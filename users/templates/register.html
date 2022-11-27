@@ -1,0 +1,43 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+
+<body style="background-color: var(--gray-dark)">
+    <section class="login-dark" style="background: var(--gray-dark);">
+        <form method="post" style="margin-top: 10vh;">
+            {% if messages %}
+                {% for i in messages %}
+                {% autoescape off %}
+                {% if i.tags == "error" %}
+                <div role="alert" class="alert alert-danger"><span>{{i}}</span></div>
+                {% else %}
+                <div role="alert" class="alert alert-{{i.tags}}"><span>{{i}}</span></div>
+                {% endif %}
+                {% endautoescape %}
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            <h1>Registrieren</h1>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            {{ form|crispy }}
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha" data-sitekey="6LdqKasaAAAAAH1BkapCKxX-JklZV66VkKc2JZxu" style="margin-left: 50pt;"></div>
+
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Registrieren</button></div><a class="forgot" href="{% url 'login' %}">Du hast schon einen Account?</a>
+        </form>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

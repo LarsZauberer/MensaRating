@@ -1,0 +1,29 @@
+name: Heroku Deployment
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -r requirements.txt
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt install ./google-chrome-stable_current_amd64.deb
+      - run: python manage.py migrate
+      - run: python manage.py collectstatic --noinput
+      - run: python manage.py test
+      - name: Deploy to heroku
+        if: job.status == 'success'
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "" #Must be unique in Heroku
+          heroku_email: "wasser.ian@gmail.com"

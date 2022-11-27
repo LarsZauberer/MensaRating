@@ -1,0 +1,21 @@
+name: CI Tests
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -r requirements.txt
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt install ./google-chrome-stable_current_amd64.deb
+      - run: python manage.py migrate
+      - run: python manage.py collectstatic --noinput
+      - run: python manage.py test

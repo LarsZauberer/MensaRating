@@ -1,0 +1,38 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Anmelden</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/Registration/Login-Form-Dark.css'%}">
+    <link rel="stylesheet" href="{% static 'css/Registration/style.css' %}">
+</head>
+
+<body style="background-color: var(--gray-dark)">
+    <section class="login-dark" style="background: var(--gray-dark);">
+        <form method="post">
+            {% if messages %}
+                {% for i in messages %}
+                {% autoescape off %}
+                <div role="alert" class="alert alert-{{i.tags}}"><span>{{i}}</span></div>
+                {% endautoescape %}
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            <h1>Anmelden</h1>
+            <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            {{ form|crispy }}
+
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Anmelden</button></div><a class="forgot" href="{% url 'register' %}">Noch keinen Account?</a>
+        </form>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
