@@ -15,7 +15,7 @@ class TestViewsCore(TestCase):
     
     def test_menu_get(self):
         client = Client()
-        response = client.get(reverse("menu"))
+        response = client.get(reverse("menu", args=(1,)))
         
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "menu.html")
@@ -26,3 +26,24 @@ class TestViewsCore(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "allMenu.html")
+    
+    def test_postReview_get(self):
+        client = Client()
+        # response = client.get(reverse("postReview", args=(1,)))
+        
+        # TODO: Implement
+        pass
+    
+    def test_postImage_get(self):
+        client = Client()
+        # response = client.get(reverse("postImage", args=(1,)))
+        
+        # TODO: Implement
+        pass
+    
+    def test_postRating_get(self):
+        client = Client()
+        # response = client.get(reverse("postRating", args=(1,)))
+        
+        # TODO: Implement
+        pass
