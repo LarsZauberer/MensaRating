@@ -31,7 +31,7 @@ class test_main_functions(LiveServerTestCase):
         submitButton = self.driver.find_elements(By.TAG_NAME, "button")[0]
         submitButton.click()
         
-        self.assertEquals(self.driver.current_url, self.live_server_url + "/app")
+        self.assertEquals(self.driver.current_url, self.live_server_url + "/index")
     
     def testRegisterUser_BotError(self):
         self.driver.get(self.live_server_url + "/users/register")
