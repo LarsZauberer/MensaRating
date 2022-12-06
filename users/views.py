@@ -8,6 +8,7 @@ import urllib.request
 import Web.settings as settings
 import json
 from .models import PromoCode
+from core.models import Profil
 
 def register(request):
     if request.method == "POST":
@@ -38,7 +39,9 @@ def register(request):
                     # Get user
                     user = User.objects.get(email=email)
                     
-                    activateCode(request, form.cleaned_data.get("promoCode"), user)
+                    Profil.objects.create(user=user)  # Create Profile for the new created user.
+                    
+                    # activateCode(request, form.cleaned_data.get("promoCode"), user)
                 
                 messages.success(request, f"Account erfolgreich erstellt!")
                 return redirect('login')
