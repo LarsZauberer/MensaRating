@@ -1,5 +1,8 @@
 from .models import Menu, Rating
 from django.db.models import Avg
+import logging
+
+log = logging.getLogger("helperFunctions")
 
 
 class HelperMenu:
@@ -17,6 +20,7 @@ class HelperMenu:
         :type menu: Menu
         """
         self.menu = menu
+        log.warning(f"Helper Menu class is deprecated! Please zip all the information together")
 
 
 def getRating(menu):

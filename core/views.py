@@ -7,19 +7,19 @@ from .models import Menu, Review, Image
 
 def index(request):
     # Get all menus with the date today
-    menus = Menu.objects.filter(date=dt.datetime.now())
-
-    # Create a helper menu
-    helperMenus = [HelperMenu(i) for i in menus]
+    menus = Menu.objects.filter(date=dt.now())
 
     # Calculate the rating for each menu
-    for i in helperMenus:
-        i.rating = getRating(i.menu)
-        i.allTimeRating = getRatingOfAllTime(i.menu)
+    ratings = [getRating(i) for i in menus]
+    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
+    
+    # Zip all the menu information to one information together.
+    # This has to happen, because the rating is not directly saved in the database object.
+    menus = zip(menus, ratings, allTimeRatings)
 
     # TODO: Check the webscraper for new menus
 
-    return render(request, 'index.html', context={'menus': helperMenus})
+    return render(request, 'index.html', context={'menus': menus})
 
 
 def menu(request, pk):
@@ -60,15 +60,14 @@ def allMenu(request):
                 uniqueMenus.append(i)
     menus = uniqueMenus
 
-    # Convert menus to helperMenus
-    helperMenus = [HelperMenu(i) for i in menus]
-
     # Calculate all the ratings of all time
-    for i in helperMenus:
-        i.allTimeRating = getRatingOfAllTime(i.menu)
+    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
+    
+    # Zip menu information together
+    menus = zip(menus, allTimeRatings)
 
     # Create a context dictionary to pass to the template
-    context = {"menus": helperMenus}
+    context = {"menus": menus}
 
     return render(request, "allMenu.html", context=context)
 
