@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 from django.shortcuts import render  # , redirect
 # from django.http import HttpResponse
 from datetime import datetime as dt  # for date and time
@@ -46,19 +47,12 @@ def menu(request, pk):
 
 def allMenu(request):
     # Get all menus
-    menus = Menu.objects.all()
-
-    # Delete all multiple occurencies of the same menu
-    uniqueMenus = []
-    for i in menus:
-        # Check if the menu is already in the list
-        for e in uniqueMenus:
-            if i.name == e.name:  # Is the name of the menu the same?
-                break
-            else:
-                # Add to the unique menus list.
-                uniqueMenus.append(i)
-    menus = uniqueMenus
+    menu_names = Menu.objects.values("name").distinct()  # Get all unique names for the menus
+    
+    # Get one menu object of all the menus with the same name
+    menus = []
+    for i in menu_names:
+        menus += Menu.objects.filter(name=i["name"])[:1]  # Get only one menu object back
 
     # Calculate all the ratings of all time
     allTimeRatings = [getRatingOfAllTime(i) for i in menus]
