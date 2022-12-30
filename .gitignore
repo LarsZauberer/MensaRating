@@ -131,3 +131,5 @@ dmypy.json
 # Django Media root
 /media/
 /images/*
+
+.vscode
