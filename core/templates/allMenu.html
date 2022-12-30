@@ -3,4 +3,10 @@
 
 <h1>allMenu</h1>
 
+<ul>
+{% for menu, allTimeRating in menus %}
+<li>{{menu.name}} - Rating: {{allTimeRating}}</li>
+{% endfor %}
+</ul>
+
 {% endblock %}
