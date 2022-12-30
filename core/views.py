@@ -1,6 +1,5 @@
 # pylint: disable=no-member
 from django.shortcuts import render  # , redirect
-# from django.http import HttpResponse
 from datetime import datetime as dt  # for date and time
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
 from .models import Menu, Review, Image
