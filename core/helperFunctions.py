@@ -1,4 +1,5 @@
 from .models import Menu, Rating
+from django.db.models import Avg
 
 
 class HelperMenu:
@@ -24,18 +25,9 @@ def getRating(menu):
     :rtype: float
     """
     # Get the ratings
-    ratings = Rating.objects.filter(menu=menu)
+    rating = Rating.objects.filter(menu=menu).aggregate(Avg("rating"))
     
-    # Calculate the average rating for the menu today (not of all time)
-    rates = []
-    for i in ratings:
-        rates.append(i.rating)
-        
-    if len(rates) == 0:
-        return 0
-        
-    rating = sum(rates) / len(rates)
-    return rating
+    return rating["rating__avg"]
 
 
 def getRatingOfAllTime(menu):
@@ -51,17 +43,6 @@ def getRatingOfAllTime(menu):
     menus = Menu.objects.filter(name=menu.name)
     
     # Find all ratings for all the menu occurencies
-    ratings = []
-    for i in menus:
-        ratings += Rating.objects.filter(menu=menu)
+    rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))
     
-    # Calculate the average rating
-    rates = []
-    for i in ratings:
-        rates.append(i.rating)
-        
-    if len(rates) == 0:
-        return 0
-    
-    rating = sum(rates) / len(rates)
-    return rating
+    return rating["rating__avg"]
