@@ -1,53 +1,53 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from datetime import datetime as dt # for date and time
-from .helperFunctions import *
-from .models import *
+from django.shortcuts import render  # , redirect
+# from django.http import HttpResponse
+from datetime import datetime as dt  # for date and time
+from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
+from .models import Menu, Review, Image
 
 
 def index(request):
     # Get all menus with the date today
-    menus = Menu.objects.filter(date=dt.today())
-    
-    helperMenus = []
-    for i in menus:
-        helperMenus.append(HelperMenu(i))
-    
+    menus = Menu.objects.filter(date=dt.datetime.now())
+
+    # Create a helper menu
+    helperMenus = [HelperMenu(i) for i in menus]
+
     # Calculate the rating for each menu
     for i in helperMenus:
         i.rating = getRating(i.menu)
         i.allTimeRating = getRatingOfAllTime(i.menu)
-    
+
     # TODO: Check the webscraper for new menus
-    
+
     return render(request, 'index.html', context={'menus': helperMenus})
 
 
 def menu(request, pk):
     # Get the menu data
     menu = Menu.objects.get(pk=pk)
-    
+
     # Get the reviews
     reviews = Review.objects.filter(menu=menu)
-    
+
     # Get the images
     images = Image.objects.filter(menu=menu)
-    
+
     # Get the rating
     rating = getRating(menu)
-    
+
     # Calculate the average rating of all time for the menu
     ratingOfAllTime = getRatingOfAllTime(menu)
-    
-    context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating, "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
-    
+
+    context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
+               "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
+
     return render(request, "menu.html", context=context)
 
 
 def allMenu(request):
     # Get all menus
     menus = Menu.objects.all()
-    
+
     # Delete all multiple occurencies of the same menu
     uniqueMenus = []
     for i in menus:
@@ -59,18 +59,17 @@ def allMenu(request):
                 # Add to the unique menus list.
                 uniqueMenus.append(i)
     menus = uniqueMenus
-    
+
     # Convert menus to helperMenus
-    helperMenus = []
-    for i in menus:
-        helperMenus.append(HelperMenu(i))
-    
+    helperMenus = [HelperMenu(i) for i in menus]
+
     # Calculate all the ratings of all time
     for i in helperMenus:
         i.allTimeRating = getRatingOfAllTime(i.menu)
-    
-    context = {"menus": helperMenus} # Create a context dictionary to pass to the template
-    
+
+    # Create a context dictionary to pass to the template
+    context = {"menus": helperMenus}
+
     return render(request, "allMenu.html", context=context)
 
 
@@ -78,9 +77,11 @@ def postReview(request, pk):
     # TODO: Implement
     pass
 
+
 def postImage(request, pk):
     # TODO: Implement
     pass
+
 
 def postRating(request, pk):
     # TODO: Implement
