@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Django Media root
+/media/
+/images/*
+
+.vscode

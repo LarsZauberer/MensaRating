@@ -37,15 +37,6 @@ class Menu(models.Model):
         """
         return self.name
     
-    def __eq__(self):
-        """
-        __eq__ Overwrites the default __eq__ method.
-
-        :return: Returns true if the names of the meals are the same.
-        :rtype: bool
-        """
-        return self.name == self.name
-    
 
 class Review(models.Model):
     """

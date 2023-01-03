@@ -3,4 +3,13 @@
 
 <h1>Index</h1>
 
+<ul>
+    {% for menu, rating, allTimeRating in menus %}
+        <li><a href="{% url 'menu' menu.pk %}">{{menu.name}}</a></li>
+        <p>{{menu.description}}</p>
+        <p>Rating Today: {{rating}}</p>
+        <p>All time Rating: {{allTimeRating}}</p>
+    {% endfor %}
+</ul>
+
 {% endblock %}

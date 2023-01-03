@@ -3,4 +3,26 @@
 
 <h1>Menu</h1>
 
+<h2>{{menu.name}}</h2>
+<p>{{menu.description}}</p>
+<p>Rating Today: {{rating}}</p>
+<p>All time Rating: {{allTimeRating}}</p>
+
+<h3>Images</h3>
+<ul>
+    {% for image in images %}
+        <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
+        <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
+    {% endfor %}
+</ul>
+
+<h3>Reviews</h3>
+<ul>
+    {% for review in reviews %}
+        <p>{{review.profil.user.username}}#{{review.profil.karma}}</p>
+        <li>{{review.text}}</li>
+    {% endfor %}
+</ul>
+
+
 {% endblock %}
