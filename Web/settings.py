@@ -160,3 +160,38 @@ EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = "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"
 
 DEFAULT_FROM_EMAIL = 'larszauberer@gmail.com'
+
+# Logging configuration
+from datetime import datetime as dt
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'file_default': {
+            'format': '{asctime} [{module}] [{name}] [{levelname}] {message}',
+            'style': '{'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'rich.logging.RichHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': f'logs/{dt.today().strftime("%d_%m_%Y")}.log',
+            'formatter': 'file_default'
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}
