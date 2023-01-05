@@ -8,6 +8,7 @@ def postReview(request, pk, form):
     
     # Create Review Object
     if not form.is_valid():
+        log.warning(f"Invalid Form")
         return "Invalid Form"
     
     review = form.instance
@@ -32,9 +33,30 @@ def postReview(request, pk, form):
 
 def postImage(request, pk, form):
     log = logging.getLogger("postImage")
-    data = request.POST
-    log.debug(f"Image Data: {data}")
-    return ""
+    
+    # Check if form valid
+    if not form.is_valid():
+        log.warning(f"Invalid Form")
+        return "Invalid Form"
+    
+    # Get the menu
+    menu = Menu.objects.filter(pk=pk)
+    if len(menu) == 0:
+        log.warning(f"Menu not found")
+        return "Menu not found"
+    menu = menu[0]
+    
+    # Get the user profil
+    profil = None
+    if request.user.is_authenticated:
+        profil = Profil.objects.get(user=request.user)
+    
+    image = form.instance
+    image.menu = menu
+    image.profil = profil
+    image.save()
+    
+    return "Success!"
 
 
 def postRating(request, pk, form):
@@ -42,6 +64,7 @@ def postRating(request, pk, form):
     
     # Check if form valid
     if not form.is_valid():
+        log.warning(f"Invalid Form")
         return "Invalid Form"
     
     # Get the menu

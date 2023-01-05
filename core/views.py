@@ -32,6 +32,7 @@ def menu(request, pk):
     # Check if the request is a post request
     if request.method == "POST":
         log.debug(f"Post Data received: {request.POST}")
+        log.debug(f"Files received: {request.FILES}")
         form = None
         
         # Sort different post kinds
@@ -48,7 +49,7 @@ def menu(request, pk):
             postReview(request, pk, form)
         
         # Image
-        elif request.POST.get("image"):
+        elif request.FILES.get("image"):
             form = ImageForm(request.POST, request.FILES)
             log.debug(f"Image Form Recognized")
             
