@@ -4,7 +4,7 @@ from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
 import logging
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
-from .models import Menu, Review, Image, Profil
+from .models import Menu, Review, Image, Rating, Profil
 
 
 def index(request):
@@ -98,5 +98,49 @@ def postImage(request, pk):
 
 
 def postRating(request, pk):
-    # TODO: Implement
-    return HttpResponse("")
+    log = logging.getLogger("postRating")
+    
+    # Get the rating data from the request body
+    data = request.POST.get("rating")
+    if data is None:
+        log.warning(f"No rating data received")
+        return HttpResponse("No rating in body")
+    
+    try:
+        data = int(data)
+    except:
+        log.warning(f"Received Data is not an integer: {data}")
+        return HttpResponse("Invalid")
+    
+    # Check validity of the rating
+    if data > 6 or data < 0:
+        return HttpResponse("Invalid")
+    
+    # Get the menu
+    menu = Menu.objects.filter(pk=pk)
+    if len(menu) == 0:
+        log.warning(f"Menu not found")
+        return HttpResponse("Menu not found")
+    menu = menu[0]
+    
+    # Get the user profil
+    profil = None
+    if request.user.is_authenticated:
+        profil = Profil.objects.get(user=request.user)
+        
+        # Check if the user already has a rating
+        log.debug(f"Searching already existing ratings for the user {request.user.username}")
+        rating = Rating.objects.filter(menu=menu, profil=profil)
+        log.debug(f"Found existing ratings: {rating}")
+        if len(rating) == 0:
+            log.debug(f"Creating a new rating")
+            Rating.objects.create(rating=data, profil=profil, menu=menu)
+        else:
+            log.debug(f"Changing old rating")
+            rating = rating[0]
+            rating.rating = data
+            rating.save()
+    else:
+        Rating.objects.create(rating=data, profil=profil, menu=menu)
+    
+    return HttpResponse("Success!")

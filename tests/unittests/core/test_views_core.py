@@ -117,7 +117,7 @@ class TestViewsCore(TestCase):
 
         self.assertEqual(response.status_code, 200)
         
-        self.assertEquals(response.content, "Invalid")
+        self.assertEqual(response.content.decode("UTF-8"), "Invalid")
         
     def test_postRating_login_change(self):
         # Create Menu instance
