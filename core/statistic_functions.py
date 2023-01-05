@@ -2,7 +2,7 @@ from .models import Menu, Rating
 from django.db.models import Avg
 import logging
 
-log = logging.getLogger("helperFunctions")
+log = logging.getLogger("statistic_functions")
 
 
 class HelperMenu:

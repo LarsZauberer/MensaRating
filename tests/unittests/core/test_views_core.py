@@ -39,7 +39,7 @@ class TestViewsCore(TestCase):
         menu = Menu.objects.create(name="Test Menu", description="Test")
 
         client = Client()
-        response = client.post(reverse("postReview", args=(1,)), data={"text": "Test Text"})
+        response = client.post(reverse("menu", args=(1,)), data={"text": "Test Text"})
 
         self.assertEqual(response.status_code, 200)
         
@@ -56,7 +56,7 @@ class TestViewsCore(TestCase):
 
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("postReview", args=(1,)), data={"text": "Test Text"})
+        response = client.post(reverse("menu", args=(1,)), data={"text": "Test Text"})
 
         self.assertEqual(response.status_code, 200)
         
@@ -72,7 +72,7 @@ class TestViewsCore(TestCase):
         menu = Menu.objects.create(name="Test Menu", description="Test")
         
         client = Client()
-        response = client.get(reverse("postImage", args=(1,)))
+        response = client.get(reverse("menu", args=(1,)))
 
         # TODO: Implement
         pass
@@ -82,7 +82,7 @@ class TestViewsCore(TestCase):
         menu = Menu.objects.create(name="Test Menu", description="Test")
         
         client = Client()
-        response = client.post(reverse("postRating", args=(1,)), data={"rating": 6})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
 
         self.assertEqual(response.status_code, 200)
         
@@ -98,7 +98,7 @@ class TestViewsCore(TestCase):
         
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("postRating", args=(1,)), data={"rating": 6})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
 
         self.assertEqual(response.status_code, 200)
         
@@ -113,11 +113,12 @@ class TestViewsCore(TestCase):
         menu = Menu.objects.create(name="Test Menu", description="Test")
         
         client = Client()
-        response = client.post(reverse("postRating", args=(1,)), data={"rating": 7})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 7})
 
         self.assertEqual(response.status_code, 200)
         
-        self.assertEqual(response.content.decode("UTF-8"), "Invalid")
+        rating = Rating.objects.filter(pk=1)
+        self.assertEqual(len(rating), 0)
         
     def test_postRating_login_change(self):
         # Create Menu instance
@@ -125,8 +126,8 @@ class TestViewsCore(TestCase):
         
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("postRating", args=(1,)), data={"rating": 6})
-        response = client.post(reverse("postRating", args=(1,)), data={"rating": 5})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 5})
 
         self.assertEqual(response.status_code, 200)
         

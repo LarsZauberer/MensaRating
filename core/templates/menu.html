@@ -24,5 +24,22 @@
     {% endfor %}
 </ul>
 
+<form method="post">
+    {% csrf_token %}
+    {{ ratingForm }}
+    <button type="submit">Post</button>
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    {{ reviewForm }}
+    <button type="submit">Post</button>
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    {{ imageForm }}
+    <button type="submit">Post</button>
+</form>
 
 {% endblock %}

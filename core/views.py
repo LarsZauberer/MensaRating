@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
 import logging
-from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
+from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
 from .models import Menu, Review, Image, Rating, Profil
+from .forms import ImageForm, ReviewForm, RatingForm
+from .post_functions import postImage, postRating, postReview
 
 
 def index(request):
@@ -25,6 +27,37 @@ def index(request):
 
 
 def menu(request, pk):
+    log = logging.getLogger("menu")
+    
+    # Check if the request is a post request
+    if request.method == "POST":
+        log.debug(f"Post Data received: {request.POST}")
+        form = None
+        
+        # Sort different post kinds
+        # Rating
+        if request.POST.get("rating"):
+            form = RatingForm(request.POST)
+            log.debug(f"Rating Form Recognized")
+            postRating(request, pk, form)
+        
+        # Review
+        elif request.POST.get("text"):
+            form = ReviewForm(request.POST)
+            log.debug(f"Review Form Recognized")
+            postReview(request, pk, form)
+        
+        # Image
+        elif request.POST.get("image"):
+            form = ImageForm(request.POST, request.FILES)
+            log.debug(f"Image Form Recognized")
+            
+            postImage(request, pk, form)
+        
+        # None of the valid kinds
+        if form is None:
+            log.warning(f"Form type is invalid for post data: {request.POST}")
+    
     # Get the menu data
     menu = Menu.objects.get(pk=pk)
 
@@ -40,8 +73,14 @@ def menu(request, pk):
     # Calculate the average rating of all time for the menu
     ratingOfAllTime = getRatingOfAllTime(menu)
 
+    # Forms
+    imageForm = ImageForm()
+    reviewForm = ReviewForm()
+    ratingForm = RatingForm()
+
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
-               "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
+               "allTimeRating": ratingOfAllTime, "imageForm": imageForm, "reviewForm": reviewForm,
+               "ratingForm": ratingForm}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 
@@ -65,82 +104,3 @@ def allMenu(request):
     context = {"menus": menus}
 
     return render(request, "allMenu.html", context=context)
-
-
-def postReview(request, pk):
-    log = logging.getLogger("postReview")
-    
-    # Get the text data from the request body
-    data = request.POST.get("text")
-    if data is None:
-        log.warning(f"No text data received")
-        return HttpResponse("No text in body")
-    
-    # Get the menu
-    menu = Menu.objects.filter(pk=pk)
-    if len(menu) == 0:
-        log.warning(f"Menu not found")
-        return HttpResponse("Menu not found")
-    menu = menu[0]
-    
-    # Get the user profil
-    profil = None
-    if request.user.is_authenticated:
-        profil = Profil.objects.get(user=request.user)
-    
-    Review.objects.create(text=data, profil=profil, menu=menu)
-    return HttpResponse("Success!")
-
-
-def postImage(request, pk):
-    # TODO: Implement
-    return HttpResponse("")
-
-
-def postRating(request, pk):
-    log = logging.getLogger("postRating")
-    
-    # Get the rating data from the request body
-    data = request.POST.get("rating")
-    if data is None:
-        log.warning(f"No rating data received")
-        return HttpResponse("No rating in body")
-    
-    try:
-        data = int(data)
-    except:
-        log.warning(f"Received Data is not an integer: {data}")
-        return HttpResponse("Invalid")
-    
-    # Check validity of the rating
-    if data > 6 or data < 0:
-        return HttpResponse("Invalid")
-    
-    # Get the menu
-    menu = Menu.objects.filter(pk=pk)
-    if len(menu) == 0:
-        log.warning(f"Menu not found")
-        return HttpResponse("Menu not found")
-    menu = menu[0]
-    
-    # Get the user profil
-    profil = None
-    if request.user.is_authenticated:
-        profil = Profil.objects.get(user=request.user)
-        
-        # Check if the user already has a rating
-        log.debug(f"Searching already existing ratings for the user {request.user.username}")
-        rating = Rating.objects.filter(menu=menu, profil=profil)
-        log.debug(f"Found existing ratings: {rating}")
-        if len(rating) == 0:
-            log.debug(f"Creating a new rating")
-            Rating.objects.create(rating=data, profil=profil, menu=menu)
-        else:
-            log.debug(f"Changing old rating")
-            rating = rating[0]
-            rating.rating = data
-            rating.save()
-    else:
-        Rating.objects.create(rating=data, profil=profil, menu=menu)
-    
-    return HttpResponse("Success!")
