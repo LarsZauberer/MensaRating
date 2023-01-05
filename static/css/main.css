@@ -6,8 +6,10 @@ body {
     margin: 0;
 }
 
-nav {
+header {
     background-color: darkgray;
-    padding: 1em;
+    padding: 2em;
+    display: flex;
+    justify-content: space-between;
 
 }
