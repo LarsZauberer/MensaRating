@@ -1,8 +1,10 @@
 # pylint: disable=no-member
+from django.http import HttpResponse
 from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
+import logging
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
-from .models import Menu, Review, Image
+from .models import Menu, Review, Image, Profil
 
 
 def index(request):
@@ -66,15 +68,35 @@ def allMenu(request):
 
 
 def postReview(request, pk):
-    # TODO: Implement
-    pass
+    log = logging.getLogger("postReview")
+    
+    # Get the text data from the request body
+    data = request.POST.get("text")
+    if data is None:
+        log.warning(f"No text data received")
+        return HttpResponse("No text in body")
+    
+    # Get the menu
+    menu = Menu.objects.filter(pk=pk)
+    if len(menu) == 0:
+        log.warning(f"Menu not found")
+        return HttpResponse("Menu not found")
+    menu = menu[0]
+    
+    # Get the user profil
+    profil = None
+    if request.user.is_authenticated:
+        profil = Profil.objects.get(user=request.user)
+    
+    Review.objects.create(text=data, profil=profil, menu=menu)
+    return HttpResponse("Success!")
 
 
 def postImage(request, pk):
     # TODO: Implement
-    pass
+    return HttpResponse("")
 
 
 def postRating(request, pk):
     # TODO: Implement
-    pass
+    return HttpResponse("")

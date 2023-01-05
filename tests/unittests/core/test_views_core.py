@@ -1,12 +1,13 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from core.models import Menu, Review, Image, Rating
-from django.contrib.auth import User
+from core.models import Menu, Review, Image, Rating, Profil
+from django.contrib.auth.models import User
 
 
 class TestViewsCore(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='user', password='user')
+        self.user_profil = Profil.objects.create(user=self.user)
 
     def test_index_get(self):
         client = Client()
@@ -47,7 +48,7 @@ class TestViewsCore(TestCase):
         self.assertEqual(review.menu, menu)
         self.assertEqual(review.profil, None)
         self.assertEqual(review.likes, 0)
-        self.assertEqual(review.text, "Test")
+        self.assertEqual(review.text, "Test Text")
     
     def test_postReview_login(self):
         # Create Menu instance
@@ -62,9 +63,9 @@ class TestViewsCore(TestCase):
         # Get review object from the database
         review = Review.objects.get(pk=1)
         self.assertEqual(review.menu, menu)
-        self.assertEqual(review.profil, self.user)
+        self.assertEqual(review.profil, self.user_profil)
         self.assertEqual(review.likes, 0)
-        self.assertEqual(review.text, "Test")
+        self.assertEqual(review.text, "Test Text")
 
     def test_postImage_get(self):
         # Create Menu instance
@@ -104,7 +105,7 @@ class TestViewsCore(TestCase):
         # Get review object from the database
         rating = Rating.objects.get(pk=1)
         self.assertEqual(rating.menu, menu)
-        self.assertEqual(rating.profil, self.user)
+        self.assertEqual(rating.profil, self.user_profil)
         self.assertEqual(rating.rating, 6)
     
     def test_postRating_no_login_invalid(self):
@@ -132,5 +133,5 @@ class TestViewsCore(TestCase):
         # Get review object from the database
         rating = Rating.objects.get(pk=1)
         self.assertEqual(rating.menu, menu)
-        self.assertEqual(rating.profil, self.user)
+        self.assertEqual(rating.profil, self.user_profil)
         self.assertEqual(rating.rating, 5)
