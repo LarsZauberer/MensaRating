@@ -9,6 +9,7 @@ urlpatterns = [
     path('postReview/<int:pk>', postReview, name="postReview"),
     path('postImage/<int:pk>', postImage, name="postImage"),
     path('postRating<int:pk>', postRating, name="postRating"),
+    path('userProfile', userProfile, name="userProfile"),
     path('', index, name="index")
 ]
 

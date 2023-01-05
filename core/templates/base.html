@@ -19,14 +19,18 @@
 </head>
 <body>
     <header>
-        Mensa NKSA Rated!
+        <a href="{% url 'index' %}">Mensa NKSA Rated!</a>
 
         <div>
             {% if user.is_authenticated %}
             <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
             {% else %}
-                <a class="login" href="{% url 'login' %}" style="color: var(--bs-light);">Login</a>
+            <a class="login" href="{% url 'login' %}" style="color: var(--bs-light);">Login</a>
             {% endif %}
+
+            <a href="{% url 'userProfile' %}">Profil</a>
+
+
         </div>
         
     </header>

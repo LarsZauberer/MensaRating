@@ -64,6 +64,9 @@ def allMenu(request):
 
     return render(request, "allMenu.html", context=context)
 
+def userProfile(request):
+    return render(request, "userProfile.html")
+
 
 def postReview(request, pk):
     # TODO: Implement
