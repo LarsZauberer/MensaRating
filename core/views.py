@@ -3,6 +3,7 @@ from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
 from .models import Menu, Review, Image
+from django.contrib.auth.models import User, Group
 
 
 def index(request):
@@ -65,7 +66,11 @@ def allMenu(request):
     return render(request, "allMenu.html", context=context)
 
 def userProfile(request):
-    return render(request, "userProfile.html")
+
+    name = request.user.username
+    context = {"name": name}
+
+    return render(request, "userProfile.html", context=context)
 
 
 def postReview(request, pk):
