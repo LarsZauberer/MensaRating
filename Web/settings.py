@@ -175,6 +175,7 @@ LOGGING = {
     'handlers': {
         'console': {
             'class': 'rich.logging.RichHandler',
+            'level': 'INFO'
         },
         'file': {
             'level': 'DEBUG',
@@ -182,14 +183,20 @@ LOGGING = {
             'filename': f'logs/{dt.today().strftime("%d_%m_%Y")}.log',
             'formatter': 'file_default'
         },
+        'cutelog': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.SocketHandler',
+            'host': '127.0.0.1',
+            'port': 19996
+        }
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': ['console', 'file', 'cutelog'],
         'level': 'DEBUG',
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console', 'file', 'cutelog'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': False,
         },
