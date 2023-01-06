@@ -66,15 +66,7 @@ def allMenu(request):
     return render(request, "allMenu.html", context=context)
 
 def userProfile(request):
-
-    name = request.user.id
-
     profil = Profil.objects.filter(user=request.user)
-
-    print(profil[0].user.email)
-
-    print(request.user.id, profil)
-
 
     context = {"name": profil[0].user, "karma": profil[0].karma}
 
