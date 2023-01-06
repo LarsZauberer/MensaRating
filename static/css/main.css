@@ -16,3 +16,8 @@ header {
 .login {
     margin: 1em;
 }
+
+main {
+    margin-left: 10%;
+    margin-right: 10%;
+}

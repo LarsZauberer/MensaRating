@@ -2,7 +2,7 @@
 from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
-from .models import Menu, Review, Image
+from .models import Menu, Review, Image, Profil
 from django.contrib.auth.models import User, Group
 
 
@@ -67,8 +67,16 @@ def allMenu(request):
 
 def userProfile(request):
 
-    name = request.user.username
-    context = {"name": name}
+    name = request.user.id
+
+    profil = Profil.objects.filter(user=request.user)
+
+    print(profil[0].user.email)
+
+    print(request.user.id, profil)
+
+
+    context = {"name": profil[0].user, "karma": profil[0].karma}
 
     return render(request, "userProfile.html", context=context)
 
