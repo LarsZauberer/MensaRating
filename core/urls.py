@@ -10,7 +10,9 @@ urlpatterns = [
     path('postImage/<int:pk>', postImage, name="postImage"),
     path('postRating<int:pk>', postRating, name="postRating"),
     path('userProfile', userProfile, name="userProfile"),
-    path('', index, name="index")
+    path('menuType/<int:pk>', menuType, name="menuType"),
+    path('', index, name="index"),
+    
 ]
 
 if settings.DEBUG:  # new

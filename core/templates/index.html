@@ -3,13 +3,23 @@
 
 <h1>Index</h1>
 
-<ul>
+
+
+<div id="menu_box_container">
     {% for menu, rating, allTimeRating in menus %}
-        <li><a href="{% url 'menu' menu.pk %}">{{menu.name}}</a></li>
+    <div class="menu_box">
+        <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
         <p>{{menu.description}}</p>
         <p>Rating Today: {{rating}}</p>
         <p>All time Rating: {{allTimeRating}}</p>
+    </div>  
     {% endfor %}
-</ul>
 
-{% endblock %}
+    {% endblock %}
+</div>
+
+
+
+
+
+

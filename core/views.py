@@ -73,6 +73,11 @@ def userProfile(request):
     return render(request, "userProfile.html", context=context)
 
 
+def menuType(request):
+    return render(request, "menuType.html")
+
+
+
 def postReview(request, pk):
     # TODO: Implement
     pass
