@@ -55,7 +55,7 @@ def menuType(request, pk):
     
     menutype = MenuType.objects.get(pk=pk)
 
-    menu_instances = Menu.objects.filter(name=menutype.name)
+    menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
 
 
     occurrences = menu_instances.count()

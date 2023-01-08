@@ -10,7 +10,7 @@
 
     <ul>
     {% for menu in menu_instances %}
-    <li> <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.description}}</li>   
+    <li> <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}</li>   
     {% endfor %}
     </ul>
 
