@@ -4,8 +4,8 @@
 <h1>allMenu</h1>
 
 <ul>
-{% for menu, allTimeRating in menus %}
-<li>{{menu.name}} - Rating: {{allTimeRating}}</li>
+{% for menuType, occurrences, allTimeRating in menuTypes %}
+<li><a href="{% url 'menuType' menuType.pk%}">{{menuType.name}} - Rating: {{allTimeRating}} - Occurrences: {{occurrences}}</a></li>
 {% endfor %}
 </ul>
 

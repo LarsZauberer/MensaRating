@@ -7,6 +7,10 @@ from django.contrib.auth.models import User, Group
 
 
 def index(request):
+    # TODO: Check the webscraper for new menus
+    # TODO: Create Menutypes for new menus
+
+
     # Get all menus with the date today
     menus = Menu.objects.filter(date=dt.now())
 
@@ -18,7 +22,7 @@ def index(request):
     # This has to happen, because the rating is not directly saved in the database object.
     menus = zip(menus, ratings, allTimeRatings)
 
-    # TODO: Check the webscraper for new menus
+    
 
     return render(request, 'index.html', context={'menus': menus})
 
@@ -55,10 +59,7 @@ def menuType(request, pk):
 
 
     occurrences = menu_instances.count()
-
     allTimeRating = getRatingOfAllTime(menutype)
-
-
 
 
     context = {"name": menutype.name, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating}
@@ -67,7 +68,7 @@ def menuType(request, pk):
 
 
 
-def allMenu(request):
+""" def allMenu(request):
     # Get all menus
     menu_names = Menu.objects.values("name").distinct()  # Get all unique names for the menus
     
@@ -85,46 +86,26 @@ def allMenu(request):
     # Create a context dictionary to pass to the template
     context = {"menus": menus}
 
-    return render(request, "allMenu.html", context=context)
-
-
-""" def allMenu(request):
-    menutypes = MenuType.objects.all()
-    menus_per_menutype = []
-
-    for type in menutypes:
-        menus_per_menutype.append(Menu.objects.filter(name=type.name))
-
-    #occurences
-
-    
-
-
-    #menus
-
-    #allTimeRating
-
-   
-
-
-
-    
-    # Get one menu object of all the menus with the same name
-    menus = []
-    for i in menu_names:
-        menus += Menu.objects.filter(name=i["name"])[:1]  # Get only one menu object back
-
-    # Calculate all the ratings of all time
-    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
-    
-    # Zip menu information together
-    menus = zip(menus, allTimeRatings)
-
-    # Create a context dictionary to pass to the template
-    context = {"menus": menus}
-
     return render(request, "allMenu.html", context=context) """
 
+
+def allMenu(request):
+    menuTypes = MenuType.objects.all()
+    
+    occurrences = []
+    allTimeRatings = []
+
+    for type in menuTypes:
+        menus = Menu.objects.filter(name=type.name)
+        occurrences.append(menus.count())
+        allTimeRatings.append(getRatingOfAllTime(type))
+
+    menuType_info = zip(menuTypes, occurrences, allTimeRatings)
+
+    context = {"menuTypes": menuType_info}
+   
+
+    return render(request, "allMenu.html", context=context)
 
 
 def userProfile(request):
