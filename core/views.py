@@ -102,6 +102,10 @@ def allMenu(request):
 
     menuType_info = zip(menuTypes, occurrences, allTimeRatings)
 
+
+    #Order by number of occurrences
+    menuType_info = sorted(menuType_info, key=lambda x: x[1], reverse=True)
+
     context = {"menuTypes": menuType_info}
    
 

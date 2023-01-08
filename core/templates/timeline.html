@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>timeline</h1>
+    <div class="fade_scroll_top">
+        <h1>
+            timeline
+            <button>order</button>
+        </h1>
+    </div>
+    
+    {% for menu in menus %}
 
-    <ul>
-        {% for menu in menus %}
-            <li><a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}</li>
-        {% endfor %}
-    </ul>
+    <div class="menu_listbox">
+        <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
+        - {{menu.date}}
+    </div>
+
+        
+    {% endfor %}
+   
 
     
 

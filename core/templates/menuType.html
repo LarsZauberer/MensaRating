@@ -8,12 +8,21 @@
     <p>all time rating: {{allTimeRating}}</p>
 
 
-    <ul>
-    {% for menu in menu_instances %}
-    <li> <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}</li>   
-    {% endfor %}
-    </ul>
+    <div class="fade_scroll_top">
+        <h1>
+            Every Instance
+            <button>order</button>
+        </h1>
+    </div>
 
+
+    {% for menu in menu_instances %}
+        <div class="menu_listbox">
+            <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}
+        </div>
+    {% endfor %}
+
+  
 
 
 
