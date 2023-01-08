@@ -4,6 +4,17 @@
     <h1>MenuType</h1>
 
     <p>{{name}}</p>
+    <p>occurrences: {{occurrences}}</p>
+    <p>all time rating: {{allTimeRating}}</p>
+
+
+    <ul>
+    {% for menu in menu_instances %}
+    <li> <a href="{% url 'menu' menu.pk %}">{{menu.name}} - {{menu.description}}</a></li>   
+    {% endfor %}
+    </ul>
+
+
 
 
 

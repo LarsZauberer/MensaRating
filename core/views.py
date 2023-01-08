@@ -51,7 +51,17 @@ def menuType(request, pk):
     
     menutype = MenuType.objects.get(pk=pk)
 
-    context = {"name": menutype.name}
+    menu_instances = Menu.objects.filter(name=menutype.name)
+
+
+    occurrences = menu_instances.count()
+
+    allTimeRating = getRatingOfAllTime(menutype)
+
+
+
+
+    context = {"name": menutype.name, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating}
 
     return render(request, "menuType.html", context=context)
 
@@ -77,15 +87,52 @@ def allMenu(request):
 
     return render(request, "allMenu.html", context=context)
 
+
+""" def allMenu(request):
+    menutypes = MenuType.objects.all()
+    menus_per_menutype = []
+
+    for type in menutypes:
+        menus_per_menutype.append(Menu.objects.filter(name=type.name))
+
+    #occurences
+
+    
+
+
+    #menus
+
+    #allTimeRating
+
+   
+
+
+
+    
+    # Get one menu object of all the menus with the same name
+    menus = []
+    for i in menu_names:
+        menus += Menu.objects.filter(name=i["name"])[:1]  # Get only one menu object back
+
+    # Calculate all the ratings of all time
+    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
+    
+    # Zip menu information together
+    menus = zip(menus, allTimeRatings)
+
+    # Create a context dictionary to pass to the template
+    context = {"menus": menus}
+
+    return render(request, "allMenu.html", context=context) """
+
+
+
 def userProfile(request):
     profil = Profil.objects.get(user=request.user)
 
     context = {"name": profil.user, "karma": profil.karma}
 
     return render(request, "userProfile.html", context=context)
-
-
-
 
 
 def postReview(request, pk):
