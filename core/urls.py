@@ -11,6 +11,7 @@ urlpatterns = [
     path('postRating<int:pk>', postRating, name="postRating"),
     path('userProfile', userProfile, name="userProfile"),
     path('menuType/<int:pk>', menuType, name="menuType"),
+    path('timeline', timeline, name="timeline"),
     path('', index, name="index"),
     
 ]

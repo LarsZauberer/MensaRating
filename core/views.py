@@ -108,6 +108,15 @@ def allMenu(request):
     return render(request, "allMenu.html", context=context)
 
 
+def timeline(request):
+    menus = Menu.objects.all().order_by("-date")
+
+    context = {"menus": menus}
+
+
+    return render(request, "timeline.html", context=context)
+
+
 def userProfile(request):
     profil = Profil.objects.get(user=request.user)
 

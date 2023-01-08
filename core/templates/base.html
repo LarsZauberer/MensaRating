@@ -21,6 +21,7 @@
     <header>
         <a href="{% url 'index' %}">Mensa NKSA Rated!</a>
         <a href="{% url 'allMenu' %}">alle Menus</a>
+        <a href="{% url 'timeline' %}">timeline</a>
         <div>
             {% if user.is_authenticated %}
             <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
