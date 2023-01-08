@@ -1,8 +1,8 @@
 # pylint: disable=no-member
 from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
-from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
-from .models import Menu, Review, Image, Profil
+from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime, getMenuType
+from .models import MenuType, Menu, Review, Image, Profil
 from django.contrib.auth.models import User, Group
 
 
@@ -36,13 +36,25 @@ def menu(request, pk):
     # Get the rating
     rating = getRating(menu)
 
+    #Get the Menu type of the corresponding menu
+    menuType = getMenuType(menu)
+
     # Calculate the average rating of all time for the menu
     ratingOfAllTime = getRatingOfAllTime(menu)
 
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
-               "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
+               "allTimeRating": ratingOfAllTime, "menuType": menuType}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
+
+def menuType(request, pk):
+    
+    menutype = MenuType.objects.get(pk=pk)
+
+    context = {"name": menutype.name}
+
+    return render(request, "menuType.html", context=context)
+
 
 
 def allMenu(request):
@@ -66,15 +78,13 @@ def allMenu(request):
     return render(request, "allMenu.html", context=context)
 
 def userProfile(request):
-    profil = Profil.objects.filter(user=request.user)
+    profil = Profil.objects.get(user=request.user)
 
-    context = {"name": profil[0].user, "karma": profil[0].karma}
+    context = {"name": profil.user, "karma": profil.karma}
 
     return render(request, "userProfile.html", context=context)
 
 
-def menuType(request):
-    return render(request, "menuType.html")
 
 
 

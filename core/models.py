@@ -36,6 +36,23 @@ class Menu(models.Model):
         :rtype: str
         """
         return self.name
+
+class MenuType(models.Model):
+    """
+    MenuType class for the type of the menu
+    """
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        """
+        __str__ Returns the name of the mealtype.
+
+        :return: Returns the name of the mealtype.
+        :rtype: str
+        """
+        return self.name
+
+
     
 
 class Review(models.Model):
