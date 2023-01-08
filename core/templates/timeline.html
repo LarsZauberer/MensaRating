@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
+    <h1>timeline</h1>
+
     <ul>
         {% for menu in menus %}
             <li><a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}</li>
         {% endfor %}
     </ul>
 
-    <h1>timeline</h1>
+    
 
 {% endblock %}
