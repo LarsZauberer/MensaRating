@@ -95,10 +95,10 @@ def allMenu(request):
     occurrences = []
     allTimeRatings = []
 
-    for type in menuTypes:
-        menus = Menu.objects.filter(name=type.name)
+    for typ in menuTypes:
+        menus = Menu.objects.filter(name=typ.name)
         occurrences.append(menus.count())
-        allTimeRatings.append(getRatingOfAllTime(type))
+        allTimeRatings.append(getRatingOfAllTime(typ))
 
     menuType_info = zip(menuTypes, occurrences, allTimeRatings)
 
