@@ -104,7 +104,7 @@ def allMenu(request):
 
 
     #Order by number of occurrences
-    menuType_info = sorted(menuType_info, key=lambda x: x[1], reverse=True)
+    menuType_info = sorted(menuType_info, key=lambda x: x[1], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
 
     context = {"menuTypes": menuType_info}
    
@@ -115,7 +115,7 @@ def allMenu(request):
 def timeline(request):
     menus = Menu.objects.all().order_by("-date")
 
-    context = {"menus": menus}
+    context = {"menus": menus[:600]}  # Return the first 600 menus
 
 
     return render(request, "timeline.html", context=context)
