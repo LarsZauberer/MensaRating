@@ -1,11 +1,12 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from core.models import Menu
+from django.auth.contrib.models import User
 
 
 class TestViewsCore(TestCase):
     def setUp(self):
-        pass
+        self.user = User.objects.create(username="user", password="user")
 
     def test_index_get(self):
         client = Client()
@@ -52,3 +53,38 @@ class TestViewsCore(TestCase):
 
         # TODO: Implement
         pass
+    
+    def test_userProfile_get_no_login(self):
+        client = Client()
+        
+        response = client.get(reverse("userProfile"))
+        
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('login'))
+    
+    def test_userProfile_get_login(self):
+        client = Client()
+        
+        client.login(username="user", password="user")
+        response = client.get(reverse("userProfile"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "userProfile.html")
+
+    def test_menuType_get(self):
+        client = Client()
+        
+        menu = Menu.objects.create(name="Test Menu", description="Test")
+        
+        response = client.get(reverse("menuType", args=(menu.menuType.pk)))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "menuType.html")
+    
+    def test_timeline_get(self):
+        client = Client()
+        
+        response = client.get(reverse("timeline"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "timeline.html")
