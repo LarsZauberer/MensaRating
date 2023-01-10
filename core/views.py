@@ -1,5 +1,6 @@
 # pylint: disable=no-member
-from django.shortcuts import render  # , redirect
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from datetime import datetime as dt  # for date and time
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
 from .models import MenuType, Menu, Review, Image, Profil
@@ -119,6 +120,9 @@ def timeline(request):
 
 
 def userProfile(request):
+    if not request.user.is_authenticated:
+        return redirect(reverse("login"))
+    
     profil = Profil.objects.get(user=request.user)
 
     context = {"name": profil.user, "karma": profil.karma}
