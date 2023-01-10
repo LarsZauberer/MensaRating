@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>allMenu</h1>
 
-<ul>
-{% for menu, allTimeRating in menus %}
-<li>{{menu.name}} - Rating: {{allTimeRating}}</li>
+
+<div class="fade_scroll_top">
+    <h1>
+        All Menus
+        <button>order</button>
+    </h1>
+</div>
+
+
+
+
+{% for menuType, occurrences, allTimeRating in menuTypes %}
+    <div class="menu_listbox">
+        <a href="{% url 'menuType' menuType.pk%}">{{menuType.name}}</a> - Rating: {{allTimeRating}} - Occurrences: {{occurrences}}
+    </div>
 {% endfor %}
-</ul>
+
+
+
+
 
 {% endblock %}

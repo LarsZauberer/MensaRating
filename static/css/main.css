@@ -1,0 +1,123 @@
+:root {
+    --main-background-col: white;
+
+    --header-height: 7vh;
+    --header-padding: 10%;
+
+    --navbar-height: 3vh;
+}
+
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    height:100vh;
+}
+
+
+header {
+    background-color: darkgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: var(--header-padding);
+    padding-right: var(--header-padding);
+
+    height: var(--header-height);
+
+    
+}
+nav {
+    width: 100%;
+    height: var(--navbar-height);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: darkgrey;
+    text-align: center;
+    position: sticky;
+    top:0;
+}
+nav a{
+    height: 100%;
+    border: solid grey;
+    box-sizing: border-box;
+}
+
+
+.login {
+    margin: 1em;
+}
+
+footer {
+    padding: 2em;
+    background-color: darkgrey;
+}
+
+main {
+    background-color: var(--main-background-col);
+
+    margin-left: 15%;
+    margin-right: 15%;
+
+    box-sizing: border-box;
+    min-height: calc(100% - var(--header-height) - var(--navbar-height));
+
+}
+
+.fade_scroll_top {
+    width:100%;
+    padding-top: 3em;
+    padding-bottom: 3em;
+
+    background-color: var(--main-background-col);
+    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 100%);
+
+    position: sticky;
+    top: var(--navbar-height);
+}
+
+.fade_scroll_top h1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width:100%;
+    margin: 0;
+    border-bottom: 0.1em solid gainsboro;
+    
+    
+
+}
+
+
+
+
+
+
+
+
+.menu_box {
+    background-color: darkgray;
+    padding: 2em;
+}
+#menu_box_container {
+    box-sizing:border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: top;
+}
+
+
+
+.menu_listbox {
+    background-color: gainsboro;
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+}

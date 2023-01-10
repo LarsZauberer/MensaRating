@@ -19,6 +19,22 @@ class Profil(models.Model):
         return self.user.username
 
 
+class MenuType(models.Model):
+    """
+    MenuType class for the type of the menu
+    """
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        """
+        __str__ Returns the name of the mealtype.
+
+        :return: Returns the name of the mealtype.
+        :rtype: str
+        """
+        return self.name
+
+
 class Menu(models.Model):
     """
     Menu class for the meals in the Mensa.
@@ -27,6 +43,7 @@ class Menu(models.Model):
     description = models.TextField()  # Description of the meal.
     date = models.DateField(auto_now_add=True)  # Date of the meal. Default is the current date.
     vegan = models.BooleanField(default=False)  # Is the meal vegan or vegetarian?
+    menuType = models.ForeignKey(MenuType, on_delete=models.CASCADE)
 
     def __str__(self):
         """
@@ -37,6 +54,18 @@ class Menu(models.Model):
         """
         return self.name
     
+    def setMenuType(self):
+        """
+        getMenuType Get the corresponding menuType of the menu
+
+        :return: The corresponding menuType of the menu
+        :rtype: MenuType
+        """
+        if not MenuType.objects.filter(name=self.name).exists():
+            MenuType.objects.create(name=self.name)
+
+        return MenuType.objects.get(name=self.name)
+
 
 class Review(models.Model):
     """
