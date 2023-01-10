@@ -54,16 +54,3 @@ def getRatingOfAllTime(menuType):
     rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))
 
     return rating["rating__avg"]
-
-def getMenuType(menu):
-
-    if not  MenuType.objects.filter(name=menu.name).exists():
-        MenuType.objects.create(name=menu.name)
-    menuType = MenuType.objects.get(name=menu.name)
-    return menuType.pk
-   
-        
-      
-
-
-    

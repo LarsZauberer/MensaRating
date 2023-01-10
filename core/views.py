@@ -1,7 +1,7 @@
 # pylint: disable=no-member
 from django.shortcuts import render  # , redirect
 from datetime import datetime as dt  # for date and time
-from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime, getMenuType
+from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
 from .models import MenuType, Menu, Review, Image, Profil
 from django.contrib.auth.models import User, Group
 
@@ -40,14 +40,11 @@ def menu(request, pk):
     # Get the rating
     rating = getRating(menu)
 
-    #Get the Menu type of the corresponding menu
-    menuType = getMenuType(menu)
-
     # Calculate the average rating of all time for the menu
     ratingOfAllTime = getRatingOfAllTime(menu)
 
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
-               "allTimeRating": ratingOfAllTime, "menuType": menuType}  # Create a context dictionary to pass to the template
+               "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 
@@ -62,7 +59,7 @@ def menuType(request, pk):
     allTimeRating = getRatingOfAllTime(menutype)
 
 
-    context = {"name": menutype.name, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating}
+    context = {"name": menutype.name, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
 
     return render(request, "menuType.html", context=context)
 
