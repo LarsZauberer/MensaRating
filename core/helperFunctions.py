@@ -48,7 +48,7 @@ def getRatingOfAllTime(menuType):
     :rtype: float
     """
     # Find all menu occurencies
-    menus = Menu.objects.filter(name=menuType.name)
+    menus = Menu.objects.filter(menuType=menuType)
 
     # Find all ratings for all the menu occurencies
     rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))

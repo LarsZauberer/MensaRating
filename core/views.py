@@ -17,7 +17,7 @@ def index(request):
 
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
-    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
+    allTimeRatings = [getRatingOfAllTime(i.menuType) for i in menus]
     
     # Zip all the menu information to one information together.
     # This has to happen, because the rating is not directly saved in the database object.
@@ -42,7 +42,7 @@ def menu(request, pk):
     rating = getRating(menu)
 
     # Calculate the average rating of all time for the menu
-    ratingOfAllTime = getRatingOfAllTime(menu)
+    ratingOfAllTime = getRatingOfAllTime(menu.menuType)
 
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
                "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
