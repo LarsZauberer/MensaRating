@@ -43,7 +43,7 @@ class TestViewsCore(TestCase):
 
     def test_postReview_no_login(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
 
         client = Client()
         response = client.post(reverse("menu", args=(1,)), data={"text": "Test Text"})
@@ -59,7 +59,7 @@ class TestViewsCore(TestCase):
     
     def test_postReview_login(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
 
         client = Client()
         client.login(username="user", password="user")
@@ -76,7 +76,7 @@ class TestViewsCore(TestCase):
 
     def test_postImage_no_login(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
 
@@ -93,7 +93,7 @@ class TestViewsCore(TestCase):
     
     def test_postImage_login(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
         client.login(username="user", password="user")
@@ -111,7 +111,7 @@ class TestViewsCore(TestCase):
 
     def test_postRating_no_login_valid(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
         response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
@@ -126,7 +126,7 @@ class TestViewsCore(TestCase):
     
     def test_postRating_login_valid(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
         client.login(username="user", password="user")
@@ -142,7 +142,7 @@ class TestViewsCore(TestCase):
     
     def test_postRating_no_login_invalid(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
         response = client.post(reverse("menu", args=(1,)), data={"rating": 7})
@@ -154,7 +154,7 @@ class TestViewsCore(TestCase):
         
     def test_postRating_login_change(self):
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
         client.login(username="user", password="user")
