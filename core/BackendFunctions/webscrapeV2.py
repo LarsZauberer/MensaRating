@@ -3,13 +3,8 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-# from datetime import datetime
 
-page = requests.get("https://neuekanti.sv-restaurant.ch/de/menuplan/")
-soup = BeautifulSoup(page.content, "html.parser")
-days = soup.find_all(attrs={"class":"menu-plan-grid"})
-
-def get_menu_list():
+def get_menu_list(days):
     menuListDict = {}
 
     for menuIndex, day in enumerate(days):
@@ -51,15 +46,22 @@ def clean(str):
     string = re.sub('<p class="menu-description">|</p>|<h2 class="menu-title">|</h2>|<br/>\s|\\xad\s*|\\n', '', str)
     return string
 
+def get_day_data():
+    page = requests.get("https://neuekanti.sv-restaurant.ch/de/menuplan/")
+    soup = BeautifulSoup(page.content, "html.parser")
+    return soup.find_all(attrs={"class":"menu-plan-grid"})
+
 def main():
+    days = get_day_data()
+    
     # Print
-    for dishesOfDay in get_menu_list().values():
+    for dishesOfDay in get_menu_list(days).values():
         for dish in dishesOfDay.values():
             for element in dish.values():
                 print(element)
             print("")
     
-    print(get_menu_list())
+    print(get_menu_list(days))
 
 
 if __name__ == "__main__":
