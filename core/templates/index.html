@@ -1,23 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Index</h1>
+<h1>Menu Heute | {% now "d. F" %}</h1>
 
-<div id="menu_box_container">
+<div id="menu_box_container" class="galleryView">
     {% for menu, rating, allTimeRating in menus %}
-    <div class="menu_box">
-        <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
-        <p>{{menu.description}}</p>
-        <p>Rating Today: {{rating}}</p>
-        <p>All time Rating: {{allTimeRating}}</p>
-    </div>  
+    <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
+        <div class="menuBox">
+            <a class="MenuTitle" href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
+            <p>{{menu.description}}</p>
+            <p>Rating Today: {{rating}}</p>
+            <p>All time Rating: {{allTimeRating}}</p>
+        </div>
+    </div>
     {% endfor %}
 </div>
 
 {% endblock %}
-
-
-
-
-
-

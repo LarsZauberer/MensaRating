@@ -13,7 +13,7 @@ html {
 
 body {
     margin: 0;
-    height:100vh;
+    min-height: 100vh;
 }
 
 
@@ -31,8 +31,9 @@ header {
 
     height: var(--header-height);
 
-    
+
 }
+
 nav {
     width: 100%;
     height: var(--navbar-height);
@@ -42,9 +43,10 @@ nav {
     background-color: darkgrey;
     text-align: center;
     position: sticky;
-    top:0;
+    top: 0;
 }
-nav a{
+
+nav a {
     height: 100%;
     border: solid grey;
     box-sizing: border-box;
@@ -72,27 +74,27 @@ main {
 }
 
 .fade_scroll_top {
-    width:100%;
+    width: 100%;
     padding-top: 3em;
     padding-bottom: 3em;
 
     background-color: var(--main-background-col);
-    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 1) 100%);
 
     position: sticky;
     top: var(--navbar-height);
 }
 
-.fade_scroll_top h1{
+.fade_scroll_top h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    width:100%;
+    width: 100%;
     margin: 0;
     border-bottom: 0.1em solid gainsboro;
-    
-    
+
+
 
 }
 
@@ -102,19 +104,41 @@ main {
 
 
 
-
-.menu_box {
-    background-color: darkgray;
-    padding: 2em;
+/*Base*/
+.content {
+    background-color: blueviolet;
+    max-width: 800px;
+    margin: auto;
 }
-#menu_box_container {
-    box-sizing:border-box;
+
+/*Index*/
+.galleryView {
     display: flex;
-    justify-content: space-around;
+    justify-content: stretch;
+    align-content: stretch;
     align-items: top;
+    gap: 50px;
+    align-items: stretch;
+    background-color: aqua;
+}
+
+.galleryElement {
+    background-color: darkgray;
+    flex-grow: 1;
+}
+
+.galleryElement:hover{
+    background-color: blue;
 }
 
 
+.menuBox {
+    margin: 20px;
+}
+
+.menuTitle {}
+
+#menuBoxContainer {}
 
 .menu_listbox {
     background-color: gainsboro;

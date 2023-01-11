@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,19 +9,18 @@
 
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static '/js/script.js' %}"></script>
 
     <script>
         const api = new API("{{ csrf_token }}");
     </script>
 
-    <script src="{% static 'js/main.js' %}"></script>
-
     <title>Mensa Rating</title>
 </head>
+
 <body>
     <header>
-        <a href="{% url 'index' %}">Mensa NKSA Rated!</a>
-        
+        <a href="{% url 'index' %}">🍽️Mensa NKSA Rated!</a>
         <div>
             {% if user.is_authenticated %}
             <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
@@ -36,7 +36,7 @@
         <a href="{% url 'timeline' %}">timeline</a>
     </nav>
 
-    <main>
+    <main class="content">
         {% block content %}
         {% endblock %}
     </main>
@@ -45,11 +45,12 @@
 
 
     <footer>
-        dummy footer
+        Made with ❤️ by Ian, Robin, Valentin and Nicolas
     </footer>
 
 
 
-    
+
 </body>
+
 </html>
