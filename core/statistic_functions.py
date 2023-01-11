@@ -1,4 +1,4 @@
-from .models import Menu, Rating
+from .models import MenuType, Menu, Rating
 from django.db.models import Avg
 import logging
 
@@ -38,7 +38,7 @@ def getRating(menu):
     return rating["rating__avg"]
 
 
-def getRatingOfAllTime(menu):
+def getRatingOfAllTime(menuType):
     """
     getRatingOfAllTime Calculates the average rating of all time for a menu.
 
@@ -48,7 +48,7 @@ def getRatingOfAllTime(menu):
     :rtype: float
     """
     # Find all menu occurencies
-    menus = Menu.objects.filter(name=menu.name)
+    menus = Menu.objects.filter(menuType=menuType)
 
     # Find all ratings for all the menu occurencies
     rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))

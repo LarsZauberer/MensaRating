@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from core.models import Menu, Review, Image, Rating, Profil
+from core.models import Menu, Review, Image, Rating, Profil, MenuType
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 import io
@@ -27,7 +27,7 @@ class TestViewsCore(TestCase):
         client = Client()
 
         # Create Menu instance
-        menu = Menu.objects.create(name="Test Menu", description="Test")
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
 
         response = client.get(reverse("menu", args=(menu.pk,)))
 
@@ -168,3 +168,40 @@ class TestViewsCore(TestCase):
         self.assertEqual(rating.menu, menu)
         self.assertEqual(rating.profil, self.user_profil)
         self.assertEqual(rating.rating, 5)
+        # TODO: Implement
+        pass
+    
+    def test_userProfile_get_no_login(self):
+        client = Client()
+        
+        response = client.get(reverse("userProfile"))
+        
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('login'))
+    
+    def test_userProfile_get_login(self):
+        client = Client()
+        
+        client.login(username='user', password='user')
+        response = client.get(reverse("userProfile"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "userProfile.html")
+
+    def test_menuType_get(self):
+        client = Client()
+        
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
+        
+        response = client.get(reverse("menuType", args=(menu.menuType.pk,)))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "menuType.html")
+    
+    def test_timeline_get(self):
+        client = Client()
+        
+        response = client.get(reverse("timeline"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "timeline.html")
