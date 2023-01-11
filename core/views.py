@@ -68,6 +68,7 @@ def menu(request, pk):
             log.warning(f"Form type is invalid for post data: {request.POST}")
             msg = ("Invalid Form Type", 1)
         
+        # Return user alert message
         if msg[1] == 1:
             messages.error(request, msg[0])
         else:
