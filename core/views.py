@@ -1,6 +1,7 @@
 # pylint: disable=no-member
 from django.http import HttpResponse
 from django.shortcuts import render  # , redirect
+from django.contrib import messages
 from datetime import datetime as dt  # for date and time
 import logging
 from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
@@ -40,24 +41,29 @@ def menu(request, pk):
         if request.POST.get("rating"):
             form = RatingForm(request.POST)
             log.debug(f"Rating Form Recognized")
-            postRating(request, pk, form)
+            msg = postRating(request, pk, form)
         
         # Review
         elif request.POST.get("text"):
             form = ReviewForm(request.POST)
             log.debug(f"Review Form Recognized")
-            postReview(request, pk, form)
+            msg = postReview(request, pk, form)
         
         # Image
         elif request.FILES.get("image"):
             form = ImageForm(request.POST, request.FILES)
             log.debug(f"Image Form Recognized")
-            
-            postImage(request, pk, form)
+            msg = postImage(request, pk, form)
         
         # None of the valid kinds
         if form is None:
             log.warning(f"Form type is invalid for post data: {request.POST}")
+            msg = ("Invalid Form Type", 1)
+        
+        if msg[1] == 1:
+            messages.error(request, msg[0])
+        else:
+            messages.success(request, msg[0])
     
     # Get the menu data
     menu = Menu.objects.get(pk=pk)

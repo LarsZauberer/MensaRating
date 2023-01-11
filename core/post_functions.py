@@ -9,7 +9,7 @@ def postReview(request, pk, form):
     # Create Review Object
     if not form.is_valid():
         log.warning(f"Invalid Form")
-        return "Invalid Form"
+        return ("Invalid Form", 1)
     
     review = form.instance
     
@@ -17,7 +17,7 @@ def postReview(request, pk, form):
     menu = Menu.objects.filter(pk=pk)
     if len(menu) == 0:
         log.warning(f"Menu not found")
-        return "Menu not found"
+        return ("Menu not found", 1)
     menu = menu[0]
     
     # Get the user profil
@@ -28,7 +28,7 @@ def postReview(request, pk, form):
     review.menu = menu
     review.profil = profil
     review.save()
-    return "Success!"
+    return ("Success!", 0)
 
 
 def postImage(request, pk, form):
@@ -37,13 +37,13 @@ def postImage(request, pk, form):
     # Check if form valid
     if not form.is_valid():
         log.warning(f"Invalid Form")
-        return "Invalid Form"
+        return ("Invalid Form", 1)
     
     # Get the menu
     menu = Menu.objects.filter(pk=pk)
     if len(menu) == 0:
         log.warning(f"Menu not found")
-        return "Menu not found"
+        return ("Menu not found", 1)
     menu = menu[0]
     
     # Get the user profil
@@ -56,7 +56,7 @@ def postImage(request, pk, form):
     image.profil = profil
     image.save()
     
-    return "Success!"
+    return ("Success!", 0)
 
 
 def postRating(request, pk, form):
@@ -65,13 +65,13 @@ def postRating(request, pk, form):
     # Check if form valid
     if not form.is_valid():
         log.warning(f"Invalid Form")
-        return "Invalid Form"
+        return ("Invalid Form", 1)
     
     # Get the menu
     menu = Menu.objects.filter(pk=pk)
     if len(menu) == 0:
         log.warning(f"Menu not found")
-        return "Menu not found"
+        return ("Menu not found", 1)
     menu = menu[0]
     
     # Get the user profil
@@ -89,7 +89,7 @@ def postRating(request, pk, form):
             rating = rating[0]
             rating.rating = form.cleaned_data.get("rating")
             rating.save()
-            return "Success!"
+            return ("Success!", 0)
     
     # Create rating object
     rating = form.instance
@@ -98,4 +98,4 @@ def postRating(request, pk, form):
     rating.menu = menu
     rating.save()
     
-    return "Success!"
+    return ("Success!", 0)
