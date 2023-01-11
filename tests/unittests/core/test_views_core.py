@@ -51,7 +51,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get review object from the database
-        review = Review.objects.get(pk=1)
+        review = Review.objects.filter(pk=1)
+        self.assertEqual(len(review), 1)
+        review = review[0]
         self.assertEqual(review.menu, menu)
         self.assertEqual(review.profil, None)
         self.assertEqual(review.likes, 0)
@@ -68,7 +70,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get review object from the database
-        review = Review.objects.get(pk=1)
+        review = Review.objects.filter(pk=1)
+        self.assertEqual(len(review), 1)
+        review = review[0]
         self.assertEqual(review.menu, menu)
         self.assertEqual(review.profil, self.user_profil)
         self.assertEqual(review.likes, 0)
@@ -85,7 +89,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get image object from database
-        image = Image.objects.get(pk=1)
+        image = Image.objects.filter(pk=1)
+        self.assertEqual(len(image), 1)
+        image = image[0]
         self.assertIsNotNone(image.image)
         self.assertEqual(image.menu, menu)
         self.assertEqual(image.profil, None)
@@ -103,7 +109,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get image object from database
-        image = Image.objects.get(pk=1)
+        image = Image.objects.filter(pk=1)
+        self.assertEqual(len(image), 1)
+        image = image[0]
         self.assertIsNotNone(image.image)
         self.assertEqual(image.menu, menu)
         self.assertEqual(image.profil, self.user_profil)
@@ -119,7 +127,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get review object from the database
-        rating = Rating.objects.get(pk=1)
+        rating = Rating.objects.filter(pk=1)
+        self.assertEqual(len(rating), 1)
+        rating = rating[0]
         self.assertEqual(rating.menu, menu)
         self.assertEqual(rating.profil, None)
         self.assertEqual(rating.rating, 6)
@@ -135,7 +145,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get review object from the database
-        rating = Rating.objects.get(pk=1)
+        rating = Rating.objects.filter(pk=1)
+        self.assertEqual(len(rating), 1)
+        rating = rating[0]
         self.assertEqual(rating.menu, menu)
         self.assertEqual(rating.profil, self.user_profil)
         self.assertEqual(rating.rating, 6)
@@ -164,7 +176,9 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         
         # Get review object from the database
-        rating = Rating.objects.get(pk=1)
+        rating = Rating.objects.filter(pk=1)
+        self.assertEqual(len(rating), 1)
+        rating = rating[0]
         self.assertEqual(rating.menu, menu)
         self.assertEqual(rating.profil, self.user_profil)
         self.assertEqual(rating.rating, 5)
