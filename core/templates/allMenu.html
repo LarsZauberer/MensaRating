@@ -5,18 +5,19 @@
 
 <div class="fade_scroll_top">
     <h1>
-        All Menus
+        Alle Menüs
         <button>order</button>
     </h1>
 </div>
 
-
-
+<div class="line"></div>
 
 {% for menuType, occurrences, allTimeRating in menuTypes %}
-    <div class="menu_listbox">
+<div onclick="location.href='{% url 'menuType' menuType.pk%}';">
+    <div class="menuListbox clickableDiv">
         <a href="{% url 'menuType' menuType.pk%}">{{menuType.name}}</a> - Rating: {{allTimeRating}} - Occurrences: {{occurrences}}
     </div>
+</div>
 {% endfor %}
 
 

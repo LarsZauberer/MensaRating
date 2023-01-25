@@ -1,24 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <div class="fade_scroll_top">
-        <h1>
-            timeline
-            <button class="btn btn-default">order</button>
-        </h1>
-    </div>
-    
-    {% for menu in menus %}
+<div class="fade_scroll_top">
+    <h1>
+        Vergangene Menüs
+        <button class="btn btn-default">order</button>
+    </h1>
+</div>
 
-    <div class="menu_listbox">
+<div class="line"></div>
+
+{% for menu in menus %}
+<div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
+    <div class="menuListbox clickableDiv">
         <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
         - {{menu.date}}
     </div>
+</div>
 
-        
-    {% endfor %}
-   
 
-    
+{% endfor %}
+
+
+
 
 {% endblock %}

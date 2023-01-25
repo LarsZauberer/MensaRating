@@ -20,20 +20,31 @@
 
 <body>
     <header>
-        <a href="{% url 'index' %}">🍽️Mensa NKSA Rated!</a>
+        <p>
+            <a href="{% url 'index' %}">🍽️MENSA APP</a>
+        </p>
         <div>
-            {% if user.is_authenticated %}
-            <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
-            <a href="{% url 'userProfile' %}">Profil</a>
-            {% else %}
-            <a class="login" href="{% url 'login' %}" style="color: var(--bs-light);">Login</a>
-            {% endif %}
+            <p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'userProfile' %}">Profil</a>
+                |
+                <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
+                {% else %}
+                <a class="login" href="{% url 'login' %}" style="color: var(--bs-light);">Login</a>
+                {% endif %}
+            </p>
         </div>
     </header>
     <nav>
-        <a href="{% url 'index' %}">heute</a>
-        <a href="{% url 'allMenu' %}">alle Menus</a>
-        <a href="{% url 'timeline' %}">timeline</a>
+        <div class="menuItem">
+            <a href="{% url 'index' %}">Heute</a>
+        </div>
+        <div class="menuItem">
+            <a href="{% url 'allMenu' %}">alle Menüs</a>
+        </div>
+        <div class="menuItem">
+            <a href="{% url 'timeline' %}">Vergangene Menüs</a>
+        </div>
     </nav>
 
     <main class="content">
@@ -41,11 +52,10 @@
         {% endblock %}
     </main>
 
-    <div style="padding-top: 5em;"></div>
-
+    <div class="footerHelper"></div>
 
     <footer>
-        Made with ❤️ by Ian, Robin, Valentin and Nicolas
+        Made with ❤️ by 4 NKSA Students
     </footer>
 
 

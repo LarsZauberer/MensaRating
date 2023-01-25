@@ -2,11 +2,11 @@
 {% block content %}
 
 <h1>Menu Heute | {% now "d. F" %}</h1>
-
+<div class="line"></div>
 <div id="menu_box_container" class="galleryView">
     {% for menu, rating, allTimeRating in menus %}
-    <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
-        <div class="menuBox">
+    <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
+        <div id="menuBox">
             <a class="MenuTitle" href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
             <p>{{menu.description}}</p>
             <p>Rating Today: {{rating}}</p>
