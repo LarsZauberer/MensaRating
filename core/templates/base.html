@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'js/api.js' %}"></script>
-    <script src="{% static '/js/script.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
 
     <script>
         const api = new API("{{ csrf_token }}");
@@ -36,13 +36,13 @@
         </div>
     </header>
     <nav>
-        <div class="menuItem">
+        <div class="menuItem" onclick="location.href='{% url 'index' %}';">
             <a href="{% url 'index' %}">Heute</a>
         </div>
-        <div class="menuItem">
+        <div class="menuItem" onclick="location.href='{% url 'allMenu' %}';">
             <a href="{% url 'allMenu' %}">alle Menüs</a>
         </div>
-        <div class="menuItem">
+        <div class="menuItem" onclick="location.href='{% url 'timeline' %}';">
             <a href="{% url 'timeline' %}">Vergangene Menüs</a>
         </div>
     </nav>
