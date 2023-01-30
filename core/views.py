@@ -6,7 +6,7 @@ from datetime import datetime as dt  # for date and time
 import logging
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from datetime import datetime as dt  # for date and time
+import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
 from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
 from .forms import ImageForm, ReviewForm, RatingForm
@@ -20,7 +20,7 @@ def index(request):
 
 
     # Get all menus with the date today
-    menus = Menu.objects.filter(date=dt.now())
+    menus = Menu.objects.filter(date=dt.date.today())
 
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
@@ -38,8 +38,13 @@ def index(request):
 def menu(request, pk):
     log = logging.getLogger("menu")
     
+    # Get the menu data
+    menu = Menu.objects.get(pk=pk)
+    
+    today = menu.date == dt.date.today() # Save if the menu is a menu of today
+    
     # Check if the request is a post request
-    if request.method == "POST":
+    if request.method == "POST" and today:
         log.debug(f"Post Data received: {request.POST}")
         log.debug(f"Files received: {request.FILES}")
         form = None
@@ -73,9 +78,6 @@ def menu(request, pk):
             messages.error(request, msg[0])
         else:
             messages.success(request, msg[0])
-    
-    # Get the menu data
-    menu = Menu.objects.get(pk=pk)
 
     # Get the reviews
     reviews = Review.objects.filter(menu=menu)
@@ -96,7 +98,7 @@ def menu(request, pk):
 
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
                "allTimeRating": ratingOfAllTime, "imageForm": imageForm, "reviewForm": reviewForm,
-               "ratingForm": ratingForm}  # Create a context dictionary to pass to the template
+               "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 

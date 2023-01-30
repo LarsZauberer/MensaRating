@@ -38,6 +38,7 @@
 {% endfor %}
 {% endif %}
 
+{% if today %}
 <form method="post">
     {% csrf_token %}
     {{ ratingForm }}
@@ -55,5 +56,6 @@
     {{ imageForm }}
     <button type="submit">Post</button>
 </form>
+{% endif %}
 
 {% endblock %}
