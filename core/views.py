@@ -57,8 +57,13 @@ def menu(request, pk):
     return render(request, "menu.html", context=context)
 
 def menuType(request, pk):
+    log = logging.getLogger("menuType")
     
-    menutype = MenuType.objects.get(pk=pk)
+    menutype = MenuType.objects.filter(pk=pk)
+    if len(menutype) == 0:
+        log.warning(f"Menutype with pk:{pk} not found")
+        return HttpResponse("Menutype not found")
+    menutype = menutype[0]
 
     menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
 

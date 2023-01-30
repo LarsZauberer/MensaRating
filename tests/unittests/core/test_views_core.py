@@ -90,6 +90,14 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "menuType.html")
     
+    def test_menuType_not_found_get(self):
+        client = Client()
+        
+        response = client.get(reverse("menuType", args=(0,)))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "Menutype not found")
+    
     def test_timeline_get(self):
         client = Client()
         
