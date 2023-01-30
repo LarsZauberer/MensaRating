@@ -5,12 +5,11 @@ from datetime import datetime as dt  # for date and time
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
 from .models import MenuType, Menu, Review, Image, Profil
 from django.contrib.auth.models import User, Group
+from .webscraper import sync_today_menu
 
 
 def index(request):
-    # TODO: Check the webscraper for new menus
-    # TODO: Create Menutypes for new menus
-
+    sync_today_menu()
 
     # Get all menus with the date today
     menus = Menu.objects.filter(date=dt.now())
@@ -29,6 +28,8 @@ def index(request):
 
 
 def menu(request, pk):
+    sync_today_menu()
+    
     # Get the menu data
     menu = Menu.objects.get(pk=pk)
 
@@ -50,6 +51,7 @@ def menu(request, pk):
     return render(request, "menu.html", context=context)
 
 def menuType(request, pk):
+    sync_today_menu()
     
     menutype = MenuType.objects.get(pk=pk)
 
@@ -88,6 +90,8 @@ def menuType(request, pk):
 
 
 def allMenu(request):
+    sync_today_menu()
+    
     menuTypes = MenuType.objects.all()
     
     occurrences = []
@@ -111,6 +115,8 @@ def allMenu(request):
 
 
 def timeline(request):
+    sync_today_menu()
+    
     menus = Menu.objects.all().order_by("-date")
 
     context = {"menus": menus[:600]}  # Return the first 600 menus
@@ -120,6 +126,8 @@ def timeline(request):
 
 
 def userProfile(request):
+    sync_today_menu()
+    
     if not request.user.is_authenticated:
         return redirect(reverse("login"))
     

@@ -3,6 +3,11 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+from .models import Menu, MenuType
+import logging
+import datetime as dt
+
+log = logging.getLogger("Webscraper")
 
 def get_menu_list(days):
     menuListDict = {}
@@ -62,6 +67,44 @@ def main():
             print("")
     
     print(get_menu_list(days))
+
+def webscrape():
+    days = get_day_data()
+    return get_menu_list(days)
+
+def create_menu_in_database(title, description, label):
+    menuType = MenuType.objects.filter(name=title)
+    if len(menuType) == 0:
+        log.info(f"No menuType with the name: {title} found.")
+        menuType = [MenuType.objects.create(name=title)]
+        log.info(f"Created menuType: {menuType[0]}")
+    menuType = menuType[0]
+    
+    labels = [
+        {"vegetarian": False, "vegan": False},
+        {"vegetarian": True, "vegan": False},
+        {"vegetarian": False, "vegan": True},
+    ]
+    
+    Menu.objects.create(name=title, description=description, menuType=menuType, **labels[label])
+    
+
+def sync_today_menu():
+    # Check if todays menu is already in database
+    log.debug(f"Checking if todays menu is already in the database")
+    menus = Menu.objects.filter(date=dt.date.today())
+    
+    # Retrieve mensa data
+    log.debug(f"Retrieving mensa data")
+    data = webscrape()
+    log.debug(f"Data received: {data}")
+    
+    titles = [i.name for i in menus]
+    for i in data["menu0"].keys():
+        if data["menu0"][i]["title"] not in titles:
+            log.info(f"Menu \"{data['menu0'][i]['title']}\" is not in the database")
+            create_menu_in_database(data["menu0"][i]["title"], data["menu0"][i]["description"], data["menu0"][i]["label"])
+            log.info(f"Created menu: {data['menu0'][i]['title']}")
 
 
 if __name__ == "__main__":
