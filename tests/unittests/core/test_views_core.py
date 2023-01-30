@@ -27,6 +27,14 @@ class TestViewsCore(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "menu.html")
 
+    def test_menu_not_found_get(self):
+        client = Client()
+
+        response = client.get(reverse("menu", args=(0,)))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "Menu not found")
+
     def test_allMenu_get(self):
         client = Client()
         response = client.get(reverse("allMenu"))

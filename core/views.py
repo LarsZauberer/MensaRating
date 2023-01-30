@@ -1,10 +1,11 @@
 # pylint: disable=no-member
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse
 from datetime import datetime as dt  # for date and time
 from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
 from .models import MenuType, Menu, Review, Image, Profil
 from django.contrib.auth.models import User, Group
+import logging
 
 
 def index(request):
@@ -29,8 +30,14 @@ def index(request):
 
 
 def menu(request, pk):
+    log = logging.getLogger("menu")
+    
     # Get the menu data
-    menu = Menu.objects.get(pk=pk)
+    menu = Menu.objects.filter(pk=pk)
+    if len(menu) == 0:
+        log.warning(f"Menu with pk:{pk} not found")
+        return HttpResponse("Menu not found")
+    menu = menu[0]
 
     # Get the reviews
     reviews = Review.objects.filter(menu=menu)
