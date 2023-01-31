@@ -12,6 +12,7 @@ from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
+import logging
 
 
 def index(request):
@@ -39,7 +40,11 @@ def menu(request, pk):
     log = logging.getLogger("menu")
     
     # Get the menu data
-    menu = Menu.objects.get(pk=pk)
+    menu = Menu.objects.filter(pk=pk)
+    if len(menu) == 0:
+        log.warning(f"Menu with pk:{pk} not found")
+        return HttpResponse("Menu not found")
+    menu = menu[0]
     
     today = menu.date == dt.date.today() # Save if the menu is a menu of today
     
@@ -103,8 +108,13 @@ def menu(request, pk):
     return render(request, "menu.html", context=context)
 
 def menuType(request, pk):
+    log = logging.getLogger("menuType")
     
-    menutype = MenuType.objects.get(pk=pk)
+    menutype = MenuType.objects.filter(pk=pk)
+    if len(menutype) == 0:
+        log.warning(f"Menutype with pk:{pk} not found")
+        return HttpResponse("Menutype not found")
+    menutype = menutype[0]
 
     menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
 
