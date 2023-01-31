@@ -1,9 +1,16 @@
 # pylint: disable=no-member
-from django.shortcuts import render, redirect, HttpResponse
-from django.urls import reverse
+from django.http import HttpResponse
+from django.shortcuts import render  # , redirect
+from django.contrib import messages
 from datetime import datetime as dt  # for date and time
-from .helperFunctions import HelperMenu, getRating, getRatingOfAllTime
+import logging
+from django.shortcuts import render, redirect
+from django.urls import reverse
+import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
+from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
+from .forms import ImageForm, ReviewForm, RatingForm
+from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
 import logging
 
@@ -14,7 +21,7 @@ def index(request):
 
 
     # Get all menus with the date today
-    menus = Menu.objects.filter(date=dt.now())
+    menus = Menu.objects.filter(date=dt.date.today())
 
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
@@ -38,6 +45,44 @@ def menu(request, pk):
         log.warning(f"Menu with pk:{pk} not found")
         return HttpResponse("Menu not found")
     menu = menu[0]
+    
+    today = menu.date == dt.date.today() # Save if the menu is a menu of today
+    
+    # Check if the request is a post request
+    if request.method == "POST" and today:
+        log.debug(f"Post Data received: {request.POST}")
+        log.debug(f"Files received: {request.FILES}")
+        form = None
+        
+        # Sort different post kinds
+        # Rating
+        if request.POST.get("rating"):
+            form = RatingForm(request.POST)
+            log.debug(f"Rating Form Recognized")
+            msg = postRating(request, pk, form)
+        
+        # Review
+        elif request.POST.get("text"):
+            form = ReviewForm(request.POST)
+            log.debug(f"Review Form Recognized")
+            msg = postReview(request, pk, form)
+        
+        # Image
+        elif request.FILES.get("image"):
+            form = ImageForm(request.POST, request.FILES)
+            log.debug(f"Image Form Recognized")
+            msg = postImage(request, pk, form)
+        
+        # None of the valid kinds
+        if form is None:
+            log.warning(f"Form type is invalid for post data: {request.POST}")
+            msg = ("Invalid Form Type", 1)
+        
+        # Return user alert message
+        if msg[1] == 1:
+            messages.error(request, msg[0])
+        else:
+            messages.success(request, msg[0])
 
     # Get the reviews
     reviews = Review.objects.filter(menu=menu)
@@ -51,8 +96,14 @@ def menu(request, pk):
     # Calculate the average rating of all time for the menu
     ratingOfAllTime = getRatingOfAllTime(menu.menuType)
 
+    # Forms
+    imageForm = ImageForm()
+    reviewForm = ReviewForm()
+    ratingForm = RatingForm()
+
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
-               "allTimeRating": ratingOfAllTime}  # Create a context dictionary to pass to the template
+               "allTimeRating": ratingOfAllTime, "imageForm": imageForm, "reviewForm": reviewForm,
+               "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 
@@ -140,18 +191,3 @@ def userProfile(request):
     context = {"name": profil.user, "karma": profil.karma}
 
     return render(request, "userProfile.html", context=context)
-
-
-def postReview(request, pk):
-    # TODO: Implement
-    pass
-
-
-def postImage(request, pk):
-    # TODO: Implement
-    pass
-
-
-def postRating(request, pk):
-    # TODO: Implement
-    pass

@@ -26,5 +26,36 @@
     {% endfor %}
 </ul>
 
+{% if messages %}
+{% for i in messages %}
+{% autoescape off %}
+{% if i.tags == "error" %}
+<div role="alert" class="alert error"><span>{{i}}</span></div>
+{% else %}
+<div role="alert" class="alert success"><span>{{i}}</span></div>
+{% endif %}
+{% endautoescape %}
+{% endfor %}
+{% endif %}
+
+{% if today %}
+<form method="post">
+    {% csrf_token %}
+    {{ ratingForm }}
+    <button type="submit">Post</button>
+</form>
+
+<form method="post">
+    {% csrf_token %}
+    {{ reviewForm }}
+    <button type="submit">Post</button>
+</form>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ imageForm }}
+    <button type="submit">Post</button>
+</form>
+{% endif %}
 
 {% endblock %}
