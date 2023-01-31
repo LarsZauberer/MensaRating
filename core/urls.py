@@ -6,14 +6,10 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('menu/<int:pk>', menu, name="menu"),
     path('allMenu', allMenu, name="allMenu"),
-    path('postReview/<int:pk>', postReview, name="postReview"),
-    path('postImage/<int:pk>', postImage, name="postImage"),
-    path('postRating<int:pk>', postRating, name="postRating"),
     path('userProfile', userProfile, name="userProfile"),
     path('menuType/<int:pk>', menuType, name="menuType"),
     path('timeline', timeline, name="timeline"),
     path('', index, name="index"),
-    
 ]
 
 if settings.DEBUG:  # new
