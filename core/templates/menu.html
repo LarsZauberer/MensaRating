@@ -13,12 +13,23 @@
 
         <span>  </span>
         <span id="date">&nbsp;&ndash; {{menu.date}}</span>
-        <img src="{% static 'images/vegan.png' %}" alt="vegan">
-        
+        <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
     </h1>
 
+    <div>di{{menu.description}}</div>
 
-    <p>{{menu.description}}</p>
+
+    <div id="gallery">  <!-- TODO: image gallery -->
+        <button> &lt; </button>
+        <img src="{% static 'images/no_images_yet.png' %}" alt="no images">
+        <button> &gt; </button>
+    </div>
+
+    
+
+
+
+    </p>
     <p>Rating Today: {{rating}}</p>
     <p>All time Rating: {{allTimeRating}}</p>
 
