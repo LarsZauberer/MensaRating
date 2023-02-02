@@ -38,9 +38,18 @@
     align-items: center;
     
 }
-#menu #gallery img{
+#menu #gallery #images{
     width:80%;
     height: 40vh
+}
+#menu #gallery #images img{
+    width:100%;
+    height:100%;
+}
+#menu #gallery #images #image-functions{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
 }
 
 

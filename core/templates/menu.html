@@ -16,18 +16,46 @@
         <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
     </h1>
 
-    <div>di{{menu.description}}</div>
+    <div>{{menu.description}}</div>
 
 
     <div id="gallery">  <!-- TODO: image gallery -->
         <button> &lt; </button>
-        <img src="{% static 'images/no_images_yet.png' %}" alt="no images">
+
+        
+        <div id="images">
+            <img src="{% static 'images/no_images_yet.png' %}" alt="no images">
+            <div id="image-functions"> <!-- TODO: image functions -->
+                user 
+
+                {% if today %}
+                <button>like</button>
+                <button>dislike</button> 
+                <form method="upload" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ imageForm }}
+                    <button type="submit">Post</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        
+        
         <button> &gt; </button>
     </div>
 
+
+  
+
+    
+   
+
+
+
+
     <div class="rating"> <!-- TODO: show average rating -->
         Rating
-        <span>(4.6)</span>
+        <span>({{rating}})</span>
         <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
     </div>
 
@@ -37,10 +65,6 @@
     </div>
 
 
-
-    </p>
-    <p>Rating Today: {{rating}}</p>
-    <p>All time Rating: {{allTimeRating}}</p>
 
     <a href="{% url 'menuType' menu.menuType.pk %}">Menu Type</a>
 
@@ -72,6 +96,7 @@
     {% endfor %}
     {% endif %}
 
+
     {% if today %}
     <form method="post">
         {% csrf_token %}
@@ -91,6 +116,8 @@
         <button type="submit">Post</button>
     </form>
     {% endif %}
+
+    
 
 </main>
 
