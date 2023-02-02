@@ -1,5 +1,5 @@
 :root {
-    --main-background-col: azure;
+    --main-background-col: white;
 
     --header-height: 7vh;
     --header-padding: 10%;
@@ -103,6 +103,7 @@ main {
 
 
 
+
 .menu_box {
     background-color: darkgray;
     padding: 2em;
@@ -121,3 +122,7 @@ main {
     padding: 1.5em;
     margin-bottom: 1.5em;
 }
+
+
+
+

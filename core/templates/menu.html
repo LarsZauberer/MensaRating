@@ -22,11 +22,11 @@
     <div id="gallery">  <!-- TODO: image gallery -->
         <button> &lt; </button>
 
-        
+
         <div id="images">
             <img src="{% static 'images/no_images_yet.png' %}" alt="no images">
             <div id="image-functions"> <!-- TODO: image functions -->
-                user 
+                <div>user</div> 
 
                 {% if today %}
                 <button>like</button>
@@ -37,21 +37,46 @@
                     <button type="submit">Post</button>
                 </form>
                 {% endif %}
+
+                <div>num-likes</div>
             </div>
         </div>
         
         
         <button> &gt; </button>
     </div>
+    <!--
+        <h3>Images</h3>
+        <ul>
+            {% for image in images %}
+                <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
+                <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
+            {% endfor %}
+        </ul>
+    -->
+    
 
-
-  
 
     
-   
 
 
 
+    {% if today %}
+    
+    <div class="rating">
+        <form method="post">
+            {% csrf_token %}
+            {{ ratingForm }}
+            <button type="submit">Post</button>
+        </form>
+    </div>
+    
+    <div class="rating"> <!-- TODO: give your own rating -->
+        Your Rating
+        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
+    </div>
+
+    {% endif%}
 
     <div class="rating"> <!-- TODO: show average rating -->
         Rating
@@ -59,30 +84,57 @@
         <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
     </div>
 
-    <div class="rating"> <!-- TODO: give your own rating -->
-        Your Rating
-        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
+    
+
+
+
+
+
+    <h3><a href="{% url 'menuType' menu.menuType.pk %}">Vergleiche das Essen</a></h3>
+
+
+
+
+
+
+    <div id="reviews">
+
+        {% if today %}
+            <h2>
+                Reviews | 
+                <form id="review-text" method="post">
+                    {% csrf_token %}
+                    {{ reviewForm }}
+                    <button type="submit">Post</button>
+                </form>
+
+            </h2>
+        {% else %}
+            <h2>
+                Reviews
+            </h2>
+        {% endif %}
+
+
+
+        {% for review in reviews %}
+        <div class="review">
+            <div class="review-header">
+                <div>{{review.profil.user.username}}</div>
+                <div>{{review.profil.karma}}</div>
+                <div>Rating</div>
+                {% if today %}
+                <button>Like</button>
+                <button>Dislike</button>
+                {% endif %}
+                <div>num-likes</div>
+            </div>
+            {{review.text}}
+        </div>
+        {% endfor %}
     </div>
 
-
-
-    <a href="{% url 'menuType' menu.menuType.pk %}">Menu Type</a>
-
-    <h3>Images</h3>
-    <ul>
-        {% for image in images %}
-            <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
-            <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
-        {% endfor %}
-    </ul>
-
-    <h3>Reviews</h3>
-    <ul>
-        {% for review in reviews %}
-            <p>{{review.profil.user.username}}#{{review.profil.karma}}</p>
-            <li>{{review.text}}</li>
-        {% endfor %}
-    </ul>
+    
 
     {% if messages %}
     {% for i in messages %}
@@ -97,29 +149,11 @@
     {% endif %}
 
 
-    {% if today %}
-    <form method="post">
-        {% csrf_token %}
-        {{ ratingForm }}
-        <button type="submit">Post</button>
-    </form>
+    
 
-    <form method="post">
-        {% csrf_token %}
-        {{ reviewForm }}
-        <button type="submit">Post</button>
-    </form>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ imageForm }}
-        <button type="submit">Post</button>
-    </form>
-    {% endif %}
 
     
 
 </main>
-
 
 {% endblock %}

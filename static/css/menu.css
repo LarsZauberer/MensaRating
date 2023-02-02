@@ -30,7 +30,7 @@
 
 #menu #gallery{
     padding-top: 2em;
-    padding-bottom: 2em;
+    padding-bottom: 4em;
 
     width: 80%;
     display: flex;
@@ -66,6 +66,62 @@
     padding:0.2em;
 }
 
+
+
+#menu #reviews{
+    width: 80%;
+}
+
+#menu #reviews h2{
+    display: flex;
+    border-bottom: solid 0.1em black;
+}
+
+
+
+.textfield{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    border: none;
+    background-color: whitesmoke;
+    height: 1.8em;
+    font-size: 0.7em;
+    flex:1;
+    
+}
+#review-text{
+    display: flex;
+    align-items: center;
+    
+    width:auto;
+    flex:1;
+}
+
+
+
+.fade_scroll_top h2{
+    display: flex;
+    align-items: center;
+
+    width:100%;
+    margin: 0;
+    border-bottom: 0.1em solid gainsboro;
+}
+
+.review{
+    width: 100%;
+    background-color: gainsboro;
+    margin-bottom: 2em;
+
+}
+.review-header{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 0.2em;
+    background-color: gray;
+    color: white;
+}
 
 
 
