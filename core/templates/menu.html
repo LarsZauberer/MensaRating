@@ -1,61 +1,78 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
-<h1>Menu</h1>
 
-<h2>{{menu.name}}</h2>
-<p>{{menu.description}}</p>
-<p>Rating Today: {{rating}}</p>
-<p>All time Rating: {{allTimeRating}}</p>
 
-<a href="{% url 'menuType' menu.menuType.pk %}">Menu Type</a>
+<main id="menu">
 
-<h3>Images</h3>
-<ul>
-    {% for image in images %}
-        <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
-        <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
+
+
+    <h1>
+        {{menu.name}}   
+
+        <span>  </span>
+        <span id="date">&nbsp;&ndash; {{menu.date}}</span>
+        <img src="{% static 'images/vegan.png' %}" alt="vegan">
+        
+    </h1>
+
+
+    <p>{{menu.description}}</p>
+    <p>Rating Today: {{rating}}</p>
+    <p>All time Rating: {{allTimeRating}}</p>
+
+    <a href="{% url 'menuType' menu.menuType.pk %}">Menu Type</a>
+
+    <h3>Images</h3>
+    <ul>
+        {% for image in images %}
+            <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
+            <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Reviews</h3>
+    <ul>
+        {% for review in reviews %}
+            <p>{{review.profil.user.username}}#{{review.profil.karma}}</p>
+            <li>{{review.text}}</li>
+        {% endfor %}
+    </ul>
+
+    {% if messages %}
+    {% for i in messages %}
+    {% autoescape off %}
+    {% if i.tags == "error" %}
+    <div role="alert" class="alert error"><span>{{i}}</span></div>
+    {% else %}
+    <div role="alert" class="alert success"><span>{{i}}</span></div>
+    {% endif %}
+    {% endautoescape %}
     {% endfor %}
-</ul>
+    {% endif %}
 
-<h3>Reviews</h3>
-<ul>
-    {% for review in reviews %}
-        <p>{{review.profil.user.username}}#{{review.profil.karma}}</p>
-        <li>{{review.text}}</li>
-    {% endfor %}
-</ul>
+    {% if today %}
+    <form method="post">
+        {% csrf_token %}
+        {{ ratingForm }}
+        <button type="submit">Post</button>
+    </form>
 
-{% if messages %}
-{% for i in messages %}
-{% autoescape off %}
-{% if i.tags == "error" %}
-<div role="alert" class="alert error"><span>{{i}}</span></div>
-{% else %}
-<div role="alert" class="alert success"><span>{{i}}</span></div>
-{% endif %}
-{% endautoescape %}
-{% endfor %}
-{% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ reviewForm }}
+        <button type="submit">Post</button>
+    </form>
 
-{% if today %}
-<form method="post">
-    {% csrf_token %}
-    {{ ratingForm }}
-    <button type="submit">Post</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ imageForm }}
+        <button type="submit">Post</button>
+    </form>
+    {% endif %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ reviewForm }}
-    <button type="submit">Post</button>
-</form>
+</main>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ imageForm }}
-    <button type="submit">Post</button>
-</form>
-{% endif %}
 
 {% endblock %}

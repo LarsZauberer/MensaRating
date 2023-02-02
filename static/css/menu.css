@@ -1,0 +1,24 @@
+#menu {
+
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#menu h1 {
+    display: flex;
+    align-items: center;
+}
+
+#menu h1 span{
+    font-size: 0.7em;
+    font-weight: normal;
+}
+
+#menu h1 img{
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
