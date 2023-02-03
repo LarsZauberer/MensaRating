@@ -15,7 +15,7 @@ class RatingForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
-    text = forms.CharField(widget=forms.TextInput(attrs={'class': 'textfield'}), label='')
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'textfield'}), label='')
     class Meta:
         model = Review
         fields = ['text']
