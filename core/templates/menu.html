@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block import %}
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
+<script src="{% static 'js/imageSlideshow.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
 <h1>Menu</h1>
@@ -10,13 +17,30 @@
 
 <a href="{% url 'menuType' menu.menuType.pk %}">Menu Type</a>
 
+<!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
 <h3>Images</h3>
-<ul>
+<div class="imageContainer">
     {% for image in images %}
-        <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
-        <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
+        <div class="imageSlide fade">
+            <p class="userName imageUserText">{{image.profil.user.username}}#{{image.profil.karma}}</p>
+            <div class="imgContainer">
+                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+            </div>
+            <div class="imageButtons">
+                <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
+                <button class="like imageLike">Like</button>
+            </div>
+        </div>
     {% endfor %}
-</ul>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+
+<script>
+    setInterval(checkOrientation, 500)
+    showSlides(slideIndex);
+</script>
 
 <h3>Reviews</h3>
 <ul>
