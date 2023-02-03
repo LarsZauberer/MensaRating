@@ -17,7 +17,7 @@ function checkOrientation() {
 
     for (let index = 0; index < images.length; index++) {
         const element = images[index];
-        if (element.naturalHeight > element.naturalWidth) {
+        if (element.naturalHeight > element.naturalWidth && !element.className.includes("portrait")) {
             element.className += " portrait"
         }
     }
