@@ -31,6 +31,7 @@ header {
 
     height: var(--header-height);
 
+    z-index: 1;
     
 }
 nav {
@@ -43,6 +44,8 @@ nav {
     text-align: center;
     position: sticky;
     top:0;
+
+    z-index: 1;
 }
 nav a{
     height: 100%;
