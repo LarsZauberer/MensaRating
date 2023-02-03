@@ -12,6 +12,17 @@ function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 
+function checkOrientation() {
+    let images = document.getElementsByClassName("imageImage");
+
+    for (let index = 0; index < images.length; index++) {
+        const element = images[index];
+        if (element.naturalHeight > element.naturalWidth) {
+            element.className += " portrait"
+        }
+    }
+}
+
 function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("imageSlide");

@@ -23,7 +23,9 @@
     {% for image in images %}
         <div class="imageSlide fade">
             <p class="userName imageUserText">{{image.profil.user.username}}#{{image.profil.karma}}</p>
-            <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+            <div class="imgContainer">
+                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+            </div>
             <div class="imageButtons">
                 <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
                 <button class="like imageLike">Like</button>
@@ -36,6 +38,7 @@
 </div>
 
 <script>
+    setInterval(checkOrientation, 500)
     showSlides(slideIndex);
 </script>
 

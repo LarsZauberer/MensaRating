@@ -29,6 +29,20 @@
     width: 100%;
     height: 60vh;
     object-fit: cover;
+    image-orientation: from-image;
+}
+
+img.portrait {
+    height: 60vh;
+    width: auto;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
 
 .next {
