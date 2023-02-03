@@ -200,7 +200,9 @@ img.portrait {
     text-align: right;
     display: flex;
     justify-content: end;
+    align-items: center;
 }
+
 
 .imageLikeText {
     color: gray;

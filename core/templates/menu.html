@@ -20,10 +20,9 @@
         <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
     </h1>
 
-    <div>{{menu.description}}</div>
+    <div style="margin-bottom: 2em;">{{menu.description}}</div>
 
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
-    <h3>Images</h3>
     <div class="imageContainer">
         {% for image in images %}
             <div class="imageSlide fade">
@@ -31,10 +30,27 @@
                 <div class="imgContainer">
                     <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
                 </div>
+
+
+                
                 <div class="imageButtons">
-                    <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
+                    {% if today %}
+                    <form method="upload" enctype="multipart/form-data" style="margin-right: 1em">
+                        {% csrf_token %}
+                        {{ imageForm }}
+                        <button type="submit">Post</button>
+                    </form>
                     <button class="like imageLike">Like</button>
+                    {% endif %}
+
+                    <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
                 </div>
+
+                
+                
+                
+
+
             </div>
         {% endfor %}
         {% if images|length == 0 %}
@@ -54,13 +70,7 @@
         showSlides(slideIndex);
     </script>
 
-    {% if today %}
-    <form method="upload" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ imageForm }}
-        <button type="submit">Post</button>
-    </form>
-    {% endif %}
+    
 
 
     {% if today %}
@@ -126,7 +136,6 @@
                 <div>Rating</div>
                 {% if today %}
                 <button>Like</button>
-                <button>Dislike</button>
                 {% endif %}
                 <div>num-likes</div>
             </div>
