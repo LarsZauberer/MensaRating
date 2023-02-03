@@ -2,84 +2,167 @@
 {% load static %}
 
 {% block import %}
-<link rel="stylesheet" href="{% static 'css/posts.css' %}">
-<script src="{% static 'js/imageSlideshow.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-<h1>Menu</h1>
 
-<h2>{{menu.name}}</h2>
-<p>{{menu.description}}</p>
-<p>Rating Today: {{rating}}</p>
-<p>All time Rating: {{allTimeRating}}</p>
 
-<a href="{% url 'menuType' menu.menuType.pk %}">Menu Type</a>
+<main id="menu">
 
-<!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
-<h3>Images</h3>
-<div class="imageContainer">
-    {% for image in images %}
-        <div class="imageSlide fade">
-            <p class="userName imageUserText">{{image.profil.user.username}}#{{image.profil.karma}}</p>
-            <div class="imgContainer">
-                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+
+
+    <h1>
+        {{menu.name}}   
+
+        <span>  </span>
+        <span id="date">&nbsp;&ndash; {{menu.date}}</span>
+        <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
+    </h1>
+
+    <div style="margin-bottom: 2em;">{{menu.description}}</div>
+
+    <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
+    <div class="imageContainer">
+        {% for image in images %}
+            <div class="imageSlide fade">
+                <p class="userName imageUserText">{{image.profil.user.username}}#{{image.profil.karma}}</p>
+                <div class="imgContainer">
+                    <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+                </div>
+
+
+                
+                <div class="imageButtons">
+                    {% if today %}
+                    <form method="upload" enctype="multipart/form-data" style="margin-right: 1em">
+                        {% csrf_token %}
+                        {{ imageForm }}
+                        <button type="submit">Post</button>
+                    </form>
+                    <button class="like imageLike">Like</button>
+                    {% endif %}
+
+                    <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
+                </div>
+
+                
+                
+                
+
+
             </div>
-            <div class="imageButtons">
-                <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
-                <button class="like imageLike">Like</button>
+        {% endfor %}
+        {% if images|length == 0 %}
+            <div class="imageSlide fade">
+                <div class="imgContainer">
+                    <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
+                </div>
             </div>
+        {% else %}
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        {% endif %}
+    </div>
+
+    <script>
+        setInterval(checkOrientation, 500)
+        showSlides(slideIndex);
+    </script>
+
+    
+
+
+    {% if today %}
+    
+    <div class="rating">
+        <form method="post">
+            {% csrf_token %}
+            {{ ratingForm }}
+            <button type="submit">Post</button>
+        </form>
+    </div>
+    
+    <div class="rating"> <!-- TODO: give your own rating -->
+        Your Rating
+        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
+    </div>
+
+    {% endif%}
+
+    <div class="rating"> <!-- TODO: show average rating -->
+        Rating
+        <span>({{rating}})</span>
+        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
+    </div>
+
+    
+
+
+
+
+
+    <h3><a href="{% url 'menuType' menu.menuType.pk %}">Vergleiche das Essen</a></h3>
+
+
+
+
+
+
+    <div id="reviews">
+
+        {% if today %}
+            <h2>
+                Reviews
+            </h2>
+            <form id="review-text" method="post">
+                {% csrf_token %}
+                {{ reviewForm }}
+                <button type="submit">Post</button>
+            </form>
+        {% else %}
+            <h2>
+                Reviews
+            </h2>
+        {% endif %}
+
+
+
+        {% for review in reviews %}
+        <div class="review">
+            <div class="review-header">
+                <div>{{review.profil.user.username}}</div>
+                <div>{{review.profil.karma}}</div>
+                <div>Rating</div>
+                {% if today %}
+                <button>Like</button>
+                {% endif %}
+                <div>num-likes</div>
+            </div>
+            {{review.text}}
         </div>
+        {% endfor %}
+    </div>
+
+    
+
+    {% if messages %}
+    {% for i in messages %}
+    {% autoescape off %}
+    {% if i.tags == "error" %}
+    <div role="alert" class="alert error"><span>{{i}}</span></div>
+    {% else %}
+    <div role="alert" class="alert success"><span>{{i}}</span></div>
+    {% endif %}
+    {% endautoescape %}
     {% endfor %}
+    {% endif %}
 
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
+    
 
-<script>
-    setInterval(checkOrientation, 500)
-    showSlides(slideIndex);
-</script>
 
-<h3>Reviews</h3>
-<ul>
-    {% for review in reviews %}
-        <p>{{review.profil.user.username}}#{{review.profil.karma}}</p>
-        <li>{{review.text}}</li>
-    {% endfor %}
-</ul>
+    
 
-{% if messages %}
-{% for i in messages %}
-{% autoescape off %}
-{% if i.tags == "error" %}
-<div role="alert" class="alert error"><span>{{i}}</span></div>
-{% else %}
-<div role="alert" class="alert success"><span>{{i}}</span></div>
-{% endif %}
-{% endautoescape %}
-{% endfor %}
-{% endif %}
-
-{% if today %}
-<form method="post">
-    {% csrf_token %}
-    {{ ratingForm }}
-    <button type="submit">Post</button>
-</form>
-
-<form method="post">
-    {% csrf_token %}
-    {{ reviewForm }}
-    <button type="submit">Post</button>
-</form>
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ imageForm }}
-    <button type="submit">Post</button>
-</form>
-{% endif %}
+</main>
 
 {% endblock %}

@@ -76,7 +76,9 @@ class Review(models.Model):
     profil = models.ForeignKey(Profil, on_delete=models.SET_NULL, null=True)  # Profil of the user who wrote the review. -> If the user doesn't exist anymore, the review is still there.
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)  # Menu of the meal the review is about. -> If the meal doesn't exist anymore, the review is deleted.
     likes = models.IntegerField(default=0)  # Number of likes for the review.
-    text = models.TextField()  # Text of the review.
+    text = models.TextField(max_length=200) # Text of the review.
+
+
     date = models.DateTimeField(auto_now_add=True)  # Date of the review. Default is the current date.
     
     def __str__(self):
