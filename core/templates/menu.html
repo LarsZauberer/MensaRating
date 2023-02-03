@@ -2,8 +2,6 @@
 {% load static %}
 
 {% block import %}
-<script src="{% static 'js/imageSlideshow.js' %}"></script>
-<link rel="stylesheet" href="{% static 'css/menu.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -39,9 +37,16 @@
                 </div>
             </div>
         {% endfor %}
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        {% if images|length == 0 %}
+            <div class="imageSlide fade">
+                <div class="imgContainer">
+                    <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
+                </div>
+            </div>
+        {% else %}
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        {% endif %}
     </div>
 
     <script>
@@ -90,14 +95,13 @@
 
         {% if today %}
             <h2>
-                Reviews | 
-                <form id="review-text" method="post">
-                    {% csrf_token %}
-                    {{ reviewForm }}
-                    <button type="submit">Post</button>
-                </form>
-
+                Reviews
             </h2>
+            <form id="review-text" method="post">
+                {% csrf_token %}
+                {{ reviewForm }}
+                <button type="submit">Post</button>
+            </form>
         {% else %}
             <h2>
                 Reviews
