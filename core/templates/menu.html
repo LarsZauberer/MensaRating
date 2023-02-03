@@ -54,6 +54,14 @@
         showSlides(slideIndex);
     </script>
 
+    {% if today %}
+    <form method="upload" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ imageForm }}
+        <button type="submit">Post</button>
+    </form>
+    {% endif %}
+
 
     {% if today %}
     
