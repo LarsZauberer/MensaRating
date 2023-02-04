@@ -137,26 +137,6 @@ def menuType(request, pk):
 
 
 
-""" def allMenu(request):
-    # Get all menus
-    menu_names = Menu.objects.values("name").distinct()  # Get all unique names for the menus
-    
-    # Get one menu object of all the menus with the same name
-    menus = []
-    for i in menu_names:
-        menus += Menu.objects.filter(name=i["name"])[:1]  # Get only one menu object back
-
-    # Calculate all the ratings of all time
-    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
-    
-    # Zip menu information together
-    menus = zip(menus, allTimeRatings)
-
-    # Create a context dictionary to pass to the template
-    context = {"menus": menus}
-
-    return render(request, "allMenu.html", context=context) """
-
 
 def allMenu(request):
     sync_today_menu()
@@ -191,10 +171,24 @@ def allMenu(request):
 
 def timeline(request):
     sync_today_menu()
+
+    
     
     menus = Menu.objects.all().order_by("-date")
 
-    context = {"menus": menus[:600]}  # Return the first 600 menus
+
+    dates = []
+    menus_with_date = []
+    for menu in menus:
+        if menu.date not in dates:
+            dates.append(menu.date)
+            menus_with_date.append([])
+        menus_with_date[-1].append(menu)
+
+    menu_dates = zip(dates[:600], menus_with_date[:600]) # Return the first 600 menus
+
+
+    context = {"menu_dates": menu_dates}  
 
 
     return render(request, "timeline.html", context=context)
