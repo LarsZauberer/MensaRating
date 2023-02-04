@@ -2,19 +2,26 @@
 {% load static %}
 {% block content %}
 
-<main>
 
-    <div class="fade_scroll_top">
-        <h1>
-            timeline
-        </h1>
-    </div>
-    
-    {% for date, menus in menu_dates %}
-        <div class="timeline-date">
-            <h2>{{date}}</h2>
-            {% for menu in menus %}
-                <div class="menu_listbox">
+
+
+
+
+<div class="fade_scroll_top">
+    <h1>
+        Vergangene Menüs
+        <button class="btn btn-default">order</button>
+    </h1>
+</div>
+
+<div class="line"></div>
+
+{% for date, menus in menu_dates %}
+    <div class="timeline-date">
+        <h2>{{date}}</h2>
+        {% for menu in menus %}
+            <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
+                <div class="menuListbox clickableDiv">
                     <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
                     - {{menu.date}}
                     
@@ -24,13 +31,11 @@
                     <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
                     {% endif %} 
                 </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
+            </div>
+        
+        {% endfor %}
+    </div>
+{% endfor %}
 
-</main>
-   
-
-    
 
 {% endblock %}
