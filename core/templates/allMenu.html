@@ -13,10 +13,6 @@
 </div>
 
 <div class="line"></div>
-
-
-
-
     {% for menuType, occurrences, description, vegetarian, vegan, allTimeRating in menuTypes %}
         <div onclick="location.href='{% url 'menuType' menuType.pk%}';">
             <div class="menuListbox clickableDiv">

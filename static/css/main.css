@@ -105,7 +105,6 @@ footer {
 
     width:100%;
     margin: 0;
-    border-bottom: 0.1em solid gainsboro;
 }
 
 
@@ -157,9 +156,6 @@ footer {
     border-bottom: gainsboro 0.1em solid
 }
 
-.timeline-date .menu_listbox{
-    margin-left: 2em;
-}
 
 
 
