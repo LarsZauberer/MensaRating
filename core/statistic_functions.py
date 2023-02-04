@@ -58,9 +58,14 @@ def getRatingOfAllTime(menuType):
 def getMostLikedImage(menuType):
         allmenus = Menu.objects.filter(menuType=menuType)
         
-        image = Image.objects.filter(menu__in=allmenus).order_by("-likes")[0]
+        image = Image.objects.filter(menu__in=allmenus).order_by("-likes")
 
-        return image
+        if len(image) == 0:
+            return None
+        else:
+            return image[0]
+
+
 
 
 

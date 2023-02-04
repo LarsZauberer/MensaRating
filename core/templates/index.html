@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% block import %}
+{% endblock %}
 {% load static %}
 {% block content %}
 
@@ -20,12 +23,18 @@
 
         <div class="description">{{menu.description}}</div>
             
-
-        <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
-
+        {% if image %}
+            <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
+        {% else %}
+            <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
+        {% endif %}
         
         <img class="stars" src="{% static 'images/5star.jpg' %}" alt="5 stars">
         <p>Rating Today: {{rating}}</p>
+
+        <script>
+            checkOrientation()
+        </script>
         
        
     </div>

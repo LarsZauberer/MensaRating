@@ -13,14 +13,22 @@ function currentSlide(n) {
 }
 
 function checkOrientation() {
-    let images = document.getElementsByClassName("imageImage");
+  let images = document.getElementsByClassName("imageImage");
 
-    for (let index = 0; index < images.length; index++) {
-        const element = images[index];
-        if (element.naturalHeight > element.naturalWidth && !element.className.includes("portrait")) {
-            element.className += " portrait"
-        }
-    }
+  for (let index = 0; index < images.length; index++) {
+      const element = images[index];
+      if (element.naturalHeight > element.naturalWidth && !element.className.includes("portrait")) {
+          element.style.objectFit = "contain";
+      }
+  }
+
+  images = document.getElementsByClassName("coverimage")
+  for (let index = 0; index < images.length; index++) {
+      const element = images[index];
+      if (element.naturalHeight > element.naturalWidth && !element.className.includes("portrait")) {
+          element.style.objectFit = "contain";
+      }
+  }
 }
 
 function showSlides(n) {
