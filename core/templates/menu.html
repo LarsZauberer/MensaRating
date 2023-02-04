@@ -18,10 +18,10 @@
         <span>  </span>
         <span id="date">&nbsp;&ndash; {{menu.date}}</span>
         {% if menu.vegetarian %}
-        <img src="{% static 'images/vegetarian.png' %}" alt="vegan">  <!-- TODO: input label -->
+        <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
         {% elif menu.vegan %}
-        <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
-        {% endif %}
+        <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+        {% endif %} 
 
     </h1>
 

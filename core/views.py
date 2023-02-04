@@ -165,13 +165,19 @@ def allMenu(request):
     
     occurrences = []
     allTimeRatings = []
+    descriptions = []
+    vegetarians = []
+    vegans = []
 
     for typ in menuTypes:
         menus = Menu.objects.filter(name=typ.name)
+        descriptions.append(menus[0].description)
+        vegetarians.append(menus[0].vegetarian)
+        vegans.append(menus[0].vegan)
         occurrences.append(menus.count())
         allTimeRatings.append(getRatingOfAllTime(typ))
 
-    menuType_info = zip(menuTypes, occurrences, allTimeRatings)
+    menuType_info = zip(menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings)
 
 
     #Order by number of occurrences
