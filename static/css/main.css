@@ -8,7 +8,7 @@
 }
 
 p {
-    margin: 0;
+    margin-top: 0;
 }
 
 /*Base*/
@@ -141,6 +141,7 @@ footer {
 
 
 
+
 .galleryElement {
     flex-grow: 1;
     flex-basis: 50%;
@@ -154,6 +155,7 @@ footer {
     flex-direction: column;
     align-items: center;
 
+
     text-align: center;
 }
 #clickMenuBox h1{
@@ -162,15 +164,25 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.coverimage{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 
+    width: 100%;
+    height: 25vh;
+    object-fit: contain;
+    image-orientation: from-image;
+    
+}
+.stars{
+    width: 50%;
+}
+.description{
+    height: 2em;
 }
 
 
-
-
-.menuTitle {}
-
-#menuBoxContainer {}
 
 
 /*All Menus*/

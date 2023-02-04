@@ -4,7 +4,7 @@
 
 <h1>Menu Heute | {% now "d. F" %}</h1>
 <div class="line"></div>
-<div id="menu_box_container" class="galleryView">
+<div id="menu_box_container">
     {% for menu, rating, allTimeRating, image in menus %}
     <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
         
@@ -17,14 +17,16 @@
             <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
             {% endif %} 
         </h1>
+
+        <div class="description">{{menu.description}}</div>
             
 
-        
-        <img src="{{image.image.url}}" alt="no image uploaded">
+        <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
 
-        <p>{{menu.description}}</p>
+        
+        <img class="stars" src="{% static 'images/5star.jpg' %}" alt="5 stars">
         <p>Rating Today: {{rating}}</p>
-        <p>All time Rating: {{allTimeRating}}</p>
+        
        
     </div>
     {% endfor %}
