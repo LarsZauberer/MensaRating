@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
+from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
@@ -24,10 +24,16 @@ def index(request):
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
     allTimeRatings = [getRatingOfAllTime(i.menuType) for i in menus]
+
+
+    images = [getMostLikedImage(i.menuType) for i in menus]
+    
+
+
     
     # Zip all the menu information to one information together.
     # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(menus, ratings, allTimeRatings)
+    menus = zip(menus, ratings, allTimeRatings, images)
 
     
 

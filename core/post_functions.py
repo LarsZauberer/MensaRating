@@ -32,6 +32,7 @@ def postReview(request, pk, form):
 
 
 def postImage(request, pk, form):
+    print("posting review")
     log = logging.getLogger("postImage")
     
     # Check if form valid
@@ -55,6 +56,8 @@ def postImage(request, pk, form):
     image.menu = menu
     image.profil = profil
     image.save()
+
+    
     
     return ("Success!", 0)
 

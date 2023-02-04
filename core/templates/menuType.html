@@ -9,9 +9,9 @@
     <h1>
         {{name}}   
 
-        {% if menu.vegetarian %}
+        {% if vegetarian %}
         <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
-        {% elif menu.vegan %}
+        {% elif vegan %}
         <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
         {% endif %} 
 

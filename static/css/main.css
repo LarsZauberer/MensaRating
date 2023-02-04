@@ -109,10 +109,7 @@ footer {
 
 
 
-.menu_box {
-    background-color: darkgray;
-    padding: 2em;
-}
+
 #menu_box_container {
     box-sizing:border-box;
     display: flex;
@@ -127,6 +124,8 @@ footer {
 .vegivegan-label{
     width: 1em;
     height: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 
@@ -136,25 +135,7 @@ footer {
 
 
 
-.menu_listbox {
-    background-color: gainsboro;
 
-    height: 2em;
-    padding: 1.5em;
-    margin-bottom: 1.5em;
-
-    display: flex;
-    align-items: center;
-}
-.menu_listbox .vegivegan-label{
-    width: 2em;
-    height: 2em;
-    margin-left: 1em;
-}
-
-.timeline-date h2{
-    border-bottom: gainsboro 0.1em solid
-}
 
 
 
@@ -169,11 +150,23 @@ footer {
     background-color: var(--accentColor);
     border-radius: var(--borderRadMenu);
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+#clickMenuBox h1{
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
 }
 
-.menuBox {
-    margin: 20px;
-}
+
+
 
 .menuTitle {}
 
@@ -184,6 +177,20 @@ footer {
 .menuListbox {
     background-color: var(--accentColor);
     padding: 1.5em;
+    height: 2em;
+    display: flex;
+    align-items: center;
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
+}
+
+
+.menuListbox .vegivegan-label{
+    width: 2em;
+    height: 2em;
+    margin-left: 1em;
+}
+
+.timeline-date h2{
+    border-bottom: gainsboro 0.1em solid
 }

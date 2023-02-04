@@ -33,27 +33,6 @@
                 <div class="imgContainer">
                     <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
                 </div>
-
-
-                
-                <div class="imageButtons">
-                    {% if today %}
-                    <form method="upload" enctype="multipart/form-data" style="margin-right: 1em">
-                        {% csrf_token %}
-                        {{ imageForm }}
-                        <button type="submit">Post</button>
-                    </form>
-                    <button class="like imageLike">Like</button>
-                    {% endif %}
-
-                    <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
-                </div>
-
-                
-                
-                
-
-
             </div>
         {% endfor %}
         {% if images|length == 0 %}
@@ -66,6 +45,19 @@
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         {% endif %}
+
+        <div class="imageButtons">
+            {% if today %}
+            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                {% csrf_token %}
+                {{ imageForm }}
+                <button type="submit">Post</button>
+            </form>
+            <button class="like imageLike">Like</button>
+            {% endif %}
+
+            <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
+        </div>
     </div>
 
     <script>
