@@ -40,50 +40,18 @@ nav {
 
 body {
     margin: 0;
-    height:100vh;
-}
-
-
-header {
-    background-color: darkgray;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-
-    box-sizing: border-box;
-    width: 100%;
-    padding-left: var(--header-padding);
-    padding-right: var(--header-padding);
-
-    height: var(--header-height);
-
-    z-index: 1;
-    
-}
-nav {
-    width: 100%;
-    height: var(--navbar-height);
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background-color: darkgrey;
-    text-align: center;
-    position: sticky;
-    top:0;
-
-    z-index: 1;
-}
-nav a{
-    height: 100%;
-    border: solid grey;
-    box-sizing: border-box;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: flex-start;
 }
+
+
+
+
+
+
 
 .content {
     flex-shrink: 0;

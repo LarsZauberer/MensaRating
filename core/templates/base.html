@@ -42,6 +42,7 @@
             </p>
         </div>
     </header>
+
     <nav>
         <div class="menuItem" onclick="location.href='{% url 'index' %}';">
             <a href="{% url 'index' %}">Heute</a>
@@ -54,6 +55,7 @@
         </div>
     </nav>
 
+    
     <main class="content">
         {% block content %}
         {% endblock %}
