@@ -8,8 +8,17 @@
 <main id="menu">
     <h1>
         {{name}}   
+
+        {% if vegetarian %}
+        <img src="{% static 'images/vegetarian.png' %}" alt="vegan">  <!-- TODO: input label -->
+        {% elif vegan %}
         <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
+        {% endif %}
+
     </h1>
+
+    <div style="margin-bottom: 2em;">{{description}}</div>
+
 
     
 

@@ -46,10 +46,6 @@ def menu(request, pk):
     menu = menu[0]
     
     today = menu.date == dt.date.today() # Save if the menu is a menu of today
-
-    vegetarian = menu.vegetarian
-    vegan = menu.vegan
-
     
     # Check if the request is a post request
     if request.method == "POST" and today:
@@ -109,7 +105,7 @@ def menu(request, pk):
 
     context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
                "allTimeRating": ratingOfAllTime, "imageForm": imageForm, "reviewForm": reviewForm,
-               "ratingForm": ratingForm, "today": today, "vegetarian": vegetarian, "vegan": vegan}  # Create a context dictionary to pass to the template
+               "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 
@@ -126,11 +122,16 @@ def menuType(request, pk):
     menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
 
 
+    description = menu_instances[0].description
+    vegetarian = menu_instances[0].vegetarian
+    vegan = menu_instances[0].vegan
+
+
     occurrences = menu_instances.count()
     allTimeRating = getRatingOfAllTime(menutype)
 
 
-    context = {"name": menutype.name, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
+    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
 
     return render(request, "menuType.html", context=context)
 

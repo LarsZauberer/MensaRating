@@ -17,9 +17,9 @@
 
         <span>  </span>
         <span id="date">&nbsp;&ndash; {{menu.date}}</span>
-        {% if vegetarian %}
+        {% if menu.vegetarian %}
         <img src="{% static 'images/vegetarian.png' %}" alt="vegan">  <!-- TODO: input label -->
-        {% elif vegan %}
+        {% elif menu.vegan %}
         <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
         {% endif %}
 
