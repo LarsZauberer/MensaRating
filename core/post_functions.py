@@ -5,6 +5,7 @@ from .forms import ImageForm, ReviewForm, RatingForm
 
 def postReview(request, pk, form):
     log = logging.getLogger("postReview")
+    log.debug("posting review")
     
     # Create Review Object
     if not form.is_valid():
@@ -32,8 +33,8 @@ def postReview(request, pk, form):
 
 
 def postImage(request, pk, form):
-    print("posting review")
     log = logging.getLogger("postImage")
+    log.debug("posting image")
     
     # Check if form valid
     if not form.is_valid():
@@ -64,6 +65,7 @@ def postImage(request, pk, form):
 
 def postRating(request, pk, form):
     log = logging.getLogger("postRating")
+    log.debug(f"posting rating")
     
     # Check if form valid
     if not form.is_valid():
