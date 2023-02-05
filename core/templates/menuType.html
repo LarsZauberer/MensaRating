@@ -8,8 +8,17 @@
 <main id="menu">
     <h1>
         {{name}}   
-        <img src="{% static 'images/vegan.png' %}" alt="vegan">  <!-- TODO: input label -->
+
+        {% if vegetarian %}
+        <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+        {% elif vegan %}
+        <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+        {% endif %} 
+
     </h1>
+
+    <div style="margin-bottom: 2em;">{{description}}</div>
+
 
     
 
@@ -75,6 +84,12 @@
         {% for menu in menu_instances %}
             <div class="menu_listbox">
                 <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}
+
+                {% if menu.vegetarian %}
+                <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+                {% elif menu.vegan %}
+                <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+                {% endif %} 
             </div>
         {% endfor %}
     </div>

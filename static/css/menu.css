@@ -1,6 +1,5 @@
 #menu {
-    margin-left: 20%;
-    margin-right: 20%;
+ 
     
     display: flex;
     align-items: center;
@@ -18,12 +17,14 @@
     font-weight: normal;
 }
 
-#menu h1 img{
+
+#menu h1 .vegivegan-label{
     width: 1em;
     height: 1em;
-    margin-left: 0.5em;
     margin-right: 0.5em;
+    margin-left: 0.5em;
 }
+
 
 
 

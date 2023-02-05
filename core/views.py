@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime
+from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
@@ -24,10 +24,16 @@ def index(request):
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
     allTimeRatings = [getRatingOfAllTime(i.menuType) for i in menus]
+
+
+    images = [getMostLikedImage(i.menuType) for i in menus]
+    
+
+
     
     # Zip all the menu information to one information together.
     # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(menus, ratings, allTimeRatings)
+    menus = zip(menus, ratings, allTimeRatings, images)
 
     
 
@@ -95,6 +101,9 @@ def menu(request, pk):
     # Calculate the average rating of all time for the menu
     ratingOfAllTime = getRatingOfAllTime(menu.menuType)
 
+
+    
+
     # Forms
     imageForm = ImageForm()
     reviewForm = ReviewForm()
@@ -119,35 +128,20 @@ def menuType(request, pk):
     menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
 
 
+    description = menu_instances[0].description
+    vegetarian = menu_instances[0].vegetarian
+    vegan = menu_instances[0].vegan
+
+
     occurrences = menu_instances.count()
     allTimeRating = getRatingOfAllTime(menutype)
 
 
-    context = {"name": menutype.name, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
+    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
 
     return render(request, "menuType.html", context=context)
 
 
-
-""" def allMenu(request):
-    # Get all menus
-    menu_names = Menu.objects.values("name").distinct()  # Get all unique names for the menus
-    
-    # Get one menu object of all the menus with the same name
-    menus = []
-    for i in menu_names:
-        menus += Menu.objects.filter(name=i["name"])[:1]  # Get only one menu object back
-
-    # Calculate all the ratings of all time
-    allTimeRatings = [getRatingOfAllTime(i) for i in menus]
-    
-    # Zip menu information together
-    menus = zip(menus, allTimeRatings)
-
-    # Create a context dictionary to pass to the template
-    context = {"menus": menus}
-
-    return render(request, "allMenu.html", context=context) """
 
 
 def allMenu(request):
@@ -157,13 +151,19 @@ def allMenu(request):
     
     occurrences = []
     allTimeRatings = []
+    descriptions = []
+    vegetarians = []
+    vegans = []
 
     for typ in menuTypes:
         menus = Menu.objects.filter(name=typ.name)
+        descriptions.append(menus[0].description)
+        vegetarians.append(menus[0].vegetarian)
+        vegans.append(menus[0].vegan)
         occurrences.append(menus.count())
         allTimeRatings.append(getRatingOfAllTime(typ))
 
-    menuType_info = zip(menuTypes, occurrences, allTimeRatings)
+    menuType_info = zip(menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings)
 
 
     #Order by number of occurrences
@@ -177,10 +177,24 @@ def allMenu(request):
 
 def timeline(request):
     sync_today_menu()
+
+    
     
     menus = Menu.objects.all().order_by("-date")
 
-    context = {"menus": menus[:600]}  # Return the first 600 menus
+
+    dates = []
+    menus_with_date = []
+    for menu in menus:
+        if menu.date not in dates:
+            dates.append(menu.date)
+            menus_with_date.append([])
+        menus_with_date[-1].append(menu)
+
+    menu_dates = zip(dates[:600], menus_with_date[:600]) # Return the first 600 menus
+
+
+    context = {"menu_dates": menu_dates}  
 
 
     return render(request, "timeline.html", context=context)

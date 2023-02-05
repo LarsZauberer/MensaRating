@@ -1,5 +1,5 @@
-from .models import MenuType, Menu, Rating
-from django.db.models import Avg
+from .models import MenuType, Menu, Rating, Image
+from django.db.models import Avg, Max
 import logging
 
 log = logging.getLogger("statistic_functions")
@@ -54,3 +54,18 @@ def getRatingOfAllTime(menuType):
     rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))
 
     return rating["rating__avg"]
+
+def getMostLikedImage(menuType):
+        allmenus = Menu.objects.filter(menuType=menuType)
+        
+        image = Image.objects.filter(menu__in=allmenus).order_by("-likes")
+
+        if len(image) == 0:
+            return None
+        else:
+            return image[0]
+
+
+
+
+

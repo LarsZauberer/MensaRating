@@ -1,131 +1,208 @@
 :root {
-    --main-background-col: white;
-
-    --header-height: 7vh;
-    --header-padding: 10%;
-
-    --navbar-height: 3vh;
+    --bgColor: white;
+    --accentColor: #DDDDDD;
+    --darkAccentColor: #CCCCCC;
+    --highlightedColor: #ABC270;
+    --red: #DD0000;
+    --borderRadMenu: 0.6rem;
 }
 
-html {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+p {
+    margin-top: 0;
+}
+
+/*Base*/
+header {
+    width: calc(100% - 4rem);
+    background-color: var(--highlightedColor);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    }
+
+.menuItem {
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
+    background-color: var(--accentColor);
+    text-transform: uppercase;
+}
+
+.active, .menuItem:hover{
+    background-color: var(--highlightedColor);
+    cursor: pointer;
 }
 
 body {
     margin: 0;
-    height:100vh;
-}
-
-
-header {
-    background-color: darkgray;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-
-    box-sizing: border-box;
-    width: 100%;
-    padding-left: var(--header-padding);
-    padding-right: var(--header-padding);
-
-    height: var(--header-height);
-
-    z-index: 1;
-    
-}
-nav {
-    width: 100%;
-    height: var(--navbar-height);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    background-color: darkgrey;
-    text-align: center;
-    position: sticky;
-    top:0;
-
-    z-index: 1;
-}
-nav a{
-    height: 100%;
-    border: solid grey;
-    box-sizing: border-box;
+    justify-content: center;
+    align-content: flex-start;
 }
 
 
-.login {
-    margin: 1em;
+
+
+
+
+
+.content {
+    flex-shrink: 0;
+    width: 80%;
+    max-width: 1100px;
+    padding: 1rem;
+    flex-basis: auto;
+    margin: 3rem auto 0 auto;
+    border-radius: var(--borderRadMenu);
+}
+
+.content h1 {
+    margin: 0.2rem 0 0 0;
+}
+
+.footerHelper {
+    min-height: 3rem;
+    flex-grow: 2;
 }
 
 footer {
-    padding: 2em;
-    background-color: darkgrey;
+    width: calc(100% - 3rem);
+    background-color: var(--accentColor);
+    padding: 1.5rem;
+    text-align: center;
 }
 
-main {
-    background-color: var(--main-background-col);
-
-    margin-left: 15%;
-    margin-right: 15%;
-
-    box-sizing: border-box;
-    min-height: calc(100% - var(--header-height) - var(--navbar-height));
-
+/*Multiple*/
+.clickableDiv {
+    transition: all 140ms;
 }
 
-.fade_scroll_top {
-    width:100%;
-    padding-top: 3em;
-    padding-bottom: 3em;
-
-    background-color: var(--main-background-col);
-    background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 100%);
-
-    position: sticky;
-    top: var(--navbar-height);
+.clickableDiv:hover {
+    animation-name: hoverClickable;
+    animation-duration: 500ms;
+    background-color: var(--highlightedColor) !important;
+    box-shadow: 0px 5px 21px -5px rgba(0,0,0,0.41);
+    cursor: pointer;
 }
 
-.fade_scroll_top h1{
+/*Index*/
+.line {
+    border: 2px solid;
+    margin: 0 0 1.5rem 0;
+}
+
+.galleryView {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     width:100%;
     margin: 0;
-    border-bottom: 0.1em solid gainsboro;
-    
-    
-
 }
 
 
 
 
-
-
-
-
-
-.menu_box {
-    background-color: darkgray;
-    padding: 2em;
-}
 #menu_box_container {
     box-sizing:border-box;
     display: flex;
     justify-content: space-around;
+    justify-content: stretch;
+    align-content: stretch;
     align-items: top;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+.vegivegan-label{
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 
 
-.menu_listbox {
-    background-color: gainsboro;
+
+
+
+
+
+
+
+
+
+
+
+
+.galleryElement {
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+#clickMenuBox {
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    text-align: center;
+}
+#clickMenuBox h1{
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.coverimage{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+    image-orientation: from-image;
+    
+}
+.stars{
+    width: 50%;
+}
+.description{
+    height: 2em;
+}
+
+
+
+
+/*All Menus*/
+.menuListbox {
+    background-color: var(--accentColor);
     padding: 1.5em;
+    height: 2em;
+    display: flex;
+    align-items: center;
     margin-bottom: 1.5em;
+    border-radius: var(--borderRadMenu);
 }
 
 
+.menuListbox .vegivegan-label{
+    width: 2em;
+    height: 2em;
+    margin-left: 1em;
+}
 
-
+.timeline-date h2{
+    border-bottom: gainsboro 0.1em solid
+}

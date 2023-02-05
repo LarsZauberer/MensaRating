@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
     <script src="{% static 'js/api.js' %}"></script>
+    <script src="{% static '/js/app.js' %}"></script>
 
     <script>
         const api = new API("{{ csrf_token }}");
@@ -22,39 +24,52 @@
 
     <title>Mensa Rating</title>
 </head>
+
 <body>
     <header>
-        <a href="{% url 'index' %}">Mensa NKSA Rated!</a>
-        
+        <p>
+            <a href="{% url 'index' %}">🍽️MENSA APP</a>
+        </p>
         <div>
-            {% if user.is_authenticated %}
-            <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
-            <a href="{% url 'userProfile' %}">Profil</a>
-            {% else %}
-            <a class="login" href="{% url 'login' %}" style="color: var(--bs-light);">Login</a>
-            {% endif %}
+            <p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'userProfile' %}">Profil</a>
+                |
+                <a class="login" href="{% url 'logout' %}" style="color: var(--bs-light);">Logout</a>
+                {% else %}
+                <a class="login" href="{% url 'login' %}" style="color: var(--bs-light);">Login</a>
+                {% endif %}
+            </p>
         </div>
     </header>
+
     <nav>
-        <a href="{% url 'index' %}">heute</a>
-        <a href="{% url 'allMenu' %}">alle Menus</a>
-        <a href="{% url 'timeline' %}">timeline</a>
+        <div class="menuItem" onclick="location.href='{% url 'index' %}';">
+            <a href="{% url 'index' %}">Heute</a>
+        </div>
+        <div class="menuItem" onclick="location.href='{% url 'allMenu' %}';">
+            <a href="{% url 'allMenu' %}">alle Menüs</a>
+        </div>
+        <div class="menuItem" onclick="location.href='{% url 'timeline' %}';">
+            <a href="{% url 'timeline' %}">Vergangene Menüs</a>
+        </div>
     </nav>
 
     
-    {% block content %}
-    {% endblock %}
-   
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    <div style="padding-top: 5em;"></div>
-
+    <div class="footerHelper"></div>
 
     <footer>
-        dummy footer
+        Made with ❤️ by 4 NKSA Students
     </footer>
 
 
 
-    
+
 </body>
+
 </html>

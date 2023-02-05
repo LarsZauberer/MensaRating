@@ -1,24 +1,31 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
 <main>
 
+
 <div class="fade_scroll_top">
     <h1>
-        All Menus
+        Alle Menüs
         <button>order</button>
     </h1>
 </div>
 
+<div class="line"></div>
+    {% for menuType, occurrences, description, vegetarian, vegan, allTimeRating in menuTypes %}
+        <div onclick="location.href='{% url 'menuType' menuType.pk%}';">
+            <div class="menuListbox clickableDiv">
+                <a href="{% url 'menuType' menuType.pk%}">{{menuType.name}}</a> - Rating: {{allTimeRating}} - Occurrences: {{occurrences}}
 
-
-
-{% for menuType, occurrences, allTimeRating in menuTypes %}
-    <div class="menu_listbox">
-        <a href="{% url 'menuType' menuType.pk%}">{{menuType.name}}</a> - Rating: {{allTimeRating}} - Occurrences: {{occurrences}}
-    </div>
-{% endfor %}
-
+                {% if vegetarian %}
+                <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+                {% elif vegan %}
+                <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+                {% endif %} 
+            </div>
+        </div>
+    {% endfor %}
 
 </main>
 
