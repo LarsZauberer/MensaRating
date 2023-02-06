@@ -240,6 +240,11 @@ def like(request, cat: int, pk: int):
 
     post = post[0]
     
+    # Check if the post is from today
+    if post.menu.date != dt.date.today():
+        log.warning(f"Post is to old")
+        return HttpResponse("Post cannot be liked anymore")
+    
     # Check if dislike or like
     dislike = request.GET.get("dislike")
     
