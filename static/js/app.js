@@ -10,4 +10,18 @@ document.addEventListener("DOMContentLoaded", function (e) {
             return;
         }
     }
+
+    removeAlertAfterDelay();
 })
+
+function removeAlertAfterDelay() {
+    alerts = document.getElementsByClassName("alert");
+    for (let index = 0; index < alerts.length; index++) {
+        const element = alerts[index];
+        setTimeout(closeAlert, 3000, element)
+    }
+}
+
+function closeAlert(domElement) {
+    domElement.style.display='none';
+}
