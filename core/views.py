@@ -211,3 +211,51 @@ def userProfile(request):
     context = {"name": profil.user, "karma": profil.karma}
 
     return render(request, "userProfile.html", context=context)
+
+
+def like(request, cat: int, pk: int):
+    log = logging.getLogger("Like View")
+    
+    # All models that can be liked
+    obj_cat: dict = {
+        1: Review,
+        2: Image
+    }
+    
+    obj = obj_cat.get(cat)
+    
+    # Is the category index out of range for the dict
+    if not obj:
+        log.warning(f"Category: {cat} out of range")
+        return HttpResponse("Category not found")
+    
+    log.debug(f"Model recognized: {obj}")
+    
+    post = obj.objects.filter(pk=pk)  # Get the post object from the database
+    
+    # If a post found
+    if len(post) == 0:
+        log.warning(f"No model of type {obj} with pk {pk} found!")
+        return HttpResponse("Post not found")
+
+    post = post[0]
+    
+    # Check if dislike or like
+    dislike = request.GET.get("dislike")
+    
+    # Check if this should be a dislike
+    weight = 1
+    if dislike:
+        log.debug(f"Dislike: {dislike}")
+        weight = -1
+    
+    # Like the post
+    post.likes += weight
+    
+    # If the like count is below zero -> 0
+    if post.likes < 0:
+        post.likes = 0
+    
+    post.save()  # Save to the database
+    
+    return HttpResponse(post.likes)

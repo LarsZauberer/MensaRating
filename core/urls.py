@@ -9,6 +9,7 @@ urlpatterns = [
     path('userProfile', userProfile, name="userProfile"),
     path('menuType/<int:pk>', menuType, name="menuType"),
     path('timeline', timeline, name="timeline"),
+    path('like/<int:cat>/<int:pk>', like, name="like"),
     path('', index, name="index"),
 ]
 
