@@ -72,7 +72,12 @@ def getMostLikedImage(menuType):
         else:
             return image[0]
 
-
+def getNumRates(menu):
+    return Rating.objects.filter(menu=menu).count()
+    
+def getNumRatesOfAllTime(menuType):
+    menus = Menu.objects.filter(menuType=menuType)
+    return Rating.objects.filter(menu__in=menus).count()
 
 
 

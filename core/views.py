@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage
+from .statistic_functions import *
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
@@ -77,8 +77,6 @@ def menu(request, pk):
             log.debug(f"Rating Form Recognized")
             msg = postRating(request, pk, form)
 
-       
-
         # Review
         elif request.POST.get("text"):
             form = ReviewForm(request.POST)
@@ -110,9 +108,7 @@ def menu(request, pk):
 
     # Get the rating
     rating = getRating(menu)
-
-    # Calculate the average rating of all time for the menu
-    ratingOfAllTime = getRatingOfAllTime(menu.menuType)
+    numRates = getNumRates(menu)
 
 
     
@@ -122,9 +118,9 @@ def menu(request, pk):
     reviewForm = ReviewForm()
     ratingForm = RatingForm()
 
-    context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
-               "allTimeRating": ratingOfAllTime, "imageForm": imageForm, "reviewForm": reviewForm,
-               "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
+    context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating, "numRates": numRates,
+                "imageForm": imageForm, "reviewForm": reviewForm,
+                "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 

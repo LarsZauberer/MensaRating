@@ -215,7 +215,7 @@ footer {
 .rating{
     background-color: var(--darkAccentColor);
     display: flex;
-    gap: 0.5em;
+    gap: 1em;
     align-items: center;
     padding: 0.5em;
     border-radius: 0.3em;
@@ -270,6 +270,7 @@ footer {
     align-items: center;
     justify-content: space-around;
 }
+
 
 
 
