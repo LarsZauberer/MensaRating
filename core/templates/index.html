@@ -13,7 +13,7 @@
         let rating;
     </script>
 
-    {% for index, menu, rating, allTimeRating, image in menus %}
+    {% for index, menu, rating, numRates, image in menus %}
     <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
         
         <h1>
@@ -36,12 +36,15 @@
         
 
         <div class="rating">
-            ({{rating}})
+            <div>{{rating}}</div>
+
             <div class="stars">
                 <div class="emptystars"></div>
                 <div id="stars-{{index}}" class="fullstars"></div>
                 <div class="starshape"></div>
             </div>
+
+            <div>({{numRates}})</div>
         </div>
         
         <script data-menuindex="{{index}}" data-rating="{{rating}}">

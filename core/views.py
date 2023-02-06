@@ -23,7 +23,7 @@ def index(request):
 
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
-    allTimeRatings = [getRatingOfAllTime(i.menuType) for i in menus]
+    numRates = [getNumRates(i) for i in menus]
 
 
     images = [getMostLikedImage(i.menuType) for i in menus]
@@ -33,7 +33,7 @@ def index(request):
     
     # Zip all the menu information to one information together.
     # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(list(range(len(menus))), menus, ratings, allTimeRatings, images)
+    menus = zip(list(range(len(menus))), menus, ratings, numRates, images)
 
     
 
