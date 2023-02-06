@@ -77,35 +77,50 @@
     
 
 
-
-
     <div style="width: 100%;">
         <div class="fade_scroll_top">
             <h1>
-                Every Instance
+                Alle Menüs
                 <button>order</button>
             </h1>
         </div>
-    
-        {% for menu in menu_instances %}
-            <div class="menu_listbox">
-                <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}
+        <div class="line"></div>
 
-                {% if menu.vegetarian %}
-                <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
-                {% elif menu.vegan %}
-                <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-                {% endif %} 
+        {% for index, rating, menu in menu_instances %}
+            <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
+                <div class="menuListbox clickableDiv">
+                    <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
+                    - {{menu.date}}
+                    
+                    {% if menu.vegetarian %}
+                    <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+                    {% elif menu.vegan %}
+                    <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+                    {% endif %} 
+
+                    <div class="rating">
+                        ({{rating}})
+                        <div class="stars">
+                            <div class="emptystars"></div>
+                            <div id="stars-{{index}}" class="fullstars"></div>
+                            <div class="starshape"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- <script data-rating="{{rating}}">
+            <script data-menuindex="{{index}}" data-rating="{{rating}}">
                 data = document.currentScript.dataset;
-                starRate(0, data.rating)
-                checkOrientation()
-                showSlides(slideIndex);
-            </script> -->
-
+                starRate(data.menuindex, data.rating)
+            </script>    
         {% endfor %}
+
+
+
+
+            
+
+        
     </div>
 
 

@@ -192,6 +192,7 @@ footer {
     height: 2em;
     display: flex;
     align-items: center;
+    gap: 1em;
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
 }
@@ -218,12 +219,7 @@ footer {
     align-items: center;
     padding: 0.5em;
     border-radius: 0.3em;
-
-
-
 }
-
-
 
 
 .stars{
@@ -245,8 +241,6 @@ footer {
 
     background-image: url("../images/starshape.svg");
     background-size:cover;
-
-
 }
 
 

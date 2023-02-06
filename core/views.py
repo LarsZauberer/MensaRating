@@ -132,12 +132,20 @@ def menuType(request, pk):
     vegetarian = menu_instances[0].vegetarian
     vegan = menu_instances[0].vegan
 
-
+    
     occurrences = menu_instances.count()
     allTimeRating = getRatingOfAllTime(menutype)
 
 
-    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
+    ratings = [getRating(i) for i in menu_instances]
+    indexes = list(range(len(menu_instances)))
+
+
+
+
+    menu_instances = zip(indexes[:600], ratings[:600], menu_instances[:600])
+
+    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating}
 
     return render(request, "menuType.html", context=context)
 
