@@ -58,16 +58,23 @@
     -->
     
 
-
-
     <p>occurrences: {{occurrences}}</p>
     
 
-    <div class="rating"> <!-- TODO: show average rating -->
-        Rating Durchschnitt
-        <span>({{allTimeRating}})</span>
-        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
+    <div class="rating">
+        ({{allTimeRating}})
+        <div class="stars">
+            <div class="emptystars"></div>
+            <div id="stars-alltime" class="fullstars"></div>
+            <div class="starshape"></div>
+        </div>
     </div>
+
+    
+    
+    
+
+    
 
 
 
@@ -80,7 +87,6 @@
             </h1>
         </div>
     
-    
         {% for menu in menu_instances %}
             <div class="menu_listbox">
                 <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a> - {{menu.date}}
@@ -91,8 +97,26 @@
                 <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
                 {% endif %} 
             </div>
+
+            <!-- <script data-rating="{{rating}}">
+                data = document.currentScript.dataset;
+                starRate(0, data.rating)
+                checkOrientation()
+                showSlides(slideIndex);
+            </script> -->
+
         {% endfor %}
     </div>
+
+
+    <script data-rating="{{allTimeRating}}">
+        data = document.currentScript.dataset;
+        starRate("alltime", data.rating)
+    </script>
+
+
+
+
     
 
 
