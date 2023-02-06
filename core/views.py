@@ -58,14 +58,27 @@ def menu(request, pk):
         log.debug(f"Post Data received: {request.POST}")
         log.debug(f"Files received: {request.FILES}")
         form = None
-        
+
+
+        """ def test_view(request):
+        if request.method == 'POST':
+            form = Fooform(request.POST)
+            if form.is_valid():
+                val = form.cleaned_data.get("btn")
+        else:
+            form = Fooform()
+        return render(request, 'template.html', locals()) """
+
+
         # Sort different post kinds
         # Rating
         if request.POST.get("rating"):
             form = RatingForm(request.POST)
             log.debug(f"Rating Form Recognized")
             msg = postRating(request, pk, form)
-        
+
+       
+
         # Review
         elif request.POST.get("text"):
             form = ReviewForm(request.POST)
@@ -179,6 +192,9 @@ def allMenu(request):
     menuType_info = sorted(menuType_info, key=lambda x: x[2], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
 
     context = {"menuTypes": menuType_info}
+
+
+    
    
 
     return render(request, "allMenu.html", context=context)

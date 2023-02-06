@@ -244,32 +244,31 @@ footer {
 }
 
 
-
-
-
 .emptystars{
-
     position: absolute;
     width: 99%;
     height:99%;
-
-
-
     top: 0;
     left: 0;
-
     background-color: darkgray;
 }
 .fullstars{
-
-
     width: 0%;
     height:99%;
     position: absolute;
     top: 0;
     left: 0;
-
     background-color: yellow;
+}
+
+.give-stars{
+    width: calc(var(--starheight)*5.5);
+    height: var(--starheight);
+    position: relative;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 

@@ -64,22 +64,26 @@
 
     
     {% if today %}
-    <div class="rating">
+    <!-- <div class="rating">
         <form method="post">
             {% csrf_token %}
             {{ ratingForm }}
             <button type="submit">Post</button>
         </form>
-    </div>
+    </div> -->
     
-    <div class="rating">
-        ({{rating}})
-        <div class="stars">
-            <div class="emptystars"></div>
-            <div id="stars-{{index}}" class="fullstars"></div>
-            <div class="starshape"></div>
+        <div class="rating">
+            <div class="give-stars">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" value="1" name="rating" class="give-star">1</button>
+                    <button type="submit" value="2" name="rating" class="give-star">2</button>
+                    <button type="submit" value="3" name="rating" class="give-star">3</button>
+                    <button type="submit" value="4" name="rating" class="give-star">4</button>
+                    <button type="submit" value="5" name="rating" class="give-star">5</button>
+                </form>
+            </div>
         </div>
-    </div>
 
 
     {% endif%}
