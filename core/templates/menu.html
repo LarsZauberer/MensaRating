@@ -65,20 +65,30 @@
     
     {% if today %}
     
-        <div class="rating">
-            <div class="give-stars">
-                <form method="post">
-                    {% csrf_token %}
-                    <button type="submit" value="1" name="rating" class="give-star">1</button>
-                    <button type="submit" value="2" name="rating" class="give-star">2</button>
-                    <button type="submit" value="3" name="rating" class="give-star">3</button>
-                    <button type="submit" value="4" name="rating" class="give-star">4</button>
-                    <button type="submit" value="5" name="rating" class="give-star">5</button>
-                </form>
+        <div class="give-star-rating">
+            <form method="post">
+                {% csrf_token %}
+                <div class="give-stars">
+                    <button type="submit" value="1" name="rating" class="give-star"></button>
+                    <button type="submit" value="2" name="rating" class="give-star"></button>
+                    <button type="submit" value="3" name="rating" class="give-star"></button>
+                    <button type="submit" value="4" name="rating" class="give-star"></button>
+                    <button type="submit" value="5" name="rating" class="give-star"></button>
+                </div>
+            </form>
             </div>
         </div>
 
+        <script>
+            stars = document.getElementsByClassName("give-star")
+            for(let i = 0; i < stars.length; i++){
+                stars[i].addEventListener("mouseover", function(){starHover(stars, i)})
+                stars[i].addEventListener("mouseout", function(){stopStarHover()})
+            }
 
+
+
+        </script>
     {% endif%}
 
 

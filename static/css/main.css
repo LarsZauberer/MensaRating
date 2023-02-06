@@ -219,6 +219,8 @@ footer {
     align-items: center;
     padding: 0.5em;
     border-radius: 0.3em;
+
+    margin-bottom: 1em;
 }
 
 
@@ -261,14 +263,46 @@ footer {
     background-color: yellow;
 }
 
+
+
+
+
+
+
+
+
+.give-star-rating{
+    background-color: var(--darkAccentColor);
+    padding: 0.5em;
+    border-radius: 0.3em;
+
+    margin-bottom: 1em;
+}
 .give-stars{
-    width: calc(var(--starheight)*5.5);
+    width: calc(var(--starheight)*7);
     height: var(--starheight);
-    position: relative;
-    
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+.starContainer{
+    height: 3em;
+    width: 3em;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+}
+.give-star{
+    height: 3em;
+    width: 3em;
+    
+    background-image: url('../images/emptystar.png');
+    background-size: contain;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
 }
 
 
