@@ -216,7 +216,7 @@ def timeline(request):
             menus_with_date.append([])
         
 
-        menus_with_date[-1].append( (i, menu, getRating(menu)) )
+        menus_with_date[-1].append( (i, menu, getRating(menu), getNumRates(menu)) )
 
     menu_dates = zip(dates[:600], menus_with_date[:600]) # Return the first 600 menus
 

@@ -18,7 +18,7 @@
 {% for date, menus in menu_dates %}
     <div class="timeline-date">
         <h2>{{date}}</h2>
-        {% for index, menu, rating in menus %}
+        {% for index, menu, rating, numRates in menus %}
             <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
                 <div class="menuListbox clickableDiv">
                     <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
@@ -31,12 +31,17 @@
                     {% endif %} 
 
                     <div class="rating">
-                        ({{rating}})
+                        <div>{{rating}}</div>
+            
                         <div class="stars">
                             <div class="emptystars"></div>
                             <div id="stars-{{index}}" class="fullstars"></div>
                             <div class="starshape"></div>
                         </div>
+
+                        <div>({{numRates}})</div>
+
+
                     </div>
                 </div>
             </div>
