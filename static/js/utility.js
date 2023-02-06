@@ -1,4 +1,5 @@
 function starRate(index, rating){
+    console.log(index, rating)
 
     let star = document.getElementById("stars-" + index);
 

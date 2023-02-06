@@ -35,7 +35,10 @@ def getRating(menu):
     # Get the ratings
     rating = Rating.objects.filter(menu=menu).aggregate(Avg("rating"))
 
-    return rating["rating__avg"]
+    if rating["rating__avg"] == None:
+        return 0
+    else:
+        return float('%.1f' % rating["rating__avg"])
 
 
 def getRatingOfAllTime(menuType):
@@ -53,7 +56,11 @@ def getRatingOfAllTime(menuType):
     # Find all ratings for all the menu occurencies
     rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))
 
-    return rating["rating__avg"]
+    if rating["rating__avg"] == None:
+        return 0
+    else:
+        return float('%.1f' % rating["rating__avg"])
+
 
 def getMostLikedImage(menuType):
         allmenus = Menu.objects.filter(menuType=menuType)

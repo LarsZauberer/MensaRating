@@ -170,12 +170,13 @@ def allMenu(request):
         vegans.append(menus[0].vegan)
         occurrences.append(menus.count())
         allTimeRatings.append(getRatingOfAllTime(typ))
+    indexes = list(range(len(menuTypes))) 
 
-    menuType_info = zip(menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings)
+    menuType_info = zip(indexes, menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings)
 
 
     #Order by number of occurrences
-    menuType_info = sorted(menuType_info, key=lambda x: x[1], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
+    menuType_info = sorted(menuType_info, key=lambda x: x[2], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
 
     context = {"menuTypes": menuType_info}
    
@@ -193,11 +194,13 @@ def timeline(request):
 
     dates = []
     menus_with_date = []
-    for menu in menus:
+    for i, menu in enumerate(menus):
         if menu.date not in dates:
             dates.append(menu.date)
             menus_with_date.append([])
-        menus_with_date[-1].append(menu)
+        
+
+        menus_with_date[-1].append( (i, menu, getRating(menu)) )
 
     menu_dates = zip(dates[:600], menus_with_date[:600]) # Return the first 600 menus
 
