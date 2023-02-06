@@ -42,7 +42,7 @@ class Menu(models.Model):
     """
     name = models.CharField(max_length=100)  # Name of the meal.
     description = models.TextField()  # Description of the meal.
-    date = models.DateField(auto_now_add=True)  # Date of the meal. Default is the current date.
+    date = models.DateField()  # Date of the meal. Default is the current date.
     vegetarian = models.BooleanField(default=False)  # Is the meal vegetarian?
     vegan = models.BooleanField(default=False)  # Is the meal vegan
     menuType = models.ForeignKey(MenuType, on_delete=models.CASCADE)

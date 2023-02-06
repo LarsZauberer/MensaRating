@@ -56,8 +56,26 @@ def get_day_data():
     soup = BeautifulSoup(page.content, "html.parser")
     return soup.find_all(attrs={"class":"menu-plan-grid"})
 
+def get_dates():
+    page = requests.get("https://neuekanti.sv-restaurant.ch/de/menuplan/")
+    soup = BeautifulSoup(page.content, "html.parser")
+    day_nav = soup.find_all(attrs={"class": "day-nav"})[0]
+    dates = day_nav.find_all(attrs={"class": "date"})
+    
+    for i, el in enumerate(dates):
+        date = dt.datetime.strptime(el.contents[0], "%d.%m.").date()
+        date_td = dt.date.today()
+        date = date.replace(year=date_td.year)
+        # check if this date is already happend
+        if date < date_td:
+            date = date.replace(year=date_td.year + 1) # set it to next year
+        dates[i] = date
+    
+    return dates
+
 def main():
     days = get_day_data()
+    get_dates()
     
     # Print
     for dishesOfDay in get_menu_list(days).values():
@@ -70,9 +88,10 @@ def main():
 
 def webscrape():
     days = get_day_data()
-    return get_menu_list(days)
+    dates = get_dates()
+    return get_menu_list(days), dates
 
-def create_menu_in_database(title, description, label):
+def create_menu_in_database(title, description, label, date):
     menuType = MenuType.objects.filter(name=title)
     if len(menuType) == 0:
         log.info(f"No menuType with the name: {title} found.")
@@ -86,25 +105,27 @@ def create_menu_in_database(title, description, label):
         {"vegetarian": False, "vegan": True},
     ]
     
-    Menu.objects.create(name=title, description=description, menuType=menuType, **labels[label])
+    Menu.objects.create(name=title, description=description, menuType=menuType, date=date, **labels[label])
     
 
 def sync_today_menu():
-    # Check if todays menu is already in database
-    log.debug(f"Checking if todays menu is already in the database")
-    menus = Menu.objects.filter(date=dt.date.today())
-    
-    # Retrieve mensa data
     log.debug(f"Retrieving mensa data")
-    data = webscrape()
-    log.debug(f"Data received: {data}")
-    
-    titles = [i.name for i in menus]
-    for i in data["menu0"].keys():
-        if data["menu0"][i]["title"] not in titles:
-            log.info(f"Menu \"{data['menu0'][i]['title']}\" is not in the database")
-            create_menu_in_database(data["menu0"][i]["title"], data["menu0"][i]["description"], data["menu0"][i]["label"])
-            log.info(f"Created menu: {data['menu0'][i]['title']}")
+    data, dates = webscrape()
+    log.debug(f"Data received: {data}, {dates}")
+
+    for key, date in zip(data.keys(), dates):
+        # Check if todays menu is already in database
+        log.debug(f"Checking if menu of date ({date}) is already in the database")
+        menus = Menu.objects.filter(date=date)
+        
+        titles = [i.name for i in menus]
+        for i in data[key].keys():
+            if data[key][i]["title"] not in titles:
+                log.info(f"Menu \"{data[key][i]['title']}\" is not in the database")
+                create_menu_in_database(data[key][i]["title"], data[key][i]["description"], data[key][i]["label"], date)
+                log.info(f"Created menu: {data[key][i]['title']}")
+            else:
+                log.debug(f"Menu \"{data[key][i]['title']}\" already in database")
 
 
 if __name__ == "__main__":
