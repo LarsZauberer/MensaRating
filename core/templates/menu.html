@@ -60,16 +60,10 @@
         </div>
     </div>
 
-    <script>
-        checkOrientation()
-        showSlides(slideIndex);
-    </script>
-
     
 
-
+    
     {% if today %}
-    
     <div class="rating">
         <form method="post">
             {% csrf_token %}
@@ -78,19 +72,31 @@
         </form>
     </div>
     
-    <div class="rating"> <!-- TODO: give your own rating -->
-        Your Rating
-        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
+    <div class="rating">
+        ({{rating}})
+        <div class="stars">
+            <div class="emptystars"></div>
+            <div id="stars-{{index}}" class="fullstars"></div>
+            <div class="starshape"></div>
+        </div>
     </div>
+
 
     {% endif%}
 
-    <div class="rating"> <!-- TODO: show average rating -->
-        Rating
-        <span>({{rating}})</span>
-        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
-    </div>
 
+  
+    <div class="rating">
+        ({{rating}})
+        <div class="stars">
+            <div class="emptystars"></div>
+            <div id="stars-0" class="fullstars"></div>
+            <div class="starshape"></div>
+        </div>
+    </div>
+    
+
+    
     
 
 
@@ -98,10 +104,6 @@
 
 
     <h3><a href="{% url 'menuType' menu.menuType.pk %}">Vergleiche das Essen</a></h3>
-
-
-
-
 
 
     <div id="reviews">
@@ -138,6 +140,16 @@
         </div>
         {% endfor %}
     </div>
+
+
+    
+
+    <script data-rating="{{rating}}">
+        data = document.currentScript.dataset;
+        starRate(0, data.rating)
+        checkOrientation()
+        showSlides(slideIndex);
+    </script>
 
     
 
