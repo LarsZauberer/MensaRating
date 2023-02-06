@@ -33,6 +33,18 @@
                 <div class="imgContainer">
                     <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
                 </div>
+                <div class="imageButtons">
+                    {% if today %}
+                    <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                        {% csrf_token %}
+                        {{ imageForm }}
+                        <button type="submit">Post</button>
+                    </form>
+                    <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                    {% endif %}
+        
+                    <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                </div>
             </div>
         {% endfor %}
         {% if images|length == 0 %}
@@ -45,19 +57,6 @@
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         {% endif %}
-
-        <div class="imageButtons">
-            {% if today %}
-            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
-                {% csrf_token %}
-                {{ imageForm }}
-                <button type="submit">Post</button>
-            </form>
-            <button class="like imageLike">Like</button>
-            {% endif %}
-
-            <p class="likeText imageLikeText">Likes: {{image.likes}}</p>
-        </div>
     </div>
 
     <script>
@@ -130,9 +129,9 @@
                 <div>{{review.profil.karma}}</div>
                 <div>Rating</div>
                 {% if today %}
-                <button>Like</button>
+                <button onclick="like(1, {{review.pk}})" id="1-{{review.pk}}-btn" class="like-btn">Like</button>
                 {% endif %}
-                <div>num-likes</div>
+                <div>Likes: <span id="1-{{review.pk}}">{{review.likes}}</span></div>
             </div>
             {{review.text}}
         </div>
