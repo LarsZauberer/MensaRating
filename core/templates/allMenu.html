@@ -13,7 +13,7 @@
 </div>
 
 <div class="line"></div>
-    {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating in menuTypes %}
+    {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
 
         <div onclick="location.href='{% url 'menuType' menuType.pk%}';">
             <div class="menuListbox clickableDiv">
@@ -28,12 +28,15 @@
                 {% endif %} 
 
                 <div class="rating">
-                    ({{allTimeRating}})
+                    <div>{{allTimeRating}}</div>
+                    
                     <div class="stars">
                         <div class="emptystars"></div>
                         <div id="stars-{{index}}" class="fullstars"></div>
                         <div class="starshape"></div>
                     </div>
+
+                    <div>({{allTimeNumRates}})</div>
                 </div>
             </div>
         </div>
