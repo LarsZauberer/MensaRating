@@ -5,6 +5,8 @@
     --highlightedColor: #ABC270;
     --red: #DD0000;
     --borderRadMenu: 0.6rem;
+
+    --starheight: 2em;
 }
 
 p {
@@ -175,9 +177,7 @@ footer {
     image-orientation: from-image;
     
 }
-.stars{
-    width: 50%;
-}
+
 .description{
     height: 2em;
 }
@@ -206,3 +206,49 @@ footer {
 .timeline-date h2{
     border-bottom: gainsboro 0.1em solid
 }
+
+
+
+
+
+.rating{
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+.stars{
+    width: calc(var(--starheight)*5.5);
+    height: var(--starheight);
+    position: relative;
+    
+    object-fit: scale-down;
+}
+.starshape{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0
+}
+.emptystars{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    top: 0;
+    left: 0;
+
+    background-color: aqua;
+}
+.fullstars{
+    width: 50%;
+    height:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: yellow;
+}
+
+
+
+

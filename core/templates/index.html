@@ -8,7 +8,12 @@
 <h1>Menu Heute | {% now "d. F" %}</h1>
 <div class="line"></div>
 <div id="menu_box_container">
-    {% for menu, rating, allTimeRating, image in menus %}
+    <script>
+        let data;
+        let rating;
+    </script>
+
+    {% for index, menu, rating, allTimeRating, image in menus %}
     <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
         
         <h1>
@@ -29,13 +34,21 @@
             <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
         {% endif %}
         
-        <img class="stars" src="{% static 'images/5star.jpg' %}" alt="5 stars">
-        <p>Rating Today: {{rating}}</p>
 
-        <script>
+        <div class="rating">
+            ({{rating}})
+            <div class="stars">
+                <div class="emptystars"></div>
+                <div id="{{index}}" class="fullstars"></div>
+                <img class="starshape" src="{% static 'images/starshape.png' %}" alt="starshape">
+            </div>
+        </div>
+        
+        <script data-menuindex="{{index}}" data-rating="{{rating}}">
+            data = document.currentScript.dataset;
+            starRate(data.menuindex, data.rating)
             checkOrientation()
         </script>
-        
        
     </div>
     {% endfor %}

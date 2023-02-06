@@ -33,7 +33,7 @@ def index(request):
     
     # Zip all the menu information to one information together.
     # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(menus, ratings, allTimeRatings, images)
+    menus = zip(list(range(len(menus))), menus, ratings, allTimeRatings, images)
 
     
 
