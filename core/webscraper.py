@@ -66,7 +66,7 @@ def get_dates():
         date = dt.datetime.strptime(el.contents[0], "%d.%m.").date()
         date_td = dt.date.today()
         date = date.replace(year=date_td.year)
-        # check if this date is already happend
+        # check if this date is already happend -> Can happen at the end of the year
         if date < date_td:
             date = date.replace(year=date_td.year + 1) # set it to next year
         dates[i] = date
@@ -87,9 +87,9 @@ def main():
     print(get_menu_list(days))
 
 def webscrape():
-    days = get_day_data()
-    dates = get_dates()
-    return get_menu_list(days), dates
+    days = get_day_data()  # Get all the days
+    dates = get_dates()  # Get the dates of the days
+    return get_menu_list(days), dates  # Retrive all the information
 
 def create_menu_in_database(title, description, label, date):
     menuType = MenuType.objects.filter(name=title)
@@ -118,11 +118,13 @@ def sync_today_menu():
         log.debug(f"Checking if menu of date ({date}) is already in the database")
         menus = Menu.objects.filter(date=date)
         
+        # Compare database with the data from the website
         titles = [i.name for i in menus]
         for i in data[key].keys():
             if data[key][i]["title"] not in titles:
+                # Menu not in the database
                 log.info(f"Menu \"{data[key][i]['title']}\" is not in the database")
-                create_menu_in_database(data[key][i]["title"], data[key][i]["description"], data[key][i]["label"], date)
+                create_menu_in_database(data[key][i]["title"], data[key][i]["description"], data[key][i]["label"], date)  # Create the menu
                 log.info(f"Created menu: {data[key][i]['title']}")
             else:
                 log.debug(f"Menu \"{data[key][i]['title']}\" already in database")
