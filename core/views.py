@@ -125,7 +125,8 @@ def menuType(request, pk):
         return HttpResponse("Menutype not found")
     menutype = menutype[0]
 
-    menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
+    menu_instances = Menu.objects.filter(name=menutype.name).filter(date__lte=dt.date.today()).order_by("-date")
+    
 
 
     description = menu_instances[0].description
@@ -156,7 +157,7 @@ def allMenu(request):
     vegans = []
 
     for typ in menuTypes:
-        menus = Menu.objects.filter(name=typ.name)
+        menus = Menu.objects.filter(name=typ.name).filter(date__lte=dt.date.today())
         descriptions.append(menus[0].description)
         vegetarians.append(menus[0].vegetarian)
         vegans.append(menus[0].vegan)
@@ -177,12 +178,8 @@ def allMenu(request):
 
 def timeline(request):
     sync_today_menu()
-
+    menus = Menu.objects.filter(date__lte=dt.date.today()).order_by("-date")
     
-    
-    menus = Menu.objects.all().order_by("-date")
-
-
     dates = []
     menus_with_date = []
     for menu in menus:
