@@ -27,8 +27,8 @@ function update_all_btn() {
                 element.className += " disliked"
             }
         } else {
+            element.innerHTML = "Like"
             if (!element.className.includes("liked")) {
-                element.innerHTML = "Like"
                 element.className = element.className.replace(" disliked", "")
                 element.className += " liked"
             }
