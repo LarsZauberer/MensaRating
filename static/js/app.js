@@ -11,3 +11,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     }
 })
+
+function change_cursor_wait() {
+    document.body.style.cursor = 'wait';
+}
