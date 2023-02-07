@@ -59,17 +59,6 @@ def menu(request, pk):
         log.debug(f"Files received: {request.FILES}")
         form = None
 
-
-        """ def test_view(request):
-        if request.method == 'POST':
-            form = Fooform(request.POST)
-            if form.is_valid():
-                val = form.cleaned_data.get("btn")
-        else:
-            form = Fooform()
-        return render(request, 'template.html', locals()) """
-
-
         # Sort different post kinds
         # Rating
         if request.POST.get("rating"):
