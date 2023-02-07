@@ -5,7 +5,23 @@
 {% endblock %}
 
 {% block content %}
-
+{% if messages %}
+{% for i in messages %}
+{% autoescape off %}
+{% if i.tags == "error" %}
+    <div class="alert error">
+        <span class="closebtn" onclick="closeAlert(this.parentElement);">&times;</span>
+        {{i}}
+    </div>
+{% else %}
+    <div class="alert success">
+        <span class="closebtn" onclick="closeAlert(this.parentElement);">&times;</span>
+        {{i}}
+    </div>
+{% endif %}
+{% endautoescape %}
+{% endfor %}
+{% endif %}
 
 <main id="menu">
 
@@ -137,25 +153,6 @@
         </div>
         {% endfor %}
     </div>
-
-    
-
-    {% if messages %}
-    {% for i in messages %}
-    {% autoescape off %}
-    {% if i.tags == "error" %}
-    <div role="alert" class="alert error"><span>{{i}}</span></div>
-    {% else %}
-    <div role="alert" class="alert success"><span>{{i}}</span></div>
-    {% endif %}
-    {% endautoescape %}
-    {% endfor %}
-    {% endif %}
-
-    
-
-
-    
 
 </main>
 

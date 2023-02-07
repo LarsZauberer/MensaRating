@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
 
     update_all_btn();
+    removeAlertAfterDelay();
 })
 
 function update_all_btn() {
@@ -56,4 +57,17 @@ function like(cat, pk) {
         localStorage.setItem(cat + "-" + pk, "YES");
         update_all_btn();
     }
+}
+
+function removeAlertAfterDelay() {
+    alerts = document.getElementsByClassName("alert");
+    for (let index = 0; index < alerts.length; index++) {
+        const element = alerts[index];
+        setTimeout(closeAlert, 3000, element)
+    }
+}
+
+
+function closeAlert(domElement) {
+    domElement.style.display='none';
 }
