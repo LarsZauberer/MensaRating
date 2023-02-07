@@ -1,4 +1,4 @@
-from .models import MenuType, Menu, Rating, Image
+from .models import MenuType, Menu, Rating, Image, Profil, Badge
 from django.db.models import Avg, Max
 import logging
 
@@ -66,6 +66,20 @@ def getMostLikedImage(menuType):
             return image[0]
 
 
+def get_badges_of_profil(profil: Profil):
+    karma: int = profil.karma
 
-
-
+    badges: list[Badge] = Badge.objects.all()
+    
+    categories: list[int] = [karma]
+    
+    # Get the highest badge for all the categories
+    highest_badges: list[Badge] = [None]
+    for i in badges:
+        if i.count <= categories[i.condition_category]:  # Does the profil have this badge
+            # Check if the badge is more worth than the saved.
+            if highest_badge[i.condition_category] is None:
+                highest_badges[i.condition_category] = i
+            else:
+                if highest_badges[i.condition_category].count < i.count:
+                    highest_badges[i.condition_category] = i
