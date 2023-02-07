@@ -235,3 +235,58 @@ class TestViewsCore(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "timeline.html")
+    
+    def test_like_like_get(self):
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
+        review = Review.objects.create(menu=menu, likes=0, text="Test")
+        
+        client = Client()
+        
+        response = client.get(reverse("like", args=(1, 1)))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "1")
+        review.refresh_from_db()
+        self.assertEqual(review.likes, 1)
+        
+    def test_like_dislike_below_get(self):
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
+        review = Review.objects.create(menu=menu, likes=0, text="Test")
+        
+        client = Client()
+        
+        response = client.get(reverse("like", args=(1, 1)), data={"dislike": "YES"})
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "0")
+        review.refresh_from_db()
+        self.assertEqual(review.likes, 0)
+    
+    def test_like_dislike_get(self):
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
+        review = Review.objects.create(menu=menu, likes=1, text="Test")
+        
+        client = Client()
+        
+        response = client.get(reverse("like", args=(1, 1)), data={"dislike": "YES"})
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "0")
+        review.refresh_from_db()
+        self.assertEqual(review.likes, 0)
+    
+    def test_like_cat_not_get(self):
+        client = Client()
+        
+        response = client.get(reverse("like", args=(3, 1)))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "Category not found")
+    
+    def test_like_cat_not_found(self):
+        client = Client()
+        
+        response = client.get(reverse("like", args=(1, 1)))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content.decode("UTF-8"), "Post not found")
