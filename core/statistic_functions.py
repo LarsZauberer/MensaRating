@@ -71,7 +71,16 @@ def get_badges_of_profil(profil: Profil):
 
     badges: list[Badge] = Badge.objects.all()
     
-    categories: list[int] = [karma]
+    # Count of most liked images
+    menuTypes: list[MenuType] = MenuType.objects.all()
+    img_counter: int = 0
+    for i in menuTypes:
+        img: Image = getMostLikedImage(i)
+        if img is not None:
+            if img.profil == profil:
+                img_counter += 1
+    
+    categories: list[int] = [karma, img_counter]
     
     # Get the highest badge for all the categories
     highest_badges: list[Badge] = [None]
