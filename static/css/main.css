@@ -258,3 +258,7 @@ footer {
 .tooltip:hover .tooltiptext {
     display: block;
 }
+
+.unposses {
+    filter: blur(1px) opacity(30%) grayscale(100%);
+}

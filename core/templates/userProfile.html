@@ -12,14 +12,21 @@
 </ul>
 
 <h2>Badges</h2>
-<div class="badgeview">
-{% for i in badges %}
-   <div class="tooltip badgeBig">
-      <img src="{{i.image.url}}" alt="" class="badgeBigImage">
-      <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span style="">{{i.description}}</span></div>
+{% for cat in badges %}
+   <div class="badgeview">
+      {% for i in cat %}
+         <div class="tooltip badgeBig">
+            {% if i.1 %}
+            <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
+            {% else %}
+            <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
+            {% endif %}
+            <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span style="">{{i.0.description}}</span></div>
+         </div>
+      {% endfor %}
    </div>
 {% endfor %}
-</div>
+
 
 <h2>Images</h2>
 <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->

@@ -7,7 +7,7 @@ import logging
 from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
-from .models import MenuType, Menu, Review, Image, Profil
+from .models import MenuType, Menu, Review, Image, Profil, Badge
 from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage, get_badges_of_profil
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
@@ -222,10 +222,18 @@ def userProfile(request):
     
     badges = get_badges_of_profil(profil)
     
-    reviews = Review.objects.filter(profil=profil)
-    images = Image.objects.filter(profil=profil)
+    all_badges = []
+    for i in range(3): # 3 Badge categories
+        all_badges.append(list(Badge.objects.filter(condition_category=i).order_by("count")))
+        
+    for i in all_badges:
+        for e, el in enumerate(i):
+            i[e] = (el, el in badges)  # Tag all the badges the profil posses
+    
+    reviews = Review.objects.filter(profil=profil).order_by("-likes")
+    images = Image.objects.filter(profil=profil).order_by("-likes")
 
-    context = {"name": profil.user, "karma": profil.karma, "badges": badges, "images": images, "reviews": reviews}
+    context = {"name": profil.user, "karma": profil.karma, "badges": all_badges, "images": images, "reviews": reviews}
 
     return render(request, "userProfile.html", context=context)
 
