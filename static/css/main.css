@@ -206,3 +206,37 @@ footer {
 .timeline-date h2{
     border-bottom: gainsboro 0.1em solid
 }
+
+
+/* Badges */
+.badgeView {
+    display: inline;
+    flex-direction: row;
+    width: 100%;
+}
+
+.badgeBig {
+    display: inline-block;
+    width: 10%;
+    height: auto;
+    margin: 10px;
+}
+
+.badgeBigImage {
+    width: 100%;
+    height: auto;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

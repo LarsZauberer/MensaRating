@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage
+from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage, get_badges_of_profil
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
@@ -204,8 +204,13 @@ def userProfile(request):
         return redirect(reverse("login"))
     
     profil = Profil.objects.get(user=request.user)
+    
+    badges = get_badges_of_profil(profil)
+    
+    reviews = Review.objects.filter(profil=profil)
+    images = Image.objects.filter(profil=profil)
 
-    context = {"name": profil.user, "karma": profil.karma}
+    context = {"name": profil.user, "karma": profil.karma, "badges": badges}
 
     return render(request, "userProfile.html", context=context)
 

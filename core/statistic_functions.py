@@ -75,7 +75,7 @@ def getMostLikedReview(menuType):
     else:
         return review[0]
 
-def count_best_posts_of_profil(profil: Profil, best_post_function: function) -> int:
+def count_best_posts_of_profil(profil: Profil, best_post_function) -> int:
     # Count of most liked images
     menuTypes: list[MenuType] = MenuType.objects.all()
     counter: int = 0
@@ -99,12 +99,16 @@ def get_badges_of_profil(profil: Profil):
     categories: list[int] = [karma, img_counter, review_counter]
     
     # Get the highest badge for all the categories
-    highest_badges: list[Badge] = [None]
+    highest_badges: list[Badge] = [None for _ in categories]
     for i in badges:
         if i.count <= categories[i.condition_category]:  # Does the profil have this badge
             # Check if the badge is more worth than the saved.
-            if highest_badge[i.condition_category] is None:
+            if highest_badges[i.condition_category] is None:
                 highest_badges[i.condition_category] = i
             else:
                 if highest_badges[i.condition_category].count < i.count:
                     highest_badges[i.condition_category] = i
+    
+    highest_badges = [i for i in highest_badges if i is not None]  # Remove all None
+    
+    return highest_badges

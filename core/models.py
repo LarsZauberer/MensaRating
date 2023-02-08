@@ -127,3 +127,6 @@ class Badge(models.Model):
 
     condition_category = models.IntegerField()
     count = models.IntegerField()
+    
+    def __str__(self):
+        return self.name
