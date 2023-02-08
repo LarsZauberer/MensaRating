@@ -1,4 +1,4 @@
-from .models import MenuType, Menu, Rating, Image
+from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review
 from django.db.models import Avg, Max
 import logging
 
@@ -65,7 +65,50 @@ def getMostLikedImage(menuType):
         else:
             return image[0]
 
+def getMostLikedReview(menuType):
+    allmenus = Menu.objects.filter(menuType=menuType)
+        
+    review = Review.objects.filter(menu__in=allmenus).order_by("-likes")
+
+    if len(review) == 0:
+        return None
+    else:
+        return review[0]
+
+def count_best_posts_of_profil(profil: Profil, best_post_function) -> int:
+    # Count of most liked images
+    menuTypes: list[MenuType] = MenuType.objects.all()
+    counter: int = 0
+    for i in menuTypes:
+        post = best_post_function(i)
+        if post is not None:
+            if post.profil == profil:
+                counter += 1
+    
+    return counter
 
 
+def get_badges_of_profil(profil: Profil):
+    karma: int = profil.karma
 
-
+    badges: list[Badge] = Badge.objects.all()
+    
+    img_counter: int = count_best_posts_of_profil(profil=profil, best_post_function=getMostLikedImage)
+    review_counter: int = count_best_posts_of_profil(profil=profil, best_post_function=getMostLikedReview)
+    
+    categories: list[int] = [karma, img_counter, review_counter]
+    
+    # Get the highest badge for all the categories
+    highest_badges: list[Badge] = [None for _ in categories]
+    for i in badges:
+        if i.count <= categories[i.condition_category]:  # Does the profil have this badge
+            # Check if the badge is more worth than the saved.
+            if highest_badges[i.condition_category] is None:
+                highest_badges[i.condition_category] = i
+            else:
+                if highest_badges[i.condition_category].count < i.count:
+                    highest_badges[i.condition_category] = i
+    
+    highest_badges = [i for i in highest_badges if i is not None]  # Remove all None
+    
+    return highest_badges

@@ -206,3 +206,59 @@ footer {
 .timeline-date h2{
     border-bottom: gainsboro 0.1em solid
 }
+
+
+/* Badges */
+.badgeView {
+    display: inline;
+    flex-direction: row;
+    width: 100%;
+}
+
+.badgeBig {
+    display: inline-block;
+    width: 10%;
+    height: auto;
+    margin: 10px;
+}
+
+.badgeBigImage {
+    width: 100%;
+    height: auto;
+}
+
+.badge {
+    display: inline-block;
+    width: 3em;
+    height: auto;
+    margin: 10px;
+}
+
+.badgeImage {
+    width: 3em;
+    height: auto;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    display: None;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    display: block;
+}
+
+.unposses {
+    filter: blur(1px) opacity(30%) grayscale(100%);
+}

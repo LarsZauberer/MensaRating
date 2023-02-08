@@ -7,8 +7,8 @@ import logging
 from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
-from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage
+from .models import MenuType, Menu, Review, Image, Profil, Badge
+from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage, get_badges_of_profil
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
@@ -91,9 +91,24 @@ def menu(request, pk):
 
     # Get the reviews
     reviews = Review.objects.filter(menu=menu)
+    review_badges = []
+    for i in reviews:
+        if i.profil:
+            review_badges.append(get_badges_of_profil(i.profil))
+        else:
+            review_badges.append([])
 
     # Get the images
     images = Image.objects.filter(menu=menu)
+    image_badges = []
+    for i in images:
+        if i.profil:
+            image_badges.append(get_badges_of_profil(i.profil))
+        else:
+            image_badges.append([])
+    
+    reviews = list(zip(reviews, review_badges))
+    images = list(zip(images, image_badges))
 
     # Get the rating
     rating = getRating(menu)
@@ -204,8 +219,21 @@ def userProfile(request):
         return redirect(reverse("login"))
     
     profil = Profil.objects.get(user=request.user)
+    
+    badges = get_badges_of_profil(profil)
+    
+    all_badges = []
+    for i in range(3): # 3 Badge categories
+        all_badges.append(list(Badge.objects.filter(condition_category=i).order_by("count")))
+        
+    for i in all_badges:
+        for e, el in enumerate(i):
+            i[e] = (el, el in badges)  # Tag all the badges the profil posses
+    
+    reviews = Review.objects.filter(profil=profil).order_by("-likes")
+    images = Image.objects.filter(profil=profil).order_by("-likes")
 
-    context = {"name": profil.user, "karma": profil.karma}
+    context = {"name": profil.user, "karma": profil.karma, "badges": all_badges, "images": images, "reviews": reviews}
 
     return render(request, "userProfile.html", context=context)
 
@@ -257,6 +285,10 @@ def like(request, cat: int, pk: int):
     # If the like count is below zero -> 0
     if post.likes < 0:
         post.likes = 0
+        
+    if post.profil is not None:
+        post.profil.karma += weight
+        post.profil.save()
     
     post.save()  # Save to the database
     

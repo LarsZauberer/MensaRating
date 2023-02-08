@@ -118,3 +118,15 @@ class Rating(models.Model):
     profil = models.ForeignKey(Profil, on_delete=models.SET_NULL, null=True)  # Profil of the user who rated the meal. -> If the user doesn't exist anymore, the rating is still there.
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)  # Menu of the meal the rating is about. -> If the meal doesn't exist anymore, the rating is deleted.
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(6)], default=1)  # Rating of the meal.
+
+
+class Badge(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    image = models.ImageField(upload_to="images/")
+
+    condition_category = models.IntegerField()
+    count = models.IntegerField()
+    
+    def __str__(self):
+        return self.name
