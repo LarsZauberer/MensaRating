@@ -107,8 +107,8 @@ def menu(request, pk):
         else:
             image_badges.append([])
     
-    reviews = zip(reviews, review_badges)
-    images = zip(images, image_badges)
+    reviews = list(zip(reviews, review_badges))
+    images = list(zip(images, image_badges))
 
     # Get the rating
     rating = getRating(menu)
