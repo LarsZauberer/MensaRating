@@ -104,12 +104,3 @@ def postRating(request, pk, form):
     rating.save()
     
     return ("Success!", 0)
-
-
-
-    if request.method == 'POST':
-        form = Fooform(request.POST)
-        if form.is_valid():
-            val = form.cleaned_data.get("btn")
-    else:
-        form = Fooform()
