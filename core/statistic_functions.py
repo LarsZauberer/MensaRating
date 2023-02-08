@@ -1,4 +1,4 @@
-from .models import MenuType, Menu, Rating, Image, Profil, Badge
+from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review
 from django.db.models import Avg, Max
 import logging
 
@@ -65,22 +65,38 @@ def getMostLikedImage(menuType):
         else:
             return image[0]
 
+def getMostLikedReview(menuType):
+    allmenus = Menu.objects.filter(menuType=menuType)
+        
+    review = Review.objects.filter(menu__in=allmenus).order_by("-likes")
+
+    if len(review) == 0:
+        return None
+    else:
+        return review[0]
+
+def count_best_posts_of_profil(profil: Profil, best_post_function: function) -> int:
+    # Count of most liked images
+    menuTypes: list[MenuType] = MenuType.objects.all()
+    counter: int = 0
+    for i in menuTypes:
+        post = best_post_function(i)
+        if post is not None:
+            if post.profil == profil:
+                counter += 1
+    
+    return counter
+
 
 def get_badges_of_profil(profil: Profil):
     karma: int = profil.karma
 
     badges: list[Badge] = Badge.objects.all()
     
-    # Count of most liked images
-    menuTypes: list[MenuType] = MenuType.objects.all()
-    img_counter: int = 0
-    for i in menuTypes:
-        img: Image = getMostLikedImage(i)
-        if img is not None:
-            if img.profil == profil:
-                img_counter += 1
+    img_counter: int = count_best_posts_of_profil(profil=profil, best_post_function=getMostLikedImage)
+    review_counter: int = count_best_posts_of_profil(profil=profil, best_post_function=getMostLikedReview)
     
-    categories: list[int] = [karma, img_counter]
+    categories: list[int] = [karma, img_counter, review_counter]
     
     # Get the highest badge for all the categories
     highest_badges: list[Badge] = [None]
