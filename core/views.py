@@ -288,6 +288,7 @@ def like(request, cat: int, pk: int):
         
     if post.profil is not None:
         post.profil.karma += weight
+        post.profil.save()
     
     post.save()  # Save to the database
     
