@@ -123,7 +123,8 @@ def menuType(request, pk):
         return HttpResponse("Menutype not found")
     menutype = menutype[0]
 
-    menu_instances = Menu.objects.filter(name=menutype.name).order_by("-date")
+    menu_instances = Menu.objects.filter(name=menutype.name).filter(date__lte=dt.date.today()).order_by("-date")
+    
 
 
     description = menu_instances[0].description
@@ -165,7 +166,7 @@ def allMenu(request):
     vegans = []
 
     for typ in menuTypes:
-        menus = Menu.objects.filter(name=typ.name)
+        menus = Menu.objects.filter(name=typ.name).filter(date__lte=dt.date.today())
         descriptions.append(menus[0].description)
         vegetarians.append(menus[0].vegetarian)
         vegans.append(menus[0].vegan)
@@ -191,12 +192,8 @@ def allMenu(request):
 
 def timeline(request):
     sync_today_menu()
-
+    menus = Menu.objects.filter(date__lte=dt.date.today()).order_by("-date")
     
-    
-    menus = Menu.objects.all().order_by("-date")
-
-
     dates = []
     menus_with_date = []
     for i, menu in enumerate(menus):
@@ -227,3 +224,56 @@ def userProfile(request):
     context = {"name": profil.user, "karma": profil.karma}
 
     return render(request, "userProfile.html", context=context)
+
+
+def like(request, cat: int, pk: int):
+    log = logging.getLogger("Like View")
+    
+    # All models that can be liked
+    obj_cat: dict = {
+        1: Review,
+        2: Image
+    }
+    
+    obj = obj_cat.get(cat)
+    
+    # Is the category index out of range for the dict
+    if not obj:
+        log.warning(f"Category: {cat} out of range")
+        return HttpResponse("Category not found")
+    
+    log.debug(f"Model recognized: {obj}")
+    
+    post = obj.objects.filter(pk=pk)  # Get the post object from the database
+    
+    # If a post found
+    if len(post) == 0:
+        log.warning(f"No model of type {obj} with pk {pk} found!")
+        return HttpResponse("Post not found")
+
+    post = post[0]
+    
+    # Check if the post is from today
+    if post.menu.date != dt.date.today():
+        log.warning(f"Post is to old")
+        return HttpResponse("Post cannot be liked anymore")
+    
+    # Check if dislike or like
+    dislike = request.GET.get("dislike")
+    
+    # Check if this should be a dislike
+    weight = 1
+    if dislike:
+        log.debug(f"Dislike: {dislike}")
+        weight = -1
+    
+    # Like the post
+    post.likes += weight
+    
+    # If the like count is below zero -> 0
+    if post.likes < 0:
+        post.likes = 0
+    
+    post.save()  # Save to the database
+    
+    return HttpResponse(post.likes)

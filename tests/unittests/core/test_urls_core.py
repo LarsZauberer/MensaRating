@@ -27,3 +27,7 @@ class TestUrlsIndex(SimpleTestCase):
     def test_timeline_url(self):
         url = reverse("timeline")
         self.assertEqual(resolve(url).func, timeline)
+    
+    def test_like_url(self):
+        url = reverse("like", args=(1, 1))
+        self.assertEqual(resolve(url).func, like)
