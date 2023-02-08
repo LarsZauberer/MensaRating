@@ -173,11 +173,12 @@ def allMenu(request):
 
     for typ in menuTypes:
         menus = Menu.objects.filter(name=typ.name).filter(date__lte=dt.date.today())
-        descriptions.append(menus[0].description)
-        vegetarians.append(menus[0].vegetarian)
-        vegans.append(menus[0].vegan)
-        occurrences.append(menus.count())
-        allTimeRatings.append(getRatingOfAllTime(typ))
+        if len(menus) > 0:
+            descriptions.append(menus[0].description)
+            vegetarians.append(menus[0].vegetarian)
+            vegans.append(menus[0].vegan)
+            occurrences.append(menus.count())
+            allTimeRatings.append(getRatingOfAllTime(typ))
 
     menuType_info = zip(menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings)
 
