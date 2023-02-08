@@ -285,6 +285,9 @@ def like(request, cat: int, pk: int):
     # If the like count is below zero -> 0
     if post.likes < 0:
         post.likes = 0
+        
+    if post.profil is not None:
+        post.profil.karma += weight
     
     post.save()  # Save to the database
     
