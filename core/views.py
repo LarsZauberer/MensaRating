@@ -210,7 +210,7 @@ def userProfile(request):
     reviews = Review.objects.filter(profil=profil)
     images = Image.objects.filter(profil=profil)
 
-    context = {"name": profil.user, "karma": profil.karma, "badges": badges}
+    context = {"name": profil.user, "karma": profil.karma, "badges": badges, "images": images, "reviews": reviews}
 
     return render(request, "userProfile.html", context=context)
 
