@@ -43,7 +43,7 @@
     <div style="margin-bottom: 2em;">{{menu.description}}</div>
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
-        {% for image in images %}
+        {% for image, badges in images %}
             <div class="imageSlide fade">
                 <p class="userName imageUserText">{{image.profil.user.username}}#{{image.profil.karma}}</p>
                 <div class="imgContainer">
@@ -138,11 +138,17 @@
 
 
 
-        {% for review in reviews %}
+        {% for review, badges in reviews %}
         <div class="review">
             <div class="review-header">
                 <div>{{review.profil.user.username}}</div>
                 <div>{{review.profil.karma}}</div>
+                {% for i in badges %}
+                    <div class="tooltip badge">
+                        <img src="{{i.image.url}}" alt="" class="badgeImage">
+                        <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span style="">{{i.description}}</span></div>
+                    </div>
+                {% endfor %}
                 <div>Rating</div>
                 {% if today %}
                 <button onclick="like(1, {{review.pk}})" id="1-{{review.pk}}-btn" class="like-btn">Like</button>

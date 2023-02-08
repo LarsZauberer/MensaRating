@@ -91,9 +91,24 @@ def menu(request, pk):
 
     # Get the reviews
     reviews = Review.objects.filter(menu=menu)
+    review_badges = []
+    for i in reviews:
+        if i.profil:
+            review_badges.append(get_badges_of_profil(i.profil))
+        else:
+            review_badges.append([])
 
     # Get the images
     images = Image.objects.filter(menu=menu)
+    image_badges = []
+    for i in images:
+        if i.profil:
+            image_badges.append(get_badges_of_profil(i.profil))
+        else:
+            image_badges.append([])
+    
+    reviews = zip(reviews, review_badges)
+    images = zip(images, image_badges)
 
     # Get the rating
     rating = getRating(menu)
