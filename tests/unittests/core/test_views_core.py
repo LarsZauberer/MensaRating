@@ -148,7 +148,7 @@ class TestViewsCore(TestCase):
         
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 5})
 
         self.assertEqual(response.status_code, 200)
         
@@ -178,8 +178,8 @@ class TestViewsCore(TestCase):
         
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
         response = client.post(reverse("menu", args=(1,)), data={"rating": 5})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 4})
 
         self.assertEqual(response.status_code, 200)
         

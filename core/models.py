@@ -90,7 +90,8 @@ class Review(models.Model):
         :return: Returns the text of the review.
         :rtype: str
         """
-        return f"{self.profil.user.username}: {self.text[0:20]}..."
+        #return f"{self.profil.user.username}: {self.text[0:20]}..."
+        return f"rew.{self.pk}"
 
 
 class Image(models.Model):
