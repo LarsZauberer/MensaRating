@@ -54,18 +54,7 @@
 }
 
 
-#menu .rating{
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-#menu .rating img{
-    width: 50%
-}
-#menu .rating{
-    padding:0.2em;
-}
+
 
 
 
@@ -219,6 +208,12 @@ img.portrait {
 @keyframes fade {
     from {opacity: .4}
     to {opacity: 1}
+}
+
+.showrating{
+    width: 20em;
+
+    display: flex;
 }
 
 

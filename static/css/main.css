@@ -1,10 +1,12 @@
 :root {
     --bgColor: white;
-    --accentColor: #DDDDDD;
-    --darkAccentColor: #CCCCCC;
+    --accentColor: rgb(221, 221, 221);
+    --darkAccentColor: rgb(204, 204, 204);
     --highlightedColor: #ABC270;
     --red: #DD0000;
     --borderRadMenu: 0.6rem;
+
+    --starheight: 2em;
 }
 
 p {
@@ -175,9 +177,7 @@ footer {
     image-orientation: from-image;
     
 }
-.stars{
-    width: 50%;
-}
+
 .description{
     height: 2em;
 }
@@ -192,6 +192,7 @@ footer {
     height: 2em;
     display: flex;
     align-items: center;
+    gap: 1em;
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
 }
@@ -262,3 +263,103 @@ footer {
 .unposses {
     filter: blur(1px) opacity(30%) grayscale(100%);
 }
+
+
+
+.rating{
+    background-color: var(--darkAccentColor);
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 0.3em;
+
+    margin-bottom: 1em;
+}
+
+
+.stars{
+    width: calc(var(--starheight)*5.5);
+    height: var(--starheight);
+    position: relative;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.starshape{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+
+    background-image: url("../images/starshape.svg");
+    background-size:cover;
+}
+
+
+.emptystars{
+    position: absolute;
+    width: 99%;
+    height:99%;
+    top: 0;
+    left: 0;
+    background-color: darkgray;
+}
+.fullstars{
+    width: 0%;
+    height:99%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: yellow;
+}
+
+
+
+
+
+
+
+
+
+.give-star-rating{
+    background-color: var(--darkAccentColor);
+    padding: 0.5em;
+    border-radius: 0.3em;
+
+    margin-bottom: 1em;
+}
+.give-stars{
+    width: calc(var(--starheight)*7);
+    height: var(--starheight);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+.starContainer{
+    height: 3em;
+    width: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.give-star{
+    height: 3em;
+    width: 3em;
+    
+    background-image: url('../images/emptystar.png');
+    background-size: contain;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
+
+
+
+
+

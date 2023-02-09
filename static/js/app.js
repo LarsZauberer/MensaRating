@@ -10,10 +10,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
             return;
         }
     }
-
+    
     update_all_btn();
     removeAlertAfterDelay();
 })
+
+
+function change_cursor_wait() {
+    document.body.style.cursor = 'wait';
+}
 
 function update_all_btn() {
     likeButtons = document.getElementsByClassName("like-btn")

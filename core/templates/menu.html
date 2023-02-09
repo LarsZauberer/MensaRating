@@ -89,30 +89,51 @@
 
     
 
-
+    
     {% if today %}
     
-    <div class="rating">
-        <form method="post">
-            {% csrf_token %}
-            {{ ratingForm }}
-            <button type="submit">Post</button>
-        </form>
-    </div>
-    
-    <div class="rating"> <!-- TODO: give your own rating -->
-        Your Rating
-        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
-    </div>
+        <div class="give-star-rating">
+            <form method="post">
+                {% csrf_token %}
+                <div class="give-stars">
+                    <button type="submit" value="1" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="2" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="3" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="4" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="5" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
+                </div>
+            </form>
+            </div>
+        </div>
 
+        <script>
+            stars = document.getElementsByClassName("give-star")
+            for(let i = 0; i < stars.length; i++){
+                stars[i].addEventListener("mouseover", function(){starHover(stars, i)})
+                stars[i].addEventListener("mouseout", function(){stopStarHover()})
+            }
+
+
+
+        </script>
     {% endif%}
 
-    <div class="rating"> <!-- TODO: show average rating -->
-        Rating
-        <span>({{rating}})</span>
-        <img src="{% static 'images/5star.jpg' %}" alt="5 stars">
-    </div>
 
+  
+    <div class="rating">
+        <div>{{rating}}</div>
+            
+        <div class="stars">
+            <div class="emptystars"></div>
+            <div id="stars-0" class="fullstars"></div>
+            <div class="starshape"></div>
+        </div>
+
+        <div>({{numRates}})</div>
+    </div>
+    
+
+    
     
 
 
@@ -120,10 +141,6 @@
 
 
     <h3><a href="{% url 'menuType' menu.menuType.pk %}">Vergleiche das Essen</a></h3>
-
-
-
-
 
 
     <div id="reviews">
@@ -166,6 +183,35 @@
         </div>
         {% endfor %}
     </div>
+
+
+    
+
+    <script data-rating="{{rating}}">
+        data = document.currentScript.dataset;
+        starRate(0, data.rating)
+        checkOrientation()
+        showSlides(slideIndex);
+    </script>
+
+    
+
+    {% if messages %}
+    {% for i in messages %}
+    {% autoescape off %}
+    {% if i.tags == "error" %}
+    <div role="alert" class="alert error"><span>{{i}}</span></div>
+    {% else %}
+    <div role="alert" class="alert success"><span>{{i}}</span></div>
+    {% endif %}
+    {% endautoescape %}
+    {% endfor %}
+    {% endif %}
+
+    
+
+
+    
 
 </main>
 

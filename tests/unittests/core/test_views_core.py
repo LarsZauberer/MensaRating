@@ -130,7 +130,7 @@ class TestViewsCore(TestCase):
         menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
         
         client = Client()
-        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 5})
 
         self.assertEqual(response.status_code, 200)
         
@@ -140,7 +140,7 @@ class TestViewsCore(TestCase):
         rating = rating[0]
         self.assertEqual(rating.menu, menu)
         self.assertEqual(rating.profil, None)
-        self.assertEqual(rating.rating, 6)
+        self.assertEqual(rating.rating, 5)
     
     def test_postRating_login_valid(self):
         # Create Menu instance
@@ -148,7 +148,7 @@ class TestViewsCore(TestCase):
         
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 5})
 
         self.assertEqual(response.status_code, 200)
         
@@ -178,8 +178,8 @@ class TestViewsCore(TestCase):
         
         client = Client()
         client.login(username="user", password="user")
-        response = client.post(reverse("menu", args=(1,)), data={"rating": 6})
         response = client.post(reverse("menu", args=(1,)), data={"rating": 5})
+        response = client.post(reverse("menu", args=(1,)), data={"rating": 4})
 
         self.assertEqual(response.status_code, 200)
         

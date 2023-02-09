@@ -7,8 +7,8 @@ import logging
 from django.shortcuts import render, redirect
 from django.urls import reverse
 import datetime as dt  # for date and time
-from .models import MenuType, Menu, Review, Image, Profil, Badge
-from .statistic_functions import HelperMenu, getRating, getRatingOfAllTime, getMostLikedImage, get_badges_of_profil
+from .models import MenuType, Menu, Review, Image, Profil
+from .statistic_functions import *
 from .forms import ImageForm, ReviewForm, RatingForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
@@ -23,7 +23,7 @@ def index(request):
 
     # Calculate the rating for each menu
     ratings = [getRating(i) for i in menus]
-    allTimeRatings = [getRatingOfAllTime(i.menuType) for i in menus]
+    numRates = [getNumRates(i) for i in menus]
 
 
     images = [getMostLikedImage(i.menuType) for i in menus]
@@ -33,7 +33,7 @@ def index(request):
     
     # Zip all the menu information to one information together.
     # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(menus, ratings, allTimeRatings, images)
+    menus = zip(list(range(len(menus))), menus, ratings, numRates, images)
 
     
 
@@ -58,14 +58,14 @@ def menu(request, pk):
         log.debug(f"Post Data received: {request.POST}")
         log.debug(f"Files received: {request.FILES}")
         form = None
-        
+
         # Sort different post kinds
         # Rating
         if request.POST.get("rating"):
             form = RatingForm(request.POST)
             log.debug(f"Rating Form Recognized")
             msg = postRating(request, pk, form)
-        
+
         # Review
         elif request.POST.get("text"):
             form = ReviewForm(request.POST)
@@ -112,9 +112,7 @@ def menu(request, pk):
 
     # Get the rating
     rating = getRating(menu)
-
-    # Calculate the average rating of all time for the menu
-    ratingOfAllTime = getRatingOfAllTime(menu.menuType)
+    numRates = getNumRates(menu)
 
 
     
@@ -124,9 +122,9 @@ def menu(request, pk):
     reviewForm = ReviewForm()
     ratingForm = RatingForm()
 
-    context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating,
-               "allTimeRating": ratingOfAllTime, "imageForm": imageForm, "reviewForm": reviewForm,
-               "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
+    context = {"menu": menu, "reviews": reviews, "images": images, "rating": rating, "numRates": numRates,
+                "imageForm": imageForm, "reviewForm": reviewForm,
+                "ratingForm": ratingForm, "today": today}  # Create a context dictionary to pass to the template
 
     return render(request, "menu.html", context=context)
 
@@ -148,12 +146,22 @@ def menuType(request, pk):
     vegetarian = menu_instances[0].vegetarian
     vegan = menu_instances[0].vegan
 
-
+    
     occurrences = menu_instances.count()
     allTimeRating = getRatingOfAllTime(menutype)
+    allTimeNumRates = getNumRatesOfAllTime(menutype)
 
 
-    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances[:600], "occurrences": occurrences, "allTimeRating": allTimeRating}
+    ratings = [getRating(i) for i in menu_instances]
+    numRates = [getNumRates(i) for i in menu_instances]
+    indexes = list(range(len(menu_instances)))
+
+
+
+
+    menu_instances = zip(indexes[:600], ratings[:600], numRates[:600], menu_instances[:600])
+
+    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating, "allTimeNumRates": allTimeNumRates}
 
     return render(request, "menuType.html", context=context)
 
@@ -167,6 +175,7 @@ def allMenu(request):
     
     occurrences = []
     allTimeRatings = []
+    allTimeNumRates = []
     descriptions = []
     vegetarians = []
     vegans = []
@@ -179,14 +188,20 @@ def allMenu(request):
             vegans.append(menus[0].vegan)
             occurrences.append(menus.count())
             allTimeRatings.append(getRatingOfAllTime(typ))
+            allTimeNumRates.append(getNumRatesOfAllTime(typ))
+        
+    indexes = list(range(len(menuTypes))) 
 
-    menuType_info = zip(menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings)
+    menuType_info = zip(indexes, menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings, allTimeNumRates)
 
 
     #Order by number of occurrences
-    menuType_info = sorted(menuType_info, key=lambda x: x[1], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
+    menuType_info = sorted(menuType_info, key=lambda x: x[2], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
 
     context = {"menuTypes": menuType_info}
+
+
+    
    
 
     return render(request, "allMenu.html", context=context)
@@ -198,11 +213,13 @@ def timeline(request):
     
     dates = []
     menus_with_date = []
-    for menu in menus:
+    for i, menu in enumerate(menus):
         if menu.date not in dates:
             dates.append(menu.date)
             menus_with_date.append([])
-        menus_with_date[-1].append(menu)
+        
+
+        menus_with_date[-1].append( (i, menu, getRating(menu), getNumRates(menu)) )
 
     menu_dates = zip(dates[:600], menus_with_date[:600]) # Return the first 600 menus
 

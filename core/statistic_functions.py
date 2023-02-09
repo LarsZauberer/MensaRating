@@ -35,7 +35,10 @@ def getRating(menu):
     # Get the ratings
     rating = Rating.objects.filter(menu=menu).aggregate(Avg("rating"))
 
-    return rating["rating__avg"]
+    if rating["rating__avg"] == None:
+        return 0
+    else:
+        return float('%.1f' % rating["rating__avg"])
 
 
 def getRatingOfAllTime(menuType):
@@ -53,7 +56,11 @@ def getRatingOfAllTime(menuType):
     # Find all ratings for all the menu occurencies
     rating = Rating.objects.filter(menu__in=menus).aggregate(Avg("rating"))
 
-    return rating["rating__avg"]
+    if rating["rating__avg"] == None:
+        return 0
+    else:
+        return float('%.1f' % rating["rating__avg"])
+
 
 def getMostLikedImage(menuType):
         allmenus = Menu.objects.filter(menuType=menuType)
@@ -87,6 +94,12 @@ def count_best_posts_of_profil(profil: Profil, best_post_function) -> int:
     
     return counter
 
+def getNumRates(menu):
+    return Rating.objects.filter(menu=menu).count()
+    
+def getNumRatesOfAllTime(menuType):
+    menus = Menu.objects.filter(menuType=menuType)
+    return Rating.objects.filter(menu__in=menus).count()
 
 def get_badges_of_profil(profil: Profil):
     karma: int = profil.karma
