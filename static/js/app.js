@@ -25,7 +25,7 @@ function update_all_btn() {
     for (let index = 0; index < likeButtons.length; index++) {
         const element = likeButtons[index];
         id = element.id.replace("-btn", "")
-        post = localStorage.getItem(id);
+        post = localStorage.getItem(id + "-" + username);
         if (post) {
             element.innerHTML = "Dislike"
             if (!element.className.includes("disliked")) {
@@ -43,7 +43,7 @@ function update_all_btn() {
 }
 
 function like(cat, pk) {
-    const post = localStorage.getItem(cat + "-" + pk);
+    const post = localStorage.getItem(cat + "-" + pk + "-" + username);
 
     change_like = function() {
         console.log(this.responseText);
@@ -55,11 +55,11 @@ function like(cat, pk) {
     if (post) {
         // Dislike
         api.get("like/" + cat + "/" + pk, "?dislike=YES", change_like);
-        localStorage.removeItem(cat + "-" + pk);
+        localStorage.removeItem(cat + "-" + pk + "-" + username);
         update_all_btn();
     } else {
         api.get("like/" + cat + "/" + pk, "", change_like);
-        localStorage.setItem(cat + "-" + pk, "YES");
+        localStorage.setItem(cat + "-" + pk + "-" + username, "YES");
         update_all_btn();
     }
 }
