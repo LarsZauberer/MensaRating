@@ -111,7 +111,7 @@ def postRating(request, pk, form):
 
 def add_karma_for_posting(post):
     if post.profil:
-        post.profil.karma += 1
+        post.profil.karma += 5
         post.profil.save()
 
     return
