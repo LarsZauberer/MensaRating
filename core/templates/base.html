@@ -14,6 +14,11 @@
 
     <script>
         const api = new API("{{ csrf_token }}");
+        {% if user.is_authenticated %}
+            const username = "{{ user.username }}";
+        {% else %}
+            const username = "";
+        {% endif %}
     </script>
 
     <script src="{% static 'js/main.js' %}"></script>
