@@ -4,26 +4,23 @@
 
 <main>
 
+<script>
+    let menuTypes = [];
+    let orderType = "occ";
+</script>
 
 <div class="fade-scroll-top">
     <h1>Alle Menüs</h1>
     <div id="order">
-        <div id="order-button" onclick="toggleOrderOptions()">order</div>
+        <button id="order-button" onclick="toggleOrderOptions()">order</button>
         <div id="sort-criteria">
-            <button>occurrences</button>
-            <button>rating</button>
-            <button>numRates</button>
+            <button onclick="orderMenutypes(menuTypes, 'occ')">occurrences</button>
+            <button onclick="orderMenutypes(menuTypes, 'rating')">rating</button>
+            <button onclick="orderMenutypes(menuTypes, 'numrates')">numRates</button>
         </div>
     </div>
-    
-
-    
 </div>
 
-
-<script>
-    menuTypes = []
-</script>
 
 <div class="line"></div>
 {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
@@ -66,10 +63,10 @@
     </script>
 {% endfor %}
 
+
 <script>
-    data = document.currentScript.dataset;
-    orderMenutypes(menuTypes)
-    
+    orderMenutypes(menuTypes, orderType)
+    toggleOrderOptions();
 </script>    
 
 
