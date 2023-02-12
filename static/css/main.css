@@ -123,12 +123,6 @@ footer {
     align-items: stretch;
 }
 
-.vegivegan-label{
-    width: 1em;
-    height: 1em;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-}
 
 
 
@@ -197,12 +191,24 @@ footer {
     border-radius: var(--borderRadMenu);
 }
 
+.menuListbox .rating{
+    margin: 0;
+}
+
 
 .menuListbox .vegivegan-label{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.menuListbox #vegivegan-container{
+    display: flex;
     width: 2em;
     height: 2em;
-    margin-left: 1em;
 }
+
+
+
 
 .timeline-date h2{
     border-bottom: gainsboro 0.1em solid

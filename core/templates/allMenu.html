@@ -12,40 +12,63 @@
     </h1>
 </div>
 
+
+<script>
+    menuTypes = []
+</script>
+
 <div class="line"></div>
-    {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
+{% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
+    <div id="menutype-{{index}}" class="menuListbox clickableDiv" onclick="location.href='{% url 'menuType' menuType.pk%}';">
+        <h3></h3> <!-- name -->
+        <div></div> <!-- occurrences -->
 
-        <div onclick="location.href='{% url 'menuType' menuType.pk%}';">
-            <div class="menuListbox clickableDiv">
-                <h3>{{menuType.name}}</h3>
-                <span>Occurrences: {{occurrences}}</span>
-                <a href="{% url 'menuType' menuType.pk%}"></a> - 
-
-                {% if vegetarian %}
-                <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
-                {% elif vegan %}
-                <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-                {% endif %} 
-
-                <div class="rating">
-                    <div>{{allTimeRating}}</div>
-                    
-                    <div class="stars">
-                        <div class="emptystars"></div>
-                        <div id="stars-{{index}}" class="fullstars"></div>
-                        <div class="starshape"></div>
-                    </div>
-
-                    <div>({{allTimeNumRates}})</div>
-                </div>
-            </div>
+        <div id="vegivegan-container">
+            <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+            <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
         </div>
+        
+        <div class="rating">
+            <div></div> <!-- allTimeRating -->
+            <div class="stars">
+                <div class="emptystars"></div>
+                <div id="stars-{{index}}" class="fullstars"></div>
+                <div class="starshape"></div>
+            </div>
+            <div></div> <!-- numRates -->
+        </div>
+    </div>
 
-        <script data-menuindex="{{index}}" data-rating="{{allTimeRating}}">
-            data = document.currentScript.dataset;
-            starRate(data.menuindex, data.rating)
-        </script>    
-    {% endfor %}
+
+    
+    <script data-url="{% url 'menuType' menuType.pk%}"data-name="{{menuType.name}}" data-index="{{index}}" data-rating="{{allTimeRating}}" 
+            data-occ="{{occurrences}}" data-numrates="{{allTimeNumRates}}" data-vegan="{{vegan}}", data-vegetarian="{{vegetarian}}">
+        data = document.currentScript.dataset;
+        
+        menuType = {
+            url: data.url,
+            name: data.name,
+            index: data.index,
+            rating: data.rating,
+            occurrences: data.occ,
+            numrates: data.numrates,
+            vegan: data.vegan,
+            vegetarian: data.vegetarian
+        }
+        menuTypes.push(menuType)
+    </script>
+    
+    
+{% endfor %}
+
+<script>
+    data = document.currentScript.dataset;
+    orderMenutypes(menuTypes)
+    
+</script>    
+
+
+
 
 </main>
 
