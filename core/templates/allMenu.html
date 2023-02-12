@@ -21,12 +21,15 @@
 {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
     <div id="menutype-{{index}}" class="menuListbox clickableDiv" onclick="location.href='{% url 'menuType' menuType.pk%}';">
         <h3></h3> <!-- name -->
-        <div></div> <!-- occurrences -->
 
         <div id="vegivegan-container">
             <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
             <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
         </div>
+        
+        <div></div> <!-- occurrences -->
+
+        
         
         <div class="rating">
             <div></div> <!-- allTimeRating -->

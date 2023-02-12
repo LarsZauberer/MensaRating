@@ -20,10 +20,8 @@ function orderMenutypes(menuTypes){
         menuTypeObject = menuTypeObject.children
 
         menuTypeObject[0].innerHTML = menuType.name
-        menuTypeObject[1].innerHTML = "Vorkommen: " + menuType.occurrences
 
-        
-        let vegivegan = menuTypeObject[2].children;
+        let vegivegan = menuTypeObject[1].children;
         if(menuType.vegetarian == "True"){
             vegivegan[0].style.width = "100%";
             vegivegan[0].style.height = "100%";
@@ -34,7 +32,10 @@ function orderMenutypes(menuTypes){
             vegivegan[1].style.opacity = "1";
         }
 
+        menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences
 
+        
+    
         rating = menuTypeObject[3].children
         rating[0].innerHTML = menuType.rating
         starRate(i, menuType.rating)
