@@ -52,6 +52,11 @@ body {
 
 
 
+.fade-scroll-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 
@@ -190,12 +195,9 @@ footer {
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
 }
-
 .menuListbox .rating{
     margin: 0;
 }
-
-
 .menuListbox .vegivegan-label{
     width: 0;
     height: 0;
@@ -206,6 +208,37 @@ footer {
     width: 2em;
     height: 2em;
 }
+
+#order{
+    width: 10em;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+}
+#order #order-button{
+    width: 100%;
+    background-color: gainsboro;
+    border: solid 0.1em black;
+    text-align: center;
+}
+#order #sort-criteria{
+    top:2em;
+    position: absolute;
+    width: 100%;
+    height: 0em;
+    background-color: darkgray;
+    display: flex;
+    flex-direction: column;
+}
+#sort-criteria button{
+    opacity: 0;
+    height: 2em;
+}
+
+
+
 
 
 

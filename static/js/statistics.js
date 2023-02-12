@@ -42,3 +42,32 @@ function orderMenutypes(menuTypes){
         rating[2].innerHTML = "(" + menuType.numrates + ")"
     }
 }
+
+function toggleOrderOptions(){
+    
+
+    let orderoptions = document.getElementById("sort-criteria")
+    let orderButtons = orderoptions.children
+
+
+    if(orderoptions.style.height == "" ||orderoptions.style.height == "0em"){
+        orderoptions.style.height = "1em"
+        for(let i = 0; i < orderButtons.length; i++){
+            console.log(orderButtons[i].style.height)
+            orderButtons[i].style.height = "2em"
+            orderButtons[i].style.opacity = 1;
+        }
+
+
+    }
+    else{
+        orderoptions.style.height = "0em"
+        for(let i = 0; i < orderButtons.length; i++){
+            orderButtons[i].style.height = "0em"
+            orderButtons[i].style.opacity = 0
+        }
+    }
+}
+
+
+
