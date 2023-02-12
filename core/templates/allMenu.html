@@ -11,13 +11,25 @@
 
 <div class="fade-scroll-top">
     <h1>Alle Menüs</h1>
-    <div id="order">
-        <button id="order-button" onclick="toggleOrderOptions()">order</button>
-        <div id="sort-criteria">
-            <button onclick="orderMenutypes(menuTypes, 'occ')">occurrences</button>
-            <button onclick="orderMenutypes(menuTypes, 'rating')">rating</button>
-            <button onclick="orderMenutypes(menuTypes, 'numrates')">numRates</button>
+    <div style="display: flex; gap: 1em">
+        <div class="stat">
+            <button onclick="toggleStatOptions(0)">filter</button>
+            <div class="stat-criteria">
+                <button onclick="filterMenutypes('nofilter')">No Filter</button>
+                <button onclick="filterMenutypes('vegan')">vegan</button>
+                <button onclick="filterMenutypes('vegi')">vegetarian</button>
+            </div>
         </div>
+        
+        <div class="stat">
+            <button onclick="toggleStatOptions(1)">order</button>
+            <div class="stat-criteria">
+                <button onclick="orderMenutypes('occ')">occurrences</button>
+                <button onclick="orderMenutypes('rating')">rating</button>
+                <button onclick="orderMenutypes('numrates')">numRates</button>
+            </div>
+    </div>
+    
     </div>
 </div>
 
@@ -57,7 +69,8 @@
             occurrences: data.occ,
             numrates: data.numrates,
             vegan: data.vegan,
-            vegetarian: data.vegetarian
+            vegetarian: data.vegetarian,
+            visible: true
         }
         menuTypes.push(menuType)
     </script>
@@ -65,8 +78,10 @@
 
 
 <script>
-    orderMenutypes(menuTypes, orderType)
-    toggleOrderOptions();
+    orderMenutypes(orderType)
+    toggleStatOptions(0);
+    toggleStatOptions(0);
+    toggleStatOptions(1);
 </script>    
 
 

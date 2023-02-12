@@ -1,4 +1,4 @@
-function orderMenutypes(menuTypes, orderType){
+function orderMenutypes(orderType){
     if(orderType == "occ"){
         menuTypes.sort(function(a, b){
             let x = a.occurrences;
@@ -30,49 +30,73 @@ function orderMenutypes(menuTypes, orderType){
         })
     }
 
+    updateListboxs(menuTypes)
+    toggleStatOptions(1)
+}
+
+function filterMenutypes(filterType){
+    for(let i = 0; i < menuTypes.length; i++){
+        let menuType = menuTypes[i]
+
+        if(filterType == "vegan"){
+            if(menuType.vegan == "True") menuType.visible = true;
+            else menuType.visible = false;
+        }else if(filterType == "vegi"){
+            if(menuType.vegetarian == "True") menuType.visible = true;
+            else menuType.visible = false
+        }
+        else{
+            menuTypes[i].visible = true
+        }
+    }
+    
+    updateListboxs()
+    toggleStatOptions(0)
+}
     
     
 
 
-    console.log(menuTypes)
-
-
+function updateListboxs(){
     for(let i = 0; i < menuTypes.length; i++){
         let menuTypeObject = document.getElementById("menutype-" + i);
         let menuType = menuTypes[i]
+        
+        menuTypeObject.style.display = "flex"
+        if(!menuType.visible){
+            menuTypeObject.style.display = "None"
+        } 
+        else{
+            menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';")
+            menuTypeObject = menuTypeObject.children
+            menuTypeObject[0].innerHTML = menuType.name
+            let vegivegan = menuTypeObject[1].children;
 
-        menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';")
-       
+            vegivegan[0].style.width = vegivegan[0].style.height = "0";
+            vegivegan[1].style.width =  vegivegan[1].style.height = "0";
+            if(menuType.vegetarian == "True"){
+                vegivegan[0].style.width = vegivegan[0].style.height = "100%";
+            }else if(menuType.vegan == "True"){
+                vegivegan[1].style.width =  vegivegan[1].style.height = "100%";
+            }
 
-        menuTypeObject = menuTypeObject.children
+            menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences
 
-        menuTypeObject[0].innerHTML = menuType.name
-
-        let vegivegan = menuTypeObject[1].children;
-
-        vegivegan[0].style.width = vegivegan[0].style.height = "0";
-        vegivegan[1].style.width =  vegivegan[1].style.height = "0";
-        if(menuType.vegetarian == "True"){
-            vegivegan[0].style.width = vegivegan[0].style.height = "100%";
-        }else if(menuType.vegan == "True"){
-            vegivegan[1].style.width =  vegivegan[1].style.height = "100%";
+            
+        
+            rating = menuTypeObject[3].children
+            rating[0].innerHTML = menuType.rating
+            starRate(i, menuType.rating)
+            rating[2].innerHTML = "(" + menuType.numrates + ")"
         }
 
-        menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences
 
         
-    
-        rating = menuTypeObject[3].children
-        rating[0].innerHTML = menuType.rating
-        starRate(i, menuType.rating)
-        rating[2].innerHTML = "(" + menuType.numrates + ")"
     }
-
-    toggleOrderOptions()
 }
 
-function toggleOrderOptions(){
-    let orderoptions = document.getElementById("sort-criteria")
+function toggleStatOptions(type){
+    let orderoptions = document.getElementsByClassName("stat-criteria")[type]
     let orderButtons = orderoptions.children
     if(orderoptions.style.height == "" || orderoptions.style.height == "0em"){
         orderoptions.style.height = "1em"

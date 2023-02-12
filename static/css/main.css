@@ -58,6 +58,11 @@ body {
     align-items: center;
 }
 
+.vegivegan-label{
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 1em;
+}
 
 
 .content {
@@ -208,21 +213,14 @@ footer {
     height: 2em;
 }
 
-#order{
+.stat{
     width: 10em;
     display: flex;
     flex-direction: column;
 
     position: relative;
-
 }
-#order #order-button{
-    width: 100%;
-    background-color: gainsboro;
-    border: solid 0.1em black;
-    text-align: center;
-}
-#order #sort-criteria{
+.stat-criteria{
     top:2em;
     position: absolute;
     width: 100%;
@@ -231,7 +229,7 @@ footer {
     display: flex;
     flex-direction: column;
 }
-#sort-criteria button{
+#stat-criteria button{
     opacity: 0;
     height: 2em;
 }
