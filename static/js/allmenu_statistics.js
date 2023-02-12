@@ -88,12 +88,12 @@ function updateListboxs(){
             rating[0].innerHTML = menuType.rating
             starRate(i, menuType.rating)
             rating[2].innerHTML = "(" + menuType.numrates + ")"
-        }
-
-
-        
+        }    
     }
 }
+
+
+
 
 function toggleStatOptions(type){
     let orderoptions = document.getElementsByClassName("stat-criteria")[type]

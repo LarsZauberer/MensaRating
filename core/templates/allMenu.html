@@ -10,7 +10,7 @@
 </script>
 
 <div class="fade-scroll-top">
-    <h1>Alle Menüs</h1>
+    <h1 class="list-title">Alle Menüs</h1>
     <div style="display: flex; gap: 1em">
         <div class="stat">
             <button onclick="toggleStatOptions(0)">filter</button>
@@ -29,14 +29,12 @@
                 <button onclick="orderMenutypes('numrates')">numRates</button>
             </div>
     </div>
-    
     </div>
 </div>
-
-
 <div class="line"></div>
+
 {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
-    <div id="menutype-{{index}}" class="menuListbox clickableDiv" onclick="location.href='{% url 'menuType' menuType.pk%}';">
+    <div id="menutype-{{index}}" class="menuListbox clickableDiv">
         <h3></h3> <!-- name -->
 
         <div id="vegivegan-container">
