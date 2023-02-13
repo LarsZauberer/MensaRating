@@ -5,10 +5,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 import datetime as dt
 
-from gdstorage.storage import GoogleDriveStorage
 from django.core.files.storage import FileSystemStorage
 
 if settings.HEROKU:
+    from gdstorage.storage import GoogleDriveStorage
     # Define Google Drive Storage
     storage_service = GoogleDriveStorage()
 else:

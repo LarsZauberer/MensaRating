@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'core',
     'users',
-    'gdstorage'
 ]
 
 MIDDLEWARE = [
@@ -98,6 +97,9 @@ else:
     
 if "DYNO" in os.environ:
     HEROKU = True
+    
+    # Google Drive Persistant storage connection
+    INSTALLED_APPS.append('gdstorage')
     GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'cred/algeteach-a6ec2bee3280.json'
     GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'MensaRating-Media-Files/'
 else:
