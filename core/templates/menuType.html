@@ -149,7 +149,10 @@
     </div>
 
 
-    <script>
+    <script data-alltimerating="{{allTimeRating}}">
+        data = document.currentScript.dataset
+        starRate("alltime", data.alltimerating)
+
         i_orderMenutypes(orderType)
         i_toggleStatOptions(0);
         i_toggleStatOptions(0);
