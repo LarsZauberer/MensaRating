@@ -2,6 +2,7 @@
     --bgColor: white;
     --accentColor: rgb(221, 221, 221);
     --darkAccentColor: rgb(204, 204, 204);
+    --greyText: #222831;
     --highlightedColor: #ABC270;
     --red: #DD0000;
     --borderRadMenu: 0.6rem;
@@ -26,7 +27,7 @@ nav {
     width: 100%;
     display: flex;
     justify-content: center;
-    }
+}
 
 .menuItem {
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
@@ -35,7 +36,8 @@ nav {
     text-transform: uppercase;
 }
 
-.active, .menuItem:hover{
+.active,
+.menuItem:hover {
     background-color: var(--highlightedColor);
     cursor: pointer;
 }
@@ -90,7 +92,7 @@ footer {
     animation-name: hoverClickable;
     animation-duration: 500ms;
     background-color: var(--highlightedColor) !important;
-    box-shadow: 0px 5px 21px -5px rgba(0,0,0,0.41);
+    box-shadow: 0px 5px 21px -5px rgba(0, 0, 0, 0.41);
     cursor: pointer;
 }
 
@@ -105,7 +107,7 @@ footer {
     justify-content: space-between;
     align-items: center;
 
-    width:100%;
+    width: 100%;
     margin: 0;
 }
 
@@ -113,7 +115,7 @@ footer {
 
 
 #menu_box_container {
-    box-sizing:border-box;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     justify-content: stretch;
@@ -123,7 +125,7 @@ footer {
     align-items: stretch;
 }
 
-.vegivegan-label{
+.vegivegan-label {
     width: 1em;
     height: 1em;
     margin-left: 0.5em;
@@ -160,14 +162,16 @@ footer {
 
     text-align: center;
 }
-#clickMenuBox h1{
+
+#clickMenuBox h1 {
     font-size: 1.8em;
     margin-bottom: 0.5em;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.coverimage{
+
+.coverimage {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 
@@ -175,10 +179,10 @@ footer {
     height: 25vh;
     object-fit: cover;
     image-orientation: from-image;
-    
+
 }
 
-.description{
+.description {
     height: 2em;
 }
 
@@ -198,14 +202,43 @@ footer {
 }
 
 
-.menuListbox .vegivegan-label{
+.menuListbox .vegivegan-label {
     width: 2em;
     height: 2em;
     margin-left: 1em;
 }
 
-.timeline-date h2{
+.timeline-date h2 {
     border-bottom: gainsboro 0.1em solid
+}
+
+.mainTitleWithOrderButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.orderButton {
+    all: unset;
+    border-radius: var(--borderRadMenu);
+    background-color: var(--accentColor);
+    color: var(--greyText);
+    font-size: 0.4em;
+    font-weight: normal;
+    padding: 5px;
+    height: 100%;
+    cursor: pointer;
+    transition: 140ms;
+}
+
+.orderButton:hover {
+    color: black;
+    background-color: var(--highlightedColor);
+}
+
+.orderButton:focus {
+    color: black;
+    background-color: var(--highlightedColor);
 }
 
 
@@ -266,7 +299,7 @@ footer {
 
 
 
-.rating{
+.rating {
     background-color: var(--darkAccentColor);
     display: flex;
     gap: 1em;
@@ -278,17 +311,18 @@ footer {
 }
 
 
-.stars{
+.stars {
     width: calc(var(--starheight)*5.5);
     height: var(--starheight);
     position: relative;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.starshape{
+
+.starshape {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -296,21 +330,22 @@ footer {
     left: 0;
 
     background-image: url("../images/starshape.svg");
-    background-size:cover;
+    background-size: cover;
 }
 
 
-.emptystars{
+.emptystars {
     position: absolute;
     width: 99%;
-    height:99%;
+    height: 99%;
     top: 0;
     left: 0;
     background-color: darkgray;
 }
-.fullstars{
+
+.fullstars {
     width: 0%;
-    height:99%;
+    height: 99%;
     position: absolute;
     top: 0;
     left: 0;
@@ -325,14 +360,15 @@ footer {
 
 
 
-.give-star-rating{
+.give-star-rating {
     background-color: var(--darkAccentColor);
     padding: 0.5em;
     border-radius: 0.3em;
 
     margin-bottom: 1em;
 }
-.give-stars{
+
+.give-stars {
     width: calc(var(--starheight)*7);
     height: var(--starheight);
 
@@ -341,25 +377,22 @@ footer {
     align-items: center;
     justify-content: center;
 }
-.starContainer{
+
+.starContainer {
     height: 3em;
     width: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.give-star{
+
+.give-star {
     height: 3em;
     width: 3em;
-    
+
     background-image: url('../images/emptystar.png');
     background-size: contain;
     background-color: transparent;
     border: 0;
     padding: 0;
 }
-
-
-
-
-
