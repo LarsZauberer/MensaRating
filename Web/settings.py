@@ -20,7 +20,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'core',
-    'users'
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +94,16 @@ else:
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=600)
     DATABASES['default'].update(db_from_env)
+    
+if "DYNO" in os.environ:
+    HEROKU = True
+    
+    # Google Drive Persistant storage connection
+    INSTALLED_APPS.append('gdstorage')
+    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'cred/algeteach-a6ec2bee3280.json'
+    GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'MensaRating-Media-Files/'
+else:
+    HEROKU = False
 
 
 # Password validation
