@@ -75,6 +75,15 @@
                 <div class="imgContainer">
                     <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
                 </div>
+                <div class="imageButtons">
+                    {% if today %}
+                    <form method="post" enctype="multipart/form-data" style="margin-right: 1em; color: black;">
+                        {% csrf_token %}
+                        {{ imageForm }}
+                        <button type="submit">Post</button>
+                    </form>
+                    {% endif %}
+                </div>
             </div>
         {% else %}
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -190,25 +199,6 @@
         checkOrientation()
         showSlides(slideIndex);
     </script>
-
-    
-
-    {% if messages %}
-    {% for i in messages %}
-    {% autoescape off %}
-    {% if i.tags == "error" %}
-    <div role="alert" class="alert error"><span>{{i}}</span></div>
-    {% else %}
-    <div role="alert" class="alert success"><span>{{i}}</span></div>
-    {% endif %}
-    {% endautoescape %}
-    {% endfor %}
-    {% endif %}
-
-    
-
-
-    
 
 </main>
 

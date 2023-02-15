@@ -2,6 +2,7 @@
     --bgColor: white;
     --accentColor: rgb(221, 221, 221);
     --darkAccentColor: #7b7979;
+    --greyText: #222831;
     --highlightedColor: #ABC270;
     --red: #DD0000;
     --borderRadMenu: 0.6rem;
@@ -142,6 +143,13 @@ footer {
 }
 
 
+.vegivegan-label {
+    width: 1em;
+    height: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
 
 
 
@@ -221,8 +229,7 @@ footer {
     margin: 0;
 }
 
-.menuListbox #vegivegan-container {
-    display: flex;
+.menuListbox .vegivegan-label {
     width: 2em;
     height: 2em;
 }
@@ -250,7 +257,17 @@ footer {
     gap: 1em
 }
 
-.orderButton, .stat-criteria button {
+.timeline-date h2 {
+    border-bottom: gainsboro 0.1em solid
+}
+
+.mainTitleWithOrderButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.orderButton {
     all: unset;
     border-radius: var(--borderRadMenu);
     background-color: var(--accentColor);
@@ -267,6 +284,15 @@ footer {
 }
 
 .orderButton:hover, .orderButton:focus, .stat-criteria button:hover {
+    font-size: 0.4em;
+    font-weight: normal;
+    padding: 5px;
+    height: 100%;
+    cursor: pointer;
+    transition: 140ms;
+}
+
+.orderButton:hover {
     color: black;
     background-color: var(--highlightedColor);
 }
