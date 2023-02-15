@@ -58,13 +58,11 @@
                 </div>
                 <div class="imageButtons">
                     {% if today %}
-                    <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
-                        {% csrf_token %}
-                        {{ imageForm }}
-                        <button type="submit">Post</button>
-                    </form>
+                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
                     <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
                     {% endif %}
+
+                    
         
                     <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
                 </div>
@@ -77,11 +75,7 @@
                 </div>
                 <div class="imageButtons">
                     {% if today %}
-                    <form method="post" enctype="multipart/form-data" style="margin-right: 1em; color: black;">
-                        {% csrf_token %}
-                        {{ imageForm }}
-                        <button type="submit">Post</button>
-                    </form>
+                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
                     {% endif %}
                 </div>
             </div>
@@ -89,9 +83,23 @@
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         {% endif %}
+
+
+        <div id="popup">
+            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                {% csrf_token %}
+                {{ imageForm }}
+                <button type="submit">Post</button>
+            </form>
+        </div>
+
+
     </div>
 
+    
+
     <script>
+        togglePopup()
         setInterval(checkOrientation, 1000);
         showSlides(slideIndex);
     </script>
