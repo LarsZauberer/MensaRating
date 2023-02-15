@@ -96,8 +96,8 @@ else:
     DATABASES['default'].update(db_from_env)
     
 if "DYNO" in os.environ:
-    HEROKU = False
-    """ HEROKU = True
+    # HEROKU = False
+    HEROKU = True
     
     # Create credentials file
     if not os.path.exists("cred"):
@@ -113,7 +113,7 @@ if "DYNO" in os.environ:
     INSTALLED_APPS.append('gdstorage')
     
     GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'cred/algeteach-a6ec2bee3280.json'
-    GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'MensaRating-Media-Files/' """
+    GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'MensaRating-Media-Files/'
 else:
     HEROKU = False
 
