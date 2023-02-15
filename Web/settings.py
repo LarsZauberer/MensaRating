@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -29,7 +30,7 @@ SECRET_KEY = 'django-insecure-56a%ng1+!7w&jg#cl^ybg(ss%-=pmm(wv+oo_xb7c)+@p7*y*e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', "*"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'core',
-    'users',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -94,28 +95,6 @@ else:
     import dj_database_url
     db_from_env = dj_database_url.config(conn_max_age=600)
     DATABASES['default'].update(db_from_env)
-    
-if "DYNO" in os.environ:
-    # HEROKU = False
-    HEROKU = True
-    
-    # Create credentials file
-    if not os.path.exists("cred"):
-        os.mkdir("cred")
-    with open("cred/algeteach-a6ec2bee3280.json", "w") as f:
-        try:
-            f.write(os.environ["GOOGLE_CREDENTIALS"])
-        except Exception as e:
-            print(os.environ)
-            raise e
-    
-    # Google Drive Persistant storage connection
-    INSTALLED_APPS.append('gdstorage')
-    
-    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'cred/algeteach-a6ec2bee3280.json'
-    GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'MensaRating-Media-Files/'
-else:
-    HEROKU = False
 
 
 # Password validation
