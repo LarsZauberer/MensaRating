@@ -98,19 +98,19 @@ else:
 if "DYNO" in os.environ:
     HEROKU = True
     
-    """ # Create credentials file
+    # Create credentials file
     os.mkdir("cred")
     with open("cred/algeteach-a6ec2bee3280.json", "w") as f:
         try:
             f.write(os.environ["gd-cred"])
         except Exception as e:
             print(os.environ)
-            raise e """
+            raise e
     
     # Google Drive Persistant storage connection
     INSTALLED_APPS.append('gdstorage')
     
-    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'google-credentials.json'
+    GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = 'cred/algeteach-a6ec2bee3280.json'
     GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = 'MensaRating-Media-Files/'
 else:
     HEROKU = False
