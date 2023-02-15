@@ -1,7 +1,7 @@
 :root {
     --bgColor: white;
     --accentColor: rgb(221, 221, 221);
-    --darkAccentColor: rgb(204, 204, 204);
+    --darkAccentColor: #7b7979;
     --highlightedColor: #ABC270;
     --red: #DD0000;
     --borderRadMenu: 0.6rem;
@@ -26,7 +26,7 @@ nav {
     width: 100%;
     display: flex;
     justify-content: center;
-    }
+}
 
 .menuItem {
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
@@ -35,7 +35,8 @@ nav {
     text-transform: uppercase;
 }
 
-.active, .menuItem:hover{
+.active,
+.menuItem:hover {
     background-color: var(--highlightedColor);
     cursor: pointer;
 }
@@ -52,19 +53,20 @@ body {
 
 
 
-.fade-scroll-top{
+.fade-scroll-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.list-title{
+
+.list-title {
     margin: 0;
     padding: 0;
 }
 
 
 
-.vegivegan-label{
+.vegivegan-label {
     width: 1.5em;
     height: 1.5em;
     margin-left: 1em;
@@ -106,7 +108,7 @@ footer {
     animation-name: hoverClickable;
     animation-duration: 500ms;
     background-color: var(--highlightedColor) !important;
-    box-shadow: 0px 5px 21px -5px rgba(0,0,0,0.41);
+    box-shadow: 0px 5px 21px -5px rgba(0, 0, 0, 0.41);
     cursor: pointer;
 }
 
@@ -121,7 +123,7 @@ footer {
     justify-content: space-between;
     align-items: center;
 
-    width:100%;
+    width: 100%;
     margin: 0;
 }
 
@@ -129,7 +131,7 @@ footer {
 
 
 #menu_box_container {
-    box-sizing:border-box;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-around;
     justify-content: stretch;
@@ -170,14 +172,16 @@ footer {
 
     text-align: center;
 }
-#clickMenuBox h1{
+
+#clickMenuBox h1 {
     font-size: 1.8em;
     margin-bottom: 0.5em;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.coverimage{
+
+.coverimage {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 
@@ -185,10 +189,10 @@ footer {
     height: 25vh;
     object-fit: cover;
     image-orientation: from-image;
-    
+
 }
 
-.description{
+.description {
     height: 2em;
 }
 
@@ -206,51 +210,83 @@ footer {
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
 }
-.menuListbox .rating{
+
+.menuListbox .rating {
     margin: 0;
 }
-.menuListbox .vegivegan-label{
+
+.menuListbox .vegivegan-label {
     width: 0;
     height: 0;
     margin: 0;
 }
-.menuListbox #vegivegan-container{
+
+.menuListbox #vegivegan-container {
     display: flex;
     width: 2em;
     height: 2em;
 }
 
-.stat{
+.criteriaContainer {
+    position: relative;
+    display: inline-block;
     width: 10em;
     display: flex;
     flex-direction: column;
-
-    position: relative;
 }
-.stat-criteria{
-    top:2em;
+
+.stat-criteria {
     position: absolute;
-    width: 100%;
+    z-index: 50;
+    top: calc(0.9em + 12px);
     height: 0em;
-    background-color: darkgray;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
-#stat-criteria button{
-    opacity: 0;
-    height: 2em;
+
+.orderContainer {
+    display: flex;
+    gap: 1em
 }
 
+.orderButton, .stat-criteria button {
+    all: unset;
+    border-radius: var(--borderRadMenu);
+    background-color: var(--accentColor);
+    color: var(--greyText);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+    font-weight: normal;
+    padding: 5px;
+    cursor: pointer;
+    width: 94%;
+    z-index: 50;
+    transition: 140ms;
+}
 
+.orderButton:hover, .orderButton:focus, .stat-criteria button:hover {
+    color: black;
+    background-color: var(--highlightedColor);
+}
 
+.orderButton:focus{
+    border-radius: var(--borderRadMenu) var(--borderRadMenu) 0 0;
+}
 
+.stat-criteria button{
+    border-top: 1px solid var(--darkAccentColor);
+    border-radius: 0;
+}
 
+.stat-criteria button:nth-child(3) {
+    border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
+  }
 
-
-.timeline-date h2{
+.timeline-date h2 {
     border-bottom: gainsboro 0.1em solid
 }
-
 
 /* Badges */
 .badgeView {
@@ -309,7 +345,7 @@ footer {
 
 
 
-.rating{
+.rating {
     background-color: var(--darkAccentColor);
     display: flex;
     gap: 1em;
@@ -321,17 +357,18 @@ footer {
 }
 
 
-.stars{
+.stars {
     width: calc(var(--starheight)*5.5);
     height: var(--starheight);
     position: relative;
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.starshape{
+
+.starshape {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -339,21 +376,22 @@ footer {
     left: 0;
 
     background-image: url("../images/starshape.svg");
-    background-size:cover;
+    background-size: cover;
 }
 
 
-.emptystars{
+.emptystars {
     position: absolute;
     width: 99%;
-    height:99%;
+    height: 99%;
     top: 0;
     left: 0;
     background-color: darkgray;
 }
-.fullstars{
+
+.fullstars {
     width: 0%;
-    height:99%;
+    height: 99%;
     position: absolute;
     top: 0;
     left: 0;
@@ -368,14 +406,15 @@ footer {
 
 
 
-.give-star-rating{
+.give-star-rating {
     background-color: var(--darkAccentColor);
     padding: 0.5em;
     border-radius: 0.3em;
 
     margin-bottom: 1em;
 }
-.give-stars{
+
+.give-stars {
     width: calc(var(--starheight)*7);
     height: var(--starheight);
 
@@ -384,25 +423,22 @@ footer {
     align-items: center;
     justify-content: center;
 }
-.starContainer{
+
+.starContainer {
     height: 3em;
     width: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.give-star{
+
+.give-star {
     height: 3em;
     width: 3em;
-    
+
     background-image: url('../images/emptystar.png');
     background-size: contain;
     background-color: transparent;
     border: 0;
     padding: 0;
 }
-
-
-
-
-

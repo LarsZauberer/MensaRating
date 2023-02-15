@@ -93,10 +93,12 @@ function i_updateListboxs(){
 
 
 
-
-function i_toggleStatOptions(type){
+//Toggle Function
+function i_toggleStatOptions(type, offClick){
+    document.getElementsByTagName("body").style.opacity = "0";
     let orderoptions = document.getElementsByClassName("stat-criteria")[type]
     let orderButtons = orderoptions.children
+
     if(orderoptions.style.height == "" || orderoptions.style.height == "0em"){
         orderoptions.style.height = "1em"
         for(let i = 0; i < orderButtons.length; i++){
