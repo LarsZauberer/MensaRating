@@ -102,7 +102,7 @@ if "DYNO" in os.environ:
     os.mkdir("cred")
     with open("cred/algeteach-a6ec2bee3280.json", "w") as f:
         try:
-            f.write(os.environ["gd-cred"])
+            f.write(os.environ["GOOGLE_CREDENTIALS"])
         except Exception as e:
             print(os.environ)
             raise e
