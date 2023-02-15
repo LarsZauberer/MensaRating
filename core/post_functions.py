@@ -29,7 +29,6 @@ def postReview(request, pk, form):
     review.menu = menu
     review.profil = profil
     review.save()
-    add_karma_for_posting(review)
     return ("Success!", 0)
 
 
@@ -57,7 +56,6 @@ def postImage(request, pk, form):
     image = form.instance
     image.menu = menu
     image.profil = profil
-    add_karma_for_posting(image)
     image.save()
 
     
@@ -102,16 +100,7 @@ def postRating(request, pk, form):
     rating = form.instance
     
     rating.profil = profil
-    add_karma_for_posting(rating)
     rating.menu = menu
     rating.save()
     
     return ("Success!", 0)
-
-
-def add_karma_for_posting(post):
-    if post.profil:
-        post.profil.karma += 5
-        post.profil.save()
-
-    return
