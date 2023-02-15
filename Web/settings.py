@@ -101,7 +101,11 @@ if "DYNO" in os.environ:
     # Create credentials file
     os.mkdir("cred")
     with open("cred/algeteach-a6ec2bee3280.json", "w") as f:
-        f.write(os.environ["gd-cred"])
+        try:
+            f.write(os.environ["gd-cred"])
+        except Exception as e:
+            print(os.environ)
+            raise e
     
     # Google Drive Persistant storage connection
     INSTALLED_APPS.append('gdstorage')
