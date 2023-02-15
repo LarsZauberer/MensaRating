@@ -40,9 +40,9 @@
 <body>
     <header>
         <p>
-            <a href="{% url 'index' %}">🍽️MENSA APP</a>
+            <img id="headerLogo" onclick="location.href='{% url 'index' %}';" src="{% static 'images/Logo V0.0.png' %}" alt="🍽️MENSA APP">
         </p>
-        <div>
+        <div class="profileContainer">
             <p>
                 {% if user.is_authenticated %}
                 <a href="{% url 'userProfile' %}">Profil</a>
