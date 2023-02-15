@@ -99,7 +99,8 @@ if "DYNO" in os.environ:
     HEROKU = True
     
     # Create credentials file
-    os.mkdir("cred")
+    if not os.path.exists("cred"):
+        os.mkdir("cred")
     with open("cred/algeteach-a6ec2bee3280.json", "w") as f:
         try:
             f.write(os.environ["GOOGLE_CREDENTIALS"])
