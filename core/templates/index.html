@@ -15,7 +15,7 @@
 
     {% for index, menu, rating, numRates, image in menus %}
     <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
-        
+
         <h1>
             {{menu.name}}
 
@@ -23,20 +23,24 @@
             <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
             {% elif menu.vegan %}
             <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-            {% endif %} 
+            {% endif %}
         </h1>
 
-        <div class="description">{{menu.description}}</div>
-            
+        <div class="description">
+            <p>{{menu.description}}</p>
+        </div>
+
         {% if image %}
-            <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
+        <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
         {% else %}
-            <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
+        <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
         {% endif %}
-        
+
 
         <div class="rating">
-            <div>{{rating}}</div>
+            <div>
+                <p>{{rating}}</p>
+            </div>
 
             <div class="stars">
                 <div class="emptystars"></div>
@@ -44,15 +48,17 @@
                 <div class="starshape"></div>
             </div>
 
-            <div>({{numRates}})</div>
+            <div>
+                <p>({{numRates}})</p>
+            </div>
         </div>
-        
+
         <script data-menuindex="{{index}}" data-rating="{{rating}}">
             data = document.currentScript.dataset;
             starRate(data.menuindex, data.rating)
             checkOrientation()
         </script>
-       
+
     </div>
     {% endfor %}
 </div>

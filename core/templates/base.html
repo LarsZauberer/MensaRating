@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
@@ -19,9 +22,9 @@
     <script>
         const api = new API("{{ csrf_token }}");
         {% if user.is_authenticated %}
-            const username = "{{ user.username }}";
+        const username = "{{ user.username }}";
         {% else %}
-            const username = "";
+        const username = "";
         {% endif %}
     </script>
 
@@ -67,7 +70,7 @@
         </div>
     </nav>
 
-    
+
     <main class="content">
         {% block content %}
         {% endblock %}
