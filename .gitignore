@@ -133,3 +133,5 @@ dmypy.json
 /images/*
 
 .vscode
+
+cred/*
