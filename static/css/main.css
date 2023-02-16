@@ -37,7 +37,32 @@ header {
     padding: 2rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
+
+#headerLogo{
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.profileContainer p, .profileContainer a{
+    color: black;
+}
+
+header p{
+    margin: 0;
+}
+
+.profileContainer a:hover{
+    color: var(--darkAccentColor) !important;
+}
+
+.profileContainer a:active{
+    color: var(--accentColor) !important;
+}
+
 
 nav {
     width: 100%;
