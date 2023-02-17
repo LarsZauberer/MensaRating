@@ -6,60 +6,35 @@
 
 
 <main id="menu">
-    <h1 class="title">
-        {{name}}   
-
+    <div class="descriptionContainerMenuSite">
+        <div>
+            <h1>
+                {{name}}
+            </h1>
+            <p>
+                {{description}}
+            </p>
+        </div>
         {% if vegetarian %}
         <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
         {% elif vegan %}
         <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-        {% endif %} 
-
-    </h1>
-
-    <div style="margin-bottom: 2em;">{{description}}</div>
+        {% endif %}
+    </div>
 
 
-    
 
 
-    <div id="gallery">  <!-- TODO: image gallery -->
-        <button> &lt; </button>
-
-        <div id="images">
-            <img src="{% static 'images/no_images_yet.png' %}" alt="no images">
-            <div id="image-functions"> <!-- TODO: image functions -->
-                <div>user</div> 
-
-                {% if today %}
-                <button>like</button>
-                <button>dislike</button> 
-                <form method="upload" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ imageForm }}
-                    <button type="submit">Post</button>
-                </form>
-                {% endif %}
-
-                <div>num-likes</div>
+    <div class="imageContainer">
+        <div class="imageSlide fade">
+            <div class="mgContainer">
+                <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
             </div>
         </div>
-        
-        <button> &gt; </button>
     </div>
-    <!--
-        <h3>Images</h3>
-        <ul>
-            {% for image in images %}
-                <p>{{image.profil.user.username}}#{{image.profil.karma}}</p>
-                <li><img src="{{image.image.url}}" alt="{{image.image.name}}" width="100" height="100"></li>
-            {% endfor %}
-        </ul>
-    -->
-    
 
     <p>occurrences: {{occurrences}}</p>
-    
+
 
     <div class="rating">
         <div>{{allTimeRating}}</div>
@@ -73,11 +48,11 @@
         <div>({{allTimeNumRates}})</div>
     </div>
 
-    
-    
-    
 
-    
+
+
+
+
     <script>
         let menuTypes = [];
         let orderType = "rating";
@@ -93,44 +68,45 @@
                         <button onclick="i_filterMenutypes('nofilter')">No Filter</button>
                     </div>
                 </div>
-                
+
                 <div class="stat">
                     <button onclick="i_toggleStatOptions(1)">order</button>
                     <div class="stat-criteria">
                         <button onclick="i_orderMenutypes('rating')">rating</button>
                         <button onclick="i_orderMenutypes('numrates')">numRates</button>
                     </div>
-            </div>
+                </div>
             </div>
         </div>
         <div class="line"></div>
 
         {% for index, rating, numRates, menu in menu_instances %}
-            <div id="menutype-{{index}}" class="menuListbox clickableDiv">   
-                <h3></h3> <!-- name -->
+        <div id="menutype-{{index}}" class="menuListbox clickableDiv">
+            <h3></h3> <!-- name -->
 
-                <div id="vegivegan-container">
-                    <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
-                    <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-                </div>
-
-                
-
-                <div class="rating">
-                    <div></div> <!-- allTimeRating -->
-                    <div class="stars">
-                        <div class="emptystars"></div>
-                        <div id="stars-{{index}}" class="fullstars"></div>
-                        <div class="starshape"></div>
-                    </div>
-                    <div></div> <!-- numRates -->
-                </div>
+            <div id="vegivegan-container">
+                <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+                <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
             </div>
 
-            <script data-url="{% url 'menu' menu.pk %}"data-name="{{menu.name}}" data-index="{{index}}" data-rating="{{rating}}" 
-                    data-occ="" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}", data-vegetarian="{{menu.vegetarian}}">
+
+
+            <div class="rating">
+                <div></div> <!-- allTimeRating -->
+                <div class="stars">
+                    <div class="emptystars"></div>
+                    <div id="stars-{{index}}" class="fullstars"></div>
+                    <div class="starshape"></div>
+                </div>
+                <div></div> <!-- numRates -->
+            </div>
+        </div>
+
+        <script data-url="{% url 'menu' menu.pk %}" data-name="{{menu.name}}" data-index="{{index}}"
+            data-rating="{{rating}}" data-occ="" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}" ,
+            data-vegetarian="{{menu.vegetarian}}">
                 data = document.currentScript.dataset;
-                
+
                 menuType = {
                     url: data.url,
                     name: data.name,
@@ -157,25 +133,25 @@
         i_toggleStatOptions(0);
         i_toggleStatOptions(0);
         i_toggleStatOptions(1);
-    </script>    
-
-
-
-
-    
-
-
-
-
-    
+    </script>
 
 
 
 
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
 
     {% if messages %}
     {% for i in messages %}
@@ -190,10 +166,10 @@
     {% endif %}
 
 
-    
 
 
-    
+
+
 
 </main>
 
