@@ -30,6 +30,14 @@ a {
     font-family: 'Merriweather', serif;
 }
 
+img {
+    border-radius: var(--borderRadMenu);
+}
+
+.imgContainer{
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
 /*Base*/
 header {
     width: calc(100% - 4rem);
@@ -220,7 +228,7 @@ footer {
     image-orientation: from-image;
 }
 
-.descriptionContainerMenuSite p{
+.descriptionContainerMenuSite p {
     text-align: left;
 }
 
@@ -479,10 +487,10 @@ footer {
     align-items: center;
 }
 
-.descriptionContainerMenuSite h1{
+.descriptionContainerMenuSite h1 {
     margin: 0 !important;
 }
 
-.descriptionContainerMenuSite .vegivegan-label{
+.descriptionContainerMenuSite .vegivegan-label {
     height: 3.2em;
 }
