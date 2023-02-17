@@ -69,8 +69,17 @@
 
     background-color: #f44336;
 }
+#menu #popup form{
+    display: flex;
+    flex-direction: column;
+}
 
-
+.upload-field{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+}
 
 
 
