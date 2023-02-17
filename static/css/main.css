@@ -174,9 +174,6 @@ footer {
     margin: 0;
 }
 
-
-
-
 #menu_box_container {
     box-sizing: border-box;
     display: flex;
@@ -187,21 +184,6 @@ footer {
     gap: 3rem;
     align-items: stretch;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .galleryElement {
     flex-grow: 1;
@@ -236,15 +218,11 @@ footer {
     height: 25vh;
     object-fit: cover;
     image-orientation: from-image;
-
 }
 
-.description {
-    height: 2em;
+.descriptionContainerMenuSite p{
+    text-align: left;
 }
-
-
-
 
 /*All Menus*/
 .menuListbox {
@@ -502,7 +480,7 @@ footer {
 }
 
 .descriptionContainerMenuSite h1{
-    margin: 0;
+    margin: 0 !important;
 }
 
 .descriptionContainerMenuSite .vegivegan-label{
