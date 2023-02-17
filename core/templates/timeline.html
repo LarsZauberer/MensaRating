@@ -21,7 +21,7 @@
         {% for index, menu, rating, numRates in menus %}
             <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
                 <div class="menuListbox clickableDiv">
-                    <a href="{% url 'menu' menu.pk %}">{{menu.name}}</a>
+                    <h3 href="{% url 'menu' menu.pk %}">{{menu.name}}</h3>
                     - {{menu.date}}
                     
                     {% if menu.vegetarian %}
