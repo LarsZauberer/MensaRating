@@ -49,6 +49,7 @@ header {
 
 .profileContainer p, .profileContainer a{
     color: black;
+    font-family: 'Alegreya Sans', sans-serif;
 }
 
 header p{
@@ -87,6 +88,7 @@ nav {
     color: black;
     text-decoration: underline;
     font-weight: bold;
+    font-family: 'Alegreya Sans', sans-serif;
 }
 
 body {
