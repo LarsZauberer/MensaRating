@@ -159,7 +159,9 @@
         <form id="review-text" method="post">
             {% csrf_token %}
             {{ reviewForm }}
-            <button type="submit">Post</button>
+            <button type="submit" class="orderButton" id="postButton">
+                <img src="{% static 'images/postSendIconMaterialSymbol.svg' %}" alt="Beitrag">
+            </button>
         </form>
         {% else %}
         <h2>
