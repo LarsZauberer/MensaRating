@@ -129,6 +129,8 @@
             <div id="menutype-{{index}}" class="menuListbox clickableDiv">   
                 <h3></h3> <!-- name -->
 
+                <div></div> <!-- date -->
+
                 <div id="vegivegan-container">
                     <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
                     <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
@@ -148,12 +150,13 @@
             </div>
 
             <script data-url="{% url 'menu' menu.pk %}"data-name="{{menu.name}}" data-index="{{index}}" data-rating="{{rating}}" 
-                    data-occ="" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}", data-vegetarian="{{menu.vegetarian}}">
+                    data-date="{{menu.date}}" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}", data-vegetarian="{{menu.vegetarian}}">
                 data = document.currentScript.dataset;
                 
                 menuType = {
                     url: data.url,
                     name: data.name,
+                    date: data.date,
                     index: data.index,
                     rating: data.rating,
                     numrates: data.numrates,

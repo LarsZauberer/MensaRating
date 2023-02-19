@@ -70,7 +70,9 @@ function i_updateListboxs(){
             menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';")
             menuTypeObject = menuTypeObject.children
             menuTypeObject[0].innerHTML = menuType.name
-            let vegivegan = menuTypeObject[1].children;
+            menuTypeObject[1].innerHTML = menuType.date
+
+            let vegivegan = menuTypeObject[2].children;
 
             vegivegan[0].style.width = vegivegan[0].style.height = "0";
             vegivegan[1].style.width =  vegivegan[1].style.height = "0";
@@ -83,7 +85,7 @@ function i_updateListboxs(){
 
             
         
-            rating = menuTypeObject[2].children
+            rating = menuTypeObject[3].children
             rating[0].innerHTML = menuType.rating
             starRate(i, menuType.rating)
             rating[2].innerHTML = "(" + menuType.numrates + ")"
