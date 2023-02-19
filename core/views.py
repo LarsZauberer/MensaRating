@@ -115,6 +115,8 @@ def menu(request, pk):
     numRates = getNumRates(menu)
 
 
+
+    print(images)
     
 
     # Forms

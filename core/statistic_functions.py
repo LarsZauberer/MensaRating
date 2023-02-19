@@ -67,6 +67,8 @@ def getMostLikedImage(menuType):
         
         image = Image.objects.filter(menu__in=allmenus).order_by("-likes")
 
+        print(image)
+
         if len(image) == 0:
             return None
         else:
