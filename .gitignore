@@ -135,3 +135,22 @@ dmypy.json
 .vscode
 
 cred/*
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.bcf
+*.blg
+*.idx
+*.lof
+*.lot
+*.fdb_latexmk
+*.fls
+*.run.xml
+*.synctex.gz
+*.thm
+
+/Documentation/main.pdf
