@@ -15,5 +15,5 @@ for i in LIST_OF_FILES:
 
 with open("Documentation/code/main_code.tex", "w") as f:
     for i in LIST_OF_FILES:
-        f.write("\\section{" + i.stem + "}\\label{code:" + i.stem + "}\n")
+        f.write("\\section{" + i.stem + ".py}\\label{code:" + i.stem + ".py}\n")
         f.write("\\input{code/" + i.stem + "}\n")
