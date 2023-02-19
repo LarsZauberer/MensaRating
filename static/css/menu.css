@@ -6,19 +6,19 @@
     flex-direction: column;
 }
 
-#menu h1 {
+#menu .title{
     margin-top: 2em;
     display: flex;
     align-items: center;
 }
 
-#menu h1 span{
+#menu .title span{
     font-size: 0.8em;
     font-weight: normal;
 }
 
 
-#menu h1 .vegivegan-label{
+#menu .title .vegivegan-label{
     width: 1em;
     height: 1em;
     margin-right: 0.5em;

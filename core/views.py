@@ -90,7 +90,7 @@ def menu(request, pk):
             messages.success(request, msg[0])
 
     # Get the reviews
-    reviews = Review.objects.filter(menu=menu).order_by("-likes")
+    reviews = Review.objects.filter(menu=menu)
     review_badges = []
     for i in reviews:
         if i.profil:
@@ -99,7 +99,7 @@ def menu(request, pk):
             review_badges.append([])
 
     # Get the images
-    images = Image.objects.filter(menu=menu).order_by("-likes")
+    images = Image.objects.filter(menu=menu)
     image_badges = []
     for i in images:
         if i.profil:
@@ -196,7 +196,7 @@ def allMenu(request):
 
 
     #Order by number of occurrences
-    menuType_info = sorted(menuType_info, key=lambda x: x[2], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
+    #menuType_info = sorted(menuType_info, key=lambda x: x[2], reverse=True)  # Sort the menu info after occurrences -> lowest to highest
 
     context = {"menuTypes": menuType_info}
 

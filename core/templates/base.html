@@ -7,6 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
     <script src="{% static 'js/api.js' %}"></script>
@@ -15,15 +22,17 @@
     <script>
         const api = new API("{{ csrf_token }}");
         {% if user.is_authenticated %}
-            const username = "{{ user.username }}";
+        const username = "{{ user.username }}";
         {% else %}
-            const username = "";
+        const username = "";
         {% endif %}
     </script>
 
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
     <script src="{% static 'js/imageSlideshow.js' %}"></script>
     <script src="{% static 'js/utility.js' %}"></script>
+    <script src="{% static 'js/allmenu_statistics.js' %}"></script>
+    <script src="{% static 'js/menuinstance_statistics.js' %}"></script>
 
     {% block import %}
     {% endblock %}
@@ -34,9 +43,9 @@
 <body>
     <header>
         <p>
-            <a href="{% url 'index' %}">🍽️MENSA APP</a>
+            <img id="headerLogo" onclick="location.href='{% url 'index' %}';" src="{% static 'images/Logo V0.0.png' %}" alt="🍽️MENSA APP">
         </p>
-        <div>
+        <div class="profileContainer">
             <p>
                 {% if user.is_authenticated %}
                 <a href="{% url 'userProfile' %}">Profil</a>
@@ -61,7 +70,7 @@
         </div>
     </nav>
 
-    
+
     <main class="content">
         {% block content %}
         {% endblock %}

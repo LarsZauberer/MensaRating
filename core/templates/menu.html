@@ -9,15 +9,15 @@
 {% for i in messages %}
 {% autoescape off %}
 {% if i.tags == "error" %}
-    <div class="alert error">
-        <span class="closebtn" onclick="closeAlert(this.parentElement);">&times;</span>
-        {{i}}
-    </div>
+<div class="alert error">
+    <span class="closebtn" onclick="closeAlert(this.parentElement);">&times;</span>
+    {{i}}
+</div>
 {% else %}
-    <div class="alert success">
-        <span class="closebtn" onclick="closeAlert(this.parentElement);">&times;</span>
-        {{i}}
-    </div>
+<div class="alert success">
+    <span class="closebtn" onclick="closeAlert(this.parentElement);">&times;</span>
+    {{i}}
+</div>
 {% endif %}
 {% endautoescape %}
 {% endfor %}
@@ -28,19 +28,21 @@
 
 
     <h1>
-        {{menu.name}}   
+        {{menu.name}}
 
-        <span>  </span>
+        <span> </span>
         <span id="date">&nbsp;&ndash; {{menu.date}}</span>
         {% if menu.vegetarian %}
         <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
         {% elif menu.vegan %}
         <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-        {% endif %} 
+        {% endif %}
 
     </h1>
 
-    <div style="margin-bottom: 2em;">{{menu.description}}</div>
+    <div style="margin-bottom: 2em;">
+        <p>{{menu.description}}</p>
+    </div>
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
         {% for image, badges in images %}
@@ -48,8 +50,9 @@
                 <div class="userName imageUserText"><span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
                     {% for i in badges %}
                         <div class="tooltip badge">
-                            <img src="{{i.image.url}}" alt="" class="badgeImage">
-                            <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span style="">{{i.description}}</span></div>
+                            img src="{{i.image.url}}" alt="" class="badgeImage">
+                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
+                            style="">{{i.description}}</span></div>
                         </div>
                     {% endfor %}
                 </div>
@@ -62,11 +65,26 @@
                     <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
                     {% endif %}
 
-                    
-        
                     <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
                 </div>
+                
             </div>
+            <div class="imgContainer">
+                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+            </div>
+            <div class="imageButtons">
+                {% if today %}
+                <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                    {% csrf_token %}
+                    {{ imageForm }}
+                    <button type="submit">Post</button>
+                </form>
+                <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                {% endif %}
+
+                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+            </div>
+        </div>
         {% endfor %}
         {% if images|length == 0 %}
             <div class="imageSlide fade">
@@ -79,9 +97,10 @@
                     {% endif %}
                 </div>
             </div>
+        </div>
         {% else %}
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
         {% endif %}
 
 
@@ -104,54 +123,60 @@
         showSlides(slideIndex);
     </script>
 
-    
 
-    
+
+
     {% if today %}
-    
-        <div class="give-star-rating">
-            <form method="post">
-                {% csrf_token %}
-                <div class="give-stars">
-                    <button type="submit" value="1" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
-                    <button type="submit" value="2" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
-                    <button type="submit" value="3" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
-                    <button type="submit" value="4" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
-                    <button type="submit" value="5" name="rating" class="give-star" onclick="change_cursor_wait();"></button>
-                </div>
-            </form>
+
+    <div class="give-star-rating">
+        <form method="post">
+            {% csrf_token %}
+            <div class="give-stars">
+                <button type="submit" value="1" name="rating" class="give-star"
+                    onclick="change_cursor_wait();"></button>
+                <button type="submit" value="2" name="rating" class="give-star"
+                    onclick="change_cursor_wait();"></button>
+                <button type="submit" value="3" name="rating" class="give-star"
+                    onclick="change_cursor_wait();"></button>
+                <button type="submit" value="4" name="rating" class="give-star"
+                    onclick="change_cursor_wait();"></button>
+                <button type="submit" value="5" name="rating" class="give-star"
+                    onclick="change_cursor_wait();"></button>
             </div>
-        </div>
+        </form>
+    </div>
+    </div>
 
-        <script>
-            stars = document.getElementsByClassName("give-star")
-            for(let i = 0; i < stars.length; i++){
-                stars[i].addEventListener("mouseover", function(){starHover(stars, i)})
-                stars[i].addEventListener("mouseout", function(){stopStarHover()})
-            }
-
-
-
-        </script>
+    <script>
+        stars = document.getElementsByClassName("give-star")
+        for (let i = 0; i < stars.length; i++) {
+            stars[i].addEventListener("mouseover", function () { starHover(stars, i) })
+            stars[i].addEventListener("mouseout", function () { stopStarHover() })
+        }
+    </script>
     {% endif%}
 
 
-  
+
     <div class="rating">
-        <div>{{rating}}</div>
-            
+        <div>
+            <p>{{rating}}</p>
+        </div>
+
         <div class="stars">
             <div class="emptystars"></div>
             <div id="stars-0" class="fullstars"></div>
             <div class="starshape"></div>
         </div>
 
-        <div>({{numRates}})</div>
+        <div>
+            <p>({{numRates}})</p>
+        </div>
     </div>
-    
 
-    
-    
+
+
+
 
 
 
@@ -163,18 +188,18 @@
     <div id="reviews">
 
         {% if today %}
-            <h2>
-                Reviews
-            </h2>
-            <form id="review-text" method="post">
-                {% csrf_token %}
-                {{ reviewForm }}
-                <button type="submit">Post</button>
-            </form>
+        <h2>
+            Reviews
+        </h2>
+        <form id="review-text" method="post">
+            {% csrf_token %}
+            {{ reviewForm }}
+            <button type="submit">Post</button>
+        </form>
         {% else %}
-            <h2>
-                Reviews
-            </h2>
+        <h2>
+            Reviews
+        </h2>
         {% endif %}
 
 
@@ -185,10 +210,11 @@
                 <div>{{review.profil.user.username}}</div>
                 <div>{{review.profil.karma}}</div>
                 {% for i in badges %}
-                    <div class="tooltip badge">
-                        <img src="{{i.image.url}}" alt="" class="badgeImage">
-                        <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span style="">{{i.description}}</span></div>
-                    </div>
+                <div class="tooltip badge">
+                    <img src="{{i.image.url}}" alt="" class="badgeImage">
+                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
+                            style="">{{i.description}}</span></div>
+                </div>
                 {% endfor %}
                 <div>Rating</div>
                 {% if today %}
@@ -202,7 +228,7 @@
     </div>
 
 
-    
+
 
     <script data-rating="{{rating}}">
         data = document.currentScript.dataset;
@@ -210,6 +236,25 @@
         checkOrientation()
         showSlides(slideIndex);
     </script>
+
+
+
+    {% if messages %}
+    {% for i in messages %}
+    {% autoescape off %}
+    {% if i.tags == "error" %}
+    <div role="alert" class="alert error"><span>{{i}}</span></div>
+    {% else %}
+    <div role="alert" class="alert success"><span>{{i}}</span></div>
+    {% endif %}
+    {% endautoescape %}
+    {% endfor %}
+    {% endif %}
+
+
+
+
+
 
 </main>
 
