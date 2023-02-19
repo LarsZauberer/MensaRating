@@ -1,7 +1,11 @@
 from pathlib import Path
 
 LIST_OF_FILES = [
-    Path("core/models.py")
+    Path("core/models.py"),
+    Path("core/webscraper.py"),
+    Path("core/views.py"),
+    Path("core/urls.py"),
+    # Path("users/views.py"),
 ]
 
 
