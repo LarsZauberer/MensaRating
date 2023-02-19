@@ -93,24 +93,25 @@ function i_updateListboxs(){
 
 
 
-//Toggle Function
-function i_toggleStatOptions(type, offClick){
-    document.getElementsByTagName("body").style.opacity = "0";
+
+function i_toggleStatOptions(type) {
     let orderoptions = document.getElementsByClassName("stat-criteria")[type]
     let orderButtons = orderoptions.children
 
-    if(orderoptions.style.height == "" || orderoptions.style.height == "0em"){
+    if (orderoptions.style.height == "" || orderoptions.style.height == "0em") {
         orderoptions.style.height = "1em"
-        for(let i = 0; i < orderButtons.length; i++){
+        for (let i = 0; i < orderButtons.length; i++) {
             orderButtons[i].style.height = "2em"
             orderButtons[i].style.opacity = 1;
+            
         }
     }
-    else{
+    else {
         orderoptions.style.height = "0em"
-        for(let i = 0; i < orderButtons.length; i++){
+        for (let i = 0; i < orderButtons.length; i++) {
             orderButtons[i].style.height = "0em"
             orderButtons[i].style.opacity = 0
+
         }
     }
 }
