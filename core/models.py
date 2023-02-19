@@ -57,18 +57,6 @@ class Menu(models.Model):
         :rtype: str
         """
         return self.name
-    
-    def setMenuType(self):
-        """
-        getMenuType Get the corresponding menuType of the menu
-
-        :return: The corresponding menuType of the menu
-        :rtype: MenuType
-        """
-        if not MenuType.objects.filter(name=self.name).exists():
-            MenuType.objects.create(name=self.name)
-
-        return MenuType.objects.get(name=self.name)
 
 
 class Review(models.Model):
