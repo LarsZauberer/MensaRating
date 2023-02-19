@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<main>
+
+    <script>
+        let menuTypes = [];
+        let orderType = "occ";
+    </script>
+
+    <div class="fade-scroll-top">
+        <h1 class="list-title">Alle Menüs</h1>
+        <div class="orderContainer">
+            <div class="criteriaContainer">
+                <button class="orderButton" onclick="toggleStatOptions(0)">Filter</button>
+                <div class="stat-criteria">
+                    <button onclick="filterMenutypes('nofilter')">Kein Filter</button>
+                    <button onclick="filterMenutypes('vegan')">Vegan</button>
+                    <button onclick="filterMenutypes('vegi')">Vegetarisch</button>
+                </div>
+            </div>
+
+            <div class="criteriaContainer">
+                <button class="orderButton" onclick="toggleStatOptions(1)">Sortieren</button>
+                <div class="stat-criteria">
+                    <button onclick="orderMenutypes('occ')">Vorkommen</button>
+                    <button onclick="orderMenutypes('rating')">Bewertung</button>
+                    <button onclick="orderMenutypes('numrates')">Anzahl Bewertungen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="line"></div>
+
+    {% for index, menuType, occurrences, description, vegetarian, vegan, allTimeRating, allTimeNumRates in menuTypes %}
+    <div id="menutype-{{index}}" class="menuListbox clickableDiv">
+        <h3></h3> <!-- name -->
+
+        <div id="vegivegan-container">
+            <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+            <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+        </div>
+
+        <div></div> <!-- occurrences -->
+
+        <div class="rating">
+            <div></div> <!-- allTimeRating -->
+            <div class="stars">
+                <div class="emptystars"></div>
+                <div id="stars-{{index}}" class="fullstars"></div>
+                <div class="starshape"></div>
+            </div>
+            <div></div> <!-- numRates -->
+        </div>
+    </div>
+
+    <script data-url="{% url 'menuType' menuType.pk%}" data-name="{{menuType.name}}" data-index="{{index}}"
+        data-rating="{{allTimeRating}}" data-occ="{{occurrences}}" data-numrates="{{allTimeNumRates}}"
+        data-vegan="{{vegan}}" , data-vegetarian="{{vegetarian}}">
+            data = document.currentScript.dataset;
+
+            menuType = {
+                url: data.url,
+                name: data.name,
+                index: data.index,
+                rating: data.rating,
+                occurrences: data.occ,
+                numrates: data.numrates,
+                vegan: data.vegan,
+                vegetarian: data.vegetarian,
+                visible: true
+            }
+            menuTypes.push(menuType)
+        </script>
+    {% endfor %}
+
+
+    <script>
+        orderMenutypes(orderType)
+        toggleStatOptions(0);
+        toggleStatOptions(0);
+        toggleStatOptions(1);
+    </script>
+
+
+
+
+</main>
+
+
+{% endblock %}

@@ -20,36 +20,37 @@ class test_main_functions(LiveServerTestCase):
         self.driver.get(self.live_server_url + "/users/login")
         
         # Username
-        usernameInput = self.driver.find_element_by_id("id_username")
+        usernameInput = self.driver.find_element("id", "id_username")
         usernameInput.send_keys("user")
         
         # Password
-        passwordInput = self.driver.find_element_by_id("id_password")
+        passwordInput = self.driver.find_element("id", "id_password")
         passwordInput.send_keys("user")
         
         # Submit button
         submitButton = self.driver.find_elements(By.TAG_NAME, "button")[0]
         submitButton.click()
         
-        self.assertEquals(self.driver.current_url, self.live_server_url + "/app")
+        # Assert redirect url is correct
+        self.assertEquals(self.driver.current_url, self.live_server_url + "/")
     
     def testRegisterUser_BotError(self):
         self.driver.get(self.live_server_url + "/users/register")
         
         # Username
-        usernameInput = self.driver.find_element_by_id("id_username")
+        usernameInput = self.driver.find_element("id", "id_username")
         usernameInput.send_keys("user2")
         
         # Email
-        emailInput = self.driver.find_element_by_id("id_email")
+        emailInput = self.driver.find_element("id", "id_email")
         emailInput.send_keys("test.test@test.com")
         
         # Password
-        passwordInput = self.driver.find_element_by_id("id_password1")
+        passwordInput = self.driver.find_element("id", "id_password1")
         passwordInput.send_keys("User2User2")
         
         # Password Confirm
-        passwordInput = self.driver.find_element_by_id("id_password2")
+        passwordInput = self.driver.find_element("id", "id_password2")
         passwordInput.send_keys("User2User2")
         
         submitButton = self.driver.find_elements(By.TAG_NAME, "button")[0]

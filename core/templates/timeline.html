@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+<div class="fade_scroll_top">
+    <h1>
+        Vergangene Menüs
+    </h1>
+</div>
+
+<div class="line"></div>
+
+{% for date, menus in menu_dates %}
+    <div class="timeline-date">
+        <h2>{{date}}</h2>
+        {% for index, menu, rating, numRates in menus %}
+            <div class="galleryElement" onclick="location.href='{% url 'menu' menu.pk %}';">
+                <div class="menuListbox clickableDiv">
+                    <h3 href="{% url 'menu' menu.pk %}">{{menu.name}}</h3>
+                    - {{menu.date}}
+                    
+                    {% if menu.vegetarian %}
+                    <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+                    {% elif menu.vegan %}
+                    <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+                    {% endif %} 
+
+                    <div class="rating">
+                        <div>{{rating}}</div>
+            
+                        <div class="stars">
+                            <div class="emptystars"></div>
+                            <div id="stars-{{index}}" class="fullstars"></div>
+                            <div class="starshape"></div>
+                        </div>
+
+                        <div>({{numRates}})</div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <script data-menuindex="{{index}}" data-rating="{{rating}}">
+                data = document.currentScript.dataset;
+                starRate(data.menuindex, data.rating)
+            </script>    
+        
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+{% endblock %}

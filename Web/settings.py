@@ -16,6 +16,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Media dir
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -115,9 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Berlin'
 
 USE_I18N = True
 
@@ -142,7 +146,7 @@ STATICFILES_DIRS = ( os.path.join('static'), )
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-LOGIN_REDIRECT_URL = "app"
+LOGIN_REDIRECT_URL = "index"
 LOGIN_URL = "login"
 
 GOOGLE_RECAPTCHA_SECRET_KEY = "6LdqKasaAAAAAHkKjyEXSh6KON2M8ABSUWWl2vxW"
@@ -156,3 +160,46 @@ EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = "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"
 
 DEFAULT_FROM_EMAIL = 'larszauberer@gmail.com'
+
+# Logging configuration
+from datetime import datetime as dt
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'file_default': {
+            'format': '{asctime} [{module}] [{name}] [{levelname}] {message}',
+            'style': '{'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'rich.logging.RichHandler',
+            'level': 'DEBUG'
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': f'logs/{dt.today().strftime("%d_%m_%Y")}.log',
+            'formatter': 'file_default'
+        },
+        'cutelog': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.SocketHandler',
+            'host': '127.0.0.1',
+            'port': 19996,
+            'formatter': 'file_default'
+        }
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+    },
+}

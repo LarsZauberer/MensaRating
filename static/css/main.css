@@ -1,0 +1,493 @@
+:root {
+    --bgColor: white;
+    --accentColor: rgb(221, 221, 221);
+    --darkAccentColor: #7b7979;
+    --highlightedColor: #ABC270;
+    --red: #DD0000;
+    --borderRadMenu: 0.6rem;
+
+    --starheight: 2em;
+}
+
+h1 {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+h2 {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+h3 {
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+p {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+}
+
+a {
+    font-family: 'Merriweather', serif;
+}
+
+/*Base*/
+header {
+    width: calc(100% - 4rem);
+    background-color: var(--highlightedColor);
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#headerLogo{
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.profileContainer p, .profileContainer a{
+    color: black;
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+header p{
+    margin: 0;
+}
+
+.profileContainer a:hover{
+    color: var(--darkAccentColor) !important;
+}
+
+.profileContainer a:active{
+    color: var(--accentColor) !important;
+}
+
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.menuItem {
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
+    background-color: var(--accentColor);
+    text-transform: uppercase;
+}
+
+.active,
+.menuItem:hover {
+    background-color: var(--highlightedColor);
+    cursor: pointer;
+}
+
+.menuItem a{
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+    font-family: 'Alegreya Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+
+
+
+.fade-scroll-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-title {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.vegivegan-label {
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 1em;
+}
+
+
+.content {
+    flex-shrink: 0;
+    width: 80%;
+    max-width: 1100px;
+    padding: 1rem;
+    flex-basis: auto;
+    margin: 3rem auto 0 auto;
+    border-radius: var(--borderRadMenu);
+}
+
+.content h1 {
+    margin: 0.2rem 0 0 0;
+}
+
+.footerHelper {
+    min-height: 3rem;
+    flex-grow: 2;
+}
+
+footer {
+    width: calc(100% - 3rem);
+    background-color: var(--accentColor);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/*Multiple*/
+.clickableDiv {
+    transition: all 140ms;
+}
+
+.clickableDiv:hover {
+    animation-name: hoverClickable;
+    animation-duration: 500ms;
+    background-color: var(--highlightedColor) !important;
+    box-shadow: 0px 5px 21px -5px rgba(0, 0, 0, 0.41);
+    cursor: pointer;
+}
+
+/*Index*/
+.line {
+    border: 2px solid;
+    margin: 0 0 1.5rem 0;
+}
+
+.galleryView {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    margin: 0;
+}
+
+
+
+
+#menu_box_container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    justify-content: stretch;
+    align-content: stretch;
+    align-items: top;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.galleryElement {
+    flex-grow: 1;
+    flex-basis: 50%;
+}
+
+#clickMenuBox {
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    text-align: center;
+}
+
+#clickMenuBox h1 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coverimage {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+    image-orientation: from-image;
+
+}
+
+.description {
+    height: 2em;
+}
+
+
+
+
+/*All Menus*/
+.menuListbox {
+    background-color: var(--accentColor);
+    padding: 1.5em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1.5em;
+    border-radius: var(--borderRadMenu);
+}
+
+.menuListbox .rating {
+    margin: 0;
+}
+
+.menuListbox .vegivegan-label {
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.menuListbox #vegivegan-container {
+    display: flex;
+    width: 2em;
+    height: 2em;
+}
+
+.criteriaContainer {
+    position: relative;
+    display: inline-block;
+    width: 10em;
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-criteria {
+    position: absolute;
+    z-index: 50;
+    top: calc(0.9em + 12px);
+    height: 0em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.orderContainer {
+    display: flex;
+    gap: 1em
+}
+
+.orderButton, .stat-criteria button {
+    all: unset;
+    border-radius: var(--borderRadMenu);
+    background-color: var(--accentColor);
+    color: var(--greyText);
+    font-family: 'Alegreya Sans', sans-serif;
+    text-align: center;
+    font-weight: normal;
+    padding: 5px;
+    cursor: pointer;
+    width: 94%;
+    z-index: 50;
+    transition: 140ms;
+}
+
+.orderButton:hover, .orderButton:focus, .stat-criteria button:hover {
+    color: black;
+    background-color: var(--highlightedColor);
+}
+
+.orderButton:focus{
+    border-radius: var(--borderRadMenu) var(--borderRadMenu) 0 0;
+}
+
+.stat-criteria button{
+    border-top: 1px solid var(--darkAccentColor);
+    border-radius: 0;
+}
+
+.stat-criteria button:nth-child(3) {
+    border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
+  }
+
+.timeline-date h2 {
+    border-bottom: gainsboro 0.1em solid
+}
+
+/* Badges */
+.badgeView {
+    display: inline;
+    flex-direction: row;
+    width: 100%;
+}
+
+.badgeBig {
+    display: inline-block;
+    width: 10%;
+    height: auto;
+    margin: 10px;
+}
+
+.badgeBigImage {
+    width: 100%;
+    height: auto;
+}
+
+.badge {
+    display: inline-block;
+    width: 3em;
+    height: auto;
+    margin: 10px;
+}
+
+.badgeImage {
+    width: 3em;
+    height: auto;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    display: None;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    display: block;
+}
+
+.unposses {
+    filter: blur(1px) opacity(30%) grayscale(100%);
+}
+
+
+
+.rating {
+    background-color: var(--darkAccentColor);
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    padding: 0.5em;
+    border-radius: 0.3em;
+
+    margin-bottom: 1em;
+}
+
+
+.stars {
+    width: calc(var(--starheight)*5.5);
+    height: var(--starheight);
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.starshape {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+
+    background-image: url("../images/starshape.svg");
+    background-size: cover;
+}
+
+
+.emptystars {
+    position: absolute;
+    width: 99%;
+    height: 99%;
+    top: 0;
+    left: 0;
+    background-color: darkgray;
+}
+
+.fullstars {
+    width: 0%;
+    height: 99%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: yellow;
+}
+
+
+
+
+
+
+
+
+
+.give-star-rating {
+    background-color: var(--darkAccentColor);
+    padding: 0.5em;
+    border-radius: 0.3em;
+
+    margin-bottom: 1em;
+}
+
+.give-stars {
+    width: calc(var(--starheight)*7);
+    height: var(--starheight);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.starContainer {
+    height: 3em;
+    width: 3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.give-star {
+    height: 3em;
+    width: 3em;
+
+    background-image: url('../images/emptystar.png');
+    background-size: contain;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+}
