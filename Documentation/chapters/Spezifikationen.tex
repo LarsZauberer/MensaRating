@@ -1,5 +1,65 @@
 \chapter{Spezifikationen}
-\section{Datenbank}
+\section{Datenbank}\label{spez:DB} Die Datenbank muss Daten speichern können. Es
+wird eine PostGreSQL Datenbank verwendet (siehe \ref{fig:Website}). Die
+Steuerung läuft über \code{Django} in der \code{models.py} Datei (siehe
+\ref{code:core.models.py}). Die Migrierung der Datenbank wird von \code{Django}
+in den \code{Migrationfiles} gemacht.
+
+Eine anschauliche Darstellung der Datenbank ist in \ref{fig:DB} zu sehen.
+
+\subsection{Entities}
+\subsubsection{Profil}\label{model:Profil}
+Da \code{Django} es nicht zulässt dem \code{User}-Model weitere Attribute
+hinzufügen, braucht es eine eigene Entität \code{Profil}. Diese wird mit einem
+\code{OneToOneField} mit dem \code{User} verknüpft. Weiter enthält es ein Karma
+Attribut um Punkte für das Punktesystem zu speichern.
+
+\subsubsection{Menu}\label{model:Menu} Das \code{Menu} Model speichert die Menus
+der Mensa. Jeder Menueintrag entspricht einem einzelnen vorkommen dieses
+Gerichtes. Wenn also ein Gericht 2 Mal vorkommt, gibt es auch 2 Menu einträge.
+Aus diesem Grund werden die \code{Menu}-Objekte mit einem \code{ForeignKey} auf
+das \code{MenuType} verknüpft (siehe \ref{model:MenuType}). Im Code dient als
+Zuordnungs Attribut für die \code{MenuTypes} der \code{Name} des Menus. Insgesamt enthält es
+folgende Attribute:
+\begin{itemize}
+    \item \code{Name}
+    \item \code{Description}
+    \item \code{Date} (Datum, wann das Menu verfügbar war)
+    \item \code{Vegetarian}
+    \item \code{Vegan}
+    \item \code{MenuType} (siehe \ref{model:MenuType})
+\end{itemize}
+
+\subsubsection{MenuType}\label{model:MenuType} Das \code{MenuType} ist ein
+Model, welches die verschiedenen Vorkommen der \code{Menu}-Objekte (siehe
+\ref{model:Menu}) dynamisch zuordnet. Es hat nur einen \code{Namen} als Attribut. Das
+wird als Zuordnungs Attribut für die Menus verwendet.
+
+\subsubsection{Review}\label{model:Review} Das \code{Review} Model speichert die
+Text Bewertungen zu den Menus. Es enthält eine verknüpfung zu dem \code{Profil}
+(siehe \ref{model:Profil}). Wenn der Nutzer keinen Account und somit kein Profil
+hat (siehe \ref{spez:AccountSystem}) ist das Attribut \code{null}. Es enhält
+auch eine Referenz auf das \code{Menu} (siehe \ref{model:Menu}). Weiter
+speichert es seine \code{likes} den \code{Bewertungstext} und das \code{Erstellungsdatum}.
+
+\subsubsection{Image}\label{model:Image} Das \code{Image} Model enthält
+dieselben Attribute wie ein Review (siehe \ref{model:Review}). Allerdings hat es
+natürlich keinen Bewertungstext, sondern die Referenz auf den Speicherort eines
+Bildes. Je nach Server ist der Speicherort lokal (Development Environment) oder
+auf einem Google Drive (deployed auf Heroku).
+
+\subsubsection{Rating}\label{model:Rating} Das \code{Rating} Model speichert das
+\code{Profil}, welches das Rating hinterlässt. Wenn der Nutzer keinen Account
+und somit kein Profil hat (siehe \ref{spez:AccountSystem}) ist das Attribut
+\code{null}. Es enhält auch eine Referenz auf das \code{Menu} (siehe
+\ref{model:Menu}). Das Attribut \code{Rating} ist dann eine Zahl zwischen
+\textbf{1 und 5}.
+
+\subsubsection{Badge}\label{model:Badge} Das \code{Badge} Model gehört zu dem
+Achievement System (siehe \ref{spez:Badges}). Es enthält einen \code{Namen},
+eine \code{Beschreibung} und ein \code{Bild}. Weiter hat es 2 Attribute:
+\code{condition\_category} und \code{count}, welche im Achievement System genauer
+erklärt werden (siehe \ref{spez:Badges}).
 
 \section{index page}
 \subsection{index view}
@@ -31,18 +91,22 @@
 
 \section{like request}
 
-\section{register page}
-\subsection{register view}
-\subsection{register template}
+\section{Account System} \label{spez:AccountSystem}
+\subsection{register page}
+\subsubsection{register view}
+\subsubsection{register template}
 
-\section{login page}
-\subsection{login view}
-\subsection{login template}
+\subsection{login page}
+\subsubsection{login view}
+\subsubsection{login template}
 
-\section{logout page}
-\subsection{logout view}
-\subsection{logout template}
+\subsection{logout page}
+\subsubsection{logout view}
+\subsubsection{logout template}
 
-\section{password reset}
+\subsection{password reset}
 
 \section{Webscraper}
+
+\section{Achievements (Badges)} \label{spez:Badges}
+\section{Punktesystem (Karma)}
