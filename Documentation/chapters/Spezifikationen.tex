@@ -9,7 +9,7 @@ Eine anschauliche Darstellung der Datenbank ist in \ref{fig:DB} zu sehen.
 
 \subsection{Entities}
 \subsubsection{Profil}\label{model:Profil}
-Da \code{Django} es nicht zulässt dem \code{User}-Model weitere Attribute
+Da \code{Django} es nicht zulässt, dem \code{User}-Model weitere Attribute
 hinzufügen, braucht es eine eigene Entität \code{Profil}. Diese wird mit einem
 \code{OneToOneField} mit dem \code{User} verknüpft. Weiter enthält es ein Karma
 Attribut um Punkte für das Punktesystem zu speichern.
@@ -50,7 +50,7 @@ auf einem Google Drive (deployed auf Heroku).
 
 \subsubsection{Rating}\label{model:Rating} Das \code{Rating} Model speichert das
 \code{Profil}, welches das Rating hinterlässt. Wenn der Nutzer keinen Account
-und somit kein Profil hat (siehe \ref{spez:AccountSystem}) ist das Attribut
+und somit kein Profil hat (siehe \ref{spez:AccountSystem}), ist das Attribut
 \code{null}. Es enhält auch eine Referenz auf das \code{Menu} (siehe
 \ref{model:Menu}). Das Attribut \code{Rating} ist dann eine Zahl zwischen
 \textbf{1 und 5}.
