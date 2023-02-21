@@ -1,112 +1,45 @@
 \chapter{Spezifikationen}
-\section{Datenbank}\label{spez:DB} Die Datenbank muss Daten speichern können. Es
-wird eine PostGreSQL Datenbank verwendet (siehe \ref{fig:Website}). Die
-Steuerung läuft über \code{Django} in der \code{models.py} Datei (siehe
-\ref{code:core.models.py}). Die Migrierung der Datenbank wird von \code{Django}
-in den \code{Migrationfiles} gemacht.
 
-Eine anschauliche Darstellung der Datenbank ist in \ref{fig:DB} zu sehen.
+\section{Menus} \label{spez:Menus}
 
-\subsection{Entities}
-\subsubsection{Profil}\label{model:Profil}
-Da \code{Django} es nicht zulässt, dem \code{User}-Model weitere Attribute
-hinzufügen, braucht es eine eigene Entität \code{Profil}. Diese wird mit einem
-\code{OneToOneField} mit dem \code{User} verknüpft. Weiter enthält es ein Karma
-Attribut um Punkte für das Punktesystem zu speichern.
+Menus sind Objekte, welche in der Datenbank als \code{Menu}-Objekt gespeichert
+werden (siehe \ref{fig:DB}, \ref{code:core.models.py}). Jedes \code{Menu} ist
+ein Vorkommen eines Gerichts. Um die \code{Menu}-Objekte zu gruppieren existiert
+das \code{MenuType}-Objekt. Als Gruppierungsattribut dient der Name des Gerichts.
 
-\subsubsection{Menu}\label{model:Menu} Das \code{Menu} Model speichert die Menus
-der Mensa. Jeder Menueintrag entspricht einem einzelnen vorkommen dieses
-Gerichtes. Wenn also ein Gericht 2 Mal vorkommt, gibt es auch 2 Menu einträge.
-Aus diesem Grund werden die \code{Menu}-Objekte mit einem \code{ForeignKey} auf
-das \code{MenuType} verknüpft (siehe \ref{model:MenuType}). Im Code dient als
-Zuordnungs Attribut für die \code{MenuTypes} der \code{Name} des Menus. Insgesamt enthält es
-folgende Attribute:
-\begin{itemize}
-    \item \code{Name}
-    \item \code{Description}
-    \item \code{Date} (Datum, wann das Menu verfügbar war)
-    \item \code{Vegetarian}
-    \item \code{Vegan}
-    \item \code{MenuType} (siehe \ref{model:MenuType})
-\end{itemize}
+\begin{lstlisting}
+    for i in MenuType {
+        request_menu_from_db(name=i.name)
+    }
+\end{lstlisting}
 
-\subsubsection{MenuType}\label{model:MenuType} Das \code{MenuType} ist ein
-Model, welches die verschiedenen Vorkommen der \code{Menu}-Objekte (siehe
-\ref{model:Menu}) dynamisch zuordnet. Es hat nur einen \code{Namen} als Attribut. Das
-wird als Zuordnungs Attribut für die Menus verwendet.
+Die Menus werden von der Mensa-Website gescraped. Die Synchronization (siehe
+\ref{spez:Webscraper}) findet bei jedem Aufruf einer der Seiten ab.
 
-\subsubsection{Review}\label{model:Review} Das \code{Review} Model speichert die
-Text Bewertungen zu den Menus. Es enthält eine verknüpfung zu dem \code{Profil}
-(siehe \ref{model:Profil}). Wenn der Nutzer keinen Account und somit kein Profil
-hat (siehe \ref{spez:AccountSystem}) ist das Attribut \code{null}. Es enhält
-auch eine Referenz auf das \code{Menu} (siehe \ref{model:Menu}). Weiter
-speichert es seine \code{likes} den \code{Bewertungstext} und das \code{Erstellungsdatum}.
+\section{Webscraper} \label{spez:Webscraper}
 
-\subsubsection{Image}\label{model:Image} Das \code{Image} Model enthält
-dieselben Attribute wie ein Review (siehe \ref{model:Review}). Allerdings hat es
-natürlich keinen Bewertungstext, sondern die Referenz auf den Speicherort eines
-Bildes. Je nach Server ist der Speicherort lokal (Development Environment) oder
-auf einem Google Drive (deployed auf Heroku).
+Der Webscraper ist ein standalone Python Script (siehe
+\ref{code:core.webscraper.py}). Der Webscraper stellt mit der Library
+\code{requests} Anfragen an die Webseite
+\url{https://neuekanti.sv-restaurant.ch/de/menuplan/}. Zuerst werden die Tages
+und Datumsdaten von der Seite geladen. Danach werden die Gerichte (Name,
+Beschreibung, Vegan/Vegetarisch) gescraped.
 
-\subsubsection{Rating}\label{model:Rating} Das \code{Rating} Model speichert das
-\code{Profil}, welches das Rating hinterlässt. Wenn der Nutzer keinen Account
-und somit kein Profil hat (siehe \ref{spez:AccountSystem}), ist das Attribut
-\code{null}. Es enhält auch eine Referenz auf das \code{Menu} (siehe
-\ref{model:Menu}). Das Attribut \code{Rating} ist dann eine Zahl zwischen
-\textbf{1 und 5}.
+Das Script wird bei jedem Aufruf einer der Seiten ausgeführt. Nach dem Scraping
+der Daten werden die Daten mit der Datenbank (siehe \ref{fig:DB}) verglichen.
+Ist das \code{Menu}-Objekt (siehe \ref{spez:Menus}) noch nicht in der Datenbank,
+dann wird nach einem zugehörigen \code{MenuType} (siehe \ref{spez:Menus})
+gesucht. Wenn dieses nicht existiert, dann werden beide Objekte einfach mit den
+Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
 
-\subsubsection{Badge}\label{model:Badge} Das \code{Badge} Model gehört zu dem
-Achievement System (siehe \ref{spez:Badges}). Es enthält einen \code{Namen},
-eine \code{Beschreibung} und ein \code{Bild}. Weiter hat es 2 Attribute:
-\code{condition\_category} und \code{count}, welche im Achievement System genauer
-erklärt werden (siehe \ref{spez:Badges}).
-
-\section{index page}
-\subsection{index view}
-\subsection{index template}
-
-\section{menu page}
-\subsection{menu view}
-\subsubsection{menu view get}
-\subsubsection{menu view post}
-\subsection{menu template}
-
-\section{Posting Forms}
-
-\section{menuType page}
-\subsection{menuType view}
-\subsection{menuType template}
-
-\section{allMenu page}
-\subsection{allMenu view}
-\subsection{allMenu template}
-
-\section{timeline page}
-\subsection{timeline view}
-\subsection{timeline template}
-
-\section{userprofile page}
-\subsection{userprofile view}
-\subsection{userprofile template}
-
-\section{like request}
-
-\section{Account System} \label{spez:AccountSystem}
-\subsection{register page}
-\subsubsection{register view}
-\subsubsection{register template}
-
-\subsection{login page}
-\subsubsection{login view}
-\subsubsection{login template}
-
-\subsection{logout page}
-\subsubsection{logout view}
-\subsubsection{logout template}
-
-\subsection{password reset}
-
-\section{Webscraper}
-
+\section{Bilder Gallerie} \label{spez:Gallerie}
+\section{Posts} \label{spez:Posts}
+\subsection{Images} \label{spez:Images}
+\subsection{Reviews} \label{spez:Reviews}
+\section{Rating} \label{spez:Rating}
+\section{Statistik Filter und Sortierung} \label{spez:Statistik}
+\section{Account System} \label{spez:Account}
+\section{Mobile Responsiveness} \label{spez:Mobile}
+\section{Punktesystem (Karma)} \label{spez:Karma}
 \section{Achievements (Badges)} \label{spez:Badges}
-\section{Punktesystem (Karma)}
+\section{Deployment} \label{spez:Deployment}
