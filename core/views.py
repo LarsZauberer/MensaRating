@@ -94,7 +94,7 @@ def menu(request, pk):
             messages.success(request, msg[0])
 
     # Get the reviews
-    reviews = Review.objects.filter(menu=menu)
+    reviews = Review.objects.filter(menu=menu).order_by("-likes")
     review_badges = []
     for i in reviews:
         if i.profil:
