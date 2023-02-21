@@ -46,46 +46,66 @@
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
         {% for image, badges in images %}
-        <div class="imageSlide fade">
-            <div class="userName imageUserText"><span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
-                {% for i in badges %}
-                <div class="tooltip badge">
-                    <img src="{{i.image.url}}" alt="" class="badgeImage">
+            <div class="imageSlide fade">
+                <div class="userName imageUserText"><span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
+                    {% for i in badges %}
+                        <div class="tooltip badge">
+                            img src="{{i.image.url}}" alt="" class="badgeImage">
                     <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
                             style="">{{i.description}}</span></div>
+                        </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-            <div class="imgContainer">
-                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
-            </div>
-            <div class="imageButtons">
-                {% if today %}
-                <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
-                    {% csrf_token %}
-                    {{ imageForm }}
-                    <button type="submit">Post</button>
-                </form>
-                <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
-                {% endif %}
+                <div class="imgContainer">
+                    <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+                </div>
+                <div class="imageButtons">
+                    {% if today %}
+                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                    {% endif %}
 
-                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                    <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                </div>
+                
             </div>
-        </div>
         {% endfor %}
         {% if images|length == 0 %}
-        <div class="imageSlide fade">
-            <div class="imgContainer">
-                <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
+            <div class="imageSlide fade">
+                <div class="imgContainer">
+                    <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
+                </div>
+                <div class="imageButtons">
+                    {% if today %}
+                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    {% endif %}
+                </div>
             </div>
-        </div>
         {% else %}
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
         {% endif %}
+
+        <div id="popup">
+            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                {% csrf_token %}
+                {{ imageForm }}
+                <button type="submit">Post</button>
+            </form>
+        </div>
     </div>
+        
+
+
+        
+
+
+
+
+    
 
     <script>
+        togglePopup()
         setInterval(checkOrientation, 1000);
         showSlides(slideIndex);
     </script>
@@ -203,25 +223,6 @@
         checkOrientation()
         showSlides(slideIndex);
     </script>
-
-
-
-    {% if messages %}
-    {% for i in messages %}
-    {% autoescape off %}
-    {% if i.tags == "error" %}
-    <div role="alert" class="alert error"><span>{{i}}</span></div>
-    {% else %}
-    <div role="alert" class="alert success"><span>{{i}}</span></div>
-    {% endif %}
-    {% endautoescape %}
-    {% endfor %}
-    {% endif %}
-
-
-
-
-
 
 </main>
 
