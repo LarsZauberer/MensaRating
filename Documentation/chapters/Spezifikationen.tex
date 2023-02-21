@@ -4,17 +4,12 @@
 
 Menus sind Objekte, welche in der Datenbank als \code{Menu}-Objekt gespeichert
 werden (siehe \ref{fig:DB}, \ref{code:core.models.py}). Jedes \code{Menu} ist
-ein Vorkommen eines Gerichts. Um die \code{Menu}-Objekte zu gruppieren existiert
-das \code{MenuType}-Objekt. Als Gruppierungsattribut dient der Name des Gerichts.
-
-\begin{lstlisting}
-    for i in MenuType {
-        request_menu_from_db(name=i.name)
-    }
-\end{lstlisting}
+ein Vorkommen eines Gerichts. Um die verschiedenen Vorkommen der
+\code{Menu}-Objekte zu gruppieren existiert das \code{MenuType}-Objekt. Als
+Gruppierungsattribut dient der Name des Gerichts.
 
 Die Menus werden von der Mensa-Website gescraped. Die Synchronization (siehe
-\ref{spez:Webscraper}) findet bei jedem Aufruf einer der Seiten ab.
+\ref{spez:Webscraper}) findet bei jedem Aufruf einer der Seiten statt.
 
 \section{Webscraper} \label{spez:Webscraper}
 
@@ -25,12 +20,23 @@ Der Webscraper ist ein standalone Python Script (siehe
 und Datumsdaten von der Seite geladen. Danach werden die Gerichte (Name,
 Beschreibung, Vegan/Vegetarisch) gescraped.
 
-Das Script wird bei jedem Aufruf einer der Seiten ausgeführt. Nach dem Scraping
+Das Script wird bei jedem Aufruf von der Webseite ausgeführt. Nach dem Scraping
 der Daten werden die Daten mit der Datenbank (siehe \ref{fig:DB}) verglichen.
 Ist das \code{Menu}-Objekt (siehe \ref{spez:Menus}) noch nicht in der Datenbank,
 dann wird nach einem zugehörigen \code{MenuType} (siehe \ref{spez:Menus})
 gesucht. Wenn dieses nicht existiert, dann werden beide Objekte einfach mit den
 Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
+
+\begin{lstlisting}
+    data = scrape_data()
+    menus = get_menus_from_db()
+    for menu in data:
+        if menu not in menus:
+            menu_type = get_menu_type(menu)
+            if menu_type is None:
+                menu_type = create_menu_type(menu)
+            create_menu(menu, menu_type)
+\end{lstlisting}
 
 \section{Bilder Gallerie} \label{spez:Gallerie}
 \section{Posts} \label{spez:Posts}
