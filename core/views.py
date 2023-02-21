@@ -25,8 +25,13 @@ def index(request):
     ratings = [getRating(i) for i in menus]
     numRates = [getNumRates(i) for i in menus]
 
-
-    images = [get_all_images_sorted(i.menuType)[0] for i in menus]
+    images = []
+    for i in menus:
+        img = get_all_images_sorted(i.menuType)
+        if img != None:
+            images.append(img[0])
+        else:
+            images.append(None)
 
 
     
