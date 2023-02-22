@@ -24,25 +24,35 @@
 {% endif %}
 
 <main id="menu">
-
-
-
-    <h1>
-        {{menu.name}}
-
-        <span> </span>
-        <span id="date">&nbsp;&ndash; {{menu.date}}</span>
+    <div class="descriptionContainerMenuSite">
+        <div>
+            <h1>
+                {{menu.name}}
+                <span id="date">&nbsp;&ndash; {{menu.date}}</span>
+            </h1>
+            <p>
+                {{menu.description}}
+            </p>
+        </div>
         {% if menu.vegetarian %}
         <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
         {% elif menu.vegan %}
         <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
         {% endif %}
-
-    </h1>
-
-    <div style="margin-bottom: 2em;">
-        <p>{{menu.description}}</p>
     </div>
+
+    <div class="rating">
+        <div class="stars">
+            <div class="emptystars"></div>
+            <div id="stars-0" class="fullstars"></div>
+            <div class="starshape"></div>
+        </div>
+
+        <div>
+            <p>{{rating}} Sterne von {{numRates}} Bewertungen</p>
+        </div>
+    </div>
+
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
         {% for image, badges in images %}
@@ -115,23 +125,31 @@
 
     {% if today %}
 
-    <div class="give-star-rating">
-        <form method="post">
-            {% csrf_token %}
-            <div class="give-stars">
-                <button type="submit" value="1" name="rating" class="give-star"
-                    onclick="change_cursor_wait();"></button>
-                <button type="submit" value="2" name="rating" class="give-star"
-                    onclick="change_cursor_wait();"></button>
-                <button type="submit" value="3" name="rating" class="give-star"
-                    onclick="change_cursor_wait();"></button>
-                <button type="submit" value="4" name="rating" class="give-star"
-                    onclick="change_cursor_wait();"></button>
-                <button type="submit" value="5" name="rating" class="give-star"
-                    onclick="change_cursor_wait();"></button>
+    <div class="interactionBox">
+        <div class="give-star-rating">
+            <h3>Wie viele Sterne bekommt {{menu.name}} von dir?</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="give-stars">
+                    <button type="submit" value="1" name="rating" class="give-star"
+                        onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="2" name="rating" class="give-star"
+                        onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="3" name="rating" class="give-star"
+                        onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="4" name="rating" class="give-star"
+                        onclick="change_cursor_wait();"></button>
+                    <button type="submit" value="5" name="rating" class="give-star"
+                        onclick="change_cursor_wait();"></button>
+                </div>
+            </form>
+        </div>
+        <!-- <div id="menuTypeButton"> -->
+            <div id="menuTypeButton" onclick="location.href='{% url 'menuType' menu.menuType.pk %}';">
+                <h3>Wie häufig gibt es {{menu.name}}</h3>
             </div>
-        </form>
-    </div>
+            <!-- <h3><a href="{% url 'menuType' menu.menuType.pk %}">Wie häufig gibt es {{menu.name}}</a></h3>
+        </div> -->
     </div>
 
     <script>
@@ -144,36 +162,7 @@
     {% endif%}
 
 
-
-    <div class="rating">
-        <div>
-            <p>{{rating}}</p>
-        </div>
-
-        <div class="stars">
-            <div class="emptystars"></div>
-            <div id="stars-0" class="fullstars"></div>
-            <div class="starshape"></div>
-        </div>
-
-        <div>
-            <p>({{numRates}})</p>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-    <h3><a href="{% url 'menuType' menu.menuType.pk %}">Vergleiche das Essen</a></h3>
-
-
     <div id="reviews">
-
         {% if today %}
         <h2>
             Reviews
@@ -181,7 +170,9 @@
         <form id="review-text" method="post">
             {% csrf_token %}
             {{ reviewForm }}
-            <button type="submit">Post</button>
+            <button type="submit" class="orderButton" id="postButton">
+                <img src="{% static 'images/postSendIconMaterialSymbol.svg' %}" alt="Beitrag">
+            </button>
         </form>
         {% else %}
         <h2>
@@ -193,9 +184,13 @@
 
         {% for review, badges in reviews %}
         <div class="review">
-            <div class="review-header">
-                <div>{{review.profil.user.username}}</div>
-                <div>{{review.profil.karma}}</div>
+            <div class="inReviewDiv">
+                <p class="mainFont"><strong>{{review.profil.user.username}}:</strong></p>
+                <div class="cookieContainer">
+                    <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="Karma:">
+                    <p class="italic mainFont">: {{review.profil.karma}}</p>
+                </div>
+
                 {% for i in badges %}
                 <div class="tooltip badge">
                     <img src="{{i.image.url}}" alt="" class="badgeImage">
@@ -203,14 +198,25 @@
                             style="">{{i.description}}</span></div>
                 </div>
                 {% endfor %}
-                <div>Rating</div>
-                {% if today %}
-                <button onclick="like(1, {{review.pk}})" id="1-{{review.pk}}-btn" class="like-btn">Like</button>
-                {% endif %}
-                <div>Likes: <span id="1-{{review.pk}}">{{review.likes}}</span></div>
+
             </div>
-            {{review.text}}
+            <div class="inReviewDiv" id="middle">
+                <p>{{review.text}}</p>
+            </div>
+            <div class="inReviewDiv">
+                <div class="cookieContainer">
+                    <img onclick="like(1, {{review.pk}})" class="like-btn" id="1-{{review.pk}}-btn"
+                        src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                    <!-- <button onclick="like(1, {{review.pk}})" id="1-{{review.pk}}-btn" class="like-btn">Like</button> -->
+                    <!-- {% if today %} -->
+                    <!-- {% endif %} -->
+                    <p>
+                        <span id="1-{{review.pk}}">{{review.likes}}</span>
+                    </p>
+                </div>
+            </div>
         </div>
+
         {% endfor %}
     </div>
 
