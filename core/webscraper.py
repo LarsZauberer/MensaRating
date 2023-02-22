@@ -50,7 +50,7 @@ def clean(str):
     # uses regex to substitute tags and double spaces in messy html string with empty strings or single spaces
     string = re.sub('<p class="menu-description">|</p>|<h2 class="menu-title">|</h2>|\\xad\s*|\\n', '', str)
     string = string.replace("<br/>", " ")
-    return string
+    return string.strip()
 
 def get_day_data():
     page = requests.get("https://neuekanti.sv-restaurant.ch/de/menuplan/")
@@ -96,7 +96,11 @@ def create_menu_in_database(title, description, label, date):
     menuType = MenuType.objects.filter(name=title)
     if len(menuType) == 0:
         log.info(f"No menuType with the name: {title} found.")
-        menuType = [MenuType.objects.create(name=title)]
+        try:
+            menuType = [MenuType.objects.create(name=title)]
+        except Exception as e:
+            log.critical(f"Duplicate menuType")
+            return
         log.info(f"Created menuType: {menuType[0]}")
     menuType = menuType[0]
     
@@ -115,14 +119,9 @@ def sync_today_menu():
     log.debug(f"Data received: {data}, {dates}")
 
     for key, date in zip(data.keys(), dates):
-        # Check if todays menu is already in database
-        log.debug(f"Checking if menu of date ({date}) is already in the database")
-        menus = Menu.objects.filter(date=date)
-        
-        # Compare database with the data from the website
-        titles = [i.name for i in menus]
         for i in data[key].keys():
-            if data[key][i]["title"] not in titles:
+            menus = Menu.objects.filter(name=data[key][i]["title"], date=date)
+            if len(menus) == 0:
                 # Menu not in the database
                 log.info(f"Menu \"{data[key][i]['title']}\" is not in the database")
                 create_menu_in_database(data[key][i]["title"], data[key][i]["description"], data[key][i]["label"], date)  # Create the menu
