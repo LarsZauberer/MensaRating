@@ -11,15 +11,9 @@
 
 
 <main id="menu">
-    <div class="descriptionContainerMenuSite">
-        <div>
-            <h1>
-                {{name}}
-            </h1>
-            <p>
-                {{description}}
-            </p>
-        </div>
+    <h1 class="title">
+        {{name}}   
+
         {% if vegetarian %}
         <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
         {% elif vegan %}
@@ -82,7 +76,7 @@
     
 
     <p>occurrences: {{occurrences}}</p>
-
+    
 
     <div class="rating">
         <div>{{allTimeRating}}</div>
@@ -96,11 +90,11 @@
         <div>({{allTimeNumRates}})</div>
     </div>
 
+    
+    
+    
 
-
-
-
-
+    
     <script>
         let menuTypes = [];
         let orderType = "rating";
@@ -119,7 +113,7 @@
                     </div>
                 </div>
     
-                <div class="criteriaContainer stat">
+                <div class="criteriaContainer">
                     <button class="orderButton" onclick="i_toggleStatOptions(1)">Sortieren</button>
                     <div class="stat-criteria">
                         <button onclick="i_orderMenutypes('occ')">Vorkommen</button>
@@ -132,8 +126,8 @@
         <div class="line"></div>
 
         {% for index, rating, numRates, menu in menu_instances %}
-        <div id="menutype-{{index}}" class="menuListbox clickableDiv">
-            <h3></h3> <!-- name -->
+            <div id="menutype-{{index}}" class="menuListbox clickableDiv">   
+                <h3></h3> <!-- name -->
 
                 <div></div> <!-- date -->
 
@@ -142,23 +136,23 @@
                     <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
                 </div>
 
+                
 
-
-            <div class="rating">
-                <div></div> <!-- allTimeRating -->
-                <div class="stars">
-                    <div class="emptystars"></div>
-                    <div id="stars-{{index}}" class="fullstars"></div>
-                    <div class="starshape"></div>
+                <div class="rating">
+                    <div></div> <!-- allTimeRating -->
+                    <div class="stars">
+                        <div class="emptystars"></div>
+                        <div id="stars-{{index}}" class="fullstars"></div>
+                        <div class="starshape"></div>
+                    </div>
+                    <div></div> <!-- numRates -->
                 </div>
-                <div></div> <!-- numRates -->
             </div>
-        </div>
 
             <script data-url="{% url 'menu' menu.pk %}"data-name="{{menu.name}}" data-index="{{index}}" data-rating="{{rating}}" 
                     data-date="{{menu.date}}" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}", data-vegetarian="{{menu.vegetarian}}">
                 data = document.currentScript.dataset;
-
+                
                 menuType = {
                     url: data.url,
                     name: data.name,
@@ -186,25 +180,25 @@
         i_toggleStatOptions(0);
         i_toggleStatOptions(0);
         i_toggleStatOptions(1);
-    </script>
+    </script>    
+
+
+
+
+    
+
+
+
+
+    
 
 
 
 
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
     {% if messages %}
     {% for i in messages %}
@@ -219,10 +213,10 @@
     {% endif %}
 
 
+    
 
 
-
-
+    
 
 </main>
 
