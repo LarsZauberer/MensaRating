@@ -100,6 +100,7 @@ def create_menu_in_database(title, description, label, date):
             menuType = [MenuType.objects.create(name=title)]
         except Exception as e:
             log.critical(f"Duplicate menuType")
+            log.critical(f"Debug information: title: {title}, description: {description}, label: {label}, date: {date}, menuType: {menuType}")
             return
         log.info(f"Created menuType: {menuType[0]}")
     menuType = menuType[0]
