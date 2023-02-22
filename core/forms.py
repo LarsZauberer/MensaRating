@@ -3,9 +3,11 @@ from .models import Image, Rating, Review
 
 
 class ImageForm(forms.ModelForm):
+    image = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'upload-field'}), label="")
     class Meta:
         model = Image
         fields = ['image']
+        
 
 
 class RatingForm(forms.ModelForm):
