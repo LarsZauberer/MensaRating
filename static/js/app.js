@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
             return;
         }
     }
-    
     update_all_btn();
     removeAlertAfterDelay();
 })
@@ -21,31 +20,53 @@ function change_cursor_wait() {
 }
 
 function update_all_btn() {
-    likeButtons = document.getElementsByClassName("like-btn")
+    likeButtons = document.getElementsByClassName("like-btn");
     for (let index = 0; index < likeButtons.length; index++) {
         const element = likeButtons[index];
         id = element.id.replace("-btn", "")
         post = localStorage.getItem(id + "-" + username);
+
+
+        console.log(post);
         if (post) {
-            element.innerHTML = "Dislike"
-            if (!element.className.includes("disliked")) {
-                element.className = element.className.replace(" liked", "")
-                element.className += " disliked"
-            }
+            element.className = element.className.replace(" disliked", "");
+            element.className += " liked";
         } else {
-            element.innerHTML = "Like"
-            if (!element.className.includes("liked")) {
-                element.className = element.className.replace(" disliked", "")
-                element.className += " liked"
-            }
+            element.className = element.className.replace(" disliked", "");
+            element.className += " disliked";
         }
+
+        // if (element.classList.contains("liked")) {
+        //     console.log("test");
+        //     element.className = element.className.replace(" liked", "")
+        //     element.className += " disliked"
+        // } else {
+        //     console.log("test1");
+        //     element.className = element.className.replace(" disliked", "")
+        //     element.className += " liked"
+        // }
+
+        // if (post) {
+        //     element.innerHTML = "Dislike"
+        //     if (!element.className.includes("disliked")) {
+        //         element.className = element.className.replace(" liked", "")
+        //         element.className += " disliked"
+        //     }
+        // } else {
+        //     element.innerHTML = "Like"
+        //     if (!element.className.includes("liked")) {
+        //         element.className = element.className.replace(" disliked", "")
+        //         element.className += " liked"
+        //     }
+        // }
     }
 }
+
 
 function like(cat, pk) {
     const post = localStorage.getItem(cat + "-" + pk + "-" + username);
 
-    change_like = function() {
+    change_like = function () {
         console.log(this.responseText);
         if (this.status == 200) {
             document.getElementById(cat + "-" + pk).innerHTML = this.responseText
@@ -74,5 +95,5 @@ function removeAlertAfterDelay() {
 
 
 function closeAlert(domElement) {
-    domElement.style.display='none';
+    domElement.style.display = 'none';
 }

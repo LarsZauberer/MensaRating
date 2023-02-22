@@ -151,7 +151,6 @@
 
 
     <div id="reviews">
-
         {% if today %}
         <h2>
             Reviews
@@ -173,9 +172,13 @@
 
         {% for review, badges in reviews %}
         <div class="review">
-            <div class="review-header">
-                <div>{{review.profil.user.username}}</div>
-                <div>{{review.profil.karma}}</div>
+            <div class="inReviewDiv">
+                <p class="mainFont"><strong>{{review.profil.user.username}}:</strong></p>
+                <div class="cookieContainer">
+                    <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="Karma:">
+                    <p class="italic mainFont">: {{review.profil.karma}}</p>
+                </div>
+
                 {% for i in badges %}
                 <div class="tooltip badge">
                     <img src="{{i.image.url}}" alt="" class="badgeImage">
@@ -183,14 +186,25 @@
                             style="">{{i.description}}</span></div>
                 </div>
                 {% endfor %}
-                <div>Rating</div>
-                {% if today %}
-                <button onclick="like(1, {{review.pk}})" id="1-{{review.pk}}-btn" class="like-btn">Like</button>
-                {% endif %}
-                <div>Likes: <span id="1-{{review.pk}}">{{review.likes}}</span></div>
+
             </div>
-            {{review.text}}
+            <div class="inReviewDiv" id="middle">
+                <p>{{review.text}}</p>
+            </div>
+            <div class="inReviewDiv">
+                <div class="cookieContainer">
+                    <img onclick="like(1, {{review.pk}})" class="like-btn" id="1-{{review.pk}}-btn"
+                        src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                    <!-- <button onclick="like(1, {{review.pk}})" id="1-{{review.pk}}-btn" class="like-btn">Like</button> -->
+                    <!-- {% if today %} -->
+                    <!-- {% endif %} -->
+                    <p>
+                        <span id="1-{{review.pk}}">{{review.likes}}</span>
+                    </p>
+                </div>
+            </div>
         </div>
+
         {% endfor %}
     </div>
 
