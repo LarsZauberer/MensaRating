@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block import %}
+{% endblock %}
+
+
 {% block content %}
 
 
@@ -19,19 +24,62 @@
         <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
         {% elif vegan %}
         <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+        {% endif %} 
+
+    </h1>
+
+    <div style="margin-bottom: 2em;">{{description}}</div>
+
+
+    <div class="imageContainer">
+        {% for image, badges in images %}
+            <div class="imageSlide fade">
+                <div class="userName imageUserText"><span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
+                    {% for i in badges %}
+                        <div class="tooltip badge">
+                            img src="{{i.image.url}}" alt="" class="badgeImage">
+                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
+                            style="">{{i.description}}</span></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="imgContainer">
+                    <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+                </div>
+                <div class="imageButtons">
+                    {% if today %}
+                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                    {% endif %}
+
+                    <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                </div>
+                
+            </div>
+        {% endfor %}
+        {% if images|length == 0 %}
+            <div class="imageSlide fade">
+                <div class="imgContainer">
+                    <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
+                </div>
+                <div class="imageButtons">
+                    {% if today %}
+                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
         {% endif %}
     </div>
 
 
-
-
-    <div class="imageContainer">
-        <div class="imageSlide fade">
-            <div class="mgContainer">
-                <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
-            </div>
-        </div>
-    </div>
+    <script>
+        setInterval(checkOrientation, 1000);
+        showSlides(slideIndex);
+    </script>
+    
 
     <p>occurrences: {{occurrences}}</p>
 
@@ -61,19 +109,22 @@
     <div style="width: 100%;">
         <div class="fade-scroll-top">
             <h1 class="list-title">Alle Menüs</h1>
-            <div style="display: flex; gap: 1em">
-                <div class="stat">
-                    <button onclick="i_toggleStatOptions(0)">filter</button>
+            <div class="orderContainer">
+                <div class="criteriaContainer">
+                    <button class="orderButton" onclick="i_toggleStatOptions(0)">Filter</button>
                     <div class="stat-criteria">
-                        <button onclick="i_filterMenutypes('nofilter')">No Filter</button>
+                        <button onclick="i_filterMenutypes('nofilter')">Kein Filter</button>
+                        <button onclick="i_filterMenutypes('vegan')">Vegan</button>
+                        <button onclick="i_filterMenutypes('vegi')">Vegetarisch</button>
                     </div>
                 </div>
-
-                <div class="stat">
-                    <button onclick="i_toggleStatOptions(1)">order</button>
+    
+                <div class="criteriaContainer stat">
+                    <button class="orderButton" onclick="i_toggleStatOptions(1)">Sortieren</button>
                     <div class="stat-criteria">
-                        <button onclick="i_orderMenutypes('rating')">rating</button>
-                        <button onclick="i_orderMenutypes('numrates')">numRates</button>
+                        <button onclick="i_orderMenutypes('occ')">Vorkommen</button>
+                        <button onclick="i_orderMenutypes('rating')">Bewertung</button>
+                        <button onclick="i_orderMenutypes('numrates')">Anzahl Bewertungen</button>
                     </div>
                 </div>
             </div>
@@ -84,10 +135,12 @@
         <div id="menutype-{{index}}" class="menuListbox clickableDiv">
             <h3></h3> <!-- name -->
 
-            <div id="vegivegan-container">
-                <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
-                <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
-            </div>
+                <div></div> <!-- date -->
+
+                <div id="vegivegan-container">
+                    <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
+                    <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
+                </div>
 
 
 
@@ -102,14 +155,14 @@
             </div>
         </div>
 
-        <script data-url="{% url 'menu' menu.pk %}" data-name="{{menu.name}}" data-index="{{index}}"
-            data-rating="{{rating}}" data-occ="" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}" ,
-            data-vegetarian="{{menu.vegetarian}}">
+            <script data-url="{% url 'menu' menu.pk %}"data-name="{{menu.name}}" data-index="{{index}}" data-rating="{{rating}}" 
+                    data-date="{{menu.date}}" data-numrates="{{numRates}}" data-vegan="{{menu.vegan}}", data-vegetarian="{{menu.vegetarian}}">
                 data = document.currentScript.dataset;
 
                 menuType = {
                     url: data.url,
                     name: data.name,
+                    date: data.date,
                     index: data.index,
                     rating: data.rating,
                     numrates: data.numrates,

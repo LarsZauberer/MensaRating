@@ -97,3 +97,13 @@ function removeAlertAfterDelay() {
 function closeAlert(domElement) {
     domElement.style.display = 'none';
 }
+
+function togglePopup(){
+    popup = document.getElementById("popup");
+    if(popup.style.display == "none"){
+        popup.style.display = "flex"
+    }
+    else{
+        popup.style.display = "none"
+    }
+}

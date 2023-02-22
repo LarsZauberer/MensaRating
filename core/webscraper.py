@@ -48,7 +48,8 @@ def get_menu_list(days):
 
 def clean(str):
     # uses regex to substitute tags and double spaces in messy html string with empty strings or single spaces
-    string = re.sub('<p class="menu-description">|</p>|<h2 class="menu-title">|</h2>|<br/>\s|\\xad\s*|\\n', '', str)
+    string = re.sub('<p class="menu-description">|</p>|<h2 class="menu-title">|</h2>|\\xad\s*|\\n', '', str)
+    string = string.replace("<br/>", " ")
     return string
 
 def get_day_data():

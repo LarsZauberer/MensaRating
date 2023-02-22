@@ -137,6 +137,10 @@ body {
     max-width: 5em;
     max-height: 5em;
 }
+.vegivegan-label-timeline {
+    width: 2em;
+    height: 2em;
+}
 
 .content {
     flex-shrink: 0;

@@ -1,8 +1,20 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 import datetime as dt
+
+from django.core.files.storage import FileSystemStorage
+
+if settings.HEROKU:
+    from gdstorage.storage import GoogleDriveStorage
+    # Define Google Drive Storage
+    storage_service = GoogleDriveStorage()
+else:
+    # Define normal MEDIA Storage Directory
+    storage_service = FileSystemStorage()
+    
 
 
 class Profil(models.Model):
@@ -57,18 +69,6 @@ class Menu(models.Model):
         :rtype: str
         """
         return self.name
-    
-    def setMenuType(self):
-        """
-        getMenuType Get the corresponding menuType of the menu
-
-        :return: The corresponding menuType of the menu
-        :rtype: MenuType
-        """
-        if not MenuType.objects.filter(name=self.name).exists():
-            MenuType.objects.create(name=self.name)
-
-        return MenuType.objects.get(name=self.name)
 
 
 class Review(models.Model):
@@ -101,7 +101,7 @@ class Image(models.Model):
 
     profil = models.ForeignKey(Profil, on_delete=models.SET_NULL, null=True)  # Profil of the user who uploaded the image. -> If the user doesn't exist anymore, the image is still there.
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)  # Menu of the meal the image is about. -> If the meal doesn't exist anymore, the image is deleted.
-    image = models.ImageField(upload_to='images/')  # Image of the meal.
+    image = models.ImageField(upload_to='images/', storage=storage_service)  # Image of the meal.
     likes = models.IntegerField(default=0)  # Number of likes for the image.
     date = models.DateTimeField(auto_now_add=True)  # Date of the image. Default is the current date.
     
@@ -124,7 +124,7 @@ class Rating(models.Model):
 class Badge(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to="images/")
+    image = models.ImageField(upload_to="images/", storage=storage_service)
 
     condition_category = models.IntegerField()
     count = models.IntegerField()
