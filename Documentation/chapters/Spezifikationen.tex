@@ -39,6 +39,24 @@ Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
 \end{lstlisting}
 
 \section{Bilder Gallerie} \label{spez:Gallerie}
+
+Die Bildergallerie ein Frontend Feature. Die Bildergallerie wurde von dem
+Tutorial auf dieser Seite nachgemacht:
+\url{https://www.w3schools.com/howto/howto_js_slideshow.asp}. Die Bildergallerie
+wird gebraucht, damit die Images (siehe \ref{spez:Images}) von den Menus (siehe
+\ref{spez:Menus}) angezeigt werden können.
+
+Im Javascript werden die verschiedenen Bilder in einem Array gespeichert. Nur
+das aktive Bild bekommt den style \code{display: block}. Die anderen Bilder
+haben \code{display: none}.
+
+Wenn es noch keine Bilder auf dem Menu gibt, dann wird ein default Bild
+angezeigt.
+
+Da Bilder einerseits Hoch oder Querformat sein können, gibt es einen Check auf
+die Orientierung gibt. Wenn das Bild Hochformat ist, dann wird es im css anders
+behandelt.
+
 \section{Posts} \label{spez:Posts}
 \subsection{Images} \label{spez:Images}
 \subsection{Reviews} \label{spez:Reviews}
