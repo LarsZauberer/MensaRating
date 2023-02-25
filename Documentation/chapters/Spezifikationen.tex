@@ -58,9 +58,34 @@ die Orientierung gibt. Wenn das Bild Hochformat ist, dann wird es im css anders
 behandelt.
 
 \section{Posts} \label{spez:Posts}
+
+Posts sind verschiedene Objekte in der Datenbank (siehe \ref{fig:DB}). Es gibt
+kein übergeordnetes Objekt Posts. Posts sind Images (siehe \ref{spez:Images})
+und Reviews (siehe \ref{spez:Reviews}).
+
 \subsection{Images} \label{spez:Images}
+
+Es gibt ein \code{Image}-Objekt in der Datenbank (siehe \ref{fig:DB} und
+\ref{code:core.models.py}). Die Image Datei wird nicht in der Datenbank
+gespeichert. In der Datenbank wird nur die Referenz dort hin gespeichert.
+
+Wenn das Image auf der öffentlichen Webseite (siehe \ref{spez:Deployment}), dann
+wird das Image nicht auf dem eigentlichen Server gespeichert, sondern auf einem
+Google Drive. Das wird gemacht, da der Server Container keinen persistant
+Storage hat.
+
 \subsection{Reviews} \label{spez:Reviews}
+
+Es gibt ein \code{Review}-Objekt in der Datenbank (siehe \ref{fig:DB} und
+\ref{code:core.models.py}). Ein Review ist ein Kommentar, welcher auf der
+Webseite angezeigt werden kann.
+
 \section{Rating} \label{spez:Rating}
+
+Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und
+\ref{code:core.models.py}). Ein Rating ist eine Bewertung für ein Menu-Objekt
+(siehe \ref{spez:Menus}). Ein Rating hat einen Wert zwischen 1 und 5.
+
 \section{Statistik Filter und Sortierung} \label{spez:Statistik}
 \section{Account System} \label{spez:Account}
 \section{Mobile Responsiveness} \label{spez:Mobile}
