@@ -80,6 +80,12 @@ Es gibt ein \code{Review}-Objekt in der Datenbank (siehe \ref{fig:DB} und
 \ref{code:core.models.py}). Ein Review ist ein Kommentar, welcher auf der
 Webseite angezeigt werden kann.
 
+\subsection{Liking} \label{spez:Liking}
+
+Man kann die Posts liken. Dabei wird der Like Counter in der Datenbank erhöht.
+Ob der User bereits geliked hat, wird im Javascript Localstorage gespeichert.
+Das wird gemacht, damit die Datenbank nicht zu viele Einträge bekommt.
+
 \section{Rating} \label{spez:Rating}
 
 Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und
@@ -122,5 +128,38 @@ Das Email Adresse wird mit einem Gmail Account gesendet.
 Milestone 1 noch nicht implementiert.
 
 \section{Punktesystem (Karma)} \label{spez:Karma}
+
+Die Punkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
+\ref{fig:DB} und \ref{code:core.models.py}) gespeichert.
+
+Man kann Punkte für das Posten von Posts (siehe \ref{spez:Posts}) und für das
+Likes auf den eigenen Posts bekommen.
+
+Mit den Punkten kann man Achievements erreichen (siehe \ref{spez:Badges}).
+
 \section{Achievements (Badges)} \label{spez:Badges}
+
+Die Achievements werden in \code{Badge}-Objekt (siehe \ref{fig:DB} und
+\ref{code:core.models.py}) gespeichert. Die Objekte werden keinem User
+zugeordnet gespeichert, sondern dynamisch berechnet, wer welche Achievements
+hat.
+
+Es gibt 3 verschiedene Kategorien von Achievements.
+\begin{itemize}
+    \item Karma basiert (siehe \ref{spez:Karma})
+    \item Images basiert (siehe \ref{spez:Images})
+    \item Review basiert (siehe \ref{spez:Reviews})
+\end{itemize}
+
+Wenn man ein besseres Achievements in einer Kategorie erreicht, dann wird das
+das neue Achievement. Man kann auch wieder Achievements wieder verlieren.
+
+Karma basiert heisst, man bekommt ein Achievment in dieser Kategorie, wenn man
+ein eine bestimmte Menge an Karma überschritten hat.
+
+Image und Review basiert heisst, dass man eine bestimmte Anzahl an most liked
+Images/Reviews in einem MenuType (siehe \ref{spez:Menus}) hat.
+
+Man kann alle Achievements im Profil anschauen (siehe \ref{code:core.views.py})
+
 \section{Deployment} \label{spez:Deployment}
