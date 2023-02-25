@@ -87,8 +87,40 @@ Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und
 (siehe \ref{spez:Menus}). Ein Rating hat einen Wert zwischen 1 und 5.
 
 \section{Statistik Filter und Sortierung} \label{spez:Statistik}
+
+
+
 \section{Account System} \label{spez:Account}
+
+Django hat ein eingebautes Account System. Dieses Accountsystem wird in die
+Webseite integriert (siehe \ref{code:users.views.py}). Es gibt die Funktionen:
+\begin{itemize}
+    \item register
+    \item login
+    \item logout
+    \item password-reset
+    \item password-reset-done
+    \item password-reset-confirm
+    \item password-reset-complete
+\end{itemize}
+
+Beim Registrieren wird ein \code{User}-Objekt in der Datenbank (nicht in der
+models.py Datei) erstellt. Danach auch ein \code{Profil}-Objekt (siehe
+\ref{code:core.models.py} und \ref{fig:DB}). Beim Registrieren gibt es auch noch
+eine ReCaptcha überprüfung, damit die Datenbank nicht zugespammt wird. Es gibt
+keine Email Verifikation.
+
+Login und Logout verwalten die Session mit den Django implementierten
+Funktionen.
+
+Die Funktion des Password-reset funktioniert über die angegebene Email Adresse.
+Es wird ein sicherer Token für den Passwordreset an die Email Adresse gesendet.
+Das Email Adresse wird mit einem Gmail Account gesendet.
+
 \section{Mobile Responsiveness} \label{spez:Mobile}
+
+Milestone 1 noch nicht implementiert.
+
 \section{Punktesystem (Karma)} \label{spez:Karma}
 \section{Achievements (Badges)} \label{spez:Badges}
 \section{Deployment} \label{spez:Deployment}
