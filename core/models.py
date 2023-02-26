@@ -23,6 +23,7 @@ class Profil(models.Model):
     """
     karma = models.IntegerField(default=0)  # Karma points for the posts from the user. 
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # User linked to the profil. -> The profil is deleted when the user is deleted.
+    picture = models.ImageField(upload_to='profile_images', storage=storage_service, blank=True, null=True)  # Image of the user.
 
     def __str__(self):
         """
