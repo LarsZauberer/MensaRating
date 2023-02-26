@@ -1,26 +1,9 @@
+# Maintained by: Robin
 from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review
 from django.db.models import Avg, Max
 import logging
 
 log = logging.getLogger("statistic_functions")
-
-
-class HelperMenu:
-    """
-     Helper class to store values of the menus
-    """
-    rating = 0
-    allTimeRating = 0
-
-    def __init__(self, menu):
-        """
-        __init__ Helper class to store more values for the menus.
-
-        :param menu: Menu object to store.
-        :type menu: Menu
-        """
-        self.menu = menu
-        log.warning(f"Helper Menu class is deprecated! Please zip all the information together")
 
 
 def getRating(menu):

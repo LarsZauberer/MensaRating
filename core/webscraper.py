@@ -1,3 +1,4 @@
+# Maintained: Valentin (Scraping), Ian (Database Synchronization)
 # https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
 from bs4 import BeautifulSoup
