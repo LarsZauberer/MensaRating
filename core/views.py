@@ -336,7 +336,12 @@ def leaderboard(request):
     if request.user.is_authenticated:
         user_profil = Profil.objects.get(user=request.user)
         rang = list(profils).index(user_profil) + 1
+        
+    profils = profils[:20]
+    badges = []
+    for i in profils:
+        badges.append(get_badges_of_profil(i))
     
-    context = {"profils": profils[:20], "user_profil": user_profil, "rang": rang}
+    context = {"profils": zip(profils, badges), "user_profil": user_profil, "rang": rang}
     
     return render(request, "leaderboard.html", context=context)
