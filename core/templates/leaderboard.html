@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block import %}
+{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Rang</th>
+            <th>Username</th>
+            <th>Karma</th>
+        </tr>
+        {% for profil in profils %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{profil.user.username}}</td>
+                <td>{{profil.karma}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    {% if user.is_authenticated %}
+    <p>Du bist <span style="color: red;">Rang {{rang}}!</span></p>
+    {% endif %}
+{% endblock %}

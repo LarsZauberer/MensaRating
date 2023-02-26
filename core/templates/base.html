@@ -47,6 +47,9 @@
         </p>
         <div class="profileContainer">
             <p>
+                <a href="{% url 'leaderboard' %}" class="leaderboard-link login">Rangliste</a>
+            </p>
+            <p>
                 {% if user.is_authenticated %}
                 <a href="{% url 'userProfile' %}">Profil</a>
                 |
