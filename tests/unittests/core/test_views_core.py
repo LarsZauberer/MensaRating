@@ -290,3 +290,20 @@ class TestViewsCore(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content.decode("UTF-8"), "Post not found")
+    
+    def test_leaderboard_get_no_login(self):
+        client = Client()
+        
+        response = client.get(reverse("leaderboard"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "leaderboard.html")
+    
+    def test_leaderboard_get_login(self):
+        client = Client()
+        client.login(username="user", password="user")
+        
+        response = client.get(reverse("leaderboard"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "leaderboard.html")
