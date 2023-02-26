@@ -11,6 +11,18 @@
    <li>Karma: {{karma}}</li> 
 </ul>
 
+<h2>Profilbild</h2>
+{% if picture %}
+   <img src="{{picture.url}}" alt="profil picture" width="200px" height="200px">
+{% else %}
+   <p>Kein Profilbild vorhanden</p>
+{% endif %}
+<form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+    {% csrf_token %}
+    {{ imageForm }}
+    <button type="submit">Neues Profilbild hochladen</button>
+</form>
+
 <h2>Badges</h2>
 {% for cat in badges %}
    <div class="badgeview">
