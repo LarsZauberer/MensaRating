@@ -20,14 +20,14 @@ Dinge zu posten (siehe \ref{spez:Posts}), das Menu zu Bewerten (siehe
 Der Webscraper ist ein standalone Python Script (siehe
 \ref{code:core.webscraper.py}). Der Webscraper stellt mit der Library
 \code{requests} Anfragen an die Webseite
-\url{https://neuekanti.sv-restaurant.ch/de/menuplan/}. Zuerst werden die Tages
+\url{https://neuekanti.sv-restaurant.ch/de/menuplan/}. Zuerst werden die Tages-
 und Datumsdaten von der Seite geladen. Danach werden die Gerichte (Name,
 Beschreibung, Vegan/Vegetarisch) gescraped.
 
-Das Script wird bei jedem Aufruf von der Webseite ausgeführt. Nach dem Scraping
-der Daten werden die Daten mit der Datenbank (siehe \ref{fig:DB}) verglichen.
+Das Script wird bei jedem Aufruf der Webseite ausgeführt. Nach dem Scraping
+der Daten werden diese mit der Datenbank (siehe \ref{fig:DB}) verglichen.
 Ist das \code{Menu}-Objekt (siehe \ref{spez:Menus}) noch nicht in der Datenbank,
-dann wird nach einem zugehörigen \code{MenuType} (siehe \ref{spez:Menus})
+so wird nach einem zugehörigen \code{MenuType} (siehe \ref{spez:Menus})
 gesucht. Wenn dieses nicht existiert, dann werden beide Objekte einfach mit den
 Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
 
@@ -44,43 +44,43 @@ Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
 
 \section{Bilder Gallerie} \label{spez:Gallerie}
 
-Die Bildergallerie ein Frontend Feature. Die Bildergallerie wurde von dem
+Die Bildergallerie ist ein Frontend Feature. Die Bildergallerie wurde von dem
 Tutorial auf dieser Seite nachgemacht:
 \url{https://www.w3schools.com/howto/howto_js_slideshow.asp}. Die Bildergallerie
-wird gebraucht, damit die Images (siehe \ref{spez:Images}) von den Menus (siehe
+wird gebraucht, damit die Images (siehe \ref{spez:Images}) der Menus (siehe
 \ref{spez:Menus}) angezeigt werden können.
 
 Im Javascript werden die verschiedenen Bilder in einem Array gespeichert. Nur
 das aktive Bild bekommt den style \code{display: block}. Die anderen Bilder
 haben \code{display: none}.
 
-Wenn es noch keine Bilder auf dem Menu gibt, dann wird ein default Bild
+Wenn es noch keine Bilder von einem Menu gibt, dann wird ein default Bild
 angezeigt.
 
-Da Bilder einerseits Hoch oder Querformat sein können, gibt es einen Check auf
-die Orientierung gibt. Wenn das Bild Hochformat ist, dann wird es im css anders
+Da Bilder Hoch- oder Querformat sein können, werden sie auf ihre Orientierung
+überprüft. Wenn das Bild Hochformat ist, dann wird es im css anders
 behandelt.
 
 \section{Posts} \label{spez:Posts}
 
-Posts sind verschiedene Objekte in der Datenbank (siehe \ref{fig:DB}). Es gibt
-kein übergeordnetes Objekt Posts. Posts sind Images (siehe \ref{spez:Images})
-und Reviews (siehe \ref{spez:Reviews}).
+Der Begriff "Posts" beschreibt zwei verschiedene Objekte in der Datenbank (siehe \ref{fig:DB}). Es gibt
+kein übergeordnetes Objekt Posts. Als Posts werden Images (siehe \ref{spez:Images})
+und Reviews (siehe \ref{spez:Reviews}) bezeichnet.
 
 \subsection{Images} \label{spez:Images}
 
-Es gibt ein \code{Image}-Objekt in der Datenbank (siehe \ref{fig:DB} und
+Es gibt ein \code{Image}-Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}). Die Image Datei wird nicht in der Datenbank
-gespeichert. In der Datenbank wird nur die Referenz dort hin gespeichert.
+gespeichert, lediglich eine Referenz, welche auf das Bild verweist.
 
-Wenn das Image auf der öffentlichen Webseite (siehe \ref{spez:Deployment}), dann
-wird das Image nicht auf dem eigentlichen Server gespeichert, sondern auf einem
+Wenn das Image auf der öffentlichen Webseite (siehe \ref{spez:Deployment}) angezeigt wird, dann
+wird das Image nicht auf dem eigentlichen Server gespeichert, sondern auf einer
 Google Drive. Das wird gemacht, da der Server Container keinen persistant
 Storage hat.
 
 \subsection{Reviews} \label{spez:Reviews}
 
-Es gibt ein \code{Review}-Objekt in der Datenbank (siehe \ref{fig:DB} und
+Es gibt ein \code{Review}-Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}). Ein Review ist ein Kommentar, welcher auf der
 Webseite angezeigt werden kann.
 
@@ -92,7 +92,7 @@ Das wird gemacht, damit die Datenbank nicht zu viele Einträge bekommt.
 
 \section{Rating} \label{spez:Rating}
 
-Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und
+Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}). Ein Rating ist eine Bewertung für ein Menu-Objekt
 (siehe \ref{spez:Menus}). Ein Rating hat einen Wert zwischen 1 und 5.
 
@@ -102,8 +102,8 @@ Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und
 
 \section{Account System} \label{spez:Account}
 
-Django hat ein eingebautes Account System. Dieses Accountsystem wird in die
-Webseite integriert (siehe \ref{code:users.views.py}). Es gibt die Funktionen:
+Django hat ein eingebautes Accountsystem. Dieses Accountsystem wird in die
+Webseite integriert (siehe \ref{code:users.views.py}). Es bietet folgende Funktionen:
 \begin{itemize}
     \item register
     \item login
@@ -114,60 +114,58 @@ Webseite integriert (siehe \ref{code:users.views.py}). Es gibt die Funktionen:
     \item password-reset-complete
 \end{itemize}
 
-Beim Registrieren wird ein \code{User}-Objekt in der Datenbank (nicht in der
+Beim Registrieren wird ein \code{User}-Objekt in der Datenbank (noch nicht in der
 models.py Datei) erstellt. Danach auch ein \code{Profil}-Objekt (siehe
 \ref{code:core.models.py} und \ref{fig:DB}). Beim Registrieren gibt es auch noch
-eine ReCaptcha überprüfung, damit die Datenbank nicht zugespammt wird. Es gibt
-keine Email Verifikation.
+eine ReCaptcha-Überprüfung, damit die Datenbank nicht zugespammt werden kann. Eine Email-Verifikation gibt es nicht
 
-Login und Logout verwalten die Session mit den Django implementierten
+Login und Logout verwalten die Session mit den von Django implementierten
 Funktionen.
 
-Die Funktion des Password-reset funktioniert über die angegebene Email Adresse.
+Die Funktion des Passwordresets funktioniert über die angegebene Email Adresse.
 Es wird ein sicherer Token für den Passwordreset an die Email Adresse gesendet.
 Das Email Adresse wird mit einem Gmail Account gesendet.
 
 \section{Mobile Responsiveness} \label{spez:Mobile}
 
-Milestone 1 noch nicht implementiert.
+In Milestone 1 noch nicht implementiert.
 
 \section{Punktesystem (Karma)} \label{spez:Karma}
 
-Die Punkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
+Die Erfahrungspunkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
 \ref{fig:DB} und \ref{code:core.models.py}) gespeichert.
 
-Man kann Punkte für das Posten von Posts (siehe \ref{spez:Posts}) und für das
+Man kann Punkte für das Veröffentlichen von Posts (siehe \ref{spez:Posts}) und für
 Likes auf den eigenen Posts bekommen.
 
 Mit den Punkten kann man Achievements erreichen (siehe \ref{spez:Badges}).
 
 \section{Achievements (Badges)} \label{spez:Badges}
 
-Die Achievements werden in \code{Badge}-Objekt (siehe \ref{fig:DB} und
+Die Achievements werden als \code{Badge}-Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}) gespeichert. Die Objekte werden keinem User
 zugeordnet gespeichert, sondern dynamisch berechnet, wer welche Achievements
 hat.
 
 Es gibt 3 verschiedene Kategorien von Achievements.
 \begin{itemize}
-    \item Karma basiert (siehe \ref{spez:Karma})
-    \item Images basiert (siehe \ref{spez:Images})
-    \item Review basiert (siehe \ref{spez:Reviews})
+    \item Karma-basiert (siehe \ref{spez:Karma})
+    \item Images-basiert (siehe \ref{spez:Images})
+    \item Review-basiert (siehe \ref{spez:Reviews})
 \end{itemize}
 
-Wenn man ein besseres Achievements in einer Kategorie erreicht, dann wird das
-das neue Achievement. Man kann auch wieder Achievements wieder verlieren.
+Wenn man ein besseres Achievements in einer Kategorie erreicht, dann wird das alte durch das neue ersetzt. Man kann Achievements auch wieder verlieren, wenn man die Kriterien nicht mehr erfüllt.
 
-Karma basiert heisst, man bekommt ein Achievment in dieser Kategorie, wenn man
+Karma-basiert heisst, man bekommt ein Achievment in dieser Kategorie, wenn man
 ein eine bestimmte Menge an Karma überschritten hat.
 
-Image und Review basiert heisst, dass man eine bestimmte Anzahl an most liked
-Images/Reviews in einem MenuType (siehe \ref{spez:Menus}) hat.
+Image- und Review-basiert heisst, dass man eine bestimmte Anzahl an "most liked
+Images/Reviews" in einem MenuType (siehe \ref{spez:Menus}) hat.
 
-Man kann alle Achievements im Profil anschauen (siehe \ref{code:core.views.py})
+Alle erreichten Achievements sind im Profil ersichtlich (siehe \ref{code:core.views.py})
 
 \section{Deployment} \label{spez:Deployment}
 
-Die Webseite wird auf einem Heroku Eco Dyno gehostet. Die Datenbank wird auch
-von Heroku auf einem Postgres Server gehostet. Die Bilder werden auf einem
+Die Webseite wird auf einem Heroku Eco Dyno gehostet. Die Datenbank wird ebenfalls
+von Heroku auf einem Postgres Server gehostet. Die Bilder werden auf einer
 Google Drive gespeichert (siehe \ref{spez:Images}).
