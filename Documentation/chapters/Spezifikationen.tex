@@ -72,6 +72,13 @@ Ein Post, sowie eine Bewertung (siehe \ref{spez:Rating}), kann nur gemacht
 werden, wenn das zugehörige \code{Menu} von heute ist. Man kann auch nur die
 Posts von dem heutigen Tag liken (siehe \ref{spez:Liking}).
 
+Um einen Post zu schicken, schickt man ein \code{POST-HTML-Form} an das Backend.
+Auch im \code{Menu}-View (siehe {\ref{code:core.views.py} -> menu}) wird die
+Anfrage verarbeitet. Es wird ausgewertet, was für eine Art Post es ist und es
+wird sich dann spezifisch in den \code{post_function.py} dann um das Speichern
+und genauere Auswerten des Formulars gekümmert. Danach wird noch eine
+Rückmeldung (\code{message}) an den User gesendet.
+
 \subsubsection{Images} \label{spez:Images}
 
 Es gibt ein \code{Image}-Objekt in der Datenbank (siehe \ref{fig:DB} und in
@@ -192,7 +199,7 @@ Die Erfahrungspunkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
 \ref{fig:DB} und \ref{code:core.models.py}) gespeichert.
 
 Man kann Punkte für das Veröffentlichen von Posts (siehe \ref{spez:Posts}) und für
-Likes auf den eigenen Posts bekommen.
+Likes auf den eigenen Posts bekommen. (Funktion \code{add_karma_for_posting})
 
 Mit den Punkten kann man Achievements erreichen (siehe \ref{spez:Badges}).
 
