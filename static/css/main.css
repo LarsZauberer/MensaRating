@@ -356,7 +356,7 @@ footer {
     border-radius: 0;
 }
 
-.stat-criteria button:nth-child(3) {
+.stat-criteria button:last-child {
     border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
 }
 
