@@ -47,6 +47,10 @@ img {
     font-style: italic;
 }
 
+.leftText{
+    text-align: left;
+}
+
 /*Base*/
 header {
     width: calc(100% - 4rem);
@@ -259,12 +263,12 @@ footer {
     filter: invert(97%) sepia(4%) saturate(3966%) hue-rotate(18deg) brightness(83%) contrast(78%);
 }
 
-#clickMenuBox .emptystars{
+#clickMenuBox .emptystars {
     transition-duration: 140ms;
     background-color: var(--darkAccentColor);
 }
 
-#clickMenuBox:hover .emptystars{
+#clickMenuBox:hover .emptystars {
     background-color: white;
 }
 
@@ -360,21 +364,21 @@ footer {
     border-bottom: gainsboro 0.1em solid
 }
 
-.menuListbox .starshape{
+.menuListbox .starshape {
     transition-duration: 140ms;
     filter: invert(99%) sepia(0%) saturate(156%) hue-rotate(140deg) brightness(91%) contrast(92%);
 }
 
-.menuListbox:hover .starshape{
+.menuListbox:hover .starshape {
     filter: invert(97%) sepia(4%) saturate(3966%) hue-rotate(18deg) brightness(83%) contrast(78%);
 }
 
-.menuListbox .emptystars{
+.menuListbox .emptystars {
     transition-duration: 140ms;
     background-color: var(--darkAccentColor);
 }
 
-.menuListbox:hover .emptystars{
+.menuListbox:hover .emptystars {
     background-color: white;
 }
 
@@ -565,4 +569,46 @@ footer {
 
 .descriptionContainerMenuSite .vegivegan-label {
     height: 3.2em;
+}
+
+/* User Profile */
+.userNameContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+
+.userNameContainer h1,
+.userNameContainer h3 {
+    margin: 0;
+}
+
+.userName {
+    font-variant: small-caps;
+}
+
+.userNameContainer div{
+    display: flex;
+}
+
+.userNameContainer img{
+    height: 1.6rem;
+    margin-right: 4px;
+}
+
+.titleMargin {
+    margin: 0;
+}
+
+#underTitle {
+    margin-bottom: 0.6rem;
+}
+
+#bottomTitle{
+    margin: 0.6rem 0 0 0;
+}
+
+.reviewTitle{
+    border-bottom: solid 0.1em black;
 }
