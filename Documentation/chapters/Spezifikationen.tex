@@ -121,13 +121,13 @@ Rating-Durchschnitt (absteigend), Alphabetisch, Anzahl Ratings und Anzahl
 Vorkommen (letzteres nur unter der `alle Menus' Seite, weil nur \code{MenuType}
 Objekte dieses Attribut aufweisen) 
 
-Beim Neuladen der Seite werden die Daten
-aller Menus in der Auflistung aus der Datenbank gesammelt (bei der `alle Menus'
-Seite wären das alle \code{MenuType} Objekte) und standardmässig nach dem
+Beim Neuladen der Seite werden die Daten aller Menus in der Auflistung aus der
+Datenbank gesammelt (bei der `alle Menus' Seite (siehe \ref{code:core.views.py})
+wären alle \code{MenuType}-Objekte) und standardmässig nach dem
 Rating-Durchschnitt sortiert. 
 
 Das Filtern und Sortieren auf Knopfdruck erfolgt in Javascript. Die einzelnen
-\code{<div>} Elemente im HTML Code, die ein Element der Auflistung beschreiben
+\code{<div>} Elemente im HTML Code, die ein Element der Auflistung beschreiben,
 sind standardmässig leer und werden durch die Javascript Funktion
 \code{updateListboxs()} mit den Daten der Menus oder MenuTypes gefüllt. Diese Daten sind pro
 Menu in einem Javascript Object gespeichert:
@@ -149,9 +149,6 @@ Menu in einem Javascript Object gespeichert:
 Je nach Filter wird das visible Attribut auf \code{false} gesetzt, wodurch die
 Daten des zugehörigen Menus oder MenuTypes in der Auflistung nicht mehr
 angezeigt werden. Das passiert ebenfalls durch die \code{updateListboxs()} Funktion
-
-
-
 
 \subsection{Account System} \label{spez:Account}
 
