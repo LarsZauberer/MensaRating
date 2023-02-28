@@ -71,7 +71,10 @@
                 </div>
                 <div class="imageButtons">
                     {% if today %}
-                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
+                    <div id="uploadButton" onclick="togglePopup()">
+                        <h3>Bild hochladen</h3>
+                    </div>
                     <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
                     {% endif %}
 
@@ -87,7 +90,10 @@
                 </div>
                 <div class="imageButtons">
                     {% if today %}
-                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
+                    <div id="uploadButton" onclick="togglePopup()">
+                        <h3>Bild hochladen</h3>
+                    </div>
                     {% endif %}
                 </div>
             </div>
