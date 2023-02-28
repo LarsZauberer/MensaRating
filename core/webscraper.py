@@ -69,7 +69,8 @@ def get_dates():
         date_td = dt.date.today()
         date = date.replace(year=date_td.year)
         # check if this date is already happend -> Can happen at the end of the year
-        if date < date_td:
+        # check if the date is more than 7 days in the past, so that this won't be triggered when the mensa page is not updated correctly.
+        if date < date_td and date_td - date > dt.timedelta(days=7):
             date = date.replace(year=date_td.year + 1) # set it to next year
         dates[i] = date
     
