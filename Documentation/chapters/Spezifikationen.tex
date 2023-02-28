@@ -75,7 +75,7 @@ Posts von dem heutigen Tag liken (siehe \ref{spez:Liking}).
 Um einen Post zu schicken, schickt man ein \code{POST-HTML-Form} an das Backend.
 Auch im \code{Menu}-View (siehe {\ref{code:core.views.py} -> menu}) wird die
 Anfrage verarbeitet. Es wird ausgewertet, was für eine Art Post es ist und es
-wird sich dann spezifisch in den \code{post_function.py} dann um das Speichern
+wird sich dann spezifisch in den \code{post\_function.py} dann um das Speichern
 und genauere Auswerten des Formulars gekümmert. Danach wird noch eine
 Rückmeldung (\code{message}) an den User gesendet.
 
@@ -199,7 +199,7 @@ Die Erfahrungspunkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
 \ref{fig:DB} und \ref{code:core.models.py}) gespeichert.
 
 Man kann Punkte für das Veröffentlichen von Posts (siehe \ref{spez:Posts}) und für
-Likes auf den eigenen Posts bekommen. (Funktion \code{add_karma_for_posting})
+Likes auf den eigenen Posts bekommen. (Funktion \code{add\_karma\_for\_posting})
 
 Mit den Punkten kann man Achievements erreichen (siehe \ref{spez:Badges}).
 
