@@ -9,7 +9,7 @@ from django.urls import reverse
 import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil
 from .statistic_functions import *
-from .forms import ImageForm, ReviewForm, RatingForm
+from .forms import ImageForm, ReviewForm, RatingForm, ProfilPictureForm
 from .post_functions import postImage, postRating, postReview
 from django.contrib.auth.models import User, Group
 from .webscraper import sync_today_menu
@@ -251,6 +251,14 @@ def userProfile(request):
     
     profil = Profil.objects.get(user=request.user)
     
+    # Uploading a new profil picture
+    if request.method == "POST":
+        form = ProfilPictureForm(request.POST, request.FILES)
+        if form.is_valid():
+            img = form.instance.picture
+            profil.picture = img
+            profil.save()
+    
     badges = get_badges_of_profil(profil)
     
     all_badges = []
@@ -263,8 +271,11 @@ def userProfile(request):
     
     reviews = Review.objects.filter(profil=profil).order_by("-likes")
     images = Image.objects.filter(profil=profil).order_by("-likes")
+    
+    # Image uploading form
+    imageForm = ProfilPictureForm()
 
-    context = {"name": profil.user, "karma": profil.karma, "badges": all_badges, "images": images, "reviews": reviews}
+    context = {"name": profil.user, "karma": profil.karma, "badges": all_badges, "images": images, "reviews": reviews, "imageForm": imageForm, "picture": profil.picture}
 
     return render(request, "userProfile.html", context=context)
 
