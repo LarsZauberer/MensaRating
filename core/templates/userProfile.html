@@ -9,7 +9,7 @@
                 {% if picture %}
                 <img src="{{picture.url}}" alt="profil picture" class="profilePicture">
                 {% else %}
-                <p>Kein Profilbild vorhanden</p>
+                <img src="{% static 'images/userProfileIconMaterialSymbol.svg' %}" alt="👤" class="profilePicture">
                 {% endif %}
                 <h1 class="userName">{{name}}</h1>
             </div>
@@ -17,11 +17,20 @@
                 <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="">
                 <h3>{{karma}} Cookiepoints</h3>
             </div>
-            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
-                {% csrf_token %}
-                {{ imageForm }}
-                <button type="submit">Hochladen</button>
-            </form>
+            <p id="profilePictureChangeButton" class="smallText clickableText" onclick="showPopUp()">Profilbild
+                ändern</p>
+            <div id="popUp">
+                <div onclick="hidePopUp()">
+                    <h3>Profilbild ändern</h3>
+                    <img src="{% static 'images/closeIconMaterialSymbol.svg' %}" alt="Abbrechen" class="clickableText">
+                                    </div>
+                <p>Wähle ein Bild und klicke anschliessend "Hochladen"</p>
+                <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                    {% csrf_token %}
+                    {{ imageForm }}
+                    <button type="submit">Hochladen</button>
+                </form>
+            </div>
 
         </div>
         <div class="achievementContainer">

@@ -98,12 +98,24 @@ function closeAlert(domElement) {
     domElement.style.display = 'none';
 }
 
-function togglePopup(){
+function togglePopup() {
     popup = document.getElementById("popup");
-    if(popup.style.display == "none"){
+    if (popup.style.display == "none") {
         popup.style.display = "flex"
     }
-    else{
+    else {
         popup.style.display = "none"
     }
+}
+
+//Zeigt Pop Up um Profil Bild zu ändern
+function showPopUp() {
+    console.log("test");
+    document.getElementById("popUp").style.display = "block";
+}
+
+//lässt Pop Up um Profil Bild zu ändern verschwinden
+function hidePopUp() {
+    console.log("test2");
+    document.getElementById("popUp").style.display = "none";
 }
