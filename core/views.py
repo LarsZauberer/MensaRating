@@ -1,19 +1,17 @@
 # Maintained by: Robin, Ian
 # pylint: disable=no-member
-from django.http import HttpResponse
-from django.shortcuts import render  # , redirect
-from django.contrib import messages
+from django.http import HttpResponse  # To send a simple response to the user
+from django.contrib import messages  # To send alert messages to the user
 from datetime import datetime as dt  # for date and time
-import logging
-from django.shortcuts import render, redirect
-from django.urls import reverse
+import logging  # To gain logging information
+from django.shortcuts import render, redirect  # To render the html page and redirect to another page
+from django.urls import reverse  # To get the url of a page
 import datetime as dt  # for date and time
-from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import *
-from .forms import ImageForm, ReviewForm, RatingForm
-from .post_functions import postImage, postRating, postReview
-from django.contrib.auth.models import User, Group
-from .webscraper import sync_today_menu
+from .models import MenuType, Menu, Review, Image, Profil  # To gain access to the database
+from .statistic_functions import *  # To gain access to the statistic functions
+from .forms import ImageForm, ReviewForm, RatingForm  # Create user forms
+from .post_functions import postImage, postRating, postReview  # To gain access to the post functions
+from .webscraper import sync_today_menu  # To gain access to the webscraper
 
 
 def index(request):

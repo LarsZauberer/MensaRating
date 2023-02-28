@@ -1,7 +1,7 @@
 # Maintained by: Robin
-from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review
-from django.db.models import Avg, Max
-import logging
+from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review  # To have access to the database
+from django.db.models import Avg, Max  # To use statistic functions of the database
+import logging  # To gain logging information
 
 log = logging.getLogger("statistic_functions")
 

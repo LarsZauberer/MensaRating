@@ -1,12 +1,12 @@
 # Maintained: Valentin (Scraping), Ian (Database Synchronization)
 # https://www.crummy.com/software/BeautifulSoup/bs4/doc/
 
-from bs4 import BeautifulSoup
-import requests
-import re
-from .models import Menu, MenuType
-import logging
-import datetime as dt
+from bs4 import BeautifulSoup  # To parse the html and analyze the data
+import requests  # To make a HTTP Request to the mensa page
+import re  # To use regex to scan the data
+from .models import Menu, MenuType  # To have access to the database
+import logging  # To gain logging information
+import datetime as dt  # To save information about the date
 
 log = logging.getLogger("Webscraper")
 
@@ -94,13 +94,17 @@ def webscrape():
     return get_menu_list(days), dates  # Retrive all the information
 
 def create_menu_in_database(title, description, label, date):
+    # Check if the menuType already exists
     menuType = MenuType.objects.filter(name=title)
     if len(menuType) == 0:
+        # Create a new menuType
         log.info(f"No menuType with the name: {title} found.")
         menuType = [MenuType.objects.create(name=title)]
         log.info(f"Created menuType: {menuType[0]}")
     menuType = menuType[0]
     
+    # Create the menu
+    # Create the labels
     labels = [
         {"vegetarian": False, "vegan": False},
         {"vegetarian": True, "vegan": False},

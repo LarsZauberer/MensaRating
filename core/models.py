@@ -1,11 +1,11 @@
-from django.db import models
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models  # The django default model
+from django.conf import settings  # To gain access to the settings of the app
+from django.contrib.auth.models import User  # To gain access to the django internal user
+from django.core.validators import MinValueValidator, MaxValueValidator  # For the Rating to validate if the rating is in the range of 1-5
 
-import datetime as dt
+import datetime as dt  # to handle dates
 
-from django.core.files.storage import FileSystemStorage
+from django.core.files.storage import FileSystemStorage  # To get the default storage service from django
 
 if settings.HEROKU:
     from gdstorage.storage import GoogleDriveStorage
