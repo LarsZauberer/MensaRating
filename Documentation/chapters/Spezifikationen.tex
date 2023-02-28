@@ -5,8 +5,8 @@
 Menus sind Objekte, welche in der Datenbank als \code{Menu}-Objekt gespeichert
 werden (siehe \ref{fig:DB}, \ref{code:core.models.py}). Jedes \code{Menu} ist
 ein Vorkommen eines Gerichts. Um die verschiedenen Vorkommen der
-\code{Menu}-Objekte zu gruppieren existiert das \code{MenuType}-Objekt. Als
-Gruppierungsattribut dient der Name des Gerichts.
+\code{Menu}-Objekte zu gruppieren existiert das \code{MenuType}-Objekt.
+Menus mit dem selben Namen wird der gleiche \code{MenuType} zugeordnet
 
 Die Menus werden von der Mensa-Website gescraped. Die Synchronization (siehe
 \ref{spez:Webscraper}) findet bei jedem Aufruf einer der Seiten statt.
@@ -14,6 +14,10 @@ Die Menus werden von der Mensa-Website gescraped. Die Synchronization (siehe
 Nur wenn das heutige Datum mit dem Datum des Menus übereinstimmt, ist es möglich
 Dinge zu posten (siehe \ref{spez:Posts}), das Menu zu Bewerten (siehe
 \ref{spez:Rating}) und die Posts zu liken (siehe \ref{spez:Liking}).
+
+
+
+
 
 \section{Webscraper} \label{spez:Webscraper}
 
@@ -96,7 +100,48 @@ Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}). Ein Rating ist eine Bewertung für ein Menu-Objekt
 (siehe \ref{spez:Menus}). Ein Rating hat einen Wert zwischen 1 und 5.
 
-\section{Statistik Filter und Sortierung} \label{spez:Statistik}
+\section{Statistik: Filter und Sortierung} \label{spez:Statistik}
+
+Auflistungen von Menus können gefiltert und sortiert werden. Folgende Filter
+können durch einen Button ausgewählt werden: nur vegan, nur vegetarisch und kein
+Filter. Folgende Sortierungen können durch einen Button ausgewählt werden:
+Rating-Durchschnitt (absteigend), Alphabetisch, Anzahl Ratings und Anzahl
+Vorkommen (letzteres nur unter der `alle Menus' Seite, weil nur \code{MenuType}
+Objekte dieses Attribut aufweisen) 
+
+Beim Neuladen der Seite werden die Daten
+aller Menus in der Auflistung aus der Datenbank gesammelt (bei der `alle Menus'
+Seite wären das alle \code{MenuType} Objekte) und standardmässig nach dem
+Rating-Durchschnitt sortiert. 
+
+Das Filtern und Sortieren auf Knopfdruck erfolgt in Javascript. Die einzelnen
+\code{<div>} Elemente im HTML Code, die ein Element der Auflistung beschreiben
+sind standardmässig leer und werden durch die Javascript Funktion
+\code{updateListboxs()} mit den Daten der Menus oder MenuTypes gefüllt. Diese Daten sind pro
+Menu in einem Javascript Object gespeichert:
+\newline \newline
+\code{
+    menuType = \{ \newline
+        url: data.url, \newline
+        name: data.name, \newline
+        index: data.index, \newline
+        rating: data.rating, \newline
+        occurrences: data.occ, \newline
+        numrates: data.numrates, \newline
+        vegan: data.vegan, \newline
+        vegetarian: data.vegetarian, \newline
+        visible: true\newline 
+    \} \newline 
+    \newline
+}
+Je nach Filter wird das visible Attribut auf \code{false} gesetzt, wodurch die
+Daten des zugehörigen Menus oder MenuTypes in der Auflistung nicht mehr
+angezeigt werden. Das passiert ebenfalls durch die \code{updateListboxs()} Funktion
+
+
+
+
+
 
 
 
