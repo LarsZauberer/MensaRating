@@ -1,5 +1,5 @@
 from django import forms
-from .models import Image, Rating, Review
+from .models import Image, Rating, Review, Profil
 
 
 class ImageForm(forms.ModelForm):
@@ -24,7 +24,10 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['text']
 
-       
 
-
+class ProfilPictureForm(forms.ModelForm):
+    picture = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'upload-field'}), label="")
+    class Meta:
+        model = Profil
+        fields = ['picture']
  

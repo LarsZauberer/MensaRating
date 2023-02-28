@@ -261,6 +261,14 @@ def userProfile(request):
     profil = Profil.objects.get(user=request.user)
     
     # Calculate all the badges. And calculate what the user has or has not achieved.
+    # Uploading a new profil picture
+    if request.method == "POST":
+        form = ProfilPictureForm(request.POST, request.FILES)
+        if form.is_valid():
+            img = form.instance.picture
+            profil.picture = img
+            profil.save()
+    
     badges = get_badges_of_profil(profil)
     all_badges = []
     for i in range(3): # 3 Badge categories
@@ -273,8 +281,11 @@ def userProfile(request):
     # Get the reviews and images of the profil
     reviews = Review.objects.filter(profil=profil).order_by("-likes")
     images = Image.objects.filter(profil=profil).order_by("-likes")
+    
+    # Image uploading form
+    imageForm = ProfilPictureForm()
 
-    context = {"name": profil.user, "karma": profil.karma, "badges": all_badges, "images": images, "reviews": reviews}
+    context = {"name": profil.user, "karma": profil.karma, "badges": all_badges, "images": images, "reviews": reviews, "imageForm": imageForm, "picture": profil.picture}
 
     return render(request, "userProfile.html", context=context)
 
