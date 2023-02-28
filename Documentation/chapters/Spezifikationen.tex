@@ -97,6 +97,11 @@ geliked hat, wird im Javascript Localstorage gespeichert. Die Likes werden nicht
 in seperaten Objekten gespeichert, damit die Datenbank nicht zu viele Einträge
 bekommt.
 
+Das Liking wird im Javascript gemacht. Die Information wird von dort ins Backend
+(siehe \ref{code:core.views.py} -> like) geschickt und dort in der Datenbank
+gespeichert. Währenddessen wird der Like Status im Localstorage gespeichert.
+Sobald die Anfrage zurückkommt, wird der Like Counter aktualisiert.
+
 \subsection{Rating} \label{spez:Rating}
 
 Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und in
