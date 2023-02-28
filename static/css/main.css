@@ -588,6 +588,15 @@ footer {
     font-variant: small-caps;
 }
 
+.userNameContainer div{
+    display: flex;
+}
+
+.userNameContainer img{
+    height: 1.6rem;
+    margin-right: 4px;
+}
+
 .titleMargin {
     margin: 0;
 }
@@ -598,4 +607,8 @@ footer {
 
 #bottomTitle{
     margin: 0.6rem 0 0 0;
+}
+
+.reviewTitle{
+    border-bottom: solid 0.1em black;
 }

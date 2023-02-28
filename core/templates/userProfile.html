@@ -6,7 +6,10 @@
 
     <div class="userNameContainer">
         <h1 class="userName">{{name}}</h1>
-        <h3>{{karma}} Cookiepoints</h3>
+        <div>
+            <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="Karma:">
+            <h3>{{karma}} Cookiepoints</h3>
+                </div>
     </div>
     <div class="line"></div>
 
@@ -59,16 +62,28 @@
         showSlides(slideIndex);
     </script>
 
-    <h2>Reviews</h2>
+    <h2 class="reviewTitle">Reviews</h2>
+
     {% for review in reviews %}
     <div class="review">
-        <div class="review-header">
-            <div>Rating</div>
-            <div>Likes: <span id="1-{{review.pk}}">{{review.likes}}</span></div>
+        <div class="inReviewDiv">
+            <p class="mainFont"><strong>{{review.profil.user.username}} für Menü {{review.menu}}:</strong></p>
         </div>
-        {{review.text}}
+        <div class="inReviewDiv" id="middle">
+            <p>{{review.text}}</p>
+        </div>
+        <div class="inReviewDiv">
+            <div class="cookieContainer">
+                <img class="like-btn" id="1-{{review.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}"
+                    alt="Likes:">
+                <p>
+                    <span id="1-{{review.pk}}">{{review.likes}}</span>
+                </p>
+            </div>
+        </div>
     </div>
     {% endfor %}
+
 </main>
 
 
