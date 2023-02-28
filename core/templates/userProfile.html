@@ -3,83 +3,101 @@
 {% block content %}
 
 <main>
-
-<h1>User Profile</h1>
-
-<ul>
-   <li>{{name}}</li>
-   <li>Karma: {{karma}}</li> 
-</ul>
-
-<h2>Profilbild</h2>
-{% if picture %}
-   <img src="{{picture.url}}" alt="profil picture" width="200px" height="200px">
-{% else %}
-   <p>Kein Profilbild vorhanden</p>
-{% endif %}
-<form method="post" enctype="multipart/form-data" style="margin-right: 1em">
-    {% csrf_token %}
-    {{ imageForm }}
-    <button type="submit">Neues Profilbild hochladen</button>
-</form>
-
-<h2>Badges</h2>
-{% for cat in badges %}
-   <div class="badgeview">
-      {% for i in cat %}
-         <div class="tooltip badgeBig">
-            {% if i.1 %}
-            <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
-            {% else %}
-            <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
-            {% endif %}
-            <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span style="">{{i.0.description}}</span></div>
-         </div>
-      {% endfor %}
-   </div>
-{% endfor %}
-
-
-<h2>Images</h2>
-<!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
-<div class="imageContainer">
-   {% for image in images %}
-       <div class="imageSlide fade">
-           <div class="imgContainer">
-               <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
-           </div>
-           <div class="imageButtons">
-               <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
-           </div>
-       </div>
-   {% endfor %}
-   {% if images|length == 0 %}
-       <div class="imageSlide fade">
-           <div class="imgContainer">
-               <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
-           </div>
-       </div>
-   {% else %}
-       <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-       <a class="next" onclick="plusSlides(1)">&#10095;</a>
-   {% endif %}
-</div>
-
-<script>
-   setInterval(checkOrientation, 100);
-   showSlides(slideIndex);
-</script>
-
-<h2>Reviews</h2>
-{% for review in reviews %}
-        <div class="review">
-            <div class="review-header">
-                <div>Rating</div>
-                <div>Likes: <span id="1-{{review.pk}}">{{review.likes}}</span></div>
+    <div class="userPageHeader">
+        <div class="userNameContainer">
+            <div>
+                {% if picture %}
+                <img src="{{picture.url}}" alt="profil picture" class="profilePicture">
+                {% else %}
+                <p>Kein Profilbild vorhanden</p>
+                {% endif %}
+                <h1 class="userName">{{name}}</h1>
             </div>
-            {{review.text}}
+            <div>
+                <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="">
+                <h3>{{karma}} Cookiepoints</h3>
+            </div>
+            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                {% csrf_token %}
+                {{ imageForm }}
+                <button type="submit">Hochladen</button>
+            </form>
+
         </div>
-{% endfor %}
+        <div class="achievementContainer">
+            <h2 class="titleMargin">Deine Achievemntes</h2>
+            <p id="underTitle">Lade Bilder hoch, Kommentiere und Like um Achievments freizuschalten</p>
+            {% for cat in badges %}
+            <div class="badgeview">
+                {% for i in cat %}
+                <div class="tooltip badgeBig">
+                    {% if i.1 %}
+                    <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
+                    {% else %}
+                    <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
+                    {% endif %}
+                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span
+                            style="">{{i.0.description}}</span></div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="line"></div>
+
+    <h2 id="bottomTitle">Hochgeladene Bilder</h2>
+    <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
+    <div class="imageContainer">
+        {% for image in images %}
+        <div class="imageSlide fade">
+            <div class="imgContainer">
+                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+            </div>
+            <div class="imageButtons">
+                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+            </div>
+        </div>
+        {% endfor %}
+        {% if images|length == 0 %}
+        <div class="imageSlide">
+            <div class="imgContainer" style="justify-content: left;">
+                <p class="leftText">Noch keine Bilder hochgeladen.</p>
+            </div>
+        </div>
+        {% else %}
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        {% endif %}
+    </div>
+
+    <script>
+        setInterval(checkOrientation, 100);
+        showSlides(slideIndex);
+    </script>
+
+    <h2 class="reviewTitle">Reviews</h2>
+
+    {% for review in reviews %}
+    <div class="review">
+        <div class="inReviewDiv">
+            <p class="mainFont"><strong>{{review.profil.user.username}} für Menü {{review.menu}}:</strong></p>
+        </div>
+        <div class="inReviewDiv" id="middle">
+            <p>{{review.text}}</p>
+        </div>
+        <div class="inReviewDiv">
+            <div class="cookieContainer">
+                <img class="like-btn" id="1-{{review.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}"
+                    alt="Likes:">
+                <p>
+                    <span id="1-{{review.pk}}">{{review.likes}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
 </main>
 
 
