@@ -70,7 +70,9 @@ function i_updateListboxs(){
             menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';")
             menuTypeObject = menuTypeObject.children
             menuTypeObject[0].innerHTML = menuType.name
-            let vegivegan = menuTypeObject[1].children;
+            menuTypeObject[1].innerHTML = menuType.date
+
+            let vegivegan = menuTypeObject[2].children;
 
             vegivegan[0].style.width = vegivegan[0].style.height = "0";
             vegivegan[1].style.width =  vegivegan[1].style.height = "0";
@@ -83,7 +85,7 @@ function i_updateListboxs(){
 
             
         
-            rating = menuTypeObject[2].children
+            rating = menuTypeObject[3].children
             rating[0].innerHTML = menuType.rating
             starRate(i, menuType.rating)
             rating[2].innerHTML = "(" + menuType.numrates + ")"
@@ -93,24 +95,25 @@ function i_updateListboxs(){
 
 
 
-//Toggle Function
-function i_toggleStatOptions(type, offClick){
-    document.getElementsByTagName("body").style.opacity = "0";
+
+function i_toggleStatOptions(type) {
     let orderoptions = document.getElementsByClassName("stat-criteria")[type]
     let orderButtons = orderoptions.children
 
-    if(orderoptions.style.height == "" || orderoptions.style.height == "0em"){
+    if (orderoptions.style.height == "" || orderoptions.style.height == "0em") {
         orderoptions.style.height = "1em"
-        for(let i = 0; i < orderButtons.length; i++){
+        for (let i = 0; i < orderButtons.length; i++) {
             orderButtons[i].style.height = "2em"
             orderButtons[i].style.opacity = 1;
+            
         }
     }
-    else{
+    else {
         orderoptions.style.height = "0em"
-        for(let i = 0; i < orderButtons.length; i++){
+        for (let i = 0; i < orderButtons.length; i++) {
             orderButtons[i].style.height = "0em"
             orderButtons[i].style.opacity = 0
+
         }
     }
 }

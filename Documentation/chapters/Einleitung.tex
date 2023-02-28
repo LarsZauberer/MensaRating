@@ -43,14 +43,6 @@ Die Arbeit nutzt für die Umsetzung folgende Technologien:
     \subitem Visual Studio Code
 \end{itemize}
 
-\subsection{Architektur der Datenbank}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/Database.png}
-    \caption{Architektur der Datenbank siehe auch \ref{code:models.py}}
-    \label{fig:DB}
-\end{figure}
-
 \subsection{Architektur der Webseite}
 \begin{figure}[ht]
     \centering
@@ -58,6 +50,12 @@ Die Arbeit nutzt für die Umsetzung folgende Technologien:
     \caption{Architektur der Webseite}
     \label{fig:Website}
 \end{figure}
+
+Die Webseite besteht aus verschiedenen Teilen. Der Hauptteil ist der
+\code{Django}-Server. Dieser macht die zentrale Arbeit. Die Anfragen der Nutzer
+werden auch an diesen Server geschickt. \code{Django} arbeit dann mit der
+Datenbank (\ref{sec:DB}) und dem Webscraper (siehe \ref{spez:Webscraper})
+zusammen, um Daten zu beschaffen oder sie zu speichern.
 
 \section{Problemdefinition}\label{sec:problemdefinition}
 

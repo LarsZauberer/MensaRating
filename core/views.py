@@ -25,9 +25,13 @@ def index(request):
     ratings = [getRating(i) for i in menus]
     numRates = [getNumRates(i) for i in menus]
 
-
-    images = [getMostLikedImage(i.menuType) for i in menus]
-    
+    images = []
+    for i in menus:
+        img = get_all_images_sorted(i.menuType)
+        if img != None:
+            images.append(img[0])
+        else:
+            images.append(None)
 
 
     
@@ -113,8 +117,6 @@ def menu(request, pk):
     # Get the rating
     rating = getRating(menu)
     numRates = getNumRates(menu)
-
-
     
 
     # Forms
@@ -156,12 +158,23 @@ def menuType(request, pk):
     numRates = [getNumRates(i) for i in menu_instances]
     indexes = list(range(len(menu_instances)))
 
+    images = get_all_images_sorted(menutype)
+    if images == None: images = []
+    image_badges = []
+    for i in images:
+        if i.profil:
+            image_badges.append(get_badges_of_profil(i.profil))
+        else:
+            image_badges.append([])
+    images = list(zip(images, image_badges))
+
+
 
 
 
     menu_instances = zip(indexes[:600], ratings[:600], numRates[:600], menu_instances[:600])
 
-    context = {"name": menutype.name, "description": description, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating, "allTimeNumRates": allTimeNumRates}
+    context = {"name": menutype.name, "description": description, "images": images, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating, "allTimeNumRates": allTimeNumRates}
 
     return render(request, "menuType.html", context=context)
 
