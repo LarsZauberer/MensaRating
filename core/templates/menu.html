@@ -75,7 +75,10 @@
                 </div>
                 <div class="imageButtons">
                     {% if today %}
-                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
+                    <div class="uploadButton" onclick="togglePopup()">
+                        <h3>Bild hochladen</h3>
+                    </div>
                     <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
                     {% endif %}
 
@@ -91,7 +94,10 @@
                 </div>
                 <div class="imageButtons">
                     {% if today %}
-                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                    <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
+                    <div class="uploadButton" onclick="togglePopup()">
+                        <h3>Bild hochladen</h3>
+                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -101,10 +107,10 @@
         {% endif %}
 
         <div id="popup">
-            <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ imageForm }}
-                <button type="submit">Post</button>
+                <button class="uploadButton" type="submit">Hochladen</button>
             </form>
         </div>
     </div>
