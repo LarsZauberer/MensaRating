@@ -19,7 +19,7 @@ def index(request):
     sync_today_menu()
 
     # Get all menus with the date today
-    menus = Menu.objects.filter(date__gte=dt.date.today()).order_by("date")  # gte = greater than or equal
+    menus = Menu.objects.filter(date__gte=dt.date.today(), date__lte=dt.date.today() + dt.timedelta(days=7)).order_by("date")  # gte = greater than or equal
     
     dates = []
     menus_with_date = []
@@ -39,6 +39,7 @@ def index(request):
 
     # Zip the data together
     menus = zip(dates, menus_with_date)
+    print(list(menus))
 
     context = {'menus_dates': list(menus)}
 
