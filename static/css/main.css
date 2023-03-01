@@ -642,7 +642,7 @@ footer {
 }
 
 .userName {
-    font-variant: small-caps;
+    /* font-variant: small-caps; */
 }
 
 .userNameContainer div {

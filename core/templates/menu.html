@@ -57,11 +57,15 @@
     <div class="imageContainer">
         {% for image, badges in images %}
             <div class="imageSlide fade">
-                <div class="userName imageUserText">
+                <div class="userName imageUserText mainFont">
                     {% if image.profil.picture %}
                         <img src="{{ image.profil.picture.url }}" alt="profil picture" width="50px" height="50px">
                     {% endif %}
-                    <span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
+                    {% if image.profil.user != None %}
+                    <span>{{image.profil.user.username}} #{{image.profil.karma}}</span>
+                    {% else %}
+                    <span>anonym</span>
+                    {% endif %}
                     {% for i in badges %}
                         <div class="tooltip badge">
                             <img src="{{i.image.url}}" alt="" class="badgeImage">
