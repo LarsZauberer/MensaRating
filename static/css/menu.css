@@ -318,6 +318,12 @@ img.portrait {
     padding: 8px 12px;
     top: 0;
     text-shadow: 0px 0px 1px white;
+    display: flex;
+    align-items: center;
+}
+
+.imageUserText span{
+    margin-left: 6px;
 }
 
 .imageButtons {

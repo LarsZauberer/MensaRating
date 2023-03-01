@@ -645,10 +645,6 @@ footer {
     margin: 0 4px 0 2px;
 }
 
-.userName {
-    /* font-variant: small-caps; */
-}
-
 .userNameContainer div {
     display: flex;
     width: 100%;
