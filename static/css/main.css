@@ -206,6 +206,11 @@ footer {
     align-items: top;
     gap: 3rem;
     align-items: stretch;
+    margin-bottom: 2.6rem;
+}
+
+#menu_box_container:last-of-type {
+    margin-bottom: 0;
 }
 
 .galleryElement {
@@ -220,8 +225,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    text-align: center;
+    text-align: left;
 }
 
 #clickMenuBox h1 {
@@ -259,12 +263,12 @@ footer {
     filter: invert(97%) sepia(4%) saturate(3966%) hue-rotate(18deg) brightness(83%) contrast(78%);
 }
 
-#clickMenuBox .emptystars{
+#clickMenuBox .emptystars {
     transition-duration: 140ms;
     background-color: var(--darkAccentColor);
 }
 
-#clickMenuBox:hover .emptystars{
+#clickMenuBox:hover .emptystars {
     background-color: white;
 }
 
@@ -360,21 +364,21 @@ footer {
     border-bottom: gainsboro 0.1em solid
 }
 
-.menuListbox .starshape{
+.menuListbox .starshape {
     transition-duration: 140ms;
     filter: invert(99%) sepia(0%) saturate(156%) hue-rotate(140deg) brightness(91%) contrast(92%);
 }
 
-.menuListbox:hover .starshape{
+.menuListbox:hover .starshape {
     filter: invert(97%) sepia(4%) saturate(3966%) hue-rotate(18deg) brightness(83%) contrast(78%);
 }
 
-.menuListbox .emptystars{
+.menuListbox .emptystars {
     transition-duration: 140ms;
     background-color: var(--darkAccentColor);
 }
 
-.menuListbox:hover .emptystars{
+.menuListbox:hover .emptystars {
     background-color: white;
 }
 
