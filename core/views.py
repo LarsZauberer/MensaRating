@@ -9,7 +9,7 @@ from django.urls import reverse  # To get the url of a page
 import datetime as dt  # for date and time
 from .models import MenuType, Menu, Review, Image, Profil  # To gain access to the database
 from .statistic_functions import *  # To gain access to the statistic functions
-from .forms import ImageForm, ReviewForm, RatingForm  # Create user forms
+from .forms import ImageForm, ReviewForm, RatingForm, ProfilPictureForm  # Create user forms
 from .post_functions import postImage, postRating, postReview  # To gain access to the post functions
 from .webscraper import sync_today_menu  # To gain access to the webscraper
 
