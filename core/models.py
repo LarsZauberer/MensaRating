@@ -113,7 +113,10 @@ class Image(models.Model):
         :return: Returns the name of the image.
         :rtype: str
         """
-        return f"{self.profil.user.username}: {self.image.name}"
+        if self.profil:
+            return f"{self.profil.user.username}: {self.image.name}"
+        else:
+            return f"None: {self.image.name}"
 
 
 class Rating(models.Model):
