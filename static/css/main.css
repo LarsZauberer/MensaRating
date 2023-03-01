@@ -538,7 +538,12 @@ footer {
 }
 
 #menuTypeButton {
-     
+    max-width: 49%;
+    height: 1.4rem;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    transition: 140ms;
 }
 
 #menuTypeButton h3 {
@@ -567,7 +572,7 @@ footer {
     height: 3.2em;
 }
 
-#uploadButton {
+.uploadButton {
     max-width: 49%;
     height: 1.4rem;
     background-color: var(--accentColor);
@@ -575,14 +580,16 @@ footer {
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
     margin-right: 1em;
     transition: 140ms;
+    border-color: black !important;
+    border: solid;
 }
 
-#uploadButton h3 {
+.uploadButton h3 {
     margin: 0;
     color: #000000;
 }
 
-#uploadButton:hover {
+.uploadButton:hover {
     cursor: pointer;
     background-color: var(--highlightedColor);
 }
