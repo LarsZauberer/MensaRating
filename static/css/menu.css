@@ -95,7 +95,7 @@
 
 #menu #popup form button {
     height: 30%;
-    width: 30%;
+    width: auto;
     background-color: var(--accentColor);
     border-radius: var(--borderRadMenu);
     transition: 140ms;
@@ -205,6 +205,8 @@
 
 .inReviewDiv {
     margin: 8px;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .inReviewDiv strong,
@@ -214,6 +216,13 @@
 
 .inReviewDiv img {
     height: 1.2em;
+}
+
+.inReviewDiv .profilePicture {
+    align-self: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-right: 6px;
 }
 
 #middle {

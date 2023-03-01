@@ -133,9 +133,6 @@ body {
     align-content: flex-start;
 }
 
-
-
-
 .fade-scroll-top {
     display: flex;
     justify-content: space-between;
@@ -194,6 +191,15 @@ footer {
     background-color: var(--highlightedColor) !important;
     box-shadow: 0px 5px 21px -5px rgba(0, 0, 0, 0.41);
     cursor: pointer;
+}
+
+.profilePicture {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: cover;
+    border-radius: 100%;
+    padding: 2px;
+    background-color: var(--highlightedColor);
 }
 
 /*Index*/
@@ -625,9 +631,7 @@ footer {
 .userNameContainer .profilePicture {
     height: 2.2rem;
     width: 2.2rem;
-    object-fit: cover;
     margin: 0 4px 0 0;
-    border-radius: 100%;
 }
 
 .userNameContainer .profilePicture,
