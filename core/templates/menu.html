@@ -56,45 +56,45 @@
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
         {% for image, badges in images %}
-            <div class="imageSlide fade">
-                <div class="userName imageUserText">
-                    {% if image.profil.picture %}
-                        <img src="{{ image.profil.picture.url }}" alt="profil picture" width="50px" height="50px">
-                    {% endif %}
-                    <span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
-                    {% for i in badges %}
-                        <div class="tooltip badge">
-                            <img src="{{i.image.url}}" alt="" class="badgeImage">
+        <div class="imageSlide fade">
+            <div class="userName imageUserText">
+                {% if image.profil.picture %}
+                <img src="{{ image.profil.picture.url }}" alt="profil picture" class="profilePicture">
+                {% endif %}
+                <span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
+                {% for i in badges %}
+                <div class="tooltip badge">
+                    <img src="{{i.image.url}}" alt="" class="badgeImage">
                     <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
                             style="">{{i.description}}</span></div>
-                        </div>
-                    {% endfor %}
                 </div>
-                <div class="imgContainer">
-                    <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
-                </div>
-                <div class="imageButtons">
-                    {% if today %}
-                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
-                    <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
-                    {% endif %}
-
-                    <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
-                </div>
-                
+                {% endfor %}
             </div>
+            <div class="imgContainer">
+                <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
+            </div>
+            <div class="imageButtons">
+                {% if today %}
+                <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                {% endif %}
+
+                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+            </div>
+
+        </div>
         {% endfor %}
         {% if images|length == 0 %}
-            <div class="imageSlide fade">
-                <div class="imgContainer">
-                    <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
-                </div>
-                <div class="imageButtons">
-                    {% if today %}
-                    <button class="uploadbutton" onclick="togglePopup()">upload</button>
-                    {% endif %}
-                </div>
+        <div class="imageSlide fade">
+            <div class="imgContainer">
+                <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
             </div>
+            <div class="imageButtons">
+                {% if today %}
+                <button class="uploadbutton" onclick="togglePopup()">upload</button>
+                {% endif %}
+            </div>
+        </div>
         {% else %}
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -108,15 +108,15 @@
             </form>
         </div>
     </div>
-        
-
-
-        
 
 
 
 
-    
+
+
+
+
+
 
     <script>
         togglePopup()
@@ -149,10 +149,10 @@
             </form>
         </div>
         <!-- <div id="menuTypeButton"> -->
-            <div id="menuTypeButton" onclick="location.href='{% url 'menuType' menu.menuType.pk %}';">
-                <h3>Wie häufig gibt es {{menu.name}}</h3>
-            </div>
-            <!-- <h3><a href="{% url 'menuType' menu.menuType.pk %}">Wie häufig gibt es {{menu.name}}</a></h3>
+        <div id="menuTypeButton" onclick="location.href='{% url 'menuType' menu.menuType.pk %}';">
+            <h3>Wie häufig gibt es {{menu.name}}</h3>
+        </div>
+        <!-- <h3><a href="{% url 'menuType' menu.menuType.pk %}">Wie häufig gibt es {{menu.name}}</a></h3>
         </div> -->
     </div>
 
@@ -190,12 +190,14 @@
         <div class="review">
             <div class="inReviewDiv">
                 {% if review.profil.picture %}
-                    <img src="{{ review.profil.picture.url }}" alt="profil picture" width="50px" height="50px">
+                <img src="{{ review.profil.picture.url }}" alt="profil picture" class="profilePicture">
                 {% endif %}
-                <p class="mainFont"><strong>{{review.profil.user.username}}:</strong></p>
-                <div class="cookieContainer">
-                    <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="Karma:">
-                    <p class="italic mainFont">: {{review.profil.karma}}</p>
+                <div>
+                    <p class="mainFont"><strong>{{review.profil.user.username}}:</strong></p>
+                    <div class="cookieContainer">
+                        <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="Karma:">
+                        <p class="italic mainFont">: {{review.profil.karma}}</p>
+                    </div>
                 </div>
 
                 {% for i in badges %}
