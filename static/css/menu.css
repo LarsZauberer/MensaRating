@@ -312,11 +312,12 @@ img.portrait {
 }
 
 .imageUserText {
-    color: red;
+    color: black;
     position: absolute;
-    font-size: 12px;
+    font-size: 1em;
     padding: 8px 12px;
     top: 0;
+    text-shadow: 0px 0px 1px white;
 }
 
 .imageButtons {

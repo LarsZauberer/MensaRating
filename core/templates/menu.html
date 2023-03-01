@@ -56,15 +56,19 @@
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
         {% for image, badges in images %}
-        <div class="imageSlide fade">
-            <div class="userName imageUserText">
-                {% if image.profil.picture %}
-                <img src="{{ image.profil.picture.url }}" alt="profil picture" class="profilePicture">
-                {% endif %}
-                <span>{{image.profil.user.username}}#{{image.profil.karma}}</span>
-                {% for i in badges %}
-                <div class="tooltip badge">
-                    <img src="{{i.image.url}}" alt="" class="badgeImage">
+            <div class="imageSlide fade">
+                <div class="userName imageUserText mainFont">
+                    {% if image.profil.picture %}
+                         <img src="{{ image.profil.picture.url }}" alt="profil picture" class="profilePicture">
+                    {% endif %}
+                    {% if image.profil.user != None %}
+                    <span>{{image.profil.user.username}} #{{image.profil.karma}}</span>
+                    {% else %}
+                    <span>anonym</span>
+                    {% endif %}
+                    {% for i in badges %}
+                        <div class="tooltip badge">
+                            <img src="{{i.image.url}}" alt="" class="badgeImage">
                     <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
                             style="">{{i.description}}</span></div>
                 </div>
