@@ -9,11 +9,16 @@ import Web.settings as settings
 import json
 from .models import PromoCode
 from core.models import Profil
+import logging
 
 def register(request):
+    log = logging.getLogger("Register")
     if request.method == "POST":
+        # Retrieve the form data
         form = UserRegisterForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():  # Check if the form ist valid
+            
+            # Recaptcha Verification
             recaptcha_response = request.POST.get('g-recaptcha-response')
             url = 'https://www.google.com/recaptcha/api/siteverify'
             values = {
@@ -28,14 +33,12 @@ def register(request):
             # Email is Unique
             email = form.cleaned_data.get("email")
             if result["success"]:
-                # Email Verification
-                
                 # Email is Unique
                 if User.objects.filter(email=email).exists():
                     messages.error(request, "Die E-Mail ist schon bei einem anderen Account verwendet worden.")
                     return render(request, "register.html", {'form': form})
                 else:
-                    form.save()
+                    form.save()  # User Objekt gets saved
                     # Get user
                     user = User.objects.get(email=email)
                     
@@ -49,14 +52,17 @@ def register(request):
                 messages.error(request, "reCaptcha Überprüfung fehlgeschlagen. Versuche es bitte erneut.")
             
     else:
+        # Not a post request. Clear the form
         form = UserRegisterForm()
     try:
+        # Show the register page
         return render(request, "register.html", {'form': form})
     except Exception as e:
-        print(e)
+        log.exception(f"Error in register")
 
 
 def activateCode(request, code, user):
+    # ! In diesem Projekt nicht verwendeter Code
     if code == "":
         return False
     promo = PromoCode.objects.filter(code=code).get()
