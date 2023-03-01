@@ -295,13 +295,21 @@ footer {
     padding: 1.5em;
     height: 2em;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 1em;
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
 }
 
+.menuListbox h3 {
+    width: 20%;
+}
+
 .menuListbox .rating {
+    width: auto;
+    align-self: flex-end;
     margin: 0;
 }
 
