@@ -39,7 +39,6 @@ def index(request):
 
     # Zip the data together
     menus = zip(dates, menus_with_date)
-    print(list(menus))
 
     context = {'menus_dates': list(menus)}
 
