@@ -100,14 +100,38 @@ function togglePopup(){
     }
 }
 
-//Zeigt Pop Up um Profil Bild zu ändern
+// Show popup to change profile picture
 function showPopUp() {
     console.log("test");
     document.getElementById("popUp").style.display = "block";
 }
 
-//lässt Pop Up um Profil Bild zu ändern verschwinden
+// Hide popup to change profile picture
 function hidePopUp() {
     console.log("test2");
     document.getElementById("popUp").style.display = "none";
+}
+
+//calculate the number of the rating into a percentage of the yellow bar representing the stars
+function starRate(index, rating){
+    let star = document.getElementById("stars-" + index);
+
+    //convert rating number into string of percentage
+    rating = +(rating.replace(",", "."))//convert string-number into float
+    rating = String(rating/5*100) + "%"//convert float to percentage-string
+
+    star.style.width = rating
+}
+
+//Display of stars when hovering over them (in the case of giving a rating)
+function starHover(stars, i){
+    for(let j = 0; j <= i; j++){
+        stars[j].style.backgroundImage = "url('../../static/images/yellowstar.png')"
+    }
+}
+//Revert display when hovering ends
+function stopStarHover(){
+    for(let j = 0; j < 5; j++){
+        stars[j].style.backgroundImage = "url('../../static/images/emptystar.png')"
+    }
 }
