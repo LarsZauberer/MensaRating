@@ -4,8 +4,9 @@
 {% block import %}
 {% endblock %}
 
-
 {% block content %}
+
+<script src="{% static 'js/menuinstance_statistics.js' %}"></script>
 
 <main id="menu">
     <div class="descriptionContainerMenuSite">
@@ -102,9 +103,6 @@
     </script>
 
 
-
-
-
     <script>
         let menuTypes = [];
         let orderType = "rating";
@@ -115,20 +113,19 @@
             <h1 class="list-title">Alle Menüs</h1>
             <div class="orderContainer">
                 <div class="criteriaContainer">
-                    <button class="orderButton" onclick="i_toggleStatOptions(0)">Filter</button>
+                    <button class="orderButton" onclick="toggleStatOptions(0)">Filter</button>
                     <div class="stat-criteria">
-                        <button onclick="i_filterMenutypes('nofilter')">Kein Filter</button>
-                        <button onclick="i_filterMenutypes('vegan')">Vegan</button>
-                        <button onclick="i_filterMenutypes('vegi')">Vegetarisch</button>
+                        <button onclick="filterMenutypes('nofilter')">Kein Filter</button>
+                        <button onclick="filterMenutypes('vegan')">Vegan</button>
+                        <button onclick="filterMenutypes('vegi')">Vegetarisch</button>
                     </div>
                 </div>
 
                 <div class="criteriaContainer">
-                    <button class="orderButton" onclick="i_toggleStatOptions(1)">Sortieren</button>
+                    <button class="orderButton" onclick="toggleStatOptions(1)">Sortieren</button>
                     <div class="stat-criteria">
-                        <button onclick="i_orderMenutypes('occ')">Vorkommen</button>
-                        <button onclick="i_orderMenutypes('rating')">Bewertung</button>
-                        <button onclick="i_orderMenutypes('numrates')">Anzahl Bewertungen</button>
+                        <button onclick="orderMenutypes('rating')">Bewertung</button>
+                        <button onclick="orderMenutypes('numrates')">Anzahl Bewertungen</button>
                     </div>
                 </div>
             </div>
@@ -187,27 +184,11 @@
         data = document.currentScript.dataset
         starRate("alltime", data.alltimerating)
 
-        i_orderMenutypes(orderType)
-        i_toggleStatOptions(0);
-        i_toggleStatOptions(0);
-        i_toggleStatOptions(1);
+        orderMenutypes(orderType)
+        toggleStatOptions(0);
+        toggleStatOptions(0);
+        toggleStatOptions(1);
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
