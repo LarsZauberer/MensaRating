@@ -39,7 +39,7 @@ class MenuType(models.Model):
     """
     MenuType class for the type of the menu
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         """
@@ -113,7 +113,10 @@ class Image(models.Model):
         :return: Returns the name of the image.
         :rtype: str
         """
-        return f"{self.profil.user.username}: {self.image.name}"
+        if self.profil:
+            return f"{self.profil.user.username}: {self.image.name}"
+        else:
+            return f"None: {self.image.name}"
 
 
 class Rating(models.Model):

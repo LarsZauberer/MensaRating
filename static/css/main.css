@@ -134,9 +134,6 @@ body {
     align-content: flex-start;
 }
 
-
-
-
 .fade-scroll-top {
     display: flex;
     justify-content: space-between;
@@ -195,6 +192,15 @@ footer {
     background-color: var(--highlightedColor) !important;
     box-shadow: 0px 5px 21px -5px rgba(0, 0, 0, 0.41);
     cursor: pointer;
+}
+
+.profilePicture {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: cover;
+    border-radius: 100%;
+    padding: 2px;
+    background-color: var(--highlightedColor);
 }
 
 /*Index*/
@@ -554,6 +560,7 @@ footer {
     background-color: var(--accentColor);
     border-radius: var(--borderRadMenu);
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    transition: 140ms;
 }
 
 #menuTypeButton h3 {
@@ -582,6 +589,28 @@ footer {
     height: 3.2em;
 }
 
+.uploadButton {
+    max-width: 49%;
+    height: 1.4rem;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    margin-right: 1em;
+    transition: 140ms;
+    border-color: black !important;
+    border: solid;
+}
+
+.uploadButton h3 {
+    margin: 0;
+    color: #000000;
+}
+
+.uploadButton:hover {
+    cursor: pointer;
+    background-color: var(--highlightedColor);
+}
+
 /* User Profile */
 .userPageHeader {
     display: flex;
@@ -603,9 +632,7 @@ footer {
 .userNameContainer .profilePicture {
     height: 2.2rem;
     width: 2.2rem;
-    object-fit: cover;
     margin: 0 4px 0 0;
-    border-radius: 100%;
 }
 
 .userNameContainer .profilePicture,
@@ -617,10 +644,6 @@ footer {
 .userNameContainer img {
     width: 1.2rem;
     margin: 0 4px 0 2px;
-}
-
-.userName {
-    font-variant: small-caps;
 }
 
 .userNameContainer div {
