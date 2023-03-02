@@ -1,3 +1,5 @@
+# Maintained by: Ian, Robin
+
 from django.db import models  # The django default model
 from django.conf import settings  # To gain access to the settings of the app
 from django.contrib.auth.models import User  # To gain access to the django internal user

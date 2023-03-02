@@ -1,3 +1,5 @@
+# Maintained by: Ian, Robin
+
 from django import forms
 from .models import Image, Rating, Review, Profil
 

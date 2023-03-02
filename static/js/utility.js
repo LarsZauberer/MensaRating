@@ -1,3 +1,5 @@
+// Maintained by: Robin
+
 function starRate(index, rating){
     let star = document.getElementById("stars-" + index);
 

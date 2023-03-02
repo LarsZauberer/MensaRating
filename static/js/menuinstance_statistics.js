@@ -1,3 +1,5 @@
+// Maintained by: Robin
+
 function i_orderMenutypes(orderType){
     if(orderType == "occ"){
         menuTypes.sort(function(a, b){
