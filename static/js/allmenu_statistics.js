@@ -78,22 +78,20 @@ function updateListboxs() {
             menuTypeObject[0].innerHTML = menuType.name
             let vegivegan = menuTypeObject[1].children;
 
-            vegivegan[0].style.width = vegivegan[0].style.height = "0";
-            vegivegan[1].style.width = vegivegan[1].style.height = "0";
             if (menuType.vegetarian == "True") {
-                vegivegan[0].style.width = vegivegan[0].style.height = "100%";
+                vegivegan[0].style.display = "block";
             } else if (menuType.vegan == "True") {
-                vegivegan[1].style.width = vegivegan[1].style.height = "100%";
+                vegivegan[1].style.display = "block";
             }
 
             menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences
 
 
 
-            rating = menuTypeObject[3].children
-            rating[0].innerHTML = menuType.rating
-            starRate(i, menuType.rating)
-            rating[2].innerHTML = "(" + menuType.numrates + ")"
+            // rating = menuTypeObject[3].children
+            // rating[0].innerHTML = menuType.rating
+            // starRate(i, menuType.rating)
+            // rating[2].innerHTML = "(" + menuType.numrates + ")"
         }
     }
 }

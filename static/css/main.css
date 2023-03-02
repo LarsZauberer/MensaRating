@@ -297,7 +297,6 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
     gap: 1em;
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
@@ -305,25 +304,42 @@ footer {
 
 .menuListbox h3 {
     width: 20%;
+    min-width: 10%;
+}
+
+.menuListbox .tielineDescription {
+    font-size: 0.8rem;
+    justify-self: end;
+    width: 60%;
+}
+
+
+
+.menuListbox .menuListOccurrences {
+    font-weight: normal;
+    margin-left: 2rem;
 }
 
 .menuListbox .rating {
     width: auto;
-    align-self: flex-end;
-    margin: 0;
+    margin: 0 0 0 auto;
 }
 
 .menuListbox .vegivegan-label {
-    width: 0;
-    height: 0;
+    width: 2em;
+    height: 2em;
+    display: none;
     margin: 0;
+    border-radius: 50%;
 }
 
 .menuListbox #vegivegan-container {
     display: flex;
-    width: 2em;
+    width: 10%;
     height: 2em;
+    min-width: 2em;
 }
+
 
 .criteriaContainer {
     position: relative;
