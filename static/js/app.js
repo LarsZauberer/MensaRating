@@ -1,6 +1,9 @@
+// Maintained by: Ian, Robin
+
 //Navbar
 //Warten bis DOM geladen ist
 document.addEventListener("DOMContentLoaded", function (e) {
+    // Aktive Seite hervorheben
     const activePage = window.location.pathname;
     const navLinks = document.querySelectorAll("nav a")
     for (i = 0; i < navLinks.length; i++) {
@@ -10,24 +13,31 @@ document.addEventListener("DOMContentLoaded", function (e) {
             return;
         }
     }
-    update_all_btn();
-    removeAlertAfterDelay();
+    update_all_btn();  // Update all the like buttons on the page if the user has already liked a post
+    removeAlertAfterDelay();  // Remove the alert information after 3 seconds.
 })
 
 
+// Change the cursor to a wait cursor
 function change_cursor_wait() {
     document.body.style.cursor = 'wait';
 }
 
+
+// Update all the like buttons on the page if the user has already liked a post
 function update_all_btn() {
+    // Get all the like buttons
     likeButtons = document.getElementsByClassName("like-btn");
     for (let index = 0; index < likeButtons.length; index++) {
+
+        // Get the id of the post and look up the information in the localstorage
         const element = likeButtons[index];
         id = element.id.replace("-btn", "")
         post = localStorage.getItem(id + "-" + username);
 
 
         console.log(post);
+        // If the post information exists -> user liked -> change the button state to liked
         if (post) {
             element.className = element.className.replace(" disliked", "");
             element.className += " liked";
@@ -35,37 +45,15 @@ function update_all_btn() {
             element.className = element.className.replace(" disliked", "");
             element.className += " disliked";
         }
-
-        // if (element.classList.contains("liked")) {
-        //     console.log("test");
-        //     element.className = element.className.replace(" liked", "")
-        //     element.className += " disliked"
-        // } else {
-        //     console.log("test1");
-        //     element.className = element.className.replace(" disliked", "")
-        //     element.className += " liked"
-        // }
-
-        // if (post) {
-        //     element.innerHTML = "Dislike"
-        //     if (!element.className.includes("disliked")) {
-        //         element.className = element.className.replace(" liked", "")
-        //         element.className += " disliked"
-        //     }
-        // } else {
-        //     element.innerHTML = "Like"
-        //     if (!element.className.includes("liked")) {
-        //         element.className = element.className.replace(" disliked", "")
-        //         element.className += " liked"
-        //     }
-        // }
     }
 }
 
 
 function like(cat, pk) {
+    // Get the information of the post from the localstorage
     const post = localStorage.getItem(cat + "-" + pk + "-" + username);
 
+    // Change the like button state after the request to the backend
     change_like = function () {
         console.log(this.responseText);
         if (this.status == 200) {
@@ -75,10 +63,11 @@ function like(cat, pk) {
 
     if (post) {
         // Dislike
-        api.get("like/" + cat + "/" + pk, "?dislike=YES", change_like);
-        localStorage.removeItem(cat + "-" + pk + "-" + username);
-        update_all_btn();
+        api.get("like/" + cat + "/" + pk, "?dislike=YES", change_like);  // send to backend
+        localStorage.removeItem(cat + "-" + pk + "-" + username);  // remove from localstorage
+        update_all_btn();  // update the like buttons
     } else {
+        // Like
         api.get("like/" + cat + "/" + pk, "", change_like);
         localStorage.setItem(cat + "-" + pk + "-" + username, "YES");
         update_all_btn();
@@ -86,6 +75,7 @@ function like(cat, pk) {
 }
 
 function removeAlertAfterDelay() {
+    // for each alert remove it after 3 seconds
     alerts = document.getElementsByClassName("alert");
     for (let index = 0; index < alerts.length; index++) {
         const element = alerts[index];
@@ -95,15 +85,29 @@ function removeAlertAfterDelay() {
 
 
 function closeAlert(domElement) {
+    // Remove the alert
     domElement.style.display = 'none';
 }
 
+// Toggle the upload popup
 function togglePopup(){
     popup = document.getElementById("popup");
-    if(popup.style.display == "none"){
+    if (popup.style.display == "none") {
         popup.style.display = "flex"
     }
-    else{
+    else {
         popup.style.display = "none"
     }
+}
+
+//Zeigt Pop Up um Profil Bild zu ändern
+function showPopUp() {
+    console.log("test");
+    document.getElementById("popUp").style.display = "block";
+}
+
+//lässt Pop Up um Profil Bild zu ändern verschwinden
+function hidePopUp() {
+    console.log("test2");
+    document.getElementById("popUp").style.display = "none";
 }

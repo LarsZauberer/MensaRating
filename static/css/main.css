@@ -1,3 +1,4 @@
+/* Maintained by: Nicolas */
 :root {
     --bgColor: white;
     --accentColor: #dddddd;
@@ -46,6 +47,20 @@ img {
 
 .italic {
     font-style: italic;
+}
+
+.leftText {
+    text-align: left;
+}
+
+.smallText {
+    font-size: 0.8em;
+}
+
+.clickableText {
+    text-decoration: underline;
+    color: var(--darkAccentColor);
+    cursor: pointer;
 }
 
 /*Base*/
@@ -120,9 +135,6 @@ body {
     align-content: flex-start;
 }
 
-
-
-
 .fade-scroll-top {
     display: flex;
     justify-content: space-between;
@@ -181,6 +193,15 @@ footer {
     background-color: var(--highlightedColor) !important;
     box-shadow: 0px 5px 21px -5px rgba(0, 0, 0, 0.41);
     cursor: pointer;
+}
+
+.profilePicture {
+    width: 2.2rem;
+    height: 2.2rem;
+    object-fit: cover;
+    border-radius: 100%;
+    padding: 2px;
+    background-color: var(--highlightedColor);
 }
 
 /*Index*/
@@ -260,12 +281,12 @@ footer {
     filter: invert(97%) sepia(4%) saturate(3966%) hue-rotate(18deg) brightness(83%) contrast(78%);
 }
 
-#clickMenuBox .emptystars{
+#clickMenuBox .emptystars {
     transition-duration: 140ms;
     background-color: var(--darkAccentColor);
 }
 
-#clickMenuBox:hover .emptystars{
+#clickMenuBox:hover .emptystars {
     background-color: white;
 }
 
@@ -352,7 +373,7 @@ footer {
     border-radius: 0;
 }
 
-.stat-criteria button:nth-child(3) {
+.stat-criteria button:last-child {
     border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
 }
 
@@ -360,21 +381,21 @@ footer {
     border-bottom: gainsboro 0.1em solid
 }
 
-.menuListbox .starshape{
+.menuListbox .starshape {
     transition-duration: 140ms;
     filter: invert(99%) sepia(0%) saturate(156%) hue-rotate(140deg) brightness(91%) contrast(92%);
 }
 
-.menuListbox:hover .starshape{
+.menuListbox:hover .starshape {
     filter: invert(97%) sepia(4%) saturate(3966%) hue-rotate(18deg) brightness(83%) contrast(78%);
 }
 
-.menuListbox .emptystars{
+.menuListbox .emptystars {
     transition-duration: 140ms;
     background-color: var(--darkAccentColor);
 }
 
-.menuListbox:hover .emptystars{
+.menuListbox:hover .emptystars {
     background-color: white;
 }
 
@@ -539,6 +560,7 @@ footer {
     background-color: var(--accentColor);
     border-radius: var(--borderRadMenu);
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    transition: 140ms;
 }
 
 #menuTypeButton h3 {
@@ -565,4 +587,120 @@ footer {
 
 .descriptionContainerMenuSite .vegivegan-label {
     height: 3.2em;
+}
+
+.uploadButton {
+    max-width: 49%;
+    height: 1.4rem;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    margin-right: 1em;
+    transition: 140ms;
+    border-color: black !important;
+    border: solid;
+}
+
+.uploadButton h3 {
+    margin: 0;
+    color: #000000;
+}
+
+.uploadButton:hover {
+    cursor: pointer;
+    background-color: var(--highlightedColor);
+}
+
+/* User Profile */
+.userPageHeader {
+    display: flex;
+}
+
+.userNameContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    margin: 0 1.5rem 0.6rem 0;
+}
+
+.userNameContainer h1,
+.userNameContainer h3 {
+    margin: 0;
+}
+
+.userNameContainer .profilePicture {
+    height: 2.2rem;
+    width: 2.2rem;
+    margin: 0 4px 0 0;
+}
+
+.userNameContainer .profilePicture,
+.userNameContainer h1 {
+    margin-bottom: 6px;
+}
+
+/* Cookie Icon */
+.userNameContainer img {
+    width: 1.2rem;
+    margin: 0 4px 0 2px;
+}
+
+.userNameContainer div {
+    display: flex;
+    width: 100%;
+}
+
+#profilePictureChangeButton {
+    margin: 3px 0 0 0;
+}
+
+#popUp {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    max-width: 316px;
+    transform: translate(-50%, -50%);
+    padding: 12px 8px 12px 8px;
+    background-color: var(--highlightedColor);
+    border-radius: var(--borderRadMenu);
+    box-shadow: 0 0 21px 1000px rgba(0, 0, 0, 0.251), 0 6px 36px -8px rgb(0, 0, 0);
+    display: inline;
+    transition-duration: 140ms;
+    display: none;
+}
+
+#popUp div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#popUp div img {
+    width: 24px;
+    text-align: right;
+    color: #FF4A4A;
+}
+
+.upload-field {
+    margin: 6px 0 6px 0;
+}
+
+#file-upload-button {
+    background-color: blue !important;
+}
+
+.titleMargin {
+    margin: 0;
+}
+
+#underTitle {
+    margin-bottom: 0.6rem;
+}
+
+#bottomTitle {
+    margin: 0.6rem 0 0 0;
+}
+
+.reviewTitle {
+    border-bottom: solid 0.1em black;
 }

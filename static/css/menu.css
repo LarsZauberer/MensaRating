@@ -26,7 +26,7 @@
 }
 
 .starshape {
-    filter: invert(100%) sepia(1%) saturate(6%) hue-rotate(15deg) brightness(106%) contrast(102%);
+    filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(308deg) brightness(108%) contrast(101%);
 }
 
 
@@ -56,7 +56,9 @@
 }
 
 #menu #popup {
-    display: none;
+    box-sizing: border-box;
+
+    display: flex;
     position: absolute;
     top: 10%;
     bottom: 10%;
@@ -65,22 +67,72 @@
     margin: auto;
     width: 40%;
     height: 40%;
+    border-radius: var(--borderRadMenu);
+
+    padding: 2rem;
 
     justify-content: center;
     align-items: center;
 
-    background-color: #f44336;
+    background-color: var(--accentColor);
+    box-shadow: 0px 0px 10px black;
 }
 
 #menu #popup form {
+    height: 100%;
+    width: 100%;
+    /* padding: 2em; */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    /* flex-direction: column; */
+}
+
+#menu #popup form .upload-field {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: 1rem;
+}
+
+#menu #popup form button {
+    height: 30%;
+    width: auto;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    transition: 140ms;
+    border: solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#menu #popup form button:hover {
+    background-color: var(--highlightedColor);
 }
 
 .upload-field {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 1rem;
+}
+
+.upload-field input #id_image{
+    border: solid;
+    transition: 140ms;
+}
+
+.upload-field input #id_image:hover{
+    background-color: var(--highlightedColor);
+}
+
+#menu #popup .uploadButton {
+    align-self: flex-end;
+    margin-right: 0;
 }
 
 
@@ -153,6 +205,8 @@
 
 .inReviewDiv {
     margin: 8px;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 .inReviewDiv strong,
@@ -162,6 +216,13 @@
 
 .inReviewDiv img {
     height: 1.2em;
+}
+
+.inReviewDiv .profilePicture {
+    align-self: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-right: 6px;
 }
 
 #middle {
@@ -251,11 +312,18 @@ img.portrait {
 }
 
 .imageUserText {
-    color: red;
+    color: black;
     position: absolute;
-    font-size: 12px;
+    font-size: 1em;
     padding: 8px 12px;
     top: 0;
+    text-shadow: 0px 0px 1px white;
+    display: flex;
+    align-items: center;
+}
+
+.imageUserText span{
+    margin-left: 6px;
 }
 
 .imageButtons {
@@ -304,7 +372,7 @@ img.portrait {
     margin-bottom: 0.6rem !important;
 }
 
-.occurencesCounter{
+.occurencesCounter {
     width: 100%;
     margin-bottom: 1.5rem;
 }
