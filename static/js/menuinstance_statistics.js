@@ -3,20 +3,21 @@
 
 //different order options. Data gets saved in menuTypes array
 function orderMenutypes(orderType){
-    if(orderType == "occ"){
+    if(orderType == "rating"){
         menuTypes.sort(function(a, b){
-            let x = a.occurrences;
-            let y = b.occurrences;
+            let x = a.rating;
+            let y = b.rating;
             //descending order
             if(x < y) return 1;
             else if(x > y) return -1;
             return 0;
         })
     }
-    else if(orderType == "rating"){
-        menuTypes.sort(function(a, b){
-            let x = a.rating;
-            let y = b.rating;
+    else if(orderType == "date"){
+        console.log(1)
+        menuTypes.sort(function(a, b){        
+            let x = new Date(a.date)
+            let y = new Date(b.date)
             //descending order
             if(x < y) return 1;
             else if(x > y) return -1;
