@@ -1,4 +1,4 @@
-//Maintained by Robin
+//Maintained by Robin, Valentin
 //This file handles the filter/sorting of the menus on the menuType.html page
 
 //different order options. Data gets saved in menuTypes array
