@@ -1,18 +1,17 @@
+# Maintained by: Robin, Ian
 # pylint: disable=no-member
-from django.http import HttpResponse
-from django.shortcuts import render  # , redirect
-from django.contrib import messages
+from django.http import HttpResponse  # To send a simple response to the user
+from django.contrib import messages  # To send alert messages to the user
 from datetime import datetime as dt  # for date and time
-import logging
-from django.shortcuts import render, redirect
-from django.urls import reverse
+import logging  # To gain logging information
+from django.shortcuts import render, redirect  # To render the html page and redirect to another page
+from django.urls import reverse  # To get the url of a page
 import datetime as dt  # for date and time
-from .models import MenuType, Menu, Review, Image, Profil
-from .statistic_functions import *
-from .forms import ImageForm, ReviewForm, RatingForm, ProfilPictureForm
-from .post_functions import postImage, postRating, postReview
-from django.contrib.auth.models import User, Group
-from .webscraper import sync_today_menu
+from .models import MenuType, Menu, Review, Image, Profil  # To gain access to the database
+from .statistic_functions import *  # To gain access to the statistic functions
+from .forms import ImageForm, ReviewForm, RatingForm, ProfilPictureForm  # Create user forms
+from .post_functions import postImage, postRating, postReview  # To gain access to the post functions
+from .webscraper import sync_today_menu  # To gain access to the webscraper
 
 
 def index(request):
@@ -25,10 +24,11 @@ def index(request):
     ratings = [getRating(i) for i in menus]
     numRates = [getNumRates(i) for i in menus]
 
+    # Get the highest rated image for each menu
     images = []
     for i in menus:
         img = get_all_images_sorted(i.menuType)
-        if img != None:
+        if img != None:  # There is no highest image -> None
             images.append(img[0])
         else:
             images.append(None)
@@ -143,23 +143,28 @@ def menuType(request, pk):
     menu_instances = Menu.objects.filter(name=menutype.name).filter(date__lte=dt.date.today()).order_by("-date")
     
 
-
+    # Set variables
     description = menu_instances[0].description
     vegetarian = menu_instances[0].vegetarian
     vegan = menu_instances[0].vegan
 
     
+    # Calculate statistics
     occurrences = menu_instances.count()
     allTimeRating = getRatingOfAllTime(menutype)
     allTimeNumRates = getNumRatesOfAllTime(menutype)
 
 
+    # Get the ratings
     ratings = [getRating(i) for i in menu_instances]
     numRates = [getNumRates(i) for i in menu_instances]
     indexes = list(range(len(menu_instances)))
 
+    # Get the images for the menu type
     images = get_all_images_sorted(menutype)
     if images == None: images = []
+    
+    # Get the badges for the images
     image_badges = []
     for i in images:
         if i.profil:
@@ -168,10 +173,7 @@ def menuType(request, pk):
             image_badges.append([])
     images = list(zip(images, image_badges))
 
-
-
-
-
+    # Zip the data together
     menu_instances = zip(indexes[:600], ratings[:600], numRates[:600], menu_instances[:600])
 
     context = {"name": menutype.name, "description": description, "images": images, "vegetarian": vegetarian, "vegan": vegan, "menu_instances": menu_instances, "occurrences": occurrences, "allTimeRating": allTimeRating, "allTimeNumRates": allTimeNumRates}
@@ -186,6 +188,7 @@ def allMenu(request):
     
     menuTypes = MenuType.objects.all()
     
+    # lists with all the datas
     occurrences = []
     allTimeRatings = []
     allTimeNumRates = []
@@ -193,6 +196,7 @@ def allMenu(request):
     vegetarians = []
     vegans = []
 
+    # Get all the data and save it in the lists
     for typ in menuTypes:
         menus = Menu.objects.filter(name=typ.name).filter(date__lte=dt.date.today())
         if len(menus) > 0:
@@ -205,6 +209,7 @@ def allMenu(request):
         
     indexes = list(range(len(menuTypes))) 
 
+    # Zip the informations together
     menuType_info = zip(indexes, menuTypes, occurrences, descriptions, vegetarians, vegans, allTimeRatings, allTimeNumRates)
 
 
@@ -227,13 +232,15 @@ def timeline(request):
     dates = []
     menus_with_date = []
     for i, menu in enumerate(menus):
+        # Check if the date, when a menu occured is already listed 
         if menu.date not in dates:
             dates.append(menu.date)
             menus_with_date.append([])
         
-
+        # Add the menu to the list with all the informations
         menus_with_date[-1].append( (i, menu, getRating(menu), getNumRates(menu)) )
 
+    # Zip the dates and the menus together. Show only 600
     menu_dates = zip(dates[:600], menus_with_date[:600]) # Return the first 600 menus
 
 
@@ -246,11 +253,14 @@ def timeline(request):
 def userProfile(request):
     sync_today_menu()
     
+    # Check if the user is logged in -> If not redirect to login page
     if not request.user.is_authenticated:
         return redirect(reverse("login"))
     
+    # Get the profil
     profil = Profil.objects.get(user=request.user)
     
+    # Calculate all the badges. And calculate what the user has or has not achieved.
     # Uploading a new profil picture
     if request.method == "POST":
         form = ProfilPictureForm(request.POST, request.FILES)
@@ -260,7 +270,6 @@ def userProfile(request):
             profil.save()
     
     badges = get_badges_of_profil(profil)
-    
     all_badges = []
     for i in range(3): # 3 Badge categories
         all_badges.append(list(Badge.objects.filter(condition_category=i).order_by("count")))
@@ -269,6 +278,7 @@ def userProfile(request):
         for e, el in enumerate(i):
             i[e] = (el, el in badges)  # Tag all the badges the profil posses
     
+    # Get the reviews and images of the profil
     reviews = Review.objects.filter(profil=profil).order_by("-likes")
     images = Image.objects.filter(profil=profil).order_by("-likes")
     

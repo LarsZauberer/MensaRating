@@ -1,3 +1,4 @@
+# Maintained by: Robin, Ian
 import logging
 from .models import Review, Profil, Rating, Image, Menu
 from .forms import ImageForm, ReviewForm, RatingForm
@@ -26,9 +27,12 @@ def postReview(request, pk, form):
     if request.user.is_authenticated:
         profil = Profil.objects.get(user=request.user)
     
+    # Save the context information
     review.menu = menu
     review.profil = profil
     review.save()
+    
+    # Add Karma
     add_karma_for_posting(review)
     return ("Success!", 0)
 
@@ -54,13 +58,14 @@ def postImage(request, pk, form):
     if request.user.is_authenticated:
         profil = Profil.objects.get(user=request.user)
     
+    # Save the context information
     image = form.instance
     image.menu = menu
     image.profil = profil
-    add_karma_for_posting(image)
     image.save()
 
-    
+    # Add Karma
+    add_karma_for_posting(image)
     
     return ("Success!", 0)
 
@@ -101,17 +106,29 @@ def postRating(request, pk, form):
     # Create rating object
     rating = form.instance
     
+    # Save the context information
     rating.profil = profil
     add_karma_for_posting(rating)
     rating.menu = menu
     rating.save()
     
+    # Add Karma
+    add_karma_for_posting(rating, amount=1)
+    
     return ("Success!", 0)
 
 
-def add_karma_for_posting(post):
+def add_karma_for_posting(post, amount=5):
+    """
+    add_karma_for_posting Gives the user Karma for posting a review, image or rating
+
+    :param post: The Post object which contains the profil
+    :type post: Image, Review or Rating
+    :param amount: The amount of karma the user gets for posting, defaults to 5
+    :type amount: int, optional
+    """
     if post.profil:
-        post.profil.karma += 5
+        post.profil.karma += amount
         post.profil.save()
 
     return
