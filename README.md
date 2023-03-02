@@ -13,6 +13,9 @@ gekauft hat.
 Es gibt eine öffentliche Seite: [MensaRating](http://mensarating.herokuapp.com/)
 
 ### Local Instance
+Getestet auf:
+- Python 3.10.9
+
 1. Laden Sie den ganzen Source Code des Projektes herunter.
 2. Laden Sie alle Python Dependencies herunter (nach Bedarf, machen Sie ein virtual environment).
 ```bash
