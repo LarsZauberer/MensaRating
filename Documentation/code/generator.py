@@ -13,7 +13,9 @@ LIST_OF_FILES = [
 for i in LIST_OF_FILES:
     with open(i, 'r') as f:
         content = f.read()
-        name = str(i).replace("/", ".")
+        name = str(i).replace("/", ".").replace("\\", ".")
+
+        print(name)
         
         # Extra characters removal
         content = content.replace("ä", "ae")
