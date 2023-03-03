@@ -297,25 +297,50 @@ footer {
     padding: 1.5em;
     height: 2em;
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 1em;
     margin-bottom: 1.5em;
     border-radius: var(--borderRadMenu);
 }
 
-.menuListbox .rating {
-    margin: 0;
+.menuListbox h3 {
+    width: 20%;
+    min-width: 10%;
 }
 
-.menuListbox .vegivegan-label {
-    width: 0;
-    height: 0;
-    margin: 0;
+.menuListbox .timelineDescription {
+    font-size: 0.8rem;
+    justify-self: end;
+    width: 60%;
+}
+
+
+
+.menuListbox .menuListOccurrences {
+    font-weight: normal;
+    margin-left: 2rem;
+}
+
+.menuListbox .rating {
+    width: auto;
+    margin: 0 0 0 auto;
 }
 
 .menuListbox .vegivegan-label {
     width: 2em;
     height: 2em;
+    display: none;
+    margin: 0;
+    border-radius: 50%;
+}
+
+
+.menuListbox #vegivegan-container {
+    display: flex;
+    width: 10%;
+    height: 2em;
+    min-width: 2em;
 }
 
 .criteriaContainer {
