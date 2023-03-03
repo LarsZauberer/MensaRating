@@ -7,13 +7,13 @@ Menus sind Objekte, welche in der Datenbank als \code{Menu}-Objekt gespeichert
 werden (siehe \ref{fig:DB}, \ref{code:core.models.py}). Jedes \code{Menu} ist
 ein Vorkommen eines Gerichts. Um die verschiedenen Vorkommen der
 \code{Menu}-Objekte zu gruppieren existiert das \code{MenuType}-Objekt.
-Menus mit dem selben Namen wird der gleiche \code{MenuType} zugeordnet
+Menus mit dem selben Namen wird der gleiche \code{MenuType} zugeordnet.
 
 Die Menus werden von der Mensa-Website gescraped. Die Synchronization (siehe
 \ref{spez:Webscraper}) findet bei jedem Aufruf einer der Seiten statt.
 
-Nur wenn das heutige Datum mit dem Datum des Menus übereinstimmt, ist es möglich
-Dinge zu posten (siehe \ref{spez:Posts}), das Menu zu Bewerten (siehe
+Nur wenn das heutige Datum mit dem Datum des Menus übereinstimmt, ist es
+möglich, Bilder zu posten (siehe \ref{spez:Images}), das Menu zu bewerten (siehe
 \ref{spez:Rating}) und die Posts zu liken (siehe \ref{spez:Liking}).
 
 \subsection{Webscraper} \label{spez:Webscraper}
@@ -42,6 +42,8 @@ Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
                 menu_type = create_menu_type(menu, data)
             create_menu(data, menu_type)
 \end{lstlisting}
+
+(Code in \code{core/webscraper.py})
 
 \subsection{Bilder Gallerie} \label{spez:Gallerie}
 
@@ -153,6 +155,8 @@ Menu in einem Javascript Object gespeichert:
     }
 \end{lstlisting}
 
+(Code in \code{core/templates/allMenu.html})
+
 Je nach Filter wird das visible Attribut auf \code{false} gesetzt, wodurch die
 Daten des zugehörigen Menus oder MenuTypes in der Auflistung nicht mehr
 angezeigt werden. Das passiert ebenfalls durch die \code{updateListboxs()} Funktion
@@ -231,6 +235,8 @@ hat.
         
         highest_badges = [i for i in highest_badges if i is not None]  # Remove null badges
 \end{lstlisting}
+
+(Code in \code{core/statistic_functions.py})
 
 
 
