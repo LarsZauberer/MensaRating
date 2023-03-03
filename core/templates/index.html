@@ -1,3 +1,5 @@
+{# Maintained by: Robin, Nicolas, Ian and Valentin #}
+
 {% extends "base.html" %}
 
 {% block import %}
@@ -34,7 +36,7 @@
         {% if image %}
         <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
         {% else %}
-        <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
+        <img class="coverimage" src="{% static 'images/no_images_yet.jpg' %}" alt="no images">
         {% endif %}
 
 

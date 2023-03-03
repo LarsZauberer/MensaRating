@@ -1,3 +1,4 @@
+/* Maintained by: Nicolas and Valentin */
 :root {
     --bgColor: white;
     --accentColor: #dddddd;
@@ -667,10 +668,6 @@ footer {
 .userNameContainer img {
     width: 1.2rem;
     margin: 0 4px 0 2px;
-}
-
-.userName {
-    /* font-variant: small-caps; */
 }
 
 .userNameContainer div {

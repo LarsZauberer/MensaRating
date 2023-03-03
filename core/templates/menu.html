@@ -1,3 +1,5 @@
+{# Maintained by: Robin, Nicolas, Ian and Valentin #}
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -56,19 +58,21 @@
     <!-- https://www.w3schools.com/howto/howto_js_slideshow.asp -->
     <div class="imageContainer">
         {% for image, badges in images %}
-            <div class="imageSlide fade">
-                <div class="userName imageUserText mainFont">
-                    {% if image.profil.picture %}
-                         <img src="{{ image.profil.picture.url }}" alt="profil picture" class="profilePicture">
-                    {% endif %}
-                    {% if image.profil.user != None %}
-                    <span>{{image.profil.user.username}} #{{image.profil.karma}}</span>
-                    {% else %}
-                    <span>anonym</span>
-                    {% endif %}
-                    {% for i in badges %}
-                        <div class="tooltip badge">
-                            <img src="{{i.image.url}}" alt="" class="badgeImage">
+        <div class="imageSlide fade">
+            <div class="userName imageUserText mainFont">
+                {% if image.profil.picture %}
+                <img src="{{image.profil.picture.url}}" alt="profil picture" class="profilePicture">
+                {% else %}
+                <img src="{% static 'images/userProfileIconMaterialSymbol.svg' %}" alt="👤" class="profilePicture">
+                {% endif %}
+                {% if image.profil.user != None %}
+                <span>{{image.profil.user.username}} #{{image.profil.karma}}</span>
+                {% else %}
+                <span>anonym</span>
+                {% endif %}
+                {% for i in badges %}
+                <div class="tooltip badge">
+                    <img src="{{i.image.url}}" alt="" class="badgeImage">
                     <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
                             style="">{{i.description}}</span></div>
                 </div>
@@ -77,14 +81,14 @@
             <div class="imgContainer">
                 <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
             </div>
-                <div class="imageButtons">
-                    {% if today %}
-                    <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
-                    <div class="uploadButton" onclick="togglePopup()">
-                        <h3>Bild hochladen</h3>
-                    </div>
-                    <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
-                    {% endif %}
+            <div class="imageButtons">
+                {% if today %}
+                <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
+                <div class="uploadButton" onclick="togglePopup()">
+                    <h3>Bild hochladen</h3>
+                </div>
+                <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                {% endif %}
 
                 <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
             </div>
@@ -92,32 +96,32 @@
         </div>
         {% endfor %}
         {% if images|length == 0 %}
-            <div class="imageSlide fade">
-                <div class="imgContainer">
-                    <img src="{% static 'images/no_images_yet.png' %}" alt="Keine Bilder verfügbar" class="imageImage">
+        <div class="imageSlide fade">
+            <div class="imgContainer">
+                <img src="{% static 'images/no_images_yet.jpg' %}" alt="Keine Bilder verfügbar" class="imageImage">
+            </div>
+            <div class="imageButtons">
+                {% if today %}
+                <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
+                <div class="uploadButton" onclick="togglePopup()">
+                    <h3>Bild hochladen</h3>
                 </div>
-                <div class="imageButtons">
-                    {% if today %}
-                    <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
-                    <div class="uploadButton" onclick="togglePopup()">
-                        <h3>Bild hochladen</h3>
-                    </div>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
         </div>
-        {% else %}
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        {% endif %}
+    </div>
+    {% else %}
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    {% endif %}
 
-        <div id="popup">
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ imageForm }}
-                <button class="uploadButton" type="submit">Hochladen</button>
-            </form>
-        </div>
+    <div id="popup">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ imageForm }}
+            <button class="uploadButton" type="submit">Hochladen</button>
+        </form>
+    </div>
     </div>
 
 
@@ -202,12 +206,22 @@
             <div class="inReviewDiv">
                 {% if review.profil.picture %}
                 <img src="{{ review.profil.picture.url }}" alt="profil picture" class="profilePicture">
+                {% else %}
+                <img src="{% static 'images/userProfileIconMaterialSymbol.svg' %}" alt="👤" class="profilePicture">
                 {% endif %}
+
                 <div>
+                    {% if review.profil.user.username != None %}
                     <p class="mainFont"><strong>{{review.profil.user.username}}:</strong></p>
+                    {% else %}
+                    <p class="mainFont"><strong>anonym:</strong></p>
+                    {% endif %}
+
                     <div class="cookieContainer">
+                        {% if review.profil.user.username != None %}
                         <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="Karma:">
                         <p class="italic mainFont">: {{review.profil.karma}}</p>
+                        {% endif %}
                     </div>
                 </div>
 

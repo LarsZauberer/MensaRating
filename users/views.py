@@ -1,15 +1,15 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib import messages
-from .forms import UserRegisterForm
-from django.contrib.auth.models import User, Group
-import urllib
-import urllib.request
-import Web.settings as settings
-import json
-from .models import PromoCode
-from core.models import Profil
-import logging
+# Maintained by: Ian
+from django.shortcuts import render, redirect  # To render the template and redirect to another page
+from django.contrib import messages  # To send alert messages to the user
+from .forms import UserRegisterForm  # To create a custom user registration form
+from django.contrib.auth.models import User, Group  # To gain access to the django internal user and group model
+import urllib  # To send a request to the google recaptcha api
+import urllib.request # To send a request to the google recaptcha api
+import Web.settings as settings  # To gain access to the settings of the app
+import json  # To parse the response from the google recaptcha api
+from .models import PromoCode  # Deprecated in this project
+from core.models import Profil  # To create a profile for the new created user -> Database
+import logging # To gain logging information about the application
 
 def register(request):
     log = logging.getLogger("Register")
