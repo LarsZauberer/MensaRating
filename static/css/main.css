@@ -3,6 +3,7 @@
     --bgColor: white;
     --accentColor: #dddddd;
     --darkAccentColor: #7b7979;
+    --greyText: #222831;
     --highlightedColor: #ABC270;
     --starYellow: #FED049;
     --red: #DD0000;
@@ -312,8 +313,7 @@ footer {
     margin: 0;
 }
 
-.menuListbox #vegivegan-container {
-    display: flex;
+.menuListbox .vegivegan-label {
     width: 2em;
     height: 2em;
 }
