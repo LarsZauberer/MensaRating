@@ -50,7 +50,7 @@ def register(request):
                 messages.success(request, f"Account erfolgreich erstellt!")
                 return redirect('login')
             else:
-                messages.error(request, "reCaptcha Überprüfung fehlgeschlagen. Versuche es bitte erneut.")
+                messages.error(request, "reCaptcha Ueberpruefung fehlgeschlagen. Versuche es bitte erneut.")
             
     else:
         # Not a post request. Clear the form
