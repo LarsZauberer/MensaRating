@@ -334,13 +334,13 @@ footer {
     border-radius: 50%;
 }
 
+
 .menuListbox #vegivegan-container {
     display: flex;
     width: 10%;
     height: 2em;
     min-width: 2em;
 }
-
 
 .criteriaContainer {
     position: relative;
