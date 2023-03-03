@@ -88,10 +88,10 @@ function updateListboxs() {
 
 
 
-            // rating = menuTypeObject[3].children
-            // rating[0].innerHTML = menuType.rating
-            // starRate(i, menuType.rating)
-            // rating[2].innerHTML = "(" + menuType.numrates + ")"
+            rating = menuTypeObject[3].children
+            rating[0].innerHTML = menuType.rating
+            starRate(i, menuType.rating)
+            rating[2].innerHTML = "(" + menuType.numrates + ")"
         }
     }
 }
