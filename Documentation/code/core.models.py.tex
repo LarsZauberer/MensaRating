@@ -10,6 +10,8 @@ import datetime as dt  # to handle dates
 
 from django.core.files.storage import FileSystemStorage  # To get the default storage service from django
 
+
+# Switch between Google Drive Storage (on heroku) and default storage service
 if settings.HEROKU:
     from gdstorage.storage import GoogleDriveStorage
     # Define Google Drive Storage
