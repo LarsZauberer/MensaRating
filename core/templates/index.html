@@ -1,3 +1,5 @@
+{# Maintained by: Robin, Nicolas, Ian and Valentin #}
+
 {% extends "base.html" %}
 
 {% block import %}
@@ -15,25 +17,26 @@
 
     {% for index, menu, rating, numRates, image in menus %}
     <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
-
-        <h1>
-            {{menu.name}}
-
+        <div class="descriptionContainerMenuSite">
+            <div>
+                <h1>
+                    {{menu.name}}
+                </h1>
+                <p>
+                    {{menu.description}}
+                </p>
+            </div>
             {% if menu.vegetarian %}
             <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
             {% elif menu.vegan %}
             <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
             {% endif %}
-        </h1>
-
-        <div class="description">
-            <p>{{menu.description}}</p>
         </div>
-
+    
         {% if image %}
         <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
         {% else %}
-        <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
+        <img class="coverimage" src="{% static 'images/no_images_yet.jpg' %}" alt="no images">
         {% endif %}
 
 

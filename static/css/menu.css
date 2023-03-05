@@ -1,60 +1,64 @@
+/* Maintained by: Nicolas and Valentin */
+
 #menu {
- 
-    
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-#menu .title{
+#menu .title {
     margin-top: 2em;
     display: flex;
     align-items: center;
 }
 
-#menu .title span{
+#menu .title span {
     font-size: 0.8em;
     font-weight: normal;
 }
 
 
-#menu .title .vegivegan-label{
+#menu .title .vegivegan-label {
     width: 1em;
     height: 1em;
     margin-right: 0.5em;
     margin-left: 0.5em;
 }
 
+.starshape {
+    filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(308deg) brightness(108%) contrast(101%);
+}
 
 
-
-
-#menu #gallery{
+#gallery {
     padding-top: 2em;
-    padding-bottom: 4em;
-
-    width: 80%;
+    padding-bottom: 0em;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
 }
-#menu #gallery #images{
-    width:80%;
+
+#menu #gallery #images {
+    width: 80%;
     height: 40vh
 }
-#menu #gallery #images img{
-    width:100%;
-    height:100%;
+
+#menu #gallery #images img {
+    width: 100%;
+    height: 100%;
 }
-#menu #gallery #images #image-functions{
+
+#menu #gallery #images #image-functions {
     display: flex;
     justify-content: space-between;
     background-color: white;
 }
 
-#menu #popup{
-    display: none;
+#menu #popup {
+    box-sizing: border-box;
+
+    display: flex;
     position: absolute;
     top: 10%;
     bottom: 10%;
@@ -63,81 +67,190 @@
     margin: auto;
     width: 40%;
     height: 40%;
+    border-radius: var(--borderRadMenu);
+
+    padding: 2rem;
 
     justify-content: center;
     align-items: center;
 
-    background-color: #f44336;
-}
-#menu #popup form{
-    display: flex;
-    flex-direction: column;
+    background-color: var(--accentColor);
+    box-shadow: 0px 0px 10px black;
 }
 
-.upload-field{
+#menu #popup form {
+    height: 100%;
+    width: 100%;
+    /* padding: 2em; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* flex-direction: column; */
+}
+
+#menu #popup form .upload-field {
+    font-family: 'Alegreya Sans', sans-serif;
+    font-size: 1rem;
+}
+
+#menu #popup form button {
+    height: 30%;
+    width: auto;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    transition: 140ms;
+    border: solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#menu #popup form button:hover {
+    background-color: var(--highlightedColor);
+}
+
+.upload-field {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 1rem;
+}
+
+.upload-field input #id_image{
+    border: solid;
+    transition: 140ms;
+}
+
+.upload-field input #id_image:hover{
+    background-color: var(--highlightedColor);
+}
+
+#menu #popup .uploadButton {
+    align-self: flex-end;
+    margin-right: 0;
 }
 
 
 
 
-#menu #reviews{
-    width: 80%;
+#menu #reviews {
+    width: 100%;
 }
 
-#menu #reviews h2{
+#menu #reviews h2 {
     display: flex;
     border-bottom: solid 0.1em black;
 }
 
+#review-text {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
 
-
-.textfield{
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+.textfield {
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    font-size: 1em;
     border: none;
-    background-color: whitesmoke;
-    height: 15vh;
-    font-size: 1.5em;
-    flex:1;
-    margin-bottom: 1em;
-    
-}
-#review-text{
-    display: flex;
-    align-items: center;
-    
-    width:auto;
-    flex:1;
-    flex-direction: column;
+    background-color: white;
+    height: 1.26em;
+    min-width: 0;
+    margin-right: 1rem;
+    resize: none;
+    flex-grow: 100;
+    padding: 8px;
+    outline: none !important;
 }
 
+#postButton {
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
+#postButton img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
-.fade_scroll_top h2{
+#postButton:focus {
+    border-radius: var(--borderRadMenu);
+}
+
+.fade_scroll_top h2 {
     display: flex;
     align-items: center;
-
-    width:100%;
+    width: 100%;
     margin: 0;
     border-bottom: 0.1em solid gainsboro;
 }
 
-.review{
+.review {
     width: 100%;
-    background-color: gainsboro;
-    margin-bottom: 2em;
-
-}
-.review-header{
+    margin-bottom: 1em;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
     display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-bottom: 0.2em;
-    background-color: gray;
-    color: white;
+}
+
+.inReviewDiv {
+    margin: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.inReviewDiv strong,
+.inReviewDiv .italic {
+    font-size: 1.2em;
+}
+
+.inReviewDiv img {
+    height: 1.2em;
+}
+
+.inReviewDiv .profilePicture {
+    align-self: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-right: 6px;
+}
+
+#middle {
+    flex-grow: 2;
+}
+
+.cookieContainer {
+    display: flex;
+    align-items: center;
+}
+
+.like-btn {
+    /* Color Change with:
+    https://stackoverflow.com/questions/22252472/how-can-i-change-the-color-of-an-svg-element
+    https://codepen.io/sosuke/pen/Pjoqqp
+    */
+}
+
+.liked {
+    filter: invert(47%) sepia(9%) saturate(3689%) hue-rotate(315deg) brightness(103%) contrast(107%);
+}
+
+.disliked {
+    filter: invert(51%) sepia(9%) saturate(25%) hue-rotate(358deg) brightness(91%) contrast(89%);
+}
+
+.disliked:hover {
+    filter: invert(25%) sepia(11%) saturate(1%) hue-rotate(358deg) brightness(96%) contrast(93%);
 }
 
 /* Image Gallery
@@ -154,10 +267,11 @@
 }
 
 .imageSlide {
-    display: none;
+    display: block;
 }
 
-.prev, .next {
+.prev,
+.next {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -198,11 +312,18 @@ img.portrait {
 }
 
 .imageUserText {
-    color: red;
+    color: black;
     position: absolute;
-    font-size: 12px;
+    font-size: 1em;
     padding: 8px 12px;
     top: 0;
+    text-shadow: 0px 0px 1px white;
+    display: flex;
+    align-items: center;
+}
+
+.imageUserText span{
+    margin-left: 6px;
 }
 
 .imageButtons {
@@ -230,18 +351,31 @@ img.portrait {
     animation-name: fade;
     animation-duration: 1.5s;
 }
-  
+
 @keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
-.showrating{
+.showrating {
     width: 20em;
 
     display: flex;
 }
 
+#rating-menuType {
+    margin-bottom: 0.6rem !important;
+}
+
+.occurencesCounter {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
 
 /* https://www.w3schools.com/howto/howto_js_alert.asp */
 /* The alert message box */
@@ -252,13 +386,14 @@ img.portrait {
 }
 
 .error {
-    background-color: #f44336; /* Red */
+    background-color: #f44336;
+    /* Red */
 }
 
 .success {
     background-color: green;
 }
-  
+
 /* The close button */
 .closebtn {
     margin-left: 15px;

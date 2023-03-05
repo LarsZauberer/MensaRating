@@ -1,12 +1,16 @@
-from django.db import models
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+# Maintained by: Ian, Robin
 
-import datetime as dt
+from django.db import models  # The django default model
+from django.conf import settings  # To gain access to the settings of the app
+from django.contrib.auth.models import User  # To gain access to the django internal user
+from django.core.validators import MinValueValidator, MaxValueValidator  # For the Rating to validate if the rating is in the range of 1-5
 
-from django.core.files.storage import FileSystemStorage
+import datetime as dt  # to handle dates
 
+from django.core.files.storage import FileSystemStorage  # To get the default storage service from django
+
+
+# Switch between Google Drive Storage (on heroku) and default storage service
 if settings.HEROKU:
     from gdstorage.storage import GoogleDriveStorage
     # Define Google Drive Storage
@@ -23,6 +27,7 @@ class Profil(models.Model):
     """
     karma = models.IntegerField(default=0)  # Karma points for the posts from the user. 
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # User linked to the profil. -> The profil is deleted when the user is deleted.
+    picture = models.ImageField(upload_to='profile_images', storage=storage_service, blank=True, null=True)  # Image of the user.
 
     def __str__(self):
         """
@@ -38,7 +43,7 @@ class MenuType(models.Model):
     """
     MenuType class for the type of the menu
     """
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         """
@@ -112,7 +117,10 @@ class Image(models.Model):
         :return: Returns the name of the image.
         :rtype: str
         """
-        return f"{self.profil.user.username}: {self.image.name}"
+        if self.profil:
+            return f"{self.profil.user.username}: {self.image.name}"
+        else:
+            return f"None: {self.image.name}"
 
 
 class Rating(models.Model):

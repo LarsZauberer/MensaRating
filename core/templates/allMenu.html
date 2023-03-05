@@ -1,6 +1,11 @@
+{# Maintained by: Robin, Nicolas, Ian and Valentin #}
+
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+
+
+<script src="{% static 'js/allmenu_statistics.js' %}"></script>
 
 <main>
 
@@ -27,6 +32,7 @@
                     <button onclick="orderMenutypes('occ')">Vorkommen</button>
                     <button onclick="orderMenutypes('rating')">Bewertung</button>
                     <button onclick="orderMenutypes('numrates')">Anzahl Bewertungen</button>
+                    <button onclick="orderMenutypes('name')">Name</button>
                 </div>
             </div>
         </div>
@@ -42,7 +48,7 @@
             <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
         </div>
 
-        <div></div> <!-- occurrences -->
+        <h3 class="menuListOccurrences"></h3> <!-- occurrences -->
 
         <div class="rating">
             <div></div> <!-- allTimeRating -->
