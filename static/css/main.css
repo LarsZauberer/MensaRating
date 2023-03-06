@@ -568,7 +568,15 @@ footer {
 }
 
 /* Leaderboard */
-.yourRang{width: 100%; text-align: center; margin-bottom: 1.5rem;}
+.yourRang {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.yourRang p:nth-child(2) {
+    font-size: 0.8em;
+}
 
 table {
     width: 100%;
