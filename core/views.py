@@ -18,6 +18,23 @@ def index(request):
     sync_today_menu()
 
     # Get all menus with the date today
+    menus = Menu.objects.filter(date__gte=dt.date.today(), date__lte=dt.date.today() + dt.timedelta(days=7)).order_by("date")  # gte = greater than or equal
+    
+    dates = []
+    menus_with_date = []
+    for i, menu in enumerate(menus):
+        # Check if the date, when a menu occured is already listed 
+        if menu.date not in dates:
+            dates.append(menu.date)
+            menus_with_date.append([])
+        
+        # Get best image of the menu
+        img = get_all_images_sorted(menu.menuType)
+        if img != None:
+            img = img[0]
+        
+        # Add the menu to the list with all the informations
+        menus_with_date[-1].append( (i, menu, img, getRating(menu), getNumRates(menu)) )
     menus = Menu.objects.filter(date=dt.date.today())
 
     # Calculate the rating for each menu
@@ -34,14 +51,12 @@ def index(request):
             images.append(None)
 
 
-    
-    # Zip all the menu information to one information together.
-    # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(list(range(len(menus))), menus, ratings, numRates, images)
+    # Zip the data together
+    menus = zip(dates, menus_with_date)
 
-    
+    context = {'menus_dates': list(menus)}
 
-    return render(request, 'index.html', context={'menus': menus})
+    return render(request, 'index.html', context=context)
 
 
 def menu(request, pk):
