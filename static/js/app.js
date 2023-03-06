@@ -36,7 +36,7 @@ function update_all_btn() {
         post = localStorage.getItem(id + "-" + username);
 
 
-        console.log(post);
+        // console.log(post);
         // If the post information exists -> user liked -> change the button state to liked
         if (post) {
             element.className = element.className.replace(" disliked", "");

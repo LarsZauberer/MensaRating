@@ -360,3 +360,24 @@ def like(request, cat: int, pk: int):
     post.save()  # Save to the database
     
     return HttpResponse(post.likes)
+
+
+def leaderboard(request):
+    sync_today_menu()
+    
+    profils = Profil.objects.all().order_by("-karma")
+    
+    user_profil = None
+    rang = None
+    if request.user.is_authenticated:
+        user_profil = Profil.objects.get(user=request.user)
+        rang = list(profils).index(user_profil) + 1
+        
+    profils = profils[:20]
+    badges = []
+    for i in profils:
+        badges.append(get_badges_of_profil(i))
+    
+    context = {"profils": zip(profils, badges), "user_profil": user_profil, "rang": rang}
+    
+    return render(request, "leaderboard.html", context=context)

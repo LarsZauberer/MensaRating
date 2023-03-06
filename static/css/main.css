@@ -618,28 +618,6 @@ footer {
     height: 3.2em;
 }
 
-.uploadButton {
-    max-width: 49%;
-    height: 1.4rem;
-    background-color: var(--accentColor);
-    border-radius: var(--borderRadMenu);
-    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
-    margin-right: 1em;
-    transition: 140ms;
-    border-color: black !important;
-    border: solid;
-}
-
-.uploadButton h3 {
-    margin: 0;
-    color: #000000;
-}
-
-.uploadButton:hover {
-    cursor: pointer;
-    background-color: var(--highlightedColor);
-}
-
 /* User Profile */
 .userPageHeader {
     display: flex;
@@ -732,4 +710,75 @@ footer {
 
 .reviewTitle {
     border-bottom: solid 0.1em black;
+}
+
+/* Leaderboard */
+.yourRang {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.yourRang p:nth-child(2) {
+    font-size: 0.8em;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+}
+
+tr:first-child {
+    background-color: var(--highlightedColor) !important;
+}
+
+tr:nth-child(odd) {
+    background-color: var(--accentColor);
+}
+
+th,
+td {
+    border: 0.4px solid var(--darkAccentColor);
+}
+
+tr th:first-child {
+    border-top-left-radius: var(--borderRadMenu);
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: var(--borderRadMenu);
+}
+
+tr th:last-child {
+    border-top-right-radius: var(--borderRadMenu);
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: var(--borderRadMenu);
+}
+
+table h3,
+table p {
+    margin: 8px 2px 8px 6px;
+}
+.uploadButton {
+    max-width: 49%;
+    height: 1.4rem;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    margin-right: 1em;
+    transition: 140ms;
+    border-color: black !important;
+    border: solid;
+}
+
+.uploadButton h3 {
+    margin: 0;
+    color: #000000;
+}
+
+.uploadButton:hover {
+    cursor: pointer;
+    background-color: var(--highlightedColor);
 }
