@@ -5,31 +5,40 @@
 {% endblock %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>Rang</th>
-            <th>Username</th>
-            <th>Karma</th>
-        </tr>
-        {% for profil in profils %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>
-                    {{profil.0.user.username}}
-                    {% for i in profil.1 %}
-                        <div class="tooltip badge">
-                            <img src="{{i.image.url}}" alt="" class="badgeImage">
-                        <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
-                                style="">{{i.description}}</span></div>
-                            </div>
-                    {% endfor %}
-                </td>
-                <td>{{profil.0.karma}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    <br>
-    {% if user.is_authenticated %}
-    <p>Du bist <span style="color: red;">Rang {{rang}}!</span></p>
-    {% endif %}
+{% if user.is_authenticated %}
+<p>Du bist <strong>Rang {{rang}}!</strong></p>
+{% endif %}
+<table>
+    <tr>
+        <th>
+            <h3>Rang</h3>
+        </th>
+        <th>
+            <h3>Username</h3>
+        </th>
+        <th>
+            <h3>Karma</h3>
+        </th>
+    </tr>
+    {% for profil in profils %}
+    <tr>
+        <td><strong>{{forloop.counter}}</strong></td>
+        <td>
+            <p> {{profil.0.user.username}} </p>
+            {% for i in profil.1 %}
+            <div class="tooltip badge">
+                <img src="{{i.image.url}}" alt="" class="badgeImage">
+                <div class="tooltiptext">
+                    <p> <strong>{{i.name}}</strong><br>{{i.description}} </p>
+                </div>
+            </div>
+            {% endfor %}
+        </td>
+        <td>
+            <p>{{profil.0.karma}}</p>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
 {% endblock %}
