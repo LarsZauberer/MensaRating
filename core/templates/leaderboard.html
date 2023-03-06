@@ -6,9 +6,16 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<p>Du bist <strong>Rang {{rang}}!</strong></p>
+<div class="yourRang">
+    <p>Du bist <strong>Rang {{rang}}!</strong></p>
+    <p>Poste Biler</p>
+</div>
+{% else %}
+<div class="yourRang">
+    <p>TEST</p>
+</div>
 {% endif %}
-<table>
+<table cellspacing="0">
     <tr>
         <th>
             <h3>Rang</h3>
@@ -17,12 +24,14 @@
             <h3>Username</h3>
         </th>
         <th>
-            <h3>Karma</h3>
+            <h3>Cookiepoints</h3>
         </th>
     </tr>
     {% for profil in profils %}
     <tr>
-        <td><strong>{{forloop.counter}}</strong></td>
+        <td><strong>
+                <p>{{forloop.counter}}</p>
+            </strong></td>
         <td>
             <p> {{profil.0.user.username}} </p>
             {% for i in profil.1 %}
