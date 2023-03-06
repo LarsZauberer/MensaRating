@@ -1,3 +1,5 @@
+{# Maintained by: Robin, Nicolas, Ian and Valentin #}
+
 {% extends "base.html" %}
 
 {% block import %}
@@ -5,7 +7,15 @@
 {% load static %}
 {% block content %}
 
-<h1>Menu Heute | {% now "d. F" %}</h1>
+{% for date, menus in menus_dates %}
+
+
+{% now "Y-m-d" as todays_date %}
+{% if todays_date == date|date:"Y-m-d" %}
+<h1>Menüs Heute</h1>
+{% else %}
+<h1>{{date|date:"l"}}</h1>
+{% endif %}
 <div class="line"></div>
 <div id="menu_box_container">
     <script>
@@ -13,7 +23,7 @@
         let rating;
     </script>
 
-    {% for index, menu, rating, numRates, image in menus %}
+    {% for index, menu, image, rating, numRates in menus %}
     <div id="clickMenuBox" class="galleryElement clickableDiv" onclick="location.href='{% url 'menu' menu.pk %}';">
         <div class="descriptionContainerMenuSite">
             <div>
@@ -30,11 +40,11 @@
             <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
             {% endif %}
         </div>
-    
+
         {% if image %}
         <img class="coverimage" src="{{image.image.url}}" alt="no image uploaded">
         {% else %}
-        <img class="coverimage" src="{% static 'images/no_images_yet.png' %}" alt="no images">
+        <img class="coverimage" src="{% static 'images/no_images_yet.jpg' %}" alt="no images">
         {% endif %}
 
 
@@ -63,5 +73,6 @@
     </div>
     {% endfor %}
 </div>
+{% endfor %}
 
 {% endblock %}

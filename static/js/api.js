@@ -1,6 +1,8 @@
+// Maintained by: Ian
+
 class API {
     constructor(csrfToken) {
-        this.csrfToken = csrfToken;
+        this.csrfToken = csrfToken;  // Save the CSRF token
     }
 
     post(endPoint, data, readyFunction) {
