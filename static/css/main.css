@@ -865,7 +865,9 @@ table p {
         margin: 0;
     }
 
-    /* .galleryElement .rating, .menuListbox .rating{
-        margin: 0.4em 0 0 0;
-    } */
+    /* User Profile */
+    .inReviewDiv:first-child{
+        width: 80%;
+    }
+
 }
