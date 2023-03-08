@@ -788,3 +788,14 @@ table p {
     cursor: pointer;
     background-color: var(--highlightedColor);
 }
+
+/* Mobile Responsive */
+@media (max-width: 746px) {
+    div{
+        background-color: rebeccapurple;
+    }
+
+    #menu_box_container{
+        flex-wrap: wrap;
+    }
+}
