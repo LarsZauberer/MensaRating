@@ -155,7 +155,7 @@ def menuType(request, pk):
         return HttpResponse("Menutype not found")
     menutype = menutype[0]
 
-    menu_instances = Menu.objects.filter(name=menutype.name).filter(date__lte=dt.date.today()).order_by("-date")
+    menu_instances = Menu.objects.filter(menuType=menutype).filter(date__lte=dt.date.today()).order_by("-date")
     
 
     # Set variables
