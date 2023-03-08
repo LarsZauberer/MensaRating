@@ -213,7 +213,7 @@ def allMenu(request):
 
     # Get all the data and save it in the lists
     for typ in menuTypes:
-        menus = Menu.objects.filter(name=typ.name).filter(date__lte=dt.date.today())
+        menus = Menu.objects.filter(menuType=typ).filter(date__lte=dt.date.today())
         if len(menus) > 0:
             descriptions.append(menus[0].description)
             vegetarians.append(menus[0].vegetarian)

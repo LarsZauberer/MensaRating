@@ -81,10 +81,15 @@ function updateListboxs() {
             
             let vegivegan = menuTypeObject[1].children;
 
-            if (menuType.vegetarian == "True") {
-                vegivegan[0].style.display = "block"; //show vegetarian label
-            } else if (menuType.vegan == "True") {
+            if (menuType.vegan == "True") {
                 vegivegan[1].style.display = "block"; //show vegan label
+                vegivegan[0].style.display = "none"; //don't show vegetarian label
+            } else if (menuType.vegetarian == "True") {
+                vegivegan[0].style.display = "block"; //show vegetarian label
+                vegivegan[1].style.display = "none"; //don't show vegan label
+            } else {
+                vegivegan[0].style.display = "none"; //don't show vegetarian label
+                vegivegan[0].style.display = "none"; //don't show vegan label
             }
 
             menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences //show occurrences
