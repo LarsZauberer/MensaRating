@@ -326,11 +326,6 @@ footer {
     margin-left: 2rem;
 }
 
-.menuListbox .rating {
-    width: auto;
-    margin: 0 0 0 auto;
-}
-
 .menuListbox .vegivegan-label {
     width: 2em;
     height: 2em;
@@ -489,7 +484,15 @@ footer {
     width: 100%;
     display: flex;
     align-items: center;
-    margin-bottom: 1.5em;
+    margin: 0 0 0 0;
+}
+
+#menu .rating {
+    margin: 0 0 1.5em 0;
+}
+
+.menuListbox .rating {
+    margin: 0 !important;
 }
 
 .stars {
@@ -584,11 +587,15 @@ footer {
 
 #menuTypeButton {
     max-width: 49%;
-    height: 1.4rem;
+    height: auto;
     background-color: var(--accentColor);
     border-radius: var(--borderRadMenu);
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
     transition: 140ms;
+}
+
+#menuTypeButton {
+    height: fit-content;
 }
 
 #menuTypeButton h3 {
@@ -791,16 +798,19 @@ table p {
 
 /* Mobile Responsive */
 @media (max-width: 746px) {
-    div {
-        background-color: rebeccapurple;
-    }
 
-    #menu_box_container {
-        flex-wrap: wrap;
+    /* Multiple */
+    div {
+        /* background-color: rebeccapurple; */
     }
 
     .content {
         width: 90%;
+    }
+
+    /* Menu Site */
+    #menu_box_container {
+        flex-wrap: wrap;
     }
 
     .interactionBox {
@@ -822,4 +832,40 @@ table p {
         max-width: 100%;
         width: 100%;
     }
+
+    /*MenuType Site*/
+
+    /* MenuType Site and MenuType search */
+    .fade-scroll-top {
+        flex-wrap: wrap;
+        margin-bottom: 0.6em;
+    }
+
+    .menuListbox {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height: fit-content;
+        gap: 0;
+    }
+
+    .menuListbox h3 {
+        width: 100%;
+        margin: 0;
+    }
+
+    .menuListbox p {
+        width: 100%;
+    }
+
+    .menuListbox h3 {
+        width: 85%;
+    }
+
+    .menuListbox .menuListOccurrences {
+        margin: 0;
+    }
+
+    /* .galleryElement .rating, .menuListbox .rating{
+        margin: 0.4em 0 0 0;
+    } */
 }

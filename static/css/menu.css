@@ -412,4 +412,14 @@ img.portrait {
 
 /* Mobile Responsive */
 @media (max-width: 746px) {
+    .review {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .inReviewDiv:nth-child(2) {
+        order: 3;
+        width: 100%;
+        margin-top: 0;
+    }
 }
