@@ -121,12 +121,12 @@
     margin: 1rem;
 }
 
-.upload-field input #id_image{
+.upload-field input #id_image {
     border: solid;
     transition: 140ms;
 }
 
-.upload-field input #id_image:hover{
+.upload-field input #id_image:hover {
     background-color: var(--highlightedColor);
 }
 
@@ -322,22 +322,21 @@ img.portrait {
     align-items: center;
 }
 
-.imageUserText span{
+.imageUserText span {
     margin-left: 6px;
 }
 
 .imageButtons {
     color: #f2f2f2;
     font-size: 15px;
-    padding: 8px 12px;
+    /* padding: 8px 12px; */
     position: absolute;
     bottom: 8px;
-    width: 98%;
+    width: 100%;
     text-align: right;
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 1em;
 }
 
 
@@ -409,4 +408,8 @@ img.portrait {
 /* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
+}
+
+/* Mobile Responsive */
+@media (max-width: 746px) {
 }

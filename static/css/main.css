@@ -488,16 +488,15 @@ footer {
 .rating {
     width: 100%;
     display: flex;
-    gap: 1em;
     align-items: center;
     margin-bottom: 1.5em;
 }
 
-
 .stars {
-    width: calc(var(--starheight)*5.5);
+    min-width: calc(var(--starheight)*5.5);
     height: var(--starheight);
     position: relative;
+    margin-right: 1em;
 
     display: flex;
     align-items: center;
@@ -618,7 +617,7 @@ footer {
     height: 3.2em;
 }
 
-.like-icon{
+.like-icon {
     width: 1.2em;
     height: 1.2em;
     filter: invert(51%) sepia(9%) saturate(25%) hue-rotate(358deg) brightness(91%) contrast(89%);
@@ -767,6 +766,7 @@ table h3,
 table p {
     margin: 8px 2px 8px 6px;
 }
+
 .uploadButton {
     max-width: 49%;
     height: 1.4rem;
@@ -791,11 +791,35 @@ table p {
 
 /* Mobile Responsive */
 @media (max-width: 746px) {
-    div{
+    div {
         background-color: rebeccapurple;
     }
 
-    #menu_box_container{
+    #menu_box_container {
         flex-wrap: wrap;
+    }
+
+    .content {
+        width: 90%;
+    }
+
+    .interactionBox {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+    }
+
+    .give-star-rating {
+        margin-bottom: 1em;
+    }
+
+    #menuTypeButton {
+        text-align: center;
+    }
+
+    .give-star-rating,
+    #menuTypeButton {
+        max-width: 100%;
+        width: 100%;
     }
 }
