@@ -87,10 +87,13 @@
                 <div class="uploadButton" onclick="togglePopup()">
                     <h3>Bild hochladen</h3>
                 </div>
-                <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
+                <div class="cookieContainer">
+                    <img class="like-icon like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                    <!-- <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button> -->
+                </div>
                 {% endif %}
-
                 <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+
             </div>
 
         </div>

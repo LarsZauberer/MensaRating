@@ -618,6 +618,12 @@ footer {
     height: 3.2em;
 }
 
+.like-icon{
+    width: 1.2em;
+    height: 1.2em;
+    filter: invert(51%) sepia(9%) saturate(25%) hue-rotate(358deg) brightness(91%) contrast(89%);
+}
+
 /* User Profile */
 .userPageHeader {
     display: flex;
