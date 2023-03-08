@@ -77,8 +77,8 @@
                 {% endif %}
 
                 <div class="cookieContainer">
-                    <img onclick="like(1, {{review.pk}})" class="like-icon"
-                        src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                    <img class="like-icon like-btn imageLike" src="{% static 'images/heartIconMaterialSymbol.svg' %}"
+                        alt="Likes:">
                     <p class="likeText imageLikeText"><span id="2-{{image.pk}}">{{image.likes}}</span></p>
                 </div>
 

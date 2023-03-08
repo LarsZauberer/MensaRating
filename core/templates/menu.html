@@ -89,10 +89,14 @@
                 </div>
                 <div class="cookieContainer">
                     <img class="like-icon like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
-                    <!-- <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button> -->
+                    <p class="likeText imageLikeText"><span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                </div>
+                {% else %}
+                <div class="cookieContainer">
+                    <img class="like-icon like-btn imageLike" id="2-{{image.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                    <p class="likeText imageLikeText"><span id="2-{{image.pk}}">{{image.likes}}</span></p>
                 </div>
                 {% endif %}
-                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
 
             </div>
 
