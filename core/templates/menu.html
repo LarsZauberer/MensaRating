@@ -84,7 +84,7 @@
             <div class="imageButtons">
                 {% if today %}
                 <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
-                <div class="uploadButton" onclick="togglePopup()">
+                <div class="uploadButton" onclick="togglePopup('menuPopUp')">
                     <h3>Bild hochladen</h3>
                 </div>
                 <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
@@ -103,7 +103,7 @@
             <div class="imageButtons">
                 {% if today %}
                 <!-- <button class="uploadbutton" onclick="togglePopup()">upload</button> -->
-                <div class="uploadButton" onclick="togglePopup()">
+                <div class="uploadButton" onclick="togglePopup('menuPopUp')">
                     <h3>Bild hochladen</h3>
                 </div>
                 {% endif %}
@@ -115,7 +115,11 @@
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
     {% endif %}
 
-    <div id="popup">
+    <div class="popUp" id="menuPopUp" style="display: none">
+        <div class="popupTitle" onclick="togglePopup('menuPopUp')">
+            <h3>Lade ein Foto deines Essens hoch</h3>
+            <img src="{% static 'images/closeIconMaterialSymbolBlack.svg' %}" alt="Abbrechen">
+        </div>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ imageForm }}
@@ -134,7 +138,6 @@
 
 
     <script>
-        togglePopup()
         setInterval(checkOrientation, 1000);
         showSlides(slideIndex);
     </script>
