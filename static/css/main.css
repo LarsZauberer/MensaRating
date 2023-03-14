@@ -796,8 +796,62 @@ table p {
     background-color: var(--highlightedColor);
 }
 
+/* Mobile Class */
+.onlyMobile {
+    display: none;
+}
+
+.onlyDesktop {
+    display: block;
+}
+
 /* Mobile Responsive */
 @media (max-width: 746px) {
+    
+    /* Mobile Class */
+    .onlyMobile {
+        display: block;
+    }
+    
+    .onlyDesktop {
+        display: none;
+    }
+    
+    /* Mobile Menu */
+    #mobileMenuOpener {
+        width: 3em;
+    }
+    
+    header {
+        width: calc(100% - 3.5em);
+        padding: 1em 1em 0.5em 1em;
+        margin: 0.75em auto 0 auto;
+        border-top-right-radius: var(--borderRadMenu);
+        border-top-left-radius: var(--borderRadMenu);
+    }
+    
+    nav {
+        width: calc(100% - 1.5em);
+        margin: 0 auto 0 auto;
+        background-color: var(--highlightedColor);
+        border-bottom-left-radius: var(--borderRadMenu);
+        border-bottom-right-radius: var(--borderRadMenu);
+        display: block;
+    }
+    
+    .closeMenu{
+        display: none;
+    }
+
+    .profileContainer {
+        margin-top: 1.5em;
+        padding: 0.6rem 1.2rem 1rem 1.2rem;
+    }
+
+    .active,
+    .menuItem {
+        background-color: transparent;
+    }
 
     /* Multiple */
     div {
@@ -866,7 +920,7 @@ table p {
     }
 
     /* User Profile */
-    .inReviewDiv:first-child{
+    .inReviewDiv:first-child {
         width: 80%;
     }
 
