@@ -48,14 +48,18 @@ Der Webscraper ist ein standalone Python Script (siehe
 und Datumsdaten von der Seite geladen und danach werden die Gerichte (Name,
 Beschreibung, Vegan/Vegetarisch) gescraped.
 
-% TODO: Dringens mit den neuen Änderungen umschreiben
-
-Das Script wird bei jedem Aufruf der Webseite ausgeführt. Nach dem Scraping
-der Daten werden diese mit der Datenbank (siehe \ref{fig:DB}) verglichen.
-Ist das \code{Menu}-Objekt (siehe \ref{spez:Menus}) noch nicht in der Datenbank,
-so wird nach einem zugehörigen \code{MenuType} (siehe \ref{spez:Menus})
-gesucht. Wenn dieses nicht existiert, dann werden beide Objekte einfach mit den
-Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
+Das Script wird bei jedem Aufruf der Webseite ausgeführt. Nach dem Scraping der
+Daten werden diese mit der Datenbank (siehe \ref{fig:DB}) verglichen. Für jedes
+Menu auf der offiziellen Webseite wird geschaut, ob es an dem Tag bereits ein
+\code{Menu}-Objekt (siehe \ref{spez:Menus}) gibt. Wenn nicht, dann wird ein
+neues \code{Menu}-Objekt erstellt und dazu, wenn auch dieses nicht existiert ein
+neues \code{MenuType}-Objekt (siehe \ref{code:core.models.py}). Wenn das
+\code{Menu}-Objekt bereits existiert hat, werden die Daten einfach ersetzt und
+es wird gegebenenfalls ein neues \code{MenuType}-Objekt erstellt. Wenn die
+Synchronization durch ist, werden \code{MenuType}-Objekte gelöscht, welche keine
+zugehörigen \code{Menu}-Objekte haben. Das kann passieren, da durch das Updaten
+der Menus ein altes \code{MenuType}-Objekt existiert, nicht nach der Mensa nie
+existieren sollte.
 
 \newpage
 
