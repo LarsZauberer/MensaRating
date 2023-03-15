@@ -147,11 +147,13 @@ body {
 }
 
 .vegivegan-label {
+    border-radius: 50%;
     max-width: 5em;
     max-height: 5em;
 }
 
 .vegivegan-label-timeline {
+    border-radius: 50%;
     width: 2em;
     height: 2em;
 }
@@ -668,30 +670,136 @@ footer {
     margin: 3px 0 0 0;
 }
 
-#popUp {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    max-width: 316px;
-    transform: translate(-50%, -50%);
-    padding: 12px 8px 12px 8px;
-    background-color: var(--highlightedColor);
-    border-radius: var(--borderRadMenu);
-    box-shadow: 0 0 21px 1000px rgba(0, 0, 0, 0.251), 0 6px 36px -8px rgb(0, 0, 0);
-    display: inline;
-    transition-duration: 140ms;
+.popUp {
+    box-sizing: border-box;
     display: none;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 15em;
+    width: 40% !important;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    
+    padding: 2em;
+    
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    box-shadow: 0 0 21px 1000px rgba(0, 0, 0, 0.251), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-#popUp div {
+@media only screen and (max-width: 1150px) {
+    .popUp {
+      width: 60vw !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .popUp {
+        width: 90vw !important;
+        height: 60vh;
+        font-size: 1.2em;
+    }
+
+    .popUp .popupTitle img {
+        transform: scale(200%);
+    }
+}
+
+.popUp form {
+    height: 100%;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
-#popUp div img {
+.popUp .popupTitle {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+.popUp p {
+    margin-top: 0.7em;
+    margin-bottom: 1em;
+    align-self: flex-start;
+}
+
+.popUp .popupTitle h3 {
+    width: 80%;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0.7em;
+}
+
+.popUp .popupTitle img {
     width: 24px;
-    text-align: right;
-    color: #FF4A4A;
+    align-self: flex-start;
+    cursor: pointer;
+    transition: 140ms;
+}
+
+.popUp .popupTitle img:hover {
+    box-shadow: 0px 0px 10px lightgray;
+    background-color: lightgray;
+}
+
+.popUp form .upload-field {
+    font-family: 'Alegreya Sans', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+.popUp form .uploadButton {
+    height: 30%;
+    width: auto;
+    min-width: fit-content;
+    min-height: 2em;
+    max-width: 12em;
+    max-height: 4em;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    transition: 140ms;
+    border: solid;
+    margin-top: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    align-self: flex-end;
+    margin-right: 0;
+}
+
+@media only screen and (max-width: 700px) {
+    .popUp form .uploadButton {
+      align-self: center;
+      width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .popUp form .uploadButton {
+        font-size: 2em;
+    }
+}
+
+
+.popUp form button:hover {
+    background-color: var(--highlightedColor);
 }
 
 .upload-field {

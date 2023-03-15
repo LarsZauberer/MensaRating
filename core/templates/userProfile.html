@@ -19,25 +19,25 @@
                 <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="">
                 <h3>{{karma}} Cookiepoints</h3>
             </div>
-            <p id="profilePictureChangeButton" class="smallText clickableText" onclick="showPopUp()">Profilbild
+            <p id="profilePictureChangeButton" class="smallText clickableText" onclick="togglePopup('profilePopUp')">Profilbild
                 ändern</p>
-            <div id="popUp">
-                <div onclick="hidePopUp()">
+            <div class="popUp" id="profilePopUp" style="display: none">
+                <div class="popupTitle" onclick="togglePopup('profilePopUp')">
                     <h3>Profilbild ändern</h3>
-                    <img src="{% static 'images/closeIconMaterialSymbol.svg' %}" alt="Abbrechen" class="clickableText">
-                                    </div>
+                    <img src="{% static 'images/closeIconMaterialSymbolBlack.svg' %}" alt="Abbrechen" class="clickableText">
+                </div>
                 <p>Wähle ein Bild und klicke anschliessend "Hochladen"</p>
-                <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ imageForm }}
-                    <button type="submit">Hochladen</button>
+                    <button class="uploadButton" type="submit">Hochladen</button>
                 </form>
             </div>
 
         </div>
         <div class="achievementContainer">
             <h2 class="titleMargin">Deine Achievemntes</h2>
-            <p id="underTitle">Lade Bilder hoch, Kommentiere und Like um Achievments freizuschalten</p>
+            <p id="underTitle">Lade Bilder hoch, kommentiere und like um Achievments freizuschalten</p>
             {% for cat in badges %}
             <div class="badgeview">
                 {% for i in cat %}
