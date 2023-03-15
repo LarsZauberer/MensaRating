@@ -11,6 +11,7 @@ urlpatterns = [
     path('menuType/<int:pk>', menuType, name="menuType"),
     path('timeline', timeline, name="timeline"),
     path('like/<int:cat>/<int:pk>', like, name="like"),
+    path('leaderboard', leaderboard, name="leaderboard"),
     path('', index, name="index"),
 ]
 
