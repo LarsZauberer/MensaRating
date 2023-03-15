@@ -234,14 +234,25 @@
                         {% endif %}
                     </div>
                 </div>
-
+                {% if not badges %}
+                <div class="tooltip badge">
+                    <img src="../static/images/no_badges.png" alt="no_badges" class="badgeImage">
+                    <div class="tooltiptext">
+                        <span style="font-weight: bold;">{{i.name}}</span><br>
+                        <span style="">{{i.description}}</span>
+                    </div>
+                </div>
+                {% else %}
                 {% for i in badges %}
                 <div class="tooltip badge">
-                    <img src="{{i.image.url}}" alt="" class="badgeImage">
-                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
-                            style="">{{i.description}}</span></div>
+                    <img src="{{i.image.url}}" alt="{{i.name}}" class="badgeImage">
+                    <div class="tooltiptext">
+                        <span style="font-weight: bold;">{{i.name}}</span><br>
+                        <span style="">{{i.description}}</span>
+                    </div>
                 </div>
                 {% endfor %}
+                {% endif %}
 
             </div>
             <div class="inReviewDiv" id="middle">
