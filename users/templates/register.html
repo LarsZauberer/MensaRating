@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 
-<body style="background-color: var(--gray-dark)">
-    <section class="login-dark" style="background: var(--gray-dark);">
+<body>
+    <section class="login-dark">
         <form method="post" style="margin-top: 10vh;">
             {% if messages %}
                 {% for i in messages %}
@@ -29,6 +29,7 @@
             {% csrf_token %}
             <h1>Registrieren</h1>
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+            <img src="../../static/images/Logo V0.0.png" alt="" style="background-color: green">
             {{ form|crispy }}
             <script src='https://www.google.com/recaptcha/api.js'></script>
             <div class="g-recaptcha" data-sitekey="6LdqKasaAAAAAH1BkapCKxX-JklZV66VkKc2JZxu" style="margin-left: 50pt;"></div>
