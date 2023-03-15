@@ -15,18 +15,19 @@
 
 Dateien:
 \begin{itemize}
-    \item views.py
-    \item static_statisticFunctions.py
+    \item views.py (\ref{code:core.views.py})
+    \item statistic-functions.py (\ref{code:core.statistic-functions.py})
 \end{itemize}
 
 Menus sind Objekte, welche in der Datenbank als \code{Menu}-Objekt gespeichert
 werden (siehe \ref{fig:DB}, \ref{code:core.models.py}). Jedes \code{Menu} ist
 ein Vorkommen eines Gerichts. Um die verschiedenen Vorkommen der
 \code{Menu}-Objekte zu gruppieren existiert das \code{MenuType}-Objekt.
-Menus mit dem selben Namen wird der gleiche \code{MenuType} zugeordnet.
+Menus mit dem selben Namen wird der gleiche \code{MenuType} zugeordnet. 
 
-Die Menus werden von der Mensa-Website gescraped. Die Synchronization (siehe
-\ref{spez:Webscraper}) findet bei jedem Aufruf einer der Seiten statt.
+Die Menus werden von der Mensa-Website \url{https://neuekanti.sv-restaurant.ch/}
+gescraped. Die Synchronization (siehe \ref{spez:Webscraper}) findet bei jedem
+Aufruf einer der Seiten statt.
 
 Nur wenn das heutige Datum mit dem Datum des Menus übereinstimmt, ist es
 möglich, Bilder zu posten (siehe \ref{spez:Images}), das Menu zu bewerten (siehe
@@ -36,15 +37,15 @@ möglich, Bilder zu posten (siehe \ref{spez:Images}), das Menu zu bewerten (sieh
 
 Dateien:
 \begin{itemize}
-    \item webscraper.py
-    \item models.py
+    \item webscraper.py (\ref{code:core.webscraper.py})
+    \item models.py (\ref{code:core.models.py})
 \end{itemize}
 
 Der Webscraper ist ein standalone Python Script (siehe
 \ref{code:core.webscraper.py}). Der Webscraper stellt mit der Library
 \code{requests} Anfragen an die Webseite
-\url{https://neuekanti.sv-restaurant.ch/de/menuplan/}. Zuerst werden die Tages-
-und Datumsdaten von der Seite geladen. Danach werden die Gerichte (Name,
+\url{https://neuekanti.sv-restaurant.ch/de/menuplan/}. Dabei werden die Tages-
+und Datumsdaten von der Seite geladen und danach werden die Gerichte (Name,
 Beschreibung, Vegan/Vegetarisch) gescraped.
 
 % TODO: Dringens mit den neuen Änderungen umschreiben
@@ -75,7 +76,7 @@ Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
 
 Dateien:
 \begin{itemize}
-    \item statistic_functions.py
+    \item statistic-functions.py (\ref{code:core.statistic-functions.py})
 \end{itemize}
 
 Die Bildergallerie ist ein Frontend Feature. Die Bildergallerie wurde von dem
@@ -101,10 +102,10 @@ Die Reihenfolge der Bilder ist absteigend nach der Anzahl \emph{Likes} (siehe
 
 Dateien:
 \begin{itemize}
-    \item forms.py
-    \item post_functions.py
-    \item models.py
-    \item views.py
+    \item forms.py 
+    \item post-functions.py
+    \item models.py (\ref{code:core.models.py})
+    \item views.py (\ref{code:core.views.py})
 \end{itemize}
 
 Der Begriff "Posts" beschreibt zwei verschiedene Objekte in der Datenbank (siehe
@@ -156,8 +157,8 @@ Sobald die Anfrage zurückkommt, wird der Like Counter aktualisiert.
 
 Dateien:
 \begin{itemize}
-    \item models.py
-    \item statistic_functions.py
+    \item models.py (\ref{code:core.models.py})
+    \item statistic-functions.py (\ref{code:core.statistic-functions.py})
 \end{itemize}
 
 Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und in
@@ -172,9 +173,9 @@ damit sie auf der Webseite angezeigt werden können.
 
 Dateien:
 \begin{itemize}
-    \item views.py
-    \item statistic_functions.py
-    \item allmenu_statistics.js
+    \item views.py (\ref{code:core.views.py})
+    \item statistic-functions.py (\ref{code:core.statistic-functions.py})
+    \item allmenu-statistics.js (\ref{code:static.js.allmenu-statistics.js})
 \end{itemize}
 
 Auflistungen von Menus können gefiltert und sortiert werden. Folgende Filter
@@ -221,7 +222,7 @@ angezeigt werden. Das passiert ebenfalls durch die \code{updateListboxs()} Funkt
 
 Dateien:
 \begin{itemize}
-    \item models.py
+    \item models.py (\ref{code:core.models.py})
 \end{itemize}
 
 Die Entwicklung des Accountsystems ist stark von der diesem Django Tutorial
@@ -263,8 +264,8 @@ In Milestone 1 noch nicht implementiert.
 
 Dateien:
 \begin{itemize}
-    \item models.py
-    \item statistic_functions.py
+    \item models.py (\ref{code:core.models.py})
+    \item statistic-functions.py (\ref{code:core.statistic-functions.py})
 \end{itemize}
 
 Die Erfahrungspunkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
@@ -277,8 +278,8 @@ man Achievements erreichen (siehe \ref{spez:Badges}).
 
 Dateien:
 \begin{itemize}
-    \item models.py
-    \item statistic_functions.py
+    \item models.py (\ref{code:core.models.py})
+    \item statistic-functions.py (\ref{code:core.statistic-functions.py})
 \end{itemize}
 
 Die Achievements werden als \code{Badge}-Objekt in der Datenbank (siehe \ref{fig:DB} und in
@@ -329,7 +330,7 @@ Images/Reviews' in einem MenuType (siehe \ref{spez:Menus}) hat.
 
 Alle erreichten Achievements sind im Profil ersichtlich (siehe \ref{code:core.views.py})
 
-\subsection{Deployment} \label{spez:Deployment}
+\subsection{Deployment}\label{spez:Deployment}
 
 Die Webseite wird auf einem Heroku Eco Dyno gehostet. Die Datenbank wird ebenfalls
 von Heroku auf einem Postgres Server gehostet. Die Bilder werden auf einem
