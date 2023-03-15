@@ -17,6 +17,18 @@ document.addEventListener("DOMContentLoaded", function (e) {
     removeAlertAfterDelay();  // Remove the alert information after 3 seconds.
 })
 
+//Mobile Menu
+function toggleMobileMenu() {
+    console.log("test");
+    const navContainer = document.querySelectorAll("nav");
+    
+    if(navContainer[0].classList.contains("closeMenu")){
+        navContainer[0].classList.remove("closeMenu");
+    }else{
+        navContainer[0].classList.add("closeMenu");
+    }
+}
+
 
 // Change the cursor to a wait cursor
 function change_cursor_wait() {
@@ -90,7 +102,7 @@ function closeAlert(domElement) {
 }
 
 // Toggle the upload popup
-function togglePopup(){
+function togglePopup() {
     popup = document.getElementById("popup");
     if (popup.style.display == "none") {
         popup.style.display = "flex"
@@ -113,25 +125,25 @@ function hidePopUp() {
 }
 
 //calculate the number of the rating into a percentage of the yellow bar representing the stars
-function starRate(index, rating){
+function starRate(index, rating) {
     let star = document.getElementById("stars-" + index);
 
     //convert rating number into string of percentage
     rating = +(rating.replace(",", "."))//convert string-number into float
-    rating = String(rating/5*100) + "%"//convert float to percentage-string
+    rating = String(rating / 5 * 100) + "%"//convert float to percentage-string
 
     star.style.width = rating
 }
 
 //Display of stars when hovering over them (in the case of giving a rating)
-function starHover(stars, i){
-    for(let j = 0; j <= i; j++){
+function starHover(stars, i) {
+    for (let j = 0; j <= i; j++) {
         stars[j].style.backgroundImage = "url('../../static/images/yellowstar.png')"
     }
 }
 //Revert display when hovering ends
-function stopStarHover(){
-    for(let j = 0; j < 5; j++){
+function stopStarHover() {
+    for (let j = 0; j < 5; j++) {
         stars[j].style.backgroundImage = "url('../../static/images/emptystar.png')"
     }
 }
