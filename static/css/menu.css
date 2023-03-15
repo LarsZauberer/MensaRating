@@ -1,5 +1,9 @@
 /* Maintained by: Nicolas and Valentin */
 
+:root {
+    --highlightedColor: #ABC270;
+}
+
 #menu {
     display: flex;
     align-items: center;
@@ -308,7 +312,7 @@ img.portrait {
 }
 
 .success {
-    background-color: green;
+    background-color: var(--highlightedColor);
 }
 
 /* The close button */
