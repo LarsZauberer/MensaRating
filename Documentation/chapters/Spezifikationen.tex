@@ -52,13 +52,24 @@ existieren sollte.
 
 \begin{lstlisting}
     data = scrape_data()
-    for menu, date in data:
+    for index, menu, date in data:
         menus = get_menus_from_db(date=date)
-        if menu not in menus:
-            menu_type = get_menu_type(menu=menu)
-            if menu_type == null:
-                menu_type = create_menu_type(menu, data)
-            create_menu(data, menu_type)
+            if menu[index] exists:
+                menu_type = get_menu_type(menu=menu)
+                if menu_type == null:
+                    menu_type = create_menu_type(menu, data)
+                update_menu(menu[index], data)
+            else:
+                menu_type = get_menu_type(menu=menu)
+                if menu_type == null:
+                    menu_type = create_menu_type(menu, data)
+                create_menu(data, menu_type)
+    
+    // Cleanup
+    all_menu_types = get_all_menu_types()
+    for i in all_menu_types:
+        if len(get_menus_from_db(menu_type=i)) == 0:
+            delete_menu_type(i)
 \end{lstlisting}
 
 (Code in \code{core/webscraper.py})
