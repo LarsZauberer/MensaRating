@@ -130,17 +130,17 @@
     flex-wrap: nowrap;
 }
 
+.inReviewDiv p.reviewText {
+    width: auto;
+}
+
 .inReviewDiv strong,
 .inReviewDiv .italic {
     font-size: 1.2em;
 }
 
-.inReviewDiv img {
-    height: 1.2em;
-}
-
 .inReviewDiv .profilePicture {
-    align-self: center;
+    align-self: flex-start;
     width: 2.2rem;
     height: 2.2rem;
     margin-right: 6px;
@@ -152,7 +152,12 @@
 
 .cookieContainer {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    height: auto;
+}
+
+.cookieContainer img {
+    height: 1.2em;
 }
 
 .like-btn {

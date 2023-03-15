@@ -451,18 +451,20 @@ footer {
 
 .badge {
     display: inline-block;
-    width: 3em;
+    width: auto;
     height: auto;
     margin: 10px;
 }
 
 .badgeImage {
-    width: 3em;
-    height: auto;
+    width: 2em;
+    height: 2em;
+    margin: 0 0 0 0;
 }
 
 .tooltip {
     position: relative;
+    margin: 0 0 0 0.5em;
 }
 
 .tooltip .tooltiptext {
