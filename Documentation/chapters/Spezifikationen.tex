@@ -13,6 +13,12 @@
 \section{Anforderungen} \label{sec:Anforderungen}
 \subsection{Menus} \label{spez:Menus}
 
+Dateien:
+\begin{itemize}
+    \item views.py
+    \item static_statisticFunctions.py
+\end{itemize}
+
 Menus sind Objekte, welche in der Datenbank als \code{Menu}-Objekt gespeichert
 werden (siehe \ref{fig:DB}, \ref{code:core.models.py}). Jedes \code{Menu} ist
 ein Vorkommen eines Gerichts. Um die verschiedenen Vorkommen der
@@ -27,6 +33,12 @@ möglich, Bilder zu posten (siehe \ref{spez:Images}), das Menu zu bewerten (sieh
 \ref{spez:Rating}) und die Posts zu liken (siehe \ref{spez:Liking}).
 
 \subsection{Webscraper} \label{spez:Webscraper}
+
+Dateien:
+\begin{itemize}
+    \item webscraper.py
+    \item models.py
+\end{itemize}
 
 Der Webscraper ist ein standalone Python Script (siehe
 \ref{code:core.webscraper.py}). Der Webscraper stellt mit der Library
@@ -61,6 +73,11 @@ Daten erstellt. Sonst wird nur das \code{Menu}-Objekt erstellt.
 
 \subsection{Bilder Gallerie} \label{spez:Gallerie}
 
+Dateien:
+\begin{itemize}
+    \item statistic_functions.py
+\end{itemize}
+
 Die Bildergallerie ist ein Frontend Feature. Die Bildergallerie wurde von dem
 Tutorial auf dieser Seite nachgemacht:
 \url{https://www.w3schools.com/howto/howto_js_slideshow.asp}. Die Bildergallerie
@@ -69,16 +86,26 @@ wird gebraucht, damit die Images (siehe \ref{spez:Images}) der Menus (siehe
 
 Im Javascript werden die verschiedenen Bilder in einem Array gespeichert. Nur
 das aktive Bild bekommt den style \code{display: block}. Die anderen Bilder
-haben \code{display: none}.
-
-Wenn es noch keine Bilder von einem Menu gibt, dann wird ein default Bild
-angezeigt.
+haben \code{display: none}. Wenn es noch keine Bilder von einem Menu gibt, dann
+wird ein default Bild angezeigt.
 
 Da Bilder Hoch- oder Querformat sein können, werden sie auf ihre Orientierung
 überprüft. Wenn das Bild Hochformat ist, dann wird es im css anders
 behandelt.
 
+Die Reihenfolge der Bilder ist absteigend nach der Anzahl \emph{Likes} (siehe
+\ref{spez:Liking}) jedes Bilds sortiert
+
+
 \subsection{Posts} \label{spez:Posts}
+
+Dateien:
+\begin{itemize}
+    \item forms.py
+    \item post_functions.py
+    \item models.py
+    \item views.py
+\end{itemize}
 
 Der Begriff "Posts" beschreibt zwei verschiedene Objekte in der Datenbank (siehe
 \ref{fig:DB}). Es gibt kein übergeordnetes Objekt Posts. Als Posts werden Images
@@ -127,6 +154,12 @@ Sobald die Anfrage zurückkommt, wird der Like Counter aktualisiert.
 
 \subsection{Rating} \label{spez:Rating}
 
+Dateien:
+\begin{itemize}
+    \item models.py
+    \item statistic_functions.py
+\end{itemize}
+
 Ein Rating ist ein Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}). Ein Rating ist eine Bewertung für ein Menu-Objekt
 (siehe \ref{spez:Menus}). Ein Rating hat einen Wert zwischen 1 und 5.
@@ -136,6 +169,13 @@ damit sie auf der Webseite angezeigt werden können.
 
 
 \subsection{Statistik: Filter und Sortierung} \label{spez:Statistik}
+
+Dateien:
+\begin{itemize}
+    \item views.py
+    \item statistic_functions.py
+    \item allmenu_statistics.js
+\end{itemize}
 
 Auflistungen von Menus können gefiltert und sortiert werden. Folgende Filter
 können durch einen Button ausgewählt werden: nur vegan, nur vegetarisch und kein
@@ -179,10 +219,16 @@ angezeigt werden. Das passiert ebenfalls durch die \code{updateListboxs()} Funkt
 
 \subsection{Account System} \label{spez:Account}
 
-Die Entwicklung des Accountsystems ist stark von der diesem Django inspiriert
+Dateien:
+\begin{itemize}
+    \item models.py
+\end{itemize}
+
+Die Entwicklung des Accountsystems ist stark von der diesem Django Tutorial
+inspiriert
 (\url{https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p}).
 Allerdings wurde der Code in verschiedenen Projekten bereits verwendet und
-dadurch immer weiter entwickelt und vom Tutorial unabhängig gemacht.
+unterscheidet sich mittlerweile stark vom Tutorial
 
 Django hat ein eingebautes Accountsystem. Dieses Accountsystem wird in die
 Webseite integriert (siehe \ref{code:users.views.py}). Es bietet folgende
@@ -215,15 +261,25 @@ In Milestone 1 noch nicht implementiert.
 
 \subsection{Punktesystem (Karma)} \label{spez:Karma}
 
+Dateien:
+\begin{itemize}
+    \item models.py
+    \item statistic_functions.py
+\end{itemize}
+
 Die Erfahrungspunkte, auch Karma genannt, werden in \code{Profil}-Objekt (siehe
-\ref{fig:DB} und \ref{code:core.models.py}) gespeichert.
-
-Man kann Punkte für das Veröffentlichen von Posts (siehe \ref{spez:Posts}) und für
-Likes auf den eigenen Posts bekommen. (Funktion \code{add\_karma\_for\_posting})
-
-Mit den Punkten kann man Achievements erreichen (siehe \ref{spez:Badges}).
+\ref{fig:DB} und \ref{code:core.models.py}) gespeichert. Man kann Punkte für das
+Veröffentlichen von Posts (siehe \ref{spez:Posts}) und für Likes auf den eigenen
+Posts bekommen. (Funktion \code{add\_karma\_for\_posting}). Mit den Punkten kann
+man Achievements erreichen (siehe \ref{spez:Badges}).
 
 \subsection{Achievements (Badges)} \label{spez:Badges}
+
+Dateien:
+\begin{itemize}
+    \item models.py
+    \item statistic_functions.py
+\end{itemize}
 
 Die Achievements werden als \code{Badge}-Objekt in der Datenbank (siehe \ref{fig:DB} und in
 \ref{code:core.models.py}) gespeichert. Die Objekte werden keinem User
@@ -233,7 +289,7 @@ hat.
 \begin{lstlisting}
     def get_badges_of_profil(profil):
         badges = Badge.objects.all()
-
+ 
         img_counter = count_best_image_of_profil(profil=profil)
         review_counter = count_best_review_of_profil(profil=profil)
         karma = profil.karma
@@ -253,8 +309,6 @@ hat.
 \end{lstlisting}
 
 (Code in \code{core/statisticFunctions.py})
-
-
 
 Es gibt 3 verschiedene Kategorien von Achievements.
 \begin{itemize}
