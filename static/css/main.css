@@ -891,6 +891,7 @@ table p {
 
     .content {
         width: 90%;
+        margin-top: 0.6em;
     }
 
     /* Menu Site */
