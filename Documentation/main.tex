@@ -86,6 +86,7 @@ natbib=true]{biblatex}
 \usepackage{cleveref}
 \usepackage[babel, german=quotes]{csquotes}
 \usepackage{listings}
+\usepackage{datetime}
 \newcommand{\code}[1]{\texttt{#1}}
 \lstset{extendedchars=\true}
 \lstset{inputencoding=utf8}
@@ -104,6 +105,7 @@ natbib=true]{biblatex}
 \renewcommand\cite{\citep}
 
 \selectlanguage{ngerman}
+\newdateformat{dateFormat}{\THEDAY{. }\monthnamengerman[\THEMONTH], \THEYEAR}
 %% Document information
 %% ====================
 
@@ -111,7 +113,7 @@ natbib=true]{biblatex}
 \author{Ian Wasser, Robin Steiner, Nicolas Kaufmann, Valentin Gisi}
 \thesistype{EINF Projekt: Milestone II}
 \advisors{Betreut durch: Martina Vàzquez}
-\date{19. Februar 2023}
+\date{\dateFormat\today}
 
 \begin{document}
 
