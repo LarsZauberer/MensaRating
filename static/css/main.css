@@ -637,9 +637,9 @@ footer {
 
 .userNameContainer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    min-width: 10em;
     margin: 0 1.5rem 0.6rem 0;
 }
 
@@ -672,6 +672,16 @@ footer {
 
 #profilePictureChangeButton {
     margin: 3px 0 0 0;
+}
+
+.achievementContainer {
+    width: 80%;
+}
+
+.space {
+    display: none;
+    height: 1em;
+    width: 100%;
 }
 
 #popUp {
@@ -945,4 +955,55 @@ table p {
         width: 80%;
     }
 
+    .userPageHeader {
+        flex-direction: column;
+    }
+
+    .userNameContainer {
+        margin-bottom: 2em;
+    }
+
+    .badgeview {
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 1em;
+    }
+
+    .badgeview .badgeBig {
+        width: 20%;
+        height: calc(100vw/6);
+        margin: 0.5em 0 0.5em 0;
+    }
+
+    .badgeview .badgeBig img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: calc(100vw/6);
+    }
+
+    .achievementContainer {
+        width: 100%;
+    }
+
+    .space {
+        display: block;
+    }
+
+    .achievementCollection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .badgeview:nth-child(odd) {
+        background-color: #f0f0f0;
+    }
+
+    .achievementContainer p {
+        margin-top: 0.5em;
+        margin-bottom: 2em !important;
+    }
 }
