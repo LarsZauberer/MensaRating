@@ -80,13 +80,17 @@ function updateListboxs() {
 
             let vegivegan = menuTypeObject[1].children;
 
-            vegivegan[0].style.width = vegivegan[0].style.height = "0";
-            vegivegan[1].style.width = vegivegan[1].style.height = "0";
-            if (menuType.vegetarian == "True") {
-                vegivegan[0].style.width = vegivegan[0].style.height = "100%"; //show vegetarian label
-            } else if (menuType.vegan == "True") {
-                vegivegan[1].style.width = vegivegan[1].style.height = "100%"; //show vegan label
+            if (menuType.vegan == "True") {
+                vegivegan[1].style.display = "block"; //show vegan label
+                vegivegan[0].style.display = "none"; //don't show vegetarian label
+            } else if (menuType.vegetarian == "True") {
+                vegivegan[0].style.display = "block"; //show vegetarian label
+                vegivegan[1].style.display = "none"; //don't show vegan label
+            } else {
+                vegivegan[0].style.display = "none"; //don't show vegetarian label
+                vegivegan[0].style.display = "none"; //don't show vegan label
             }
+            
             //update Rating
             rating = menuTypeObject[3].children
             starRate(i, menuType.rating)
