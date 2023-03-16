@@ -20,20 +20,21 @@ body {
 }
 
 .login-dark {
-  height: 1000px;
-  position: relative;
+  height: auto;
   background-color: var(--highlightedColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .login-dark form {
   max-width: 500px;
   width: 90%;
   background-color: var(--accentColor);
   padding: 40px;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   border-radius: var(--borderRadMenu);
-  transform: translate(-50%, -50%);
-  position: absolute;
-  top: 50%;
-  left: 50%;
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -87,4 +88,10 @@ body {
 }
 .login-dark form .btn-primary:active {
   transform: translateY(1px);
+}
+
+.g-recaptcha {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
