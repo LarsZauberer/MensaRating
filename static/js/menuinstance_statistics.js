@@ -76,7 +76,7 @@ function updateListboxs() {
             menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';") //assign correct link to menu
             menuTypeObject = menuTypeObject.children
             menuTypeObject[0].innerHTML = menuType.name //first div == name
-            menuTypeObject[2].innerHTML = "<p>" + menuType.date + "</p>" //second div == date
+            menuTypeObject[2].innerHTML = "<p class='instanceDate'>" + menuType.date + "</p>" //second div == date
 
             let vegivegan = menuTypeObject[1].children;
 
@@ -90,7 +90,7 @@ function updateListboxs() {
                 vegivegan[0].style.display = "none"; //don't show vegetarian label
                 vegivegan[0].style.display = "none"; //don't show vegan label
             }
-            
+
             //update Rating
             rating = menuTypeObject[3].children
             starRate(i, menuType.rating)

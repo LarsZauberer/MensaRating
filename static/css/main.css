@@ -313,6 +313,8 @@ footer {
 .menuListbox h3 {
     width: 20%;
     min-width: 10%;
+    flex-shrink: 0;
+    margin-right: 1em;
 }
 
 .menuListbox .timelineDescription {
@@ -509,6 +511,11 @@ footer {
 
 .menuListbox .rating .ratingText p:first-child {
     margin-right: 0.5em;
+}
+
+.menuListbox .instanceDate {
+    width: 10em;
+    text-align: center;
 }
 
 .stars {
@@ -928,6 +935,20 @@ table p {
 }
 
 /* Mobile Responsive */
+@media (max-width: 830px) {
+    .menuListbox .timelineDescription {
+        display: none;
+    }
+
+    .menuListbox .menuListOccurrences {
+        margin-left: 1em;
+    }
+
+    .menuListbox {
+        gap: 0;
+    }
+}
+
 @media (max-width: 746px) {
 
     /* Mobile Class */
@@ -947,7 +968,7 @@ table p {
 
     header {
         width: calc(100% - 3.5em);
-        padding: 1em 1em 0.5em 1em;
+        padding: 1em 1em 1em 1em;
         margin: 0.75em auto 0 auto;
         border-radius: var(--borderRadMenu) var(--borderRadMenu) 0 0;
         z-index: 10;
@@ -1032,6 +1053,10 @@ table p {
     }
 
     /*MenuType Site*/
+
+    .menuListbox .instanceDate {
+        text-align: left;
+    }
 
     /* MenuType Site and MenuType search */
     .fade-scroll-top {
