@@ -48,9 +48,11 @@
 </head>
 
 <body>
-    <header>
-        <img id="mobileMenuOpener" class="onlyMobile clickableText" onclick="toggleMobileMenu()" src="{% static 'images/burgerMenuIconMaterialSymbol.svg' %}"
-                alt="Menu">
+    <header class="allBorder">
+        <img id="mobileMenuOpener" class="onlyMobile clickableText" onclick="toggleMobileMenu()"
+            src="{% static 'images/burgerMenuIconMaterialSymbol.svg' %}" alt="Menu">
+        <img id="mobileMenuCloser" class="onlyMobile clickableText closeMenu" onclick="toggleMobileMenu()"
+            src="{% static 'images/closeMenuIconMaterialSymbol.svg' %}" alt="Schliessen">
         <p>
             <img id="headerLogo" onclick="location.href='{% url 'index' %}';" src="{% static 'images/Logo V0.0.png' %}"
                 alt="🍽️MENSA APP">
@@ -71,7 +73,7 @@
         </div>
     </header>
 
-    <nav>
+    <nav class="mobileMenuNav closeMenu">
         <div class="menuItem" onclick="location.href='{% url 'index' %}';">
             <a href="{% url 'index' %}">Heute</a>
         </div>

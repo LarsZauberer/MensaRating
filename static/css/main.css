@@ -807,39 +807,60 @@ table p {
 
 /* Mobile Responsive */
 @media (max-width: 746px) {
-    
+
     /* Mobile Class */
     .onlyMobile {
         display: block;
     }
-    
+
     .onlyDesktop {
         display: none;
     }
-    
+
     /* Mobile Menu */
-    #mobileMenuOpener {
+    #mobileMenuOpener,
+    #mobileMenuCloser {
         width: 3em;
     }
-    
+
     header {
         width: calc(100% - 3.5em);
         padding: 1em 1em 0.5em 1em;
         margin: 0.75em auto 0 auto;
-        border-top-right-radius: var(--borderRadMenu);
-        border-top-left-radius: var(--borderRadMenu);
+        border-radius: var(--borderRadMenu) var(--borderRadMenu) 0 0;
+        z-index: 10;
     }
-    
+
+    .allBorder {
+        border-radius: var(--borderRadMenu);
+    }
+
     nav {
         width: calc(100% - 1.5em);
         margin: 0 auto 0 auto;
         background-color: var(--highlightedColor);
-        border-bottom-left-radius: var(--borderRadMenu);
-        border-bottom-right-radius: var(--borderRadMenu);
+        border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
         display: block;
+        animation-name: mobileMenuNav;
+        animation-duration: 140ms;
+        transform: translate(0, -1px);
     }
-    
-    .closeMenu{
+
+    @keyframes mobileMenuNav {
+        from {
+            transform: translate(0, -70px);
+        }
+
+        to {
+            transform: translate(0, 0);
+        }
+    }
+
+    nav .menuItem {
+        font-size: 1.5em;
+    }
+
+    .closeMenu {
         display: none;
     }
 

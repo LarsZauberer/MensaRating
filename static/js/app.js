@@ -20,12 +20,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
 //Mobile Menu
 function toggleMobileMenu() {
     console.log("test");
+    const header = document.querySelectorAll("header");
     const navContainer = document.querySelectorAll("nav");
+    const menuOpener = document.getElementById("mobileMenuOpener");
+    const menuCloser = document.getElementById("mobileMenuCloser");
     
     if(navContainer[0].classList.contains("closeMenu")){
+        // Menü anzeigen
         navContainer[0].classList.remove("closeMenu");
+        header[0].classList.remove("allBorder");
+        // Icon ändern
+        menuOpener.classList.add("closeMenu");
+        menuCloser.classList.remove("closeMenu");
+        
     }else{
+        // Menü verschwinden lassen
         navContainer[0].classList.add("closeMenu");
+        header[0].classList.add("allBorder");
+        // Icon ändern
+        menuCloser.classList.add("closeMenu");
+        menuOpener.classList.remove("closeMenu");
     }
 }
 
