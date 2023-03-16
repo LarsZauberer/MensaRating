@@ -97,7 +97,7 @@ function updateListboxs() {
             //update Rating
             rating = menuTypeObject[3].children
             starRate(i, menuType.rating)
-            rating[2].innerHTML = "<p>von " + menuType.numrates + "</p>"
+            rating[2].innerHTML = "<p>von </p><p class='ratingNumber'>" + menuType.numrates + "</p>"
         }
     }
 }

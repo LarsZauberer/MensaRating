@@ -497,6 +497,18 @@ footer {
 
 .menuListbox .rating {
     margin: 0 !important;
+    justify-content: flex-end;
+}
+
+.menuListbox .rating .ratingText {
+    min-width: 3.5em;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.menuListbox .rating .ratingText p:first-child {
+    margin-right: 0.5em;
 }
 
 .stars {
@@ -1049,6 +1061,10 @@ table p {
 
     .menuListbox .menuListOccurrences {
         margin: 0;
+    }
+
+    .menuListbox .rating {
+        justify-content: flex-start;
     }
 
     /* User Profile */
