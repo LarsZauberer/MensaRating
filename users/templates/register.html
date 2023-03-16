@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 
-<body style="background-color: var(--gray-dark)">
-    <section class="login-dark" style="background: var(--gray-dark);">
-        <form method="post" style="margin-top: 10vh;">
+<body>
+    <section class="login-dark">
+        <form method="post">
             {% if messages %}
                 {% for i in messages %}
                 {% autoescape off %}
@@ -31,7 +31,7 @@
             <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
             {{ form|crispy }}
             <script src='https://www.google.com/recaptcha/api.js'></script>
-            <div class="g-recaptcha" data-sitekey="6LdqKasaAAAAAH1BkapCKxX-JklZV66VkKc2JZxu" style="margin-left: 50pt;"></div>
+            <div class="g-recaptcha" data-sitekey="6LdqKasaAAAAAH1BkapCKxX-JklZV66VkKc2JZxu"></div>
 
             <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Registrieren</button></div><a class="forgot" href="{% url 'login' %}">Du hast schon einen Account?</a>
         </form>
