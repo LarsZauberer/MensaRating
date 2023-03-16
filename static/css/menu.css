@@ -150,9 +150,37 @@
     flex-grow: 2;
 }
 
+.imageLikeDisplay {
+    background-color: var(--accentColor);
+    height: 2.8em;
+    width: 4em;
+    
+    margin-right: 0.5em;
+
+    border-style: solid;
+    border-color: black;
+    border-radius: var(--borderRadMenu);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 140ms;
+}
+
+.imageLikeDisplay:hover {
+    background-color: var(--highlightedColor);
+    cursor: pointer;
+}
+
 .cookieContainer {
     display: flex;
-    align-items: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 2em;
+
+    user-select: none;
+
     height: auto;
 }
 
@@ -196,20 +224,54 @@
     display: block;
 }
 
-.prev,
-.next {
+.slideshowButton {
     cursor: pointer;
     position: absolute;
     top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: gray;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+
+    width: 2em;
+    height: 3em;
+
+    background-color: rgb(248, 248, 248);
+
+    transition: 100ms ease;
     user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshowButton:hover {
+    width: 2.15em;
+    height: 3.2em;
+}
+
+.slideshowButton p {
+    color: var(--greyText);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0.05em;
+}
+
+#prev {
+    transform: translate(-5%, -50%);
+    border-radius: 0 0.2em 0.2em 0;
+}
+
+#next {
+    right: 0;
+
+    transform: translate(5%, -50%);
+    border-radius:0.2em 0 0 0.2em;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
 
 .imageImage {
@@ -222,19 +284,6 @@
 img.portrait {
     height: 60vh;
     width: auto;
-}
-
-.imgContainer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
 }
 
 .imageUserText {
@@ -268,7 +317,7 @@ img.portrait {
 
 .imageLikeText {
     color: gray;
-    margin-right: 2em;
+    margin-bottom: 0.1em;
 }
 
 /* Fading animation */
@@ -347,5 +396,14 @@ img.portrait {
         order: 3;
         width: 100%;
         margin-top: 0;
+    }
+
+    .slideshowButton {
+        width: 3em;
+        height: 4em;
+    }
+
+    .slideshowButton p {
+        font-size: 1.5em;
     }
 }
