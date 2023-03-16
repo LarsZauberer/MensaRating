@@ -154,3 +154,5 @@ cred/*
 *.thm
 
 /Documentation/main.pdf
+.DS_Store
+static/.DS_Store

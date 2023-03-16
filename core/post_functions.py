@@ -34,7 +34,7 @@ def postReview(request, pk, form):
     
     # Add Karma
     add_karma_for_posting(review)
-    return ("Success!", 0)
+    return ("Kommentar erfolgreich gepostet!", 0)
 
 
 def postImage(request, pk, form):
@@ -67,7 +67,7 @@ def postImage(request, pk, form):
     # Add Karma
     add_karma_for_posting(image)
     
-    return ("Success!", 0)
+    return ("Bild erfolgreich hochgeladen!", 0)
 
 
 def postRating(request, pk, form):
@@ -101,7 +101,11 @@ def postRating(request, pk, form):
             rating = rating[0]
             rating.rating = form.cleaned_data.get("rating")
             rating.save()
-            return ("Success!", 0)
+            if rating.rating > 1:
+                sing_plur = "Sternen"
+            else:
+                sing_plur = "Stern"
+            return ("Menü mit " + str(rating.rating) + " " + sing_plur +" bewertet!", 0)
     
     # Create rating object
     rating = form.instance

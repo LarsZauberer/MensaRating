@@ -116,26 +116,15 @@ function closeAlert(domElement) {
 }
 
 // Toggle the upload popup
-function togglePopup() {
-    popup = document.getElementById("popup");
+function togglePopup(popup_id){
+    popup = document.getElementById(popup_id);
+    
     if (popup.style.display == "none") {
-        popup.style.display = "flex"
+        popup.style.display = "flex";
     }
-    else {
-        popup.style.display = "none"
+    else if (popup.style.display == "flex") {
+        popup.style.display = "none";
     }
-}
-
-// Show popup to change profile picture
-function showPopUp() {
-    console.log("test");
-    document.getElementById("popUp").style.display = "block";
-}
-
-// Hide popup to change profile picture
-function hidePopUp() {
-    console.log("test2");
-    document.getElementById("popUp").style.display = "none";
 }
 
 //calculate the number of the rating into a percentage of the yellow bar representing the stars
