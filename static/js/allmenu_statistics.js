@@ -78,7 +78,7 @@ function updateListboxs() {
             menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';") //assign correct link to menu
             menuTypeObject = menuTypeObject.children
             menuTypeObject[0].innerHTML = menuType.name //first div == name
-            
+
             let vegivegan = menuTypeObject[1].children;
 
             if (menuType.vegan == "True") {
@@ -96,9 +96,8 @@ function updateListboxs() {
 
             //update Rating
             rating = menuTypeObject[3].children
-            rating[0].innerHTML = menuType.rating
             starRate(i, menuType.rating)
-            rating[2].innerHTML = "(" + menuType.numrates + ")"
+            rating[2].innerHTML = "<p>von " + menuType.numrates + "</p>"
         }
     }
 }

@@ -36,23 +36,26 @@
 
         </div>
         <div class="achievementContainer">
-            <h2 class="titleMargin">Deine Achievemntes</h2>
-            <p id="underTitle">Lade Bilder hoch, kommentiere und like um Achievments freizuschalten</p>
-            {% for cat in badges %}
-            <div class="badgeview">
-                {% for i in cat %}
-                <div class="tooltip badgeBig">
-                    {% if i.1 %}
-                    <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
-                    {% else %}
-                    <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
-                    {% endif %}
-                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span
-                            style="">{{i.0.description}}</span></div>
+            <h2 class="titleMargin">Deine Achievements</h2>
+            <p id="underTitle">Lade Bilder hoch, Kommentiere und Like um Achievments freizuschalten</p>
+            <div class="achievementCollection">
+                {% for cat in badges %}
+                <div class="badgeview">
+                    {% for i in cat %}
+                    <div class="tooltip badgeBig">
+                        {% if i.1 %}
+                        <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
+                        {% else %}
+                        <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
+                        {% endif %}
+                        <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span
+                                style="">{{i.0.description}}</span></div>
+                    </div>
+                    {% endfor %}
                 </div>
                 {% endfor %}
             </div>
-            {% endfor %}
+            <div class="space"></div>
         </div>
     </div>
     <div class="line"></div>
