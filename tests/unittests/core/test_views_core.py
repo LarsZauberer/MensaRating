@@ -214,7 +214,7 @@ class TestViewsCore(TestCase):
     def test_menuType_get(self):
         client = Client()
         
-        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu", date=dt.date(2018, 1, 1)))
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"), date=dt.date(2018, 1, 1))
         
         response = client.get(reverse("menuType", args=(menu.menuType.pk,)))
         
