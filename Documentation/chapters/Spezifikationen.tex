@@ -268,6 +268,7 @@ die \code{updateListboxs()} Funktion.
 Dateien:
 \begin{itemize}
     \item users/views.py
+    \item core/models.py
 \end{itemize}
 
 Die Entwicklung des Account Systems ist stark von folgendem Django Tutorial
@@ -290,7 +291,7 @@ Webseite integriert. Es bietet folgende Funktionen:
 
 Beim Registrieren wird ein \code{User}-Objekt in der Datenbank (noch nicht in
 der models.py Datei) erstellt. Danach wird ein \code{Profil}-Objekt (siehe
-\ref{code:users.models.py} und \ref{fig:DB}) erstellt. Beim Registrieren gibt es
+\ref{code:core.models.py} und \ref{fig:DB}) erstellt. Beim Registrieren gibt es
 ausserdem eine ReCaptcha-Überprüfung (users/views.py), damit die Datenbank nicht
 von Spam durch Bots überfallen wird. Eine Email-Verifikation gibt es nicht.
 
