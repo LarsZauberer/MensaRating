@@ -173,6 +173,15 @@
     cursor: pointer;
 }
 
+.disabled {
+    pointer-events: none;
+}
+
+#imageLikesProfile {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
 .cookieContainer {
     display: flex;
     justify-content: space-between;
