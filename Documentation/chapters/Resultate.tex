@@ -98,7 +98,7 @@ Anzahl Likes. Der Upload findet über einen Upload Button statt, der ein Pop-Up
 Am Tag, an dem es ein bestimmtes Menu gibt, kann diesem Menu ein Review (siehe
 \ref{fig:r-review}) gegeben werden. Die Reviews sind in einer Liste angeordet
 und bei jedem Review ist der User angegeben, zusammen mit seinen Achievements
-und Karma Punkten. Reviews können geliked werden (Beachte das Herz).
+und Karma Punkten. Reviews können geliked werden (beachte das Herz).
 
 \subsubsection*{Rating}
 
@@ -109,8 +109,8 @@ und Karma Punkten. Reviews können geliked werden (Beachte das Herz).
     \label{fig:r-rating}
 \end{figure}
 
-Ein User kann einem Menu als Rating eienen bis fünf Sterne gebe. Der User drückt
-dabei auf die Anzahl sterne, die er geben will. Der Durchschnitt des Ratings
+Ein User kann einem Menu als Rating einen bis fünf Sterne gebe. Der User drückt
+dabei auf die Anzahl Sterne, die er geben will. Der Durchschnitt des Ratings
 wird ebenfalls in der Form von Sternen angezeigt. Dabei kann es auch nicht volle
 Sterne geben (siehe \ref{fig:r-rating}) 
 
@@ -261,6 +261,8 @@ Zu jedem Achievement gibt es eine kurze Beschreibung (siehe
 Mauszeiger über dem Achievement hovered. Ausserdem werden die Achievements neben
 dem User bei seinen Posts angezeigt (siehe \ref{fig:r-username-display}).
 
+\newpage
+
 \subsubsection*{Deployment}
 
 \begin{figure}[ht]
@@ -274,6 +276,36 @@ Die Webseite wurde auf Heroku (siehe Interface der Heroku App
 \ref{fig:r-deployment}) mit einem Eco-Server und einer Postgres Datenbank
 veröffentlicht.
 
+\newpage
 
+\subsection{Datenbank}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Resultat-Adminpanel.png}
+    \caption{Screenshot: Admin panel Web Page von Django}
+    \label{fig:r-adminpanel}
+\end{figure}
+
+\begin{figure}[htp]
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/Resultat-admin-menulist.png}
+        \caption{Screenshot: Menu Einträge in Datenbank}
+        \label{fig:r-adminpanel-menulist}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/Resultat-admin-menu.png}
+        \caption{Screenshot: Spezifischer Menu Eintrag}
+        \label{fig:r-adminpanel-menu}
+    \end{subfigure}
+    \hfill
+\end{figure}
+
+
+Auf dem bereitgestellten Admin Panel von Django (siehe \ref{fig:r-adminpanel})
+können Administratoren Einträge in der Datenbank hinzufügen, löschen und
+verändern.
 
 

@@ -267,8 +267,7 @@ die \code{updateListboxs()} Funktion.
 
 Dateien:
 \begin{itemize}
-    \item users/models.py (\ref{code:users.models.py})
-    \item users/views.py (\ref{code:users.views.py})
+    \item users/views.py
 \end{itemize}
 
 Die Entwicklung des Account Systems ist stark von folgendem Django Tutorial
@@ -278,8 +277,7 @@ Allerdings wurde der Code in verschiedenen Projekten bereits verwendet und
 unterscheidet sich mittlerweile stark vom Tutorial.
 
 Django hat ein eingebautes Account System. Dieses Account System wird in die
-Webseite integriert (siehe \ref{code:users.views.py}). Es bietet folgende
-Funktionen:
+Webseite integriert. Es bietet folgende Funktionen:
 \begin{itemize}
     \item register
     \item login
@@ -293,11 +291,11 @@ Funktionen:
 Beim Registrieren wird ein \code{User}-Objekt in der Datenbank (noch nicht in
 der models.py Datei) erstellt. Danach wird ein \code{Profil}-Objekt (siehe
 \ref{code:users.models.py} und \ref{fig:DB}) erstellt. Beim Registrieren gibt es
-ausserdem eine ReCaptcha-Überprüfung (siehe \ref{code:users.views.py}), damit
-die Datenbank nicht von Spam durch Bots überfallen wird. Eine Email-Verifikation
-gibt es nicht.
+ausserdem eine ReCaptcha-Überprüfung (users/views.py), damit die Datenbank nicht
+von Spam durch Bots überfallen wird. Eine Email-Verifikation gibt es nicht.
 
-Die Login und Logout funktionen sind direkt von Django implementiert (siehe users/urls.py)
+Die Login und Logout funktionen sind direkt von Django implementiert (siehe
+users/urls.py)
 
 Die Funktion: `Password Reset' funktioniert über die angegebene Email Adresse
 bei der Registrierung. Es wird ein sicherer Token für den Password Reset an die
