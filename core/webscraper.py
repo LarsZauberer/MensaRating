@@ -160,6 +160,14 @@ def sync_today_menu():
         # If the menu is in the database, update it
         # If the menu is not in the new data, delete it
         
+        while len(menus) > len(data[key].keys()):
+            # There are more menus in the database than in the new data
+            # -> Delete the menus that are not in the new data
+            log.error(f"There are more menus in the database than in the new data")
+            menus[len(menus)-1].delete()
+            menus = Menu.objects.filter(date=date)
+            
+        
         for index, item in enumerate(data[key].keys()):
             # Blacklist menus
             if data[key][item]['title'] in BLACKLIST:
