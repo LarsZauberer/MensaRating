@@ -137,8 +137,6 @@ ein Grün gewählt, an vielen Formen sind die Ecken abgerundet und die
 verschiedenen Aktionen auf der Webseite sollten für den User so einfach wie
 möglich gestaltet sein
 
-
-
 \subsection{Resultate der Erweiterungskriterien}
 
 \subsubsection*{Account System}
@@ -193,11 +191,11 @@ ausloggen und sein Passwort zurücksetzen.
     \label{fig:r-karma}
 \end{figure}
 
-User erhalten für Interaktionen auf der Webseite so genannte Cookiepoints. Das
-Geben eines Ratings gibt einen Cookiepoint und das Hochladen eines Bildes oder
-Reviews gibt 5 Cookiepoints. Wenn ein Post geliked wird (siehe
-\ref{spez:Posts}), erhält der User, der geposted hat, einen Cookiepoint. 
-
+User erhalten für Interaktionen auf der Webseite so genannte Cookiepoints (siehe
+\ref{fig:r-karma}). Das Geben eines Ratings gibt einen Cookiepoint und das
+Hochladen eines Bildes oder Reviews gibt 5 Cookiepoints. Wenn ein Post geliked
+wird (siehe \ref{spez:Posts}), erhält der User, der geposted hat, einen
+Cookiepoint. 
 
 \begin{figure}[ht]
     \centering
@@ -211,6 +209,41 @@ sich auf die Cookiepoints. Der User hat eine Angabe, wo er sich auf der
 Rangliste befindet.
 
 \subsubsection*{Achievement System}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/Resultate_Achievements.png}
+    \caption{Screenshot: Achievements Liste (Profil Page)}
+    \label{fig:r-Achievement}
+\end{figure} 
+
+User können Achievements (siehe \ref{fig:r-Achievement}) erhalten. Die Bedinungen, um die Achievements zu
+erhalten, sind in den Spezifikationen definiert (siehe \ref{spez:Badges}). Es
+gibt fünf Achievements pro Kategorie. Wenn von einer Kategorie ein besseres
+Achievement freigeschalten wird, wird dem User das Alte Achievement wieder
+entzogen.
+
+\begin{figure}[htp]
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/Resultat-Beschreibung.png}
+        \caption{Screenshot: Bildergallerie}
+        \label{fig:r-Achievement-beschreibung}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/Resultat-Username.png}
+        \caption{Screenshot: Bilder Upload}
+        \label{fig:r-username-display}
+    \end{subfigure}
+    \hfill
+\end{figure}
+
+Zu jedem Achievement gibt es eine kurze Beschreibung (siehe
+\ref{fig:r-Achievement-beschreibung}), die angezeigt wird, wenn der User mit dem
+Mauszeiger über dem Achievement hovered. Ausserdem werden die Achievements neben
+dem User bei seinen Posts angezeigt (siehe \ref{fig:r-username-display}).
+
 \subsubsection*{Deployment}
 
 \begin{figure}[ht]
@@ -220,7 +253,8 @@ Rangliste befindet.
     \label{fig:r-deployment}
 \end{figure}
 
-Die Webseite wurde auf Heroku mit einem Eco-Server und einer Postgres Datenbank
+Die Webseite wurde auf Heroku (siehe Interface der Heroku App
+\ref{fig:r-deployment}) mit einem Eco-Server und einer Postgres Datenbank
 veröffentlicht.
 
 
