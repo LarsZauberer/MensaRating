@@ -1,3 +1,4 @@
+\begin{lstlisting}[language=Python]
 # Maintained by: Robin, Ian
 
 from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review  # To have access to the database
@@ -91,3 +92,5 @@ def get_badges_of_profil(profil: Profil):
     highest_badges = [i for i in highest_badges if i is not None]  # Remove all None
     
     return highest_badges
+
+\end{lstlisting}
