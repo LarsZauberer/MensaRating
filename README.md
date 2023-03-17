@@ -44,3 +44,16 @@ python manage.py runserver
 Auf die Admin-Page http://localhost:8000/admin kann man nur mit einem
 Admin-Account gelangen. Dort befinden sich alle Datenbankmodelle, wo die
 einzelnen Daten verwaltet und manipuliert werden können.
+
+## Badges/Achievements
+Badges/Achievements sind nicht hardcoded. Diese werden zur Aktivierung auf der
+Admin-Page erstellt.
+
+![Example Badge](/Documentation/images/BadgeRamsey.png?raw=true "Beispiel Badge")
+
+Es gibt 3 Kategorien (`condition category`) (0, 1, 2):
+- Karma-basiert
+- Bilder-basiert
+- Review-basiert
+
+Das `Count`-Attribut besagt dann, wie viele von den Sachen man haben muss.
