@@ -22,6 +22,7 @@ eine Web Page der WebApp, wo Admins direkt auf die Datenbank zugreiffen können.
 Dateien:
 \begin{itemize}
     \item core/views.py (\ref{code:core.views.py})
+    \item core/models.py (\ref{code:core.models.py})
     \item core/statistic\_functions.py (\ref{code:core.statistic-functions.py})
 \end{itemize}
 
@@ -117,7 +118,8 @@ auf ihre Orientierung überprüft. Wenn das Bild Hochformat ist, dann wird es im
 css anders behandelt.
 
 Bilder werden ihrer Orientierung (Hoch- oder Querformat) entsprechend im Design
-der Webseite anders eingebunden. Die Orientierung eines Bildes wird mit dem folgenden Code Ausschnitt determiniert:
+der Webseite anders eingebunden. Die Orientierung eines Bildes wird mit dem
+folgenden Code Ausschnitt determiniert:
 
 \begin{lstlisting}
 for (let index = 0; index < images.length; index++) {
@@ -144,15 +146,15 @@ Dateien:
 \end{itemize}
 
 Der Begriff ``Posts'' beschreibt zwei verschiedene Objekte in der Datenbank (siehe
-\ref{fig:DB}). Es gibt kein übergeordnetes Posts. Als Posts werden Images
+\ref{fig:DB}). Es gibt kein übergeordnetes Post-Objekt. Als Posts werden Images
 (siehe \ref{spez:Images}) und Reviews (siehe \ref{spez:Reviews}) bezeichnet.
 
 Ein Post (siehe \ref{spez:Rating}) ist nur möglich, wenn das zugehörige
 \code{Menu} vom selben Tag ist. Posts können auch nur am selben Tag geliked
 werden (siehe \ref{spez:Liking}).
 
-Um einen Post zu veröffentlichen, schickt der User ein \code{POST-HTML-Form} an
-das Backend durch die \code{menu} funktion \code{core/views.py}
+Um einen Post zu veröffentlichen, schickt der User ein \code{POST-HTML-Form} (siehe code/forms.py) an
+das Backend durch die \code{menu} funktion in \code{core/views.py}
 \ref{code:core.views.py}. Es wird bestimmt, ob der Post ein \code{Image} oder
 ein \code{Review} ist und dem entsprechend in \code{post\_function.py}
 ausgewertet. Durch eine Rückmeldung in Form einer \code{Pop-Up Message} wird der
@@ -178,6 +180,7 @@ Webseite angezeigt wird.
 \subsubsection{Liking} \label{spez:Liking} Dateien
 \begin{itemize}
     \item static/js/app.js
+    \item core/views.py (\ref{code:core.views.py})
 \end{itemize}
 
 Posts kann man liken. Dabei wird das \code{Like} Attribut des zugehörigen Posts
@@ -197,6 +200,7 @@ Dateien:
 \begin{itemize}
     \item core/models.py (\ref{code:core.models.py})
     \item core/statistic-functions.py (\ref{code:core.statistic-functions.py})
+    \item core/views.py (\ref{code:core.views.py})
 \end{itemize}
 
 Ein \code{Rating} ist ein Objekt in der Datenbank (siehe \ref{fig:DB}) und stellt
@@ -259,12 +263,14 @@ Daten des zugehörigen Menus oder MenuTypes in der Auflistung nicht mehr
 angezeigt werden (In CSS: \code{display: none}). Das passiert ebenfalls durch
 die \code{updateListboxs()} Funktion.
 
+\newpage
+
 \subsection{Account System} \label{spez:Account}
 
 Dateien:
 \begin{itemize}
-    \item core/models.py (\ref{code:core.models.py})
-    \item core/views.py (\ref{code:core.views.py})
+    \item users/models.py (\ref{code:users.models.py})
+    \item users/views.py (\ref{code:users.views.py})
 \end{itemize}
 
 Die Entwicklung des Account Systems ist stark von folgendem Django Tutorial
@@ -274,7 +280,7 @@ Allerdings wurde der Code in verschiedenen Projekten bereits verwendet und
 unterscheidet sich mittlerweile stark vom Tutorial
 
 Django hat ein eingebautes Account System. Dieses Account System wird in die
-Webseite integriert (siehe \ref{code:core.views.py}). Es bietet folgende
+Webseite integriert (siehe \ref{code:users.views.py}). Es bietet folgende
 Funktionen:
 \begin{itemize}
     \item register
@@ -288,11 +294,12 @@ Funktionen:
 
 Beim Registrieren wird ein \code{User}-Objekt in der Datenbank (noch nicht in
 der models.py Datei) erstellt. Danach wird ein \code{Profil}-Objekt (siehe
-\ref{code:core.models.py} und \ref{fig:DB}) erstellt. Beim Registrieren gibt es
-ausserdem eine ReCaptcha-Überprüfung, damit die Datenbank nicht von Spam durch
-Bots überfallen wird. Eine Email-Verifikation gibt es nicht.
+\ref{code:users.models.py} und \ref{fig:DB}) erstellt. Beim Registrieren gibt es
+ausserdem eine ReCaptcha-Überprüfung (siehe \ref{code:users.views.py}), damit
+die Datenbank nicht von Spam durch Bots überfallen wird. Eine Email-Verifikation
+gibt es nicht.
 
-Die Login und Logout funktionen sind direkt von Django implementiert
+Die Login und Logout funktionen sind direkt von Django implementiert (siehe users/urls.py)
 
 Die Funktion des Password Reset funktioniert über die angegebene Email Adresse.
 Es wird ein sicherer Token für den Password Reset an die Email Adresse gesendet.
@@ -324,7 +331,8 @@ Dateien:
 Die Achievements werden als \code{Badge}-Objekt in der Datenbank (siehe
 \ref{fig:DB}) gespeichert. Die Objekte werden keinem User zugeordnet.
 Stattdessen wird immer, wenn die Achievements eines Users angezeigt werden
-sollen, berechnet, welche Achievements dieser User hat.
+sollen, berechnet, welche Achievements dieser User hat. Daher sind die Objekte
+in der Datenbank nur eine Beschreibung, welche Achievements es gibt.
 
 \begin{lstlisting}
     def get_badges_of_profil(profil):
@@ -372,6 +380,13 @@ Alle erreichten Achievements werden auf der Profil Seite angezeigt (siehe
 
 
 \subsection{Deployment}\label{spez:Deployment}
+
+Dateien:
+\begin{itemize}
+    \item Procfile
+    \item requirements.txt
+    \item .github/workflows/CI Tests.yml
+\end{itemize}
 
 Die Webseite wird auf einem Heroku Eco Dyno gehostet. Die Datenbank wird ebenfalls
 von Heroku auf einem Postgres Server gehostet. Die Bilder werden auf einer
