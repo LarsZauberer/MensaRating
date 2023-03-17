@@ -57,3 +57,7 @@ Es gibt 3 Kategorien (`condition category`) (0, 1, 2):
 - Review-basiert
 
 Das `Count`-Attribut besagt dann, wie viele von den Sachen man haben muss.
+
+## Datenbank auswechseln
+Wenn die Datenbank lokal ausgetauscht werden soll, dann muss die Datei
+`db.sqlite3` ersetzt werden.
