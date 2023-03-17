@@ -2,28 +2,26 @@
 
 \section{Testen} \label{sec:testen}
 
-Die Webseite lässt sich testen in einer lokalen Entwicklungsumgebung oder auf
-der öffentlichen Seite. Getestet wurden die Funktionen manuell von Hand oder
-durch automatisierte Tests.
+Die Webseite lässt in einer lokalen Entwicklungsumgebung oder auf der
+öffentlichen Seite testen. Getestet wurden die Funktionen manuell von Hand oder
+auch teilweise durch automatisierte Tests.
 
 Grundsätzlich funktionieren alle Funktionen. Schlussendlich gibt es nur ein
 Problem: Es kommt vor, dass der Webscraper Edge-Cases antrifft. Das kann
 passieren, wenn die offizielle Mensa Webseite die Informationen auf ihrer
 Webseite kurzfristig ändern. Es wurde versucht diese Edge-Cases möglichst alle
 abzufangen, allerdings kann es immer noch sein, dass es manchmal zu Fehlern
-kommt. Diese Fehler müssten dann von einem Admin auf der Admin-Seite behoben
-werden.
+kommt und die Daten der Webseite sich von der offiziellen Webseite
+unterscheiden. Diese Fehler müssen jeweils von einem Admin auf der Admin-Seite
+behoben werden.
 
 \section{Resultate} \label{sec:resultate}
 
-Als Resultat dieser Arbeit ist eine voll funktionsfähige Webseite entstanden.
+Das Resultat dieser Webseite ist eine voll Funktionstüchtige Webseite
 Die Webseite erfüllt alle nötigen Anforderungen (siehe
 \ref{sec:problemdefinition}). Die Webseite ist auch öffentlich zugänglich
 (siehe \ref{spez:Deployment}) und kann unter
-\url{http://mensarating.herokuapp.com/} aufgerufen werden. Es lässt sich also
-sagen, dass die Webseite komplett einsatzbereit ist und Nutzer von der NKSA sie
-beginnen können zu benutzen.
-
+\url{http://mensarating.herokuapp.com/} aufgerufen werden. 
 \subsection{Resultate der Grundanforderungen}
  
 \newpage
@@ -41,7 +39,7 @@ Auf der Startseite der Webseite (siehe \ref{fig:r-menuindex}) werden die beiden 
 offiziellen Mensa Webseite gescraped wurden, angezeigt. Es wird die
 Beschreibung, ein Label (Vegan/Vegetarisch), das durchschnittliche Rating und
 das Bild mit den meisten Likes angezeigt. Als Zusatz sind die zukünftigen Menus
-ebenfalls angezeigt
+ebenfalls angezeigt.
 
 \begin{figure}[htp]
     \begin{subfigure}[b]{0.5\textwidth}
@@ -82,10 +80,10 @@ Page (siehe \ref{fig:r-menutype}), wo die Menus genauer angezeigt werden
 \end{figure}
 
 Bei der Bildergallerie (siehe \ref{fig:r-bildergallerie}) können User Bilder
-hochladen. Man kann durch Pfeil-Buttons die hochgeladenen Bilder durchschauen.
-Für ein Bild ist der User angezeigt, der es hochgeladen hat, und die Anzahl
-likes. Der Upload findet über einen Upload Button statt, der ein Pop-Up öffnet
-(siehe \ref{fig:r-bildpopup})
+hochladen. Man kann durch Pfeil-Buttons die verschiedenen hochgeladenen Bilder
+ansehen. Für jedes Bild ist erstens der User angezeigt, der es hochgeladen hat, und zweitens die
+Anzahl Likes. Der Upload findet über einen Upload Button statt, der ein Pop-Up
+öffnet (siehe \ref{fig:r-bildpopup})
 
 
 \subsubsection*{Reviews}
@@ -97,11 +95,10 @@ likes. Der Upload findet über einen Upload Button statt, der ein Pop-Up öffnet
     \label{fig:r-review}
 \end{figure}
 
-Am Tag, an dem es ein Menu gibt, kann diesem Menu ein Review (siehe \ref{fig:r-review}) gegeben werden. Die
-Reviews sind in einer Liste angeordet und bei jedem Review ist der User
-angegeben, zusammen mit seinen Achievements und Karma Punkten. Reviews können
-geliked werden (Beachte das Herz).
-
+Am Tag, an dem es ein bestimmtes Menu gibt, kann diesem Menu ein Review (siehe
+\ref{fig:r-review}) gegeben werden. Die Reviews sind in einer Liste angeordet
+und bei jedem Review ist der User angegeben, zusammen mit seinen Achievements
+und Karma Punkten. Reviews können geliked werden (Beachte das Herz).
 
 \subsubsection*{Rating}
 
@@ -113,7 +110,7 @@ geliked werden (Beachte das Herz).
 \end{figure}
 
 Ein User kann einem Menu als Rating eienen bis fünf Sterne gebe. Der User drückt
-dabei auf die anzahl sterne, die er geben will. Der Durchschnitt des Ratings
+dabei auf die Anzahl sterne, die er geben will. Der Durchschnitt des Ratings
 wird ebenfalls in der Form von Sternen angezeigt. Dabei kann es auch nicht volle
 Sterne geben (siehe \ref{fig:r-rating}) 
 
@@ -135,7 +132,9 @@ Aktion ohne einen Reload der Seite ausgeführt.
 Das Design ist an allen bisherigen Screenshots erkennbar. Als Akzentfarbe wurde
 ein Grün gewählt, an vielen Formen sind die Ecken abgerundet und die
 verschiedenen Aktionen auf der Webseite sollten für den User so einfach wie
-möglich gestaltet sein
+möglich gestaltet sein.
+
+\newpage
 
 \subsection{Resultate der Erweiterungskriterien}
 
@@ -150,7 +149,7 @@ möglich gestaltet sein
     \end{subfigure}
     \begin{subfigure}[b]{0.32\textwidth}
         \centering
-        \includegraphics[width=0.7\textwidth]{images/Auth2.png}
+        \includegraphics[width=0.5\textwidth]{images/Auth2.png}
         \caption{Screenshot: Registrieren Form}
         \label{fig:r-register}
     \end{subfigure}
@@ -174,11 +173,11 @@ möglich gestaltet sein
     \end{subfigure}
     \caption{Screenshots: Account System}
     \label{fig:r-auth}
-\end{figure}
+\end{figure} 
 
 Die Webseite verfügt über ein komplett funktionierendes Account System. Wie den
-einzelnen Screenshots zu entnehmen, kann der User sich registrieren, einloggen,
-ausloggen und sein Passwort zurücksetzen.
+einzelnen Screenshots zu entnehmen, kann der User sich registrieren, sich
+einloggen, sich ausloggen und sein Passwort zurücksetzen.
 
 \subsubsection*{Mobile Responsiveness}
 
@@ -192,13 +191,12 @@ ausloggen und sein Passwort zurücksetzen.
 Beim Entwickeln der Website wurde davon ausgegangen, dass die meisten User mit
 mobilen Endgeräten auf die Seite zugreifen. Daher ist es zentral, dass die
 Website auf kleinen Bildschirmen einfach zu bedienen ist. Da ein Grossteil der
-Seite mit Flexboxen designt wurde, war es meist einfach denn Inhalt auf kleinere
+Seite mit Flexboxen designt wurde, war es meist einfach, den Inhalt für kleinere
 Bildschirme anzupassen. Für andere Teile wurde ein komplett neues Design
 erstellt, welches mithilfe von Media Queries nur auf kleinen Bildschirmen
-dargestellt wird. Um mehr Inhalt darzustellen wurden die Navigationselemente
-komplett überarbeitet und kleinere Seitenränder angewendet. Das Ziel, die
-Website Mobile Responsive zu machen, konnte mit den oben erwähnten Schritten
-erreicht werden.
+dargestellt wird. Die Navigationselemente wurden komplett überarbeitet und
+kleinere Seitenränder angewendet. Das Ziel, die Website Mobile Responsive zu
+machen, wurde mit den oben erwähnten Schritten erreicht.
 
 
 \subsubsection*{Punktesystem (Karma)}
@@ -223,7 +221,7 @@ Cookiepoint.
     \label{fig:r-rangliste}
 \end{figure} 
 
-Alle User mit Account sind in einer Rangliste angegeben. Die Rangliste bezieht
+Alle User mit Account sind in einer Rangliste aufgelistet. Die Rangliste bezieht
 sich auf die Cookiepoints. Der User hat eine Angabe, wo er sich auf der
 Rangliste befindet.
 

@@ -8,11 +8,10 @@
     \label{fig:UseCases}
 \end{figure}
 
-Die Use Cases für den User sind nur auf der eigentlichen WebApp, während Admins
-neben der WebApp noch Zugriff auf ein Admin Panel haben. Das Admin Panel ist
-eine Web Page der WebApp, wo Admins direkt auf die Datenbank zugreiffen können.
-
-
+Die Use Cases für den User sind nur auf der eigentlichen Webseite der WebApp,
+während Administratoren neben der WebApp noch Zugriff auf ein Admin Panel haben.
+Das Admin Panel ist eine Web Page der WebApp, wo Admins direkt auf die Datenbank
+zugreiffen und die Einträge dieser anpassen können.
 
 \newpage
 
@@ -112,12 +111,9 @@ das aktive Bild bekommt den style \code{display: block}. Die anderen Bilder
 haben \code{display: none}. Wenn es noch keine Bilder von einem Menu gibt, dann
 wird ein default Bild angezeigt.
 
-Da Bilder im  sein können, werden sie mit ihren Dimensionen
-auf ihre Orientierung überprüft. Wenn das Bild Hochformat ist, dann wird es im
-css anders behandelt.
-
 Bilder werden ihrer Orientierung (Hoch- oder Querformat) entsprechend im Design
-der Webseite anders eingebunden. Die Orientierung eines Bildes wird mit dem folgenden Code Ausschnitt determiniert:
+der Webseite anders eingebunden. Die Orientierung eines Bildes wird mit dem
+folgenden Code Ausschnitt determiniert:
 
 \begin{lstlisting}
 for (let index = 0; index < images.length; index++) {
@@ -144,7 +140,7 @@ Dateien:
 \end{itemize}
 
 Der Begriff ``Posts'' beschreibt zwei verschiedene Objekte in der Datenbank (siehe
-\ref{fig:DB}). Es gibt kein übergeordnetes Posts. Als Posts werden Images
+\ref{fig:DB}). Es gibt kein übergeordnetes Posts Objekt. Als Posts werden Images
 (siehe \ref{spez:Images}) und Reviews (siehe \ref{spez:Reviews}) bezeichnet.
 
 Ein Post (siehe \ref{spez:Rating}) ist nur möglich, wenn das zugehörige
@@ -152,11 +148,11 @@ Ein Post (siehe \ref{spez:Rating}) ist nur möglich, wenn das zugehörige
 werden (siehe \ref{spez:Liking}).
 
 Um einen Post zu veröffentlichen, schickt der User ein \code{POST-HTML-Form} an
-das Backend durch die \code{menu} funktion \code{core/views.py}
+das Backend durch die \code{menu} Funktion in \code{core/views.py}
 \ref{code:core.views.py}. Es wird bestimmt, ob der Post ein \code{Image} oder
-ein \code{Review} ist und dem entsprechend in \code{post\_function.py}
-ausgewertet. Durch eine Rückmeldung in Form einer \code{Pop-Up Message} wird der
-User über den Erfolg oder Misserfolg seines Posts informiert.
+ein \code{Review} ist, um diesen anschliessnd in \code{post\_function.py}
+entsprechend zu behandeln. Durch eine Rückmeldung in Form einer \code{Pop-Up
+Message} wird der User über den Erfolg oder Misserfolg seines Posts informiert.
 
 \subsubsection{Images} \label{spez:Images}
 
@@ -175,7 +171,8 @@ Es gibt ein \code{Review}-Objekt in der Datenbank (siehe \ref{fig:DB}). Ein
 Review ist ein Kommentar zu einem Menu (\ref{spez:Menus}), welcher auf der
 Webseite angezeigt wird.
 
-\subsubsection{Liking} \label{spez:Liking} Dateien
+\subsubsection{Liking} \label{spez:Liking} 
+Dateien
 \begin{itemize}
     \item static/js/app.js
 \end{itemize}
@@ -184,12 +181,12 @@ Posts kann man liken. Dabei wird das \code{Like} Attribut des zugehörigen Posts
 in der Datenbank (siehe \ref{fig:DB}) erhöht. Um zu verhindern, dass ein User
 einen Post mehrfach liken kann, werden die Likes des Users im Javascript
 Localstorage gespeichert. Die Likes haben kein eigenes Objekt in der Datenbank,
-weil dadurch zu viele Einträge entstehen würden.
+weil ansonsten zu viele Einträge entstehen würden.
 
 Das Like Verfahren ist in Javascript in \code{static/js/app.js} programmiert.
-Von da aus wird die Aktion des Users an das Backend (siehe \code{like} in
-core/views.py \ref{code:core.views.py}) geschickt und dort in der Datenbank
-gespeichert.
+Von dieser Datei aus wird die Aktion des Users an das Backend (siehe \code{like}
+in core/views.py \ref{code:core.views.py}) geschickt und anschliessend dort in
+der Datenbank gespeichert.
 
 \subsection{Rating} \label{spez:Rating}
 
@@ -206,7 +203,7 @@ zugehörige Menu vom selben Tag ist.
 
 Von den Ratings eines Menus wird in \code{core/statistic-functions.py}
 \ref{code:core.statistic-functions.py} der Durchschnitt berechnet, um diesen auf
-der Webseite anzuzeigen
+der Webseite anzuzeigen.
 
 
 \subsection{Statistik: Filter und Sortierung} \label{spez:Statistik}
@@ -271,7 +268,7 @@ Die Entwicklung des Account Systems ist stark von folgendem Django Tutorial
 inspiriert:
 (\url{https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p}).
 Allerdings wurde der Code in verschiedenen Projekten bereits verwendet und
-unterscheidet sich mittlerweile stark vom Tutorial
+unterscheidet sich mittlerweile stark vom Tutorial.
 
 Django hat ein eingebautes Account System. Dieses Account System wird in die
 Webseite integriert (siehe \ref{code:core.views.py}). Es bietet folgende
@@ -294,9 +291,9 @@ Bots überfallen wird. Eine Email-Verifikation gibt es nicht.
 
 Die Login und Logout funktionen sind direkt von Django implementiert
 
-Die Funktion des Password Reset funktioniert über die angegebene Email Adresse.
-Es wird ein sicherer Token für den Password Reset an die Email Adresse gesendet.
-Die Email wird über einen Gmail Account versendet.
+Die Funktion: `Password Reset' funktioniert über die angegebene Email Adresse
+bei der Registrierung. Es wird ein sicherer Token für den Password Reset an die
+Email Adresse gesendet. Die Email wird über einen Gmail Account versendet.
 
 
 \subsection{Punktesystem (Karma)} \label{spez:Karma}
@@ -368,7 +365,6 @@ verlieren, wenn er die Kriterien dafür nicht mehr erfüllt.
 
 Alle erreichten Achievements werden auf der Profil Seite angezeigt (siehe
 \ref{code:core.views.py}).
-
 
 
 \subsection{Deployment}\label{spez:Deployment}

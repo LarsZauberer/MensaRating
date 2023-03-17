@@ -9,7 +9,7 @@
 \end{figure}
 
 Diese Skizze repräsentiert den Aufbau der Datenbank. Sie zeigt die verschiedenen
-Entitiys und ihre Beziehungen. Die Datenbankstruktur ist in der Datei
+Entities und ihre Relationships. Die Datenbankstruktur ist in der Datei
 \code{core/models.py} beschrieben (siehe \ref{code:core.models.py}).
 
 \section{UML-Diagramm der WebApp} \label{sec:UMLS}
@@ -21,9 +21,11 @@ Entitiys und ihre Beziehungen. Die Datenbankstruktur ist in der Datei
 \end{figure}
 
 Dieses UML-Diagramm zeigt die Zusammenhänge aller Komponenten (nicht Klassen,
-häufig einfach Funktine) der WebApp. Dabei sind nur die Verbindungen der
+häufig einfach Funktionen) der WebApp. Dabei sind nur die Verbindungen der
 \code{Index} Seite und der \code{Menu} Seite vorhanden, da es mit allen
-Verbindungen zu unübersichtlich werden würde.
+Verbindungen zu unübersichtlich werden würde. Die Rechtecke beschreiben eigene
+files, die Quadrate eigene Funktionen und die Pfeile (Verbindungen) beschreiben
+Aufrufe von Funktionen in anderen Funktionen.
 
 \newpage
 
