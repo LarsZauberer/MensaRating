@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 //Mobile Menu
 function toggleMobileMenu() {
-    console.log("test");
     const header = document.querySelectorAll("header");
     const navContainer = document.querySelectorAll("nav");
     const menuOpener = document.getElementById("mobileMenuOpener");
