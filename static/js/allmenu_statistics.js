@@ -89,7 +89,7 @@ function updateListboxs() {
                 vegivegan[1].style.display = "none"; //don't show vegan label
             } else {
                 vegivegan[0].style.display = "none"; //don't show vegetarian label
-                vegivegan[0].style.display = "none"; //don't show vegan label
+                vegivegan[1].style.display = "none"; //don't show vegan label
             }
 
             menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences //show occurrences
