@@ -86,6 +86,7 @@ natbib=true]{biblatex}
 \usepackage{cleveref}
 \usepackage[babel, german=quotes]{csquotes}
 \usepackage{listings}
+\usepackage{datetime}
 \newcommand{\code}[1]{\texttt{#1}}
 \lstset{extendedchars=\true}
 \lstset{inputencoding=utf8}
@@ -104,14 +105,15 @@ natbib=true]{biblatex}
 \renewcommand\cite{\citep}
 
 \selectlanguage{ngerman}
+\newdateformat{dateFormat}{\THEDAY{. }\monthnamengerman[\THEMONTH], \THEYEAR}
 %% Document information
 %% ====================
 
 \title{MensaRating WebApp}
 \author{Ian Wasser, Robin Steiner, Nicolas Kaufmann, Valentin Gisi}
-\thesistype{EINF Projekt}
+\thesistype{EINF Projekt: Milestone II}
 \advisors{Betreut durch: Martina Vàzquez}
-\date{19. Februar 2023}
+\date{\dateFormat\today}
 
 \begin{document}
 
@@ -151,14 +153,11 @@ natbib=true]{biblatex}
 \input{chapters/Einleitung}
 \input{chapters/Spezifikationen}
 \input{chapters/Entwurf}
-
+\input{chapters/Resultate}
+\input{chapters/Diskussion}
 \chapter{Implementierung}
 \input{code/main_code}
-% \input{chapters/Theoretische-Grundlagen}
-% \input{chapters/Methode}
-% \input{chapters/Resultate}
-% \input{chapters/Diskussion}
-% \input{chapters/Zusammenfassung}
+
 
 %% Your Appendix
 \appendix
