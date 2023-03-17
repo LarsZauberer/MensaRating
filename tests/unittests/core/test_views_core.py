@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 import io
 from PIL import Image as Img
+import datetime as dt
 
 
 class TestViewsCore(TestCase):
@@ -213,7 +214,7 @@ class TestViewsCore(TestCase):
     def test_menuType_get(self):
         client = Client()
         
-        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"), date=dt.date(2018, 1, 1))
         
         response = client.get(reverse("menuType", args=(menu.menuType.pk,)))
         
@@ -290,3 +291,20 @@ class TestViewsCore(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content.decode("UTF-8"), "Post not found")
+    
+    def test_leaderboard_get_no_login(self):
+        client = Client()
+        
+        response = client.get(reverse("leaderboard"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "leaderboard.html")
+    
+    def test_leaderboard_get_login(self):
+        client = Client()
+        client.login(username="user", password="user")
+        
+        response = client.get(reverse("leaderboard"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "leaderboard.html")

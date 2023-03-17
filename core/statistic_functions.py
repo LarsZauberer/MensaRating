@@ -1,20 +1,12 @@
-# Maintained by: Robin
+# Maintained by: Robin, Ian
+
 from .models import MenuType, Menu, Rating, Image, Profil, Badge, Review  # To have access to the database
 from django.db.models import Avg, Max  # To use statistic functions of the database
 import logging  # To gain logging information
 
 log = logging.getLogger("statistic_functions")
 
-
 def getRating(menu):
-    """
-    getRating Calculate the rating for a menu.
-
-    :param menu: Menu to calculate the rating for.
-    :type menu: Menu
-    :return: Returns the rating for a menu.
-    :rtype: float
-    """
     # Get the ratings
     rating = Rating.objects.filter(menu=menu).aggregate(Avg("rating"))
 
@@ -25,14 +17,6 @@ def getRating(menu):
 
 
 def getRatingOfAllTime(menuType):
-    """
-    getRatingOfAllTime Calculates the average rating of all time for a menu.
-
-    :param menu: Menu to calculate the average rating for.
-    :type menu: Menu
-    :return: Returns the average rating of all time for a menu.
-    :rtype: float
-    """
     # Find all menu occurencies
     menus = Menu.objects.filter(menuType=menuType)
 

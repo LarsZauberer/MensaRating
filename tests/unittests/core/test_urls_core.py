@@ -31,3 +31,7 @@ class TestUrlsIndex(SimpleTestCase):
     def test_like_url(self):
         url = reverse("like", args=(1, 1))
         self.assertEqual(resolve(url).func, like)
+    
+    def test_leaderboard_url(self):
+        url = reverse("leaderboard")
+        self.assertEqual(resolve(url).func, leaderboard)

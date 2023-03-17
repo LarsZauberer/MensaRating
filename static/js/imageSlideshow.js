@@ -44,8 +44,8 @@ function showSlides(n) {
   if (slides.length == 0) {
     console.warn("No images found");
     let container = document.getElementsByClassName("imageContainer")[0];
-    let prev = document.getElementsByClassName("prev")[0];
-    let next = document.getElementsByClassName("next")[0];
+    let prev = document.getElementById("prev")[0];
+    let next = document.getElementById("next")[0];
     container.innerHTML = "No images available";
     prev.style.display = "none";
     next.style.display = "none";

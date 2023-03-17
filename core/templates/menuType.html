@@ -60,25 +60,24 @@
                 <span>anonym</span>
                 {% endif %}
                 {% for i in badges %}
-                    <div class="tooltip badge">
-                        <img src="{{i.image.url}}" alt="" class="badgeImage">
-                <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
-                        style="">{{i.description}}</span></div>
-                    </div>
+                <div class="tooltip badge">
+                    <img src="{{i.image.url}}" alt="" class="badgeImage">
+                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.name}}</span><br><span
+                            style="">{{i.description}}</span></div>
+                </div>
                 {% endfor %}
             </div>
             <div class="imgContainer">
                 <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
             </div>
             <div class="imageButtons">
-                {% if today %}
-                <button class="uploadbutton" onclick="togglePopup()">upload</button>
-                <button class="like-btn imageLike" onclick="like(2, {{image.pk}})" id="2-{{image.pk}}-btn">Like</button>
-                {% endif %}
-
-                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                <div class="imageLikeDisplay disabled">
+                    <div class="cookieContainer">
+                        <img class="like-icon like-btn imageLike" id="2-{{image.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                        <p class="likeText imageLikeText"><span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                    </div>
+                </div>
             </div>
-
         </div>
         {% endfor %}
         {% if images|length == 0 %}
@@ -93,8 +92,12 @@
             </div>
         </div>
         {% else %}
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div id="prev" class="slideshowButton" onclick="plusSlides(-1)">
+            <p>&#10094;</p>
+        </div>
+        <div id="next" class="slideshowButton" onclick="plusSlides(1)">
+            <p>&#10095;</p>
+        </div>
         {% endif %}
     </div>
 
@@ -139,14 +142,12 @@
         <div id="menutype-{{index}}" class="menuListbox clickableDiv">
             <h3></h3> <!-- name -->
 
-            <div></div> <!-- date -->
-
             <div id="vegivegan-container">
                 <img class="vegivegan-label" src="{% static 'images/vegetarian.png' %}" alt="vegetarian">
                 <img class="vegivegan-label" src="{% static 'images/vegan.png' %}" alt="vegan">
             </div>
-
-
+            
+            <div></div> <!-- date -->
 
             <div class="rating">
                 <div></div> <!-- allTimeRating -->

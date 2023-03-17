@@ -19,40 +19,43 @@
                 <img src="{% static 'images/cookieIconMaterialSymbol.svg' %}" alt="">
                 <h3>{{karma}} Cookiepoints</h3>
             </div>
-            <p id="profilePictureChangeButton" class="smallText clickableText" onclick="showPopUp()">Profilbild
+            <p id="profilePictureChangeButton" class="smallText clickableText" onclick="togglePopup('profilePopUp')">Profilbild
                 ändern</p>
-            <div id="popUp">
-                <div onclick="hidePopUp()">
+            <div class="popUp" id="profilePopUp" style="display: none">
+                <div class="popupTitle" onclick="togglePopup('profilePopUp')">
                     <h3>Profilbild ändern</h3>
-                    <img src="{% static 'images/closeIconMaterialSymbol.svg' %}" alt="Abbrechen" class="clickableText">
-                                    </div>
+                    <img src="{% static 'images/closeIconMaterialSymbolBlack.svg' %}" alt="Abbrechen" class="clickableText">
+                </div>
                 <p>Wähle ein Bild und klicke anschliessend "Hochladen"</p>
-                <form method="post" enctype="multipart/form-data" style="margin-right: 1em">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ imageForm }}
-                    <button type="submit">Hochladen</button>
+                    <button class="uploadButton" type="submit">Hochladen</button>
                 </form>
             </div>
 
         </div>
         <div class="achievementContainer">
-            <h2 class="titleMargin">Deine Achievemntes</h2>
+            <h2 class="titleMargin">Deine Achievements</h2>
             <p id="underTitle">Lade Bilder hoch, Kommentiere und Like um Achievments freizuschalten</p>
-            {% for cat in badges %}
-            <div class="badgeview">
-                {% for i in cat %}
-                <div class="tooltip badgeBig">
-                    {% if i.1 %}
-                    <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
-                    {% else %}
-                    <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
-                    {% endif %}
-                    <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span
-                            style="">{{i.0.description}}</span></div>
+            <div class="achievementCollection">
+                {% for cat in badges %}
+                <div class="badgeview">
+                    {% for i in cat %}
+                    <div class="tooltip badgeBig">
+                        {% if i.1 %}
+                        <img src="{{i.0.image.url}}" alt="" class="badgeBigImage">
+                        {% else %}
+                        <img src="{{i.0.image.url}}" alt="" class="badgeBigImage unposses">
+                        {% endif %}
+                        <div class="tooltiptext"><span style="font-weight: bold;">{{i.0.name}}</span><br><span
+                                style="">{{i.0.description}}</span></div>
+                    </div>
+                    {% endfor %}
                 </div>
                 {% endfor %}
             </div>
-            {% endfor %}
+            <div class="space"></div>
         </div>
     </div>
     <div class="line"></div>
@@ -66,7 +69,12 @@
                 <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
             </div>
             <div class="imageButtons">
-                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                <div class="imageLikeDisplay disabled" id="imageLikesProfile">
+                    <div class="cookieContainer">
+                        <img class="like-icon like-btn imageLike" id="2-{{image.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
+                        <p class="likeText imageLikeText"><span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -77,8 +85,12 @@
             </div>
         </div>
         {% else %}
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div id="prev" class="slideshowButton" onclick="plusSlides(-1)">
+            <p>&#10094;</p>
+        </div>
+        <div id="next" class="slideshowButton" onclick="plusSlides(1)">
+            <p>&#10095;</p>
+        </div>
         {% endif %}
     </div>
 

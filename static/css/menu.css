@@ -1,5 +1,9 @@
 /* Maintained by: Nicolas and Valentin */
 
+:root {
+    --highlightedColor: #ABC270;
+}
+
 #menu {
     display: flex;
     align-items: center;
@@ -54,89 +58,6 @@
     justify-content: space-between;
     background-color: white;
 }
-
-#menu #popup {
-    box-sizing: border-box;
-
-    display: flex;
-    position: absolute;
-    top: 10%;
-    bottom: 10%;
-    left: 10%;
-    right: 10%;
-    margin: auto;
-    width: 40%;
-    height: 40%;
-    border-radius: var(--borderRadMenu);
-
-    padding: 2rem;
-
-    justify-content: center;
-    align-items: center;
-
-    background-color: var(--accentColor);
-    box-shadow: 0px 0px 10px black;
-}
-
-#menu #popup form {
-    height: 100%;
-    width: 100%;
-    /* padding: 2em; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* flex-direction: column; */
-}
-
-#menu #popup form .upload-field {
-    font-family: 'Alegreya Sans', sans-serif;
-    font-size: 1rem;
-}
-
-#menu #popup form button {
-    height: 30%;
-    width: auto;
-    background-color: var(--accentColor);
-    border-radius: var(--borderRadMenu);
-    transition: 140ms;
-    border: solid;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-family: 'Alegreya Sans', sans-serif;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-#menu #popup form button:hover {
-    background-color: var(--highlightedColor);
-}
-
-.upload-field {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-}
-
-.upload-field input #id_image{
-    border: solid;
-    transition: 140ms;
-}
-
-.upload-field input #id_image:hover{
-    background-color: var(--highlightedColor);
-}
-
-#menu #popup .uploadButton {
-    align-self: flex-end;
-    margin-right: 0;
-}
-
-
-
 
 #menu #reviews {
     width: 100%;
@@ -209,17 +130,17 @@
     flex-wrap: nowrap;
 }
 
+.inReviewDiv p.reviewText {
+    width: auto;
+}
+
 .inReviewDiv strong,
 .inReviewDiv .italic {
     font-size: 1.2em;
 }
 
-.inReviewDiv img {
-    height: 1.2em;
-}
-
 .inReviewDiv .profilePicture {
-    align-self: center;
+    align-self: flex-start;
     width: 2.2rem;
     height: 2.2rem;
     margin-right: 6px;
@@ -229,9 +150,51 @@
     flex-grow: 2;
 }
 
-.cookieContainer {
+.imageLikeDisplay {
+    background-color: var(--accentColor);
+    height: 2.8em;
+    width: 4em;
+    
+    margin-right: 0.5em;
+
+    border-style: solid;
+    border-color: black;
+    border-radius: var(--borderRadMenu);
+
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    transition: 140ms;
+}
+
+.imageLikeDisplay:hover {
+    background-color: var(--highlightedColor);
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+#imageLikesProfile {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.cookieContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 2em;
+
+    user-select: none;
+
+    height: auto;
+}
+
+.cookieContainer img {
+    height: 1.2em;
 }
 
 .like-btn {
@@ -270,20 +233,54 @@
     display: block;
 }
 
-.prev,
-.next {
+.slideshowButton {
     cursor: pointer;
     position: absolute;
     top: 50%;
-    width: auto;
-    margin-top: -22px;
-    padding: 16px;
-    color: gray;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+
+    width: 2em;
+    height: 3em;
+
+    background-color: rgb(248, 248, 248);
+
+    transition: 100ms ease;
     user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slideshowButton:hover {
+    width: 2.15em;
+    height: 3.2em;
+}
+
+.slideshowButton p {
+    color: var(--greyText);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 0.05em;
+}
+
+#prev {
+    transform: translate(-5%, -50%);
+    border-radius: 0 0.2em 0.2em 0;
+}
+
+#next {
+    right: 0;
+
+    transform: translate(5%, -50%);
+    border-radius:0.2em 0 0 0.2em;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
 
 .imageImage {
@@ -298,19 +295,6 @@ img.portrait {
     width: auto;
 }
 
-.imgContainer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
 .imageUserText {
     color: black;
     position: absolute;
@@ -322,28 +306,27 @@ img.portrait {
     align-items: center;
 }
 
-.imageUserText span{
+.imageUserText span {
     margin-left: 6px;
 }
 
 .imageButtons {
     color: #f2f2f2;
     font-size: 15px;
-    padding: 8px 12px;
+    /* padding: 8px 12px; */
     position: absolute;
     bottom: 8px;
-    width: 98%;
+    width: 100%;
     text-align: right;
     display: flex;
     justify-content: end;
     align-items: center;
-    gap: 1em;
 }
 
 
 .imageLikeText {
     color: gray;
-    margin-right: 2em;
+    margin-bottom: 0.1em;
 }
 
 /* Fading animation */
@@ -354,11 +337,11 @@ img.portrait {
 
 @keyframes fade {
     from {
-        opacity: .4
+        opacity: .4;
     }
 
     to {
-        opacity: 1
+        opacity: 1;
     }
 }
 
@@ -391,7 +374,7 @@ img.portrait {
 }
 
 .success {
-    background-color: green;
+    background-color: var(--highlightedColor);
 }
 
 /* The close button */
@@ -409,4 +392,32 @@ img.portrait {
 /* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
+}
+
+/* Mobile Responsive */
+@media (max-width: 746px) {
+    .review {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .inReviewDiv:nth-child(2) {
+        order: 3;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .slideshowButton {
+        width: 3em;
+        height: 4em;
+    }
+
+    .slideshowButton:hover {
+        width: 3.2em;
+        height: 4.3em;
+    }
+
+    .slideshowButton p {
+        font-size: 1.5em;
+    }
 }

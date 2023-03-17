@@ -5,7 +5,7 @@ from .models import Image, Rating, Review, Profil
 
 
 class ImageForm(forms.ModelForm):
-    image = forms.FileField(widget=forms.ClearableFileInput(attrs={'class': 'upload-field'}), label="")
+    image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'upload-field'}), label="")
     class Meta:
         model = Image
         fields = ['image']

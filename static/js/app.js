@@ -17,6 +17,31 @@ document.addEventListener("DOMContentLoaded", function (e) {
     removeAlertAfterDelay();  // Remove the alert information after 3 seconds.
 })
 
+//Mobile Menu
+function toggleMobileMenu() {
+    const header = document.querySelectorAll("header");
+    const navContainer = document.querySelectorAll("nav");
+    const menuOpener = document.getElementById("mobileMenuOpener");
+    const menuCloser = document.getElementById("mobileMenuCloser");
+    
+    if(navContainer[0].classList.contains("closeMenu")){
+        // Menü anzeigen
+        navContainer[0].classList.remove("closeMenu");
+        header[0].classList.remove("allBorder");
+        // Icon ändern
+        menuOpener.classList.add("closeMenu");
+        menuCloser.classList.remove("closeMenu");
+        
+    }else{
+        // Menü verschwinden lassen
+        navContainer[0].classList.add("closeMenu");
+        header[0].classList.add("allBorder");
+        // Icon ändern
+        menuCloser.classList.add("closeMenu");
+        menuOpener.classList.remove("closeMenu");
+    }
+}
+
 
 // Change the cursor to a wait cursor
 function change_cursor_wait() {
@@ -36,13 +61,13 @@ function update_all_btn() {
         post = localStorage.getItem(id + "-" + username);
 
 
-        console.log(post);
+        // console.log(post);
         // If the post information exists -> user liked -> change the button state to liked
+        element.className = element.className.replace(" disliked", "");
+        element.className = element.className.replace(" liked", "");
         if (post) {
-            element.className = element.className.replace(" disliked", "");
             element.className += " liked";
         } else {
-            element.className = element.className.replace(" disliked", "");
             element.className += " disliked";
         }
     }
@@ -90,48 +115,37 @@ function closeAlert(domElement) {
 }
 
 // Toggle the upload popup
-function togglePopup(){
-    popup = document.getElementById("popup");
+function togglePopup(popup_id){
+    popup = document.getElementById(popup_id);
+    
     if (popup.style.display == "none") {
-        popup.style.display = "flex"
+        popup.style.display = "flex";
     }
-    else {
-        popup.style.display = "none"
+    else if (popup.style.display == "flex") {
+        popup.style.display = "none";
     }
-}
-
-// Show popup to change profile picture
-function showPopUp() {
-    console.log("test");
-    document.getElementById("popUp").style.display = "block";
-}
-
-// Hide popup to change profile picture
-function hidePopUp() {
-    console.log("test2");
-    document.getElementById("popUp").style.display = "none";
 }
 
 //calculate the number of the rating into a percentage of the yellow bar representing the stars
-function starRate(index, rating){
+function starRate(index, rating) {
     let star = document.getElementById("stars-" + index);
 
     //convert rating number into string of percentage
     rating = +(rating.replace(",", "."))//convert string-number into float
-    rating = String(rating/5*100) + "%"//convert float to percentage-string
+    rating = String(rating / 5 * 100) + "%"//convert float to percentage-string
 
     star.style.width = rating
 }
 
 //Display of stars when hovering over them (in the case of giving a rating)
-function starHover(stars, i){
-    for(let j = 0; j <= i; j++){
+function starHover(stars, i) {
+    for (let j = 0; j <= i; j++) {
         stars[j].style.backgroundImage = "url('../../static/images/yellowstar.png')"
     }
 }
 //Revert display when hovering ends
-function stopStarHover(){
-    for(let j = 0; j < 5; j++){
+function stopStarHover() {
+    for (let j = 0; j < 5; j++) {
         stars[j].style.backgroundImage = "url('../../static/images/emptystar.png')"
     }
 }

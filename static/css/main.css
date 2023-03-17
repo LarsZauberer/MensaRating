@@ -147,11 +147,13 @@ body {
 }
 
 .vegivegan-label {
+    border-radius: 50%;
     max-width: 5em;
     max-height: 5em;
 }
 
 .vegivegan-label-timeline {
+    border-radius: 50%;
     width: 2em;
     height: 2em;
 }
@@ -228,6 +230,11 @@ footer {
     align-items: top;
     gap: 3rem;
     align-items: stretch;
+    margin-bottom: 2.6rem;
+}
+
+#menu_box_container:last-of-type {
+    margin-bottom: 0;
 }
 
 .galleryElement {
@@ -242,8 +249,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    text-align: center;
+    text-align: left;
 }
 
 #clickMenuBox h1 {
@@ -307,6 +313,8 @@ footer {
 .menuListbox h3 {
     width: 20%;
     min-width: 10%;
+    flex-shrink: 0;
+    margin-right: 1em;
 }
 
 .menuListbox .timelineDescription {
@@ -320,11 +328,6 @@ footer {
 .menuListbox .menuListOccurrences {
     font-weight: normal;
     margin-left: 2rem;
-}
-
-.menuListbox .rating {
-    width: auto;
-    margin: 0 0 0 auto;
 }
 
 .menuListbox .vegivegan-label {
@@ -445,34 +448,45 @@ footer {
 
 .badge {
     display: inline-block;
-    width: 3em;
+    width: auto;
     height: auto;
     margin: 10px;
 }
 
 .badgeImage {
-    width: 3em;
-    height: auto;
+    width: 2em;
+    height: 2em;
+    margin: 0 0 0 0;
+    border-radius: 0;
 }
 
 .tooltip {
     position: relative;
+    margin: 0 0 0 0.5em;
+}
+
+.tooltip .tooltiptext .tooltipDescription span {
+    margin-left: 0;
 }
 
 .tooltip .tooltiptext {
     display: None;
-    width: 120px;
     background-color: black;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 0.5em;
     position: absolute;
     z-index: 1;
+    width: 10em;
 }
 
 .tooltip:hover .tooltiptext {
     display: block;
+}
+
+.tooltip #noBadges {
+    width: 6em;
 }
 
 .unposses {
@@ -484,16 +498,40 @@ footer {
 .rating {
     width: 100%;
     display: flex;
-    gap: 1em;
     align-items: center;
-    margin-bottom: 1.5em;
+    margin: 0 0 0 0;
 }
 
+#menu .rating {
+    margin: 0 0 1.5em 0;
+}
+
+.menuListbox .rating {
+    margin: 0 !important;
+    justify-content: flex-end;
+}
+
+.menuListbox .rating .ratingText {
+    min-width: 3.5em;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.menuListbox .rating .ratingText p:first-child {
+    margin-right: 0.5em;
+}
+
+.menuListbox .instanceDate {
+    width: 10em;
+    text-align: center;
+}
 
 .stars {
-    width: calc(var(--starheight)*5.5);
+    min-width: calc(var(--starheight)*5.5);
     height: var(--starheight);
     position: relative;
+    margin-right: 1em;
 
     display: flex;
     align-items: center;
@@ -581,11 +619,15 @@ footer {
 
 #menuTypeButton {
     max-width: 49%;
-    height: 1.4rem;
+    height: auto;
     background-color: var(--accentColor);
     border-radius: var(--borderRadMenu);
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;
     transition: 140ms;
+}
+
+#menuTypeButton {
+    height: fit-content;
 }
 
 #menuTypeButton h3 {
@@ -614,26 +656,10 @@ footer {
     height: 3.2em;
 }
 
-.uploadButton {
-    max-width: 49%;
-    height: 1.4rem;
-    background-color: var(--accentColor);
-    border-radius: var(--borderRadMenu);
-    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
-    margin-right: 1em;
-    transition: 140ms;
-    border-color: black !important;
-    border: solid;
-}
-
-.uploadButton h3 {
-    margin: 0;
-    color: #000000;
-}
-
-.uploadButton:hover {
-    cursor: pointer;
-    background-color: var(--highlightedColor);
+.like-icon {
+    width: 1.2em;
+    height: 1.2em;
+    filter: invert(51%) sepia(9%) saturate(25%) hue-rotate(358deg) brightness(91%) contrast(89%);
 }
 
 /* User Profile */
@@ -643,9 +669,9 @@ footer {
 
 .userNameContainer {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    min-width: 10em;
     margin: 0 1.5rem 0.6rem 0;
 }
 
@@ -680,30 +706,136 @@ footer {
     margin: 3px 0 0 0;
 }
 
-#popUp {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    max-width: 316px;
-    transform: translate(-50%, -50%);
-    padding: 12px 8px 12px 8px;
-    background-color: var(--highlightedColor);
-    border-radius: var(--borderRadMenu);
-    box-shadow: 0 0 21px 1000px rgba(0, 0, 0, 0.251), 0 6px 36px -8px rgb(0, 0, 0);
-    display: inline;
-    transition-duration: 140ms;
+.popUp {
+    box-sizing: border-box;
     display: none;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 15em;
+    width: 40% !important;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    
+    padding: 2em;
+    
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    box-shadow: 0 0 21px 1000px rgba(0, 0, 0, 0.251), 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-#popUp div {
+@media only screen and (max-width: 1150px) {
+    .popUp {
+      width: 60vw !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .popUp {
+        width: 90vw !important;
+        height: 60vh;
+        font-size: 1.2em;
+    }
+
+    .popUp .popupTitle img {
+        transform: scale(200%);
+    }
+}
+
+.popUp form {
+    height: 100%;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
-#popUp div img {
+.popUp .popupTitle {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+}
+
+.popUp p {
+    margin-top: 0.7em;
+    margin-bottom: 1em;
+    align-self: flex-start;
+}
+
+.popUp .popupTitle h3 {
+    width: 80%;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0.7em;
+}
+
+.popUp .popupTitle img {
     width: 24px;
-    text-align: right;
-    color: #FF4A4A;
+    align-self: flex-start;
+    cursor: pointer;
+    transition: 140ms;
+}
+
+.popUp .popupTitle img:hover {
+    box-shadow: 0px 0px 10px lightgray;
+    background-color: lightgray;
+}
+
+.popUp form .upload-field {
+    font-family: 'Alegreya Sans', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+.popUp form .uploadButton {
+    height: 30%;
+    width: auto;
+    min-width: fit-content;
+    min-height: 2em;
+    max-width: 12em;
+    max-height: 4em;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    transition: 140ms;
+    border: solid;
+    margin-top: 1em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Alegreya Sans', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    align-self: flex-end;
+    margin-right: 0;
+}
+
+@media only screen and (max-width: 700px) {
+    .popUp form .uploadButton {
+      align-self: center;
+      width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .popUp form .uploadButton {
+        font-size: 2em;
+    }
+}
+
+
+.popUp form button:hover {
+    background-color: var(--highlightedColor);
 }
 
 .upload-field {
@@ -728,4 +860,302 @@ footer {
 
 .reviewTitle {
     border-bottom: solid 0.1em black;
+}
+
+/* Leaderboard */
+.yourRang {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.yourRang p:nth-child(2) {
+    font-size: 0.8em;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+}
+
+tr:first-child {
+    background-color: var(--highlightedColor) !important;
+}
+
+tr:nth-child(odd) {
+    background-color: var(--accentColor);
+}
+
+th,
+td {
+    border: 0.4px solid var(--darkAccentColor);
+}
+
+tr th:first-child {
+    border-top-left-radius: var(--borderRadMenu);
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: var(--borderRadMenu);
+}
+
+tr th:last-child {
+    border-top-right-radius: var(--borderRadMenu);
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: var(--borderRadMenu);
+}
+
+table h3,
+table p {
+    margin: 8px 2px 8px 6px;
+}
+
+.uploadButton {
+    max-width: 49%;
+    height: 1.4rem;
+    background-color: var(--accentColor);
+    border-radius: var(--borderRadMenu);
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+    margin-right: 1em;
+    transition: 140ms;
+    border-color: black !important;
+    border: solid;
+}
+
+.uploadButton h3 {
+    margin: 0;
+    color: #000000;
+}
+
+.uploadButton:hover {
+    cursor: pointer;
+    background-color: var(--highlightedColor);
+}
+
+/* Mobile Class */
+.onlyMobile {
+    display: none;
+}
+
+.onlyDesktop {
+    display: block;
+}
+
+/* Mobile Responsive */
+@media (max-width: 830px) {
+    .menuListbox .timelineDescription {
+        display: none;
+    }
+
+    .menuListbox .menuListOccurrences {
+        margin-left: 1em;
+    }
+
+    .menuListbox {
+        gap: 0;
+    }
+}
+
+@media (max-width: 746px) {
+
+    /* Mobile Class */
+    .onlyMobile {
+        display: block;
+    }
+
+    .onlyDesktop {
+        display: none;
+    }
+
+    /* Mobile Menu */
+    #mobileMenuOpener,
+    #mobileMenuCloser {
+        width: 3em;
+    }
+
+    header {
+        width: calc(100% - 3.5em);
+        padding: 1em 1em 1em 1em;
+        margin: 0.75em auto 0 auto;
+        border-radius: var(--borderRadMenu) var(--borderRadMenu) 0 0;
+        z-index: 10;
+    }
+
+    .allBorder {
+        border-radius: var(--borderRadMenu);
+    }
+
+    nav {
+        width: calc(100% - 1.5em);
+        margin: 0 auto 0 auto;
+        background-color: var(--highlightedColor);
+        border-radius: 0 0 var(--borderRadMenu) var(--borderRadMenu);
+        display: block;
+        animation-name: mobileMenuNav;
+        animation-duration: 140ms;
+        transform: translate(0, -1px);
+    }
+
+    @keyframes mobileMenuNav {
+        from {
+            transform: translate(0, -70px);
+        }
+
+        to {
+            transform: translate(0, 0);
+        }
+    }
+
+    nav .menuItem {
+        font-size: 1.5em;
+    }
+
+    .closeMenu {
+        display: none;
+    }
+
+    .profileContainer {
+        margin-top: 1.5em;
+        padding: 0.6rem 1.2rem 1rem 1.2rem;
+    }
+
+    .active,
+    .menuItem {
+        background-color: transparent;
+    }
+
+    /* Multiple */
+    div {
+        /* background-color: rebeccapurple; */
+    }
+
+    .content {
+        width: 90%;
+        margin-top: 0.6em;
+    }
+
+    /* Menu Site */
+    #menu_box_container {
+        flex-wrap: wrap;
+    }
+
+    .interactionBox {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+
+    }
+
+    .give-star-rating {
+        margin-bottom: 1em;
+    }
+
+    #menuTypeButton {
+        text-align: center;
+    }
+
+    .give-star-rating,
+    #menuTypeButton {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /*MenuType Site*/
+
+    .menuListbox .instanceDate {
+        text-align: left;
+    }
+
+    /* MenuType Site and MenuType search */
+    .fade-scroll-top {
+        flex-wrap: wrap;
+        margin-bottom: 0.6em;
+    }
+
+    .menuListbox {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        height: fit-content;
+        gap: 0;
+    }
+
+    .menuListbox h3 {
+        width: 100%;
+        margin: 0;
+    }
+
+    .menuListbox p {
+        width: 100%;
+    }
+
+    .menuListbox h3 {
+        width: 85%;
+    }
+
+    .menuListbox .menuListOccurrences {
+        margin: 0;
+    }
+
+    .menuListbox .rating {
+        justify-content: flex-start;
+    }
+
+    /* User Profile */
+    .inReviewDiv:first-child {
+        width: 80%;
+    }
+
+    .userPageHeader {
+        flex-direction: column;
+    }
+
+    .userNameContainer {
+        margin-bottom: 2em;
+    }
+
+    .badgeview {
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 1em;
+    }
+
+    .badgeview .badgeBig {
+        width: 20%;
+        height: calc(100vw/6);
+        margin: 0.5em 0 0.5em 0;
+    }
+
+    .badgeview .badgeBig img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: calc(100vw/6);
+    }
+
+    .achievementContainer {
+        width: 100%;
+    }
+
+    .space {
+        display: block;
+        height: 1em;
+    }
+
+    .achievementCollection {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .badgeview:nth-child(odd) {
+        background-color: #f0f0f0;
+    }
+
+    .achievementContainer p {
+        margin-top: 0.5em;
+        margin-bottom: 2em !important;
+    }
 }
