@@ -412,6 +412,11 @@ img.portrait {
         height: 4em;
     }
 
+    .slideshowButton:hover {
+        width: 3.2em;
+        height: 4.3em;
+    }
+
     .slideshowButton p {
         font-size: 1.5em;
     }
