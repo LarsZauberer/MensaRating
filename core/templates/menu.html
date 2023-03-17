@@ -104,16 +104,14 @@
                     </div>
                 </div>
                 {% else %}
-                <div class="imageLikeDisplay">
+                <div class="imageLikeDisplay disabled">
                     <div class="cookieContainer">
                         <img class="like-icon like-btn imageLike" id="2-{{image.pk}}-btn" src="{% static 'images/heartIconMaterialSymbol.svg' %}" alt="Likes:">
                         <p class="likeText imageLikeText"><span id="2-{{image.pk}}">{{image.likes}}</span></p>
                     </div>
                 </div>
                 {% endif %}
-
             </div>
-
         </div>
         {% endfor %}
         {% if images|length == 0 %}
