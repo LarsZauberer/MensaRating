@@ -64,11 +64,11 @@ function update_all_btn() {
 
         // console.log(post);
         // If the post information exists -> user liked -> change the button state to liked
+        element.className = element.className.replace(" disliked", "");
+        element.className = element.className.replace(" liked", "");
         if (post) {
-            element.className = element.className.replace(" disliked", "");
             element.className += " liked";
         } else {
-            element.className = element.className.replace(" disliked", "");
             element.className += " disliked";
         }
     }
