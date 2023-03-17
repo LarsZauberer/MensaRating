@@ -457,6 +457,7 @@ footer {
     width: 2em;
     height: 2em;
     margin: 0 0 0 0;
+    border-radius: 0;
 }
 
 .tooltip {
@@ -464,20 +465,28 @@ footer {
     margin: 0 0 0 0.5em;
 }
 
+.tooltip .tooltiptext .tooltipDescription span {
+    margin-left: 0;
+}
+
 .tooltip .tooltiptext {
     display: None;
-    width: 120px;
     background-color: black;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 0.5em;
     position: absolute;
     z-index: 1;
+    width: 10em;
 }
 
 .tooltip:hover .tooltiptext {
     display: block;
+}
+
+.tooltip #noBadges {
+    width: 6em;
 }
 
 .unposses {
