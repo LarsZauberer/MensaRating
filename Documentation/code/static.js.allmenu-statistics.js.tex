@@ -79,22 +79,26 @@ function updateListboxs() {
             menuTypeObject.setAttribute("onclick", "location.href='" + menuType.url + "';") //assign correct link to menu
             menuTypeObject = menuTypeObject.children
             menuTypeObject[0].innerHTML = menuType.name //first div == name
-            
+
             let vegivegan = menuTypeObject[1].children;
 
-            if (menuType.vegetarian == "True") {
-                vegivegan[0].style.display = "block"; //show vegetarian label
-            } else if (menuType.vegan == "True") {
+            if (menuType.vegan == "True") {
                 vegivegan[1].style.display = "block"; //show vegan label
+                vegivegan[0].style.display = "none"; //don't show vegetarian label
+            } else if (menuType.vegetarian == "True") {
+                vegivegan[0].style.display = "block"; //show vegetarian label
+                vegivegan[1].style.display = "none"; //don't show vegan label
+            } else {
+                vegivegan[0].style.display = "none"; //don't show vegetarian label
+                vegivegan[1].style.display = "none"; //don't show vegan label
             }
 
             menuTypeObject[2].innerHTML = "Vorkommen: " + menuType.occurrences //show occurrences
 
             //update Rating
             rating = menuTypeObject[3].children
-            rating[0].innerHTML = menuType.rating
             starRate(i, menuType.rating)
-            rating[2].innerHTML = "(" + menuType.numrates + ")"
+            rating[2].innerHTML = "<p>von </p><p class='ratingNumber'>" + menuType.numrates + "</p>"
         }
     }
 }

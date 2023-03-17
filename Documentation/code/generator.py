@@ -16,6 +16,7 @@ for i in LIST_OF_FILES:
     with open(i, 'r') as f:
         content = f.read()
         name = str(i).replace("\\", ".")
+        name = str(i).replace("/", ".")
         name = str(name).replace("_", "-")
         
         # Extra characters removal
@@ -37,6 +38,7 @@ for i in LIST_OF_FILES:
 with open("Documentation/code/main_code.tex", "w") as f:
     for i in LIST_OF_FILES:
         name = str(i).replace("\\", ".")
+        name = str(i).replace("/", ".")
         name = str(name).replace("_", "-")
         f.write("\\section{" + name + "}\\label{code:" + name + "}\n")
         f.write("\\input{code/" + name + "}\n")
