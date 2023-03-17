@@ -236,10 +236,9 @@
                 </div>
                 {% if not badges %}
                 <div class="tooltip badge">
-                    <img src="../static/images/no_badges.png" alt="no_badges" class="badgeImage">
+                    <img src="{% static 'images/no_badges.png' %}" alt="no_badges" class="badgeImage">
                     <div class="tooltiptext">
-                        <span style="font-weight: bold;">{{i.name}}</span><br>
-                        <span style="">{{i.description}}</span>
+                        <span style="font-weight: bold;">No badges?</span><br> 
                     </div>
                 </div>
                 {% else %}
