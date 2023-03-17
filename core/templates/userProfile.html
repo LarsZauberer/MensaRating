@@ -69,7 +69,9 @@
                 <img src="{{image.image.url}}" alt="{{image.image.name}}" class="imageImage">
             </div>
             <div class="imageButtons">
-                <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                <div class="imageLikeDisplay disabled" id="imageLikesProfile">
+                    <p class="likeText imageLikeText">Likes: <span id="2-{{image.pk}}">{{image.likes}}</span></p>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -80,8 +82,12 @@
             </div>
         </div>
         {% else %}
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div id="prev" class="slideshowButton" onclick="plusSlides(-1)">
+            <p>&#10094;</p>
+        </div>
+        <div id="next" class="slideshowButton" onclick="plusSlides(1)">
+            <p>&#10095;</p>
+        </div>
         {% endif %}
     </div>
 
