@@ -5,6 +5,7 @@ LIST_OF_FILES = [
     Path("core/webscraper.py"),
     Path("core/views.py"),
     Path("core/urls.py"),
+    Path("core/statistic_functions.py"),
     Path("users/views.py"),
     Path("core/webscraper.py"),
     Path("static/js/allmenu_statistics.js")
@@ -14,6 +15,7 @@ LIST_OF_FILES = [
 for i in LIST_OF_FILES:
     with open(i, 'r') as f:
         content = f.read()
+        name = str(i).replace("\\", ".")
         name = str(i).replace("/", ".")
         name = str(name).replace("_", "-")
         
@@ -35,6 +37,7 @@ for i in LIST_OF_FILES:
 
 with open("Documentation/code/main_code.tex", "w") as f:
     for i in LIST_OF_FILES:
+        name = str(i).replace("\\", ".")
         name = str(i).replace("/", ".")
         name = str(name).replace("_", "-")
         f.write("\\section{" + name + "}\\label{code:" + name + "}\n")

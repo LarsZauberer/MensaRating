@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 import io
 from PIL import Image as Img
+import datetime as dt
 
 
 class TestViewsCore(TestCase):
@@ -213,7 +214,7 @@ class TestViewsCore(TestCase):
     def test_menuType_get(self):
         client = Client()
         
-        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"))
+        menu = Menu.objects.create(name="Test Menu", description="Test", menuType=MenuType.objects.create(name="Test Menu"), date=dt.date(2018, 1, 1))
         
         response = client.get(reverse("menuType", args=(menu.menuType.pk,)))
         

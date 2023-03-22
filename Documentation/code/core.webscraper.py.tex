@@ -11,6 +11,11 @@ import datetime as dt  # To save information about the date
 
 log = logging.getLogger("Webscraper")
 
+BLACKLIST = [
+    "Ferien",
+    "Kollegiumstag"
+]
+
 def get_menu_list(days):
     menuListDict = {}
 
@@ -95,7 +100,7 @@ def webscrape():
     dates = get_dates()  # Get the dates of the days
     return get_menu_list(days), dates  # Retrive all the information
 
-def create_menu_in_database(title, description, label, date):
+def get_menu_type(title: str) -> MenuType:
     # Check if the menuType already exists
     menuType = MenuType.objects.filter(name=title)
     if len(menuType) == 0:
@@ -108,7 +113,10 @@ def create_menu_in_database(title, description, label, date):
             log.critical(f"Debug information: title: {title}, description: {description}, label: {label}, date: {date}, menuType: {menuType}")
             return
         log.info(f"Created menuType: {menuType[0]}")
-    menuType = menuType[0]
+    return menuType[0]
+
+def create_menu_in_database(title, description, label, date):
+    menuType = get_menu_type(title)
     
     # Create the menu
     # Create the labels
@@ -119,6 +127,25 @@ def create_menu_in_database(title, description, label, date):
     ]
     
     Menu.objects.create(name=title, description=description, menuType=menuType, date=date, **labels[label])
+
+def update_menu_in_database(title, description, label, date, menu):
+    menuType = get_menu_type(title)
+    
+    # Update the menu
+    # Create the labels
+    labels = [
+        {"vegetarian": False, "vegan": False},
+        {"vegetarian": True, "vegan": False},
+        {"vegetarian": False, "vegan": True},
+    ]
+    
+    menu.name = title
+    menu.description = description
+    menu.menuType = menuType
+    menu.date = date
+    menu.vegetarian = labels[label]["vegetarian"]
+    menu.vegan = labels[label]["vegan"]
+    menu.save()
     
 
 def sync_today_menu():
@@ -127,15 +154,46 @@ def sync_today_menu():
     log.debug(f"Data received: {data}, {dates}")
 
     for key, date in zip(data.keys(), dates):
-        for i in data[key].keys():
-            menus = Menu.objects.filter(name=data[key][i]["title"], date=date)
-            if len(menus) == 0:
-                # Menu not in the database
-                log.info(f"Menu \"{data[key][i]['title']}\" is not in the database")
-                create_menu_in_database(data[key][i]["title"], data[key][i]["description"], data[key][i]["label"], date)  # Create the menu
-                log.info(f"Created menu: {data[key][i]['title']}")
-            else:
-                log.debug(f"Menu \"{data[key][i]['title']}\" already in database")
+        menus = Menu.objects.filter(date=date)
+        
+        # Update the menus with the new data
+        # If the menu is not in the database, create it
+        # If the menu is in the database, update it
+        # If the menu is not in the new data, delete it
+        
+        while len(menus) > len(data[key].keys()):
+            # There are more menus in the database than in the new data
+            # -> Delete the menus that are not in the new data
+            log.error(f"There are more menus in the database than in the new data")
+            menus[len(menus)-1].delete()
+            menus = Menu.objects.filter(date=date)
+            
+        
+        for index, item in enumerate(data[key].keys()):
+            # Blacklist menus
+            if data[key][item]['title'] in BLACKLIST:
+                continue
+            
+            # Check if the menu is in the database
+            try:
+                menu = menus[index]
+                log.debug(f"Menu \"{data[key][item]['title']}\" already in database (DB: {menu})")
+                update_menu_in_database(data[key][item]["title"], data[key][item]["description"], data[key][item]["label"], date, menu)  # Update the menu
+                log.debug(f"Updated menu: {menu}")
+            except IndexError:
+                # Menu is not in the database -> create one
+                log.info(f"Menu \"{data[key][item]['title']}\" is not in the database")
+                create_menu_in_database(data[key][item]["title"], data[key][item]["description"], data[key][item]["label"], date)  # Create the menu
+                log.info(f"Created menu: {data[key][item]['title']}")
+        
+        # Cleanup
+        # Delete menuTypes that have 0 occurences
+        allMenuTypes = MenuType.objects.all()
+        for i in allMenuTypes:
+            if len(Menu.objects.filter(menuType=i)) == 0:
+                log.info(f"Deleting menuType: {i}")
+                i.delete()
+                continue
 
 
 if __name__ == "__main__":

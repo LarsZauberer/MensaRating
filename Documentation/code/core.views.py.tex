@@ -19,6 +19,23 @@ def index(request):
     sync_today_menu()
 
     # Get all menus with the date today
+    menus = Menu.objects.filter(date__gte=dt.date.today(), date__lte=dt.date.today() + dt.timedelta(days=7)).order_by("date")  # gte = greater than or equal
+    
+    dates = []
+    menus_with_date = []
+    for i, menu in enumerate(menus):
+        # Check if the date, when a menu occured is already listed 
+        if menu.date not in dates:
+            dates.append(menu.date)
+            menus_with_date.append([])
+        
+        # Get best image of the menu
+        img = get_all_images_sorted(menu.menuType)
+        if img != None:
+            img = img[0]
+        
+        # Add the menu to the list with all the informations
+        menus_with_date[-1].append( (i, menu, img, getRating(menu), getNumRates(menu)) )
     menus = Menu.objects.filter(date=dt.date.today())
 
     # Calculate the rating for each menu
@@ -35,14 +52,12 @@ def index(request):
             images.append(None)
 
 
-    
-    # Zip all the menu information to one information together.
-    # This has to happen, because the rating is not directly saved in the database object.
-    menus = zip(list(range(len(menus))), menus, ratings, numRates, images)
+    # Zip the data together
+    menus = zip(dates, menus_with_date)
 
-    
+    context = {'menus_dates': list(menus)}
 
-    return render(request, 'index.html', context={'menus': menus})
+    return render(request, 'index.html', context=context)
 
 
 def menu(request, pk):
@@ -141,7 +156,7 @@ def menuType(request, pk):
         return HttpResponse("Menutype not found")
     menutype = menutype[0]
 
-    menu_instances = Menu.objects.filter(name=menutype.name).filter(date__lte=dt.date.today()).order_by("-date")
+    menu_instances = Menu.objects.filter(menuType=menutype).filter(date__lte=dt.date.today()).order_by("-date")
     
 
     # Set variables
@@ -199,7 +214,7 @@ def allMenu(request):
 
     # Get all the data and save it in the lists
     for typ in menuTypes:
-        menus = Menu.objects.filter(name=typ.name).filter(date__lte=dt.date.today())
+        menus = Menu.objects.filter(menuType=typ).filter(date__lte=dt.date.today())
         if len(menus) > 0:
             descriptions.append(menus[0].description)
             vegetarians.append(menus[0].vegetarian)
@@ -346,5 +361,26 @@ def like(request, cat: int, pk: int):
     post.save()  # Save to the database
     
     return HttpResponse(post.likes)
+
+
+def leaderboard(request):
+    sync_today_menu()
+    
+    profils = Profil.objects.all().order_by("-karma")
+    
+    user_profil = None
+    rang = None
+    if request.user.is_authenticated:
+        user_profil = Profil.objects.get(user=request.user)
+        rang = list(profils).index(user_profil) + 1
+        
+    profils = profils[:20]
+    badges = []
+    for i in profils:
+        badges.append(get_badges_of_profil(i))
+    
+    context = {"profils": zip(profils, badges), "user_profil": user_profil, "rang": rang}
+    
+    return render(request, "leaderboard.html", context=context)
 
 \end{lstlisting}
