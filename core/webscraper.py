@@ -177,7 +177,7 @@ def sync_today_menu():
     log.debug(f"Data received: {data}, {dates}")
 
     for key, date in zip(data.keys(), dates):
-        menus = Menu.objects.filter(date=date)
+        menus = Menu.objects.filter(date=date).order_by("id")
 
         # Update the menus with the new data
         # If the menu is not in the database, create it
@@ -196,6 +196,9 @@ def sync_today_menu():
             # Blacklist menus
             if data[key][item]["title"] in BLACKLIST:
                 continue
+
+            data[key] = dict(sorted(data[key].items()))
+            log.debug(f"Sorted data: {data[key]}")
 
             # Check if the menu is in the database
             try:
