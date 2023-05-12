@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/panel.css' %}">
+    <script src="{% static 'js/main.js' %}"></script>
+    <title>Infcom NKSA Page</title>
+</head>
+<body>
+    <div id="main">
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Infcom G4E</h1>
+                <h2>Panel</h2>
+            </div>
+            <div class="sidebar-spacer"></div>
+            <div class="clock">
+                <p id="clock"></p>
+                <div class="clock-line"></div>
+                <p id="date"></p>
+            </div>
+        </div>
+        <div class="posts">
+            {% for i in memes %}
+            <article>
+                <h1>{{i.title}}</h1>
+                {% if i.text.strip %}
+                <img src="{{i.img.url}}" alt="">
+                {% else %}
+                <img class="alone" src="{{i.img.url}}" alt="">
+                {% endif %}
+                {% autoescape off %}
+                <p>{{i.text}}</p>
+                {% endautoescape %}
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="news-ticker" id="abwesend">
+        <p><strong>Abwesend</strong></p>
+        <ul>
+            {% for i in abwesend %}
+            <li><strong>{{i.name}}</strong>: {{i.text|striptags}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="news-ticker" id="ausfall">
+        <p><strong>Ausfall</strong></p>
+        <ul>
+            {% for i in ausfall %}
+            <li><strong>{{i.name}}</strong>: {{i.text|striptags}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="news-ticker" id="exkursionen">
+        <p><strong>Exkursionen</strong></p>
+        <ul>
+            {% for i in exkursionen %}
+            <li><strong>{{i.name}}</strong>: {{i.text|striptags}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="news-ticker" id="u">
+        <p><strong>U-Verschiebung</strong></p>
+        <ul>
+            {% for i in u_verschiebung %}
+            <li><strong>{{i.name}}</strong>: {{i.text|striptags}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

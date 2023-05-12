@@ -139,3 +139,12 @@ class Badge(models.Model):
     
     def __str__(self):
         return self.name
+
+
+class Memes(models.Model):
+    title = models.CharField(max_length=100)
+    img = models.ImageField(upload_to="images/", storage=storage_service)
+    text = models.TextField(default="", blank=True)
+
+    def __str__(self):
+        return self.title

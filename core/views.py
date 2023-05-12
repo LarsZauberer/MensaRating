@@ -381,3 +381,29 @@ def leaderboard(request):
     context = {"profils": zip(profils, badges), "user_profil": user_profil, "rang": rang}
     
     return render(request, "leaderboard.html", context=context)
+
+
+def panel(request):
+    import requests
+    import json
+    from .models import Memes
+    data = requests.get("https://www.nksa.ch/wp-content/themes/nksa/api/panel-data.php?branch=gf")
+    data = json.loads(data.text)
+    my_data = {"abwesend": [], "ausfall": [], "u-verschiebung": [], "exkursionen": [], "memes": []}
+    show_data = []
+    for i in data["posts"]:
+        try:
+            if i["terms"]["panel-entry-category"][list(i["terms"]["panel-entry-category"].keys())[0]]["slug"] in ["abwesend", "ausfall", "u-verschiebung", "exkursionen"]:
+                d = {}
+                d["name"] = i["title"]
+                d["text"] = i["fields"]["text"]
+                d["cat"] = i["terms"]["panel-entry-category"][list(i["terms"]["panel-entry-category"].keys())[0]]["slug"]
+                my_data[i["terms"]["panel-entry-category"][list(i["terms"]["panel-entry-category"].keys())[0]]["slug"]].append(d)
+        except Exception as e:
+            print(e)
+            
+    my_data["u_verschiebung"] = my_data["u-verschiebung"]
+    
+    my_data["memes"] = list(Memes.objects.all())
+    
+    return render(request, "main.html", my_data)

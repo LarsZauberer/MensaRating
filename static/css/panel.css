@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 99vh;
+}
+
+h1, h2, p {
+    font-family: Impact, nimbus-sans,"Helvetica Neue","Helvetica","Arial",sans-serif;
+}
+
+#main {
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.news-ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: black;
+    height: 5vh;
+}
+
+.news-ticker li {
+    position: absolute;
+    left: 15%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    color: white;
+    font-size: 30px;
+    list-style: none;
+    width: 85%;
+    overflow: hidden;
+}
+
+.news-ticker p {
+    margin: 1vh;
+    padding-left: 20px;
+    padding-right: 30px;
+    border-right: 1px solid white;
+    float: left;
+    color: white;
+    font-size: 30px;
+    width: 10%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    background-color: #FF890A;
+    height: 80vh;
+}
+
+.sidebar img {
+    width: 100%;
+    height: auto;
+}
+
+.logo {
+    font-size: 35px;
+    color: black;
+    font-family: nimbus-sans,"Helvetica Neue","Helvetica","Arial",sans-serif;
+}
+
+.logo h1 {
+    padding-left: 2vw;
+    margin-bottom: 20px;
+}
+
+.logo h2 {
+    margin-top: 0;
+    padding-top: 0;
+    padding-left: 2vw;
+    font-size: 30px;
+}
+
+.sidebar-spacer {
+    flex-grow: 1;
+}
+
+.clock {
+    color: black;
+    font-size: 30px;
+    margin-bottom: 2vh;
+}
+
+.clock p {
+    padding-left: 2vw;
+    margin-top: 0;
+    padding-top: 0;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.clock-line {
+    margin-left: 2vw;
+    border-top: 5px solid black;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    background-color: #F2F2F2;
+
+    color: black;
+}
+
+.posts img.alone {
+    height: 60vh;
+    width: auto;
+}
+
+.posts img {
+    height: 50vh;
+}
+
+.posts p {
+    font-size: 25px;
+    margin-right: 40vw;
+}
+
+.posts article {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    margin-left: 2vw;
+    height: 80vh;
+}
+
+.posts h1 {
+    font-size: 70px;;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
