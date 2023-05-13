@@ -31,13 +31,13 @@ h1, h2, p {
 
 .news-ticker li {
     position: absolute;
-    left: 15%;
+    left: 22.5%;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     color: white;
     font-size: 30px;
     list-style: none;
-    width: 85%;
+    width: 75%;
     overflow: hidden;
 }
 
@@ -49,13 +49,13 @@ h1, h2, p {
     float: left;
     color: white;
     font-size: 30px;
-    width: 10%;
+    width: 17.5%;
 }
 
 .sidebar {
     display: flex;
     flex-direction: column;
-    width: 15vw;
+    width: 20vw;
     background-color: #FF890A;
     height: 80vh;
 }
