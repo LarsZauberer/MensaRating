@@ -21,9 +21,9 @@ function main() {
     setInterval(set_time, 60000);
 
     // Autoreload after 10min
-    setTimeout(function() {
-        location.reload();
-    }, 600000);
+    // setTimeout(function() {
+    //     location.reload();
+    // }, 600000);
 }
 
 function set_time() {
